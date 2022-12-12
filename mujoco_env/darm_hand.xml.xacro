@@ -141,20 +141,20 @@
     <xacro:property name="flexor_superficialis_v_origin_tf" value="-0.012 -0.013 -0.075" />
     
     <!-- Digit 1 Tendons -->
-    <xacro:property name="abductor_pollicis_brevis_carpals_tunnel_tf" value="0.0223607 -0.0073321 0.0254833" />
-    <xacro:property name="abductor_pollicis_brevis_insertion_tf" value="0.0223607 -0.0073321 0.0254833" />
+    <xacro:property name="abductor_pollicis_brevis_carpals_tunnel_tf" value="0.024963 -0.016395 0.022153" />
+    <xacro:property name="abductor_pollicis_brevis_insertion_tf" value="0.008 0.0 0.0" />
 
-    <xacro:property name="adductor_pollicis_metacarpals_iii_tunnel_i_tf" value="0.0223607 -0.0073321 0.0254833" />
-    <xacro:property name="adductor_pollicis_metacarpals_iii_tunnel_ii_tf" value="0.0223607 -0.0073321 0.0254833" />
-    <xacro:property name="adductor_pollicis_capitate_tunnel_tf" value="0.0223607 -0.0073321 0.0254833" />
-    <xacro:property name="adductor_pollicis_insertion_tf" value="0.0223607 -0.0073321 0.0254833" />
+    <xacro:property name="adductor_pollicis_metacarpals_iii_tunnel_i_tf" value="0.009064 -0.000907 0.041" />
+    <xacro:property name="adductor_pollicis_metacarpals_iii_tunnel_ii_tf" value="0.012845 0.001949 0.07707" />
+    <xacro:property name="adductor_pollicis_capitate_tunnel_tf" value="-0.001286 -0.010 0.016" />
+    <xacro:property name="adductor_pollicis_insertion_tf" value="-0.008 0.0 0.0" />
 
-    <xacro:property name="flexor_pollicis_brevis_carpals_tunnel_tf" value="0.0223607 -0.0073321 0.0254833" />
-    <xacro:property name="flexor_pollicis_brevis_insertion_tf" value="0.0223607 -0.0073321 0.0254833" />
+    <xacro:property name="flexor_pollicis_brevis_carpals_tunnel_tf" value="0.0128 -0.00957 0.020" />
+    <xacro:property name="flexor_pollicis_brevis_insertion_tf" value="0.005 -0.005598 0.008406" />
 
-    <xacro:property name="opponens_pollicis_carpals_tunnel_tf" value="0.0223607 -0.0073321 0.0254833" />
-    <xacro:property name="opponens_pollicis_insertion_i_tf" value="0.0223607 -0.0073321 0.0254833" />
-    <xacro:property name="opponens_pollicis_insertion_ii_tf" value="0.0223607 -0.0073321 0.0254833" />
+    <xacro:property name="opponens_pollicis_carpals_tunnel_tf" value="0.0128 -0.00957 0.020" />
+    <xacro:property name="opponens_pollicis_insertion_i_tf" value="0.0055 0.0048 0.009875" />
+    <xacro:property name="opponens_pollicis_insertion_ii_tf" value="0.00543 0.005595 0.03379" />
     
 
     <!-- Tendon Origin Macro -->
