@@ -100,7 +100,9 @@
         </body>
     </xacro:macro>
 
-    <xacro:macro name="phalanx_i" params="index cm_translation cm_rotation centre_block_offset metacarpal_length pp_length">
+    <xacro:macro name="phalanx_i" params="index cm_translation cm_rotation centre_block_offset metacarpal_length 
+        pp_length abductor_pollicis_brevis_insertion_tf adductor_pollicis_insertion_tf flexor_pollicis_brevis_insertion_tf
+        opponens_pollicis_insertion_i_tf opponens_pollicis_insertion_ii_tf">
         <body name="proximal_cm_i_centre_block" pos="${cm_translation}" euler="${cm_rotation}">
             <joint type="hinge" axis="1 0 0" />
             <geom type="mesh" mesh="proximal_cm_i_centre_block_mesh" />
@@ -110,13 +112,21 @@
                 <geom type="mesh" mesh="distal_cm_i_centre_block_mesh" />
   
                 <body name="metacarpal_i" pos="0 0 0" euler="0 0 0">
-                  <joint type="hinge" axis="0 1 0" pos="0 0 0" />
-                  <geom type="mesh" mesh="metacarpal_i_mesh" />
+                    <joint type="hinge" axis="0 1 0" pos="0 0 0" />
+                    <geom type="mesh" mesh="metacarpal_i_mesh" />
+
+                    <site name="opponens_pollicis_insertion_i" pos="${opponens_pollicis_insertion_i_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="opponens_pollicis_insertion_ii" pos="${opponens_pollicis_insertion_ii_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+
                 
                         <body name="proximal_phalanx_${index}" pos="0 0 ${metacarpal_length}" euler="0 0 0">
                             <joint type="hinge" axis="1 0 0" />
                             <geom type="mesh" mesh="proximal_phalanx_${index}_mesh" rgba="1 0 0 1" />
-                
+
+                            <site name="abductor_pollicis_brevis_insertion" pos="${abductor_pollicis_brevis_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                            <site name="adductor_pollicis_insertion" pos="${adductor_pollicis_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                            <site name="flexor_pollicis_brevis_insertion" pos="${flexor_pollicis_brevis_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                            
                             <body name="distal_phalanx_${index}" pos="0 0 ${pp_length}" euler="0 0 0">
                                 <joint type="hinge" axis="1 0 0" />
                                 <geom type="mesh" mesh="distal_phalanx_${index}_mesh" rgba="0 0 1 1" />

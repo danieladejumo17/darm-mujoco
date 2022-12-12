@@ -34,8 +34,8 @@ Insertions
 - Lateral aspect of base of proximal phalanx 1
 
 Functions
-Carpometacarpal joint 1: Thumb flexion
-Metacarpophalangeal joint 1: Thumb flexion
+- Metacarpophalangeal joint 1: Thumb flexion
+- Carpometacarpal joint 1: Thumb flexion
 
 
 
@@ -53,10 +53,3 @@ Functions
 
 Extensors
 Long abductor and flexor
-
-
-
-> 4 verses: 
-> Graphic with 4 verses : 
-Deut 11:12 Bind it upon your hands
-Feedbacks
