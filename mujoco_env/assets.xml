@@ -1,0 +1,50 @@
+<asset>
+    <texture name="checker_1" builtin="checker" type="2d" width="128" height="128" 
+                rgb1="0 0 0" rgb2="1 1 1" /> 
+    <material name="ground" texture="checker_1" texrepeat="2 2" texuniform="true" />
+
+    <!-- FOREARM -->
+    <mesh name="forearm_mesh" file="Forearm/Forearm.stl" />
+    <mesh name="rc_centre_block_mesh" file="Forearm/RC Joint Centre Block.stl" />
+    
+    <!-- CARPALS & METACARPALS -->
+    <mesh name="carpals_metacarpals_mesh" file="Carpals Metacarpals/Carpals_Metacarpals.stl" />
+    
+    <mesh name="metacarpal_i_mesh" file="Carpals Metacarpals/Metacarpal I/Metacarpal I.stl" />
+    <mesh name="distal_cm_i_centre_block_mesh" file="Carpals Metacarpals/Metacarpal I/Distal CM I Centre Block.stl" />
+    <mesh name="proximal_cm_i_centre_block_mesh" file="Carpals Metacarpals/Metacarpal I/Proximal CM I Centre Block.stl" />
+    <mesh name="cm_i_centre_block_stop_screw_mesh" file="Carpals Metacarpals/Metacarpal I/CM I Centre Block Stop Screw.stl" />
+    
+    <mesh name="metacarpal_v_mesh" file="Carpals Metacarpals/Metacarpal V/Metacarpal V.stl" />
+    <mesh name="distal_cm_v_centre_block_mesh" file="Carpals Metacarpals/Metacarpal V/Distal CM V Centre Block.stl" />
+    <mesh name="proximal_cm_v_centre_block_mesh" file="Carpals Metacarpals/Metacarpal V/Proximal CM V Centre Block.stl" />
+    <mesh name="cm_v_centre_block_stop_screw_mesh" file="Carpals Metacarpals/Metacarpal V/CM V Centre Block Stop Screw.stl" />
+    
+    <!-- PHALANX I -->
+    <mesh name="distal_phalanx_i_mesh" file="Phalanges/Phalanges I/Distal Phalanx I.stl" />
+    <mesh name="proximal_phalanx_i_mesh" file="Phalanges/Phalanges I/Proximal Phalanx I.stl" />
+
+    <!-- PHALANX II -->
+    <mesh name="distal_phalanx_ii_mesh" file="Phalanges/Phalanges II/Distal Phalanx II.stl" />
+    <mesh name="middle_phalanx_ii_mesh" file="Phalanges/Phalanges II/Middle Phalanx II.stl" />
+    <mesh name="proximal_phalanx_ii_mesh" file="Phalanges/Phalanges II/Proximal Phalanx II.stl" />
+    <mesh name="mcp_centre_block_ii_mesh" file="Phalanges/Phalanges II/MCP Centre Block II.stl" />
+
+    <!-- PHALANX III -->
+    <mesh name="distal_phalanx_iii_mesh" file="Phalanges/Phalanges III/Distal Phalanx III.stl" />
+    <mesh name="middle_phalanx_iii_mesh" file="Phalanges/Phalanges III/Middle Phalanx III.stl" />
+    <mesh name="proximal_phalanx_iii_mesh" file="Phalanges/Phalanges III/Proximal Phalanx III.stl" />
+    <mesh name="mcp_centre_block_iii_mesh" file="Phalanges/Phalanges III/MCP Centre Block III.stl" />
+    
+    <!-- PHALANX IV -->
+    <mesh name="distal_phalanx_iv_mesh" file="Phalanges/Phalanges IV/Distal Phalanx IV.stl" />
+    <mesh name="middle_phalanx_iv_mesh" file="Phalanges/Phalanges IV/Middle Phalanx IV.stl" />
+    <mesh name="proximal_phalanx_iv_mesh" file="Phalanges/Phalanges IV/Proximal Phalanx IV.stl" />
+    <mesh name="mcp_centre_block_iv_mesh" file="Phalanges/Phalanges IV/MCP Centre Block IV.stl" />
+
+    <!-- PHALANX V -->
+    <mesh name="distal_phalanx_v_mesh" file="Phalanges/Phalanges V/Distal Phalanx V.stl" />
+    <mesh name="middle_phalanx_v_mesh" file="Phalanges/Phalanges V/Middle Phalanx V.stl" />
+    <mesh name="proximal_phalanx_v_mesh" file="Phalanges/Phalanges V/Proximal Phalanx V.stl" />
+    <mesh name="mcp_centre_block_v_mesh" file="Phalanges/Phalanges V/MCP Centre Block V.stl" />
+</asset>

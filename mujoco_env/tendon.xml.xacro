@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tendon xmlns:xacro="http://wiki.ros.org/xacro">
+    <xacro:macro name="phalanges_tendons" params="index">
+        <spatial name="dorsal_interossei_${index}" width="0.0004">
+            <site site="dorsal_interossei_${index}_origin" />
+            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" />
+            <site site="flexor_${index}_carpals_tunnel" />
+            <site site="flexor_${index}_metacarpals_tunnel" />
+            <geom geom="mcp_${index}_wrap" sidesite="mcp_${index}_wrap_palmar_sidesite" />
+            <site site="dorsal_interossei_${index}_insertion" />
+            <!-- <geom geom="pp_${index}_wrap" /> -->
+            <site site="pp_${index}_dorsal_interossei_tunnel" />
+            <geom geom="pip_${index}_wrap" sidesite="pip_${index}_wrap_dorsal_sidesite" />
+            <site site="mp_${index}_extensor_hood_insertion" />
+            <geom geom="dip_${index}_wrap" sidesite="dip_${index}_wrap_dorsal_sidesite" />
+            <site site="dp_${index}_extensor_hood_insertion" />
+        </spatial>
+    
+        <spatial name="palmar_interossei_${index}" width="0.0004">
+            <site site="palmar_interossei_${index}_origin" />
+            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" />
+            <site site="flexor_${index}_carpals_tunnel" />
+            <site site="flexor_${index}_metacarpals_tunnel" />
+            <geom geom="mcp_${index}_wrap" sidesite="mcp_${index}_wrap_palmar_sidesite" />
+            <site site="palmar_interossei_${index}_insertion" />
+            <!-- <geom geom="pp_${index}_wrap" /> -->
+            <site site="pp_${index}_palmar_interossei_tunnel" />
+            <geom geom="pip_${index}_wrap" sidesite="pip_${index}_wrap_dorsal_sidesite" /> 
+            <site site="mp_${index}_extensor_hood_insertion" />
+            <geom geom="dip_${index}_wrap" sidesite="dip_${index}_wrap_dorsal_sidesite" />
+            <site site="dp_${index}_extensor_hood_insertion" />
+        </spatial>
+    
+        <spatial name="extensor_communis_${index}" width="0.0004">
+            <site site="extensor_communis_${index}_origin" />
+            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_dorsal_sidesite" />
+            <site site="extensor_communis_${index}_carpals_tunnel" />
+            <site site="extensor_communis_${index}_metacarpals_tunnel" />
+            <geom geom="mcp_${index}_wrap" sidesite="mcp_${index}_wrap_dorsal_sidesite" />
+            <site site="pp_${index}_extensor_communis_insertion" />
+            <geom geom="pip_${index}_wrap" sidesite="pip_${index}_wrap_dorsal_sidesite" />
+            <site site="mp_${index}_extensor_hood_insertion" />
+            <geom geom="dip_${index}_wrap" sidesite="dip_${index}_wrap_dorsal_sidesite" />
+            <site site="dp_${index}_extensor_hood_insertion" />
+        </spatial>
+    
+        <spatial name="flexor_profundus_${index}" width="0.0004">
+            <site site="flexor_profundus_${index}_origin" />
+            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" />
+            <site site="flexor_${index}_carpals_tunnel" />
+            <site site="flexor_${index}_metacarpals_tunnel" />
+            <geom geom="mcp_${index}_wrap" sidesite="mcp_${index}_wrap_palmar_sidesite" />
+            <site site="pp_${index}_flexor_tunnel" />
+            <geom geom="pip_${index}_wrap" sidesite="pip_${index}_wrap_palmar_sidesite" />
+            <site site="flexor_superficialis_${index}_insertion" />
+            <site site="mp_${index}_flexor_tunnel" />
+            <geom geom="dip_${index}_wrap" sidesite="dip_${index}_wrap_palmar_sidesite" />
+            <site site="flexor_profundus_${index}_insertion" />
+        </spatial>
+    
+        <spatial name="flexor_superficialis_${index}" width="0.0004">
+            <site site="flexor_superficialis_${index}_origin" />
+            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" />
+            <site site="flexor_${index}_carpals_tunnel" />
+            <site site="flexor_${index}_metacarpals_tunnel" />
+            <geom geom="mcp_${index}_wrap" sidesite="mcp_${index}_wrap_palmar_sidesite" />
+            <site site="pp_${index}_flexor_tunnel" />
+            <geom geom="pip_${index}_wrap" sidesite="pip_${index}_wrap_palmar_sidesite" />
+            <site site="flexor_superficialis_${index}_insertion" />
+        </spatial>
+    </xacro:macro>
+    
+    <xacro:phalanges_tendons index="ii" />
+    <xacro:phalanges_tendons index="iii" />
+    <xacro:phalanges_tendons index="iv" />
+    <xacro:phalanges_tendons index="v" />
+</tendon>

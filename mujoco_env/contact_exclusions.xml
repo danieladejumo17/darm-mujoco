@@ -1,0 +1,45 @@
+<contact>
+    <!-- TODO: Exclude contact in wraps -->
+    <!-- TODO: Eclude contacts in Phalanx I -->
+
+    <!-- PHALANGES II -->
+    <exclude body1="mcp_centre_block_ii" body2="carpals_metacarpals" />
+    <exclude body1="proximal_phalanx_ii" body2="mcp_centre_block_ii" />
+    <exclude body1="proximal_phalanx_ii" body2="carpals_metacarpals" />
+
+    <exclude body1="middle_phalanx_ii" body2="proximal_phalanx_ii" />
+    <exclude body1="distal_phalanx_ii" body2="middle_phalanx_ii" />
+
+    <!-- PHALANGES III -->
+    <exclude body1="mcp_centre_block_iii" body2="carpals_metacarpals" />
+    <exclude body1="proximal_phalanx_iii" body2="mcp_centre_block_iii" />
+    <exclude body1="proximal_phalanx_iii" body2="carpals_metacarpals" />
+
+    <exclude body1="middle_phalanx_iii" body2="proximal_phalanx_iii" />
+    <exclude body1="distal_phalanx_iii" body2="middle_phalanx_iii" />
+
+    <!-- PHALANGES IV -->
+    <exclude body1="mcp_centre_block_iv" body2="carpals_metacarpals" />
+    <exclude body1="proximal_phalanx_iv" body2="mcp_centre_block_iv" />
+    <exclude body1="proximal_phalanx_iv" body2="carpals_metacarpals" />
+
+    <exclude body1="middle_phalanx_iv" body2="proximal_phalanx_iv" />
+    <exclude body1="distal_phalanx_iv" body2="middle_phalanx_iv" />
+
+    <!-- PHALANGES V -->
+    <exclude body1="proximal_cm_v_centre_block" body2="carpals_metacarpals" />
+    <exclude body1="distal_cm_v_centre_block" body2="proximal_cm_v_centre_block" />
+    <exclude body1="distal_cm_v_centre_block" body2="carpals_metacarpals" />
+    <exclude body1="metacarpal_v" body2="distal_cm_v_centre_block" />
+    <exclude body1="metacarpal_v" body2="proximal_cm_v_centre_block" />
+    <exclude body1="metacarpal_v" body2="carpals_metacarpals" />
+
+    <exclude body1="mcp_centre_block_v" body2="metacarpal_v" />
+    <exclude body1="proximal_phalanx_v" body2="mcp_centre_block_v" />
+    <exclude body1="proximal_phalanx_v" body2="metacarpal_v" />
+
+    <exclude body1="middle_phalanx_v" body2="proximal_phalanx_v" />
+    <exclude body1="distal_phalanx_v" body2="middle_phalanx_v" />
+
+    
+</contact>

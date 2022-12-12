@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<worldbody xmlns:xacro="http://wiki.ros.org/xacro">
+    <body name="forearm" pos="0 0 0.12" euler="0 0 0" childclass="darm_meshes">
+        <geom type="mesh" mesh="forearm_mesh" />
+
+        <!-- TODO: Measure this accurately from f360 -->
+        <body name="rc_centre_block" pos="0 0 0.032" euler="0 0 0">
+            <geom type="mesh" mesh="rc_centre_block_mesh" />
+
+            <body name="carpals_metacarpals" pos="0 0 0" euler="0 0 0">
+                <geom type="mesh" mesh="carpals_metacarpals_mesh" />
+                
+                <!-- Phalanx II -->
+                <body name="mcp_centre_block_ii" pos="0.0293 0.0086 0.0907" euler="0 5 -10">
+                    <joint type="hinge" axis="0 1 0" />
+                    <geom type="mesh" mesh="mcp_centre_block_ii_mesh" />
+    
+                    <body name="proximal_phalanx_ii" pos="0 0 0" euler="6 0 0">
+                        <joint type="hinge" axis="1 0 0" />
+                        <geom type="mesh" mesh="proximal_phalanx_ii_mesh" rgba="1 0 0 1" />
+        
+                        <body name="middle_phalanx_ii" pos="0 0 0.0488" euler="12 0 0">
+                            <joint type="hinge" axis="1 0 0" />
+                            <geom type="mesh" mesh="middle_phalanx_ii_mesh" rgba="0 1 0 1" />
+            
+                            <body name="distal_phalanx_ii" pos="0 0 0.0268" euler="6 0 0">
+                                <joint type="hinge" axis="1 0 0" />
+                                <geom type="mesh" mesh="distal_phalanx_ii_mesh" rgba="0 0 1 1" />
+                            </body>
+                        </body>
+                    </body>
+                </body>
+
+            </body>
+        </body>
+    </body>
+</worldbody>

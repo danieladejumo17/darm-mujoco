@@ -1,0 +1,102 @@
+<mujoco>
+    <compiler meshdir="/media/daniel/8442A3E642A3DAE6/Users/Daniel Adejumo/Documents/MATLAB/DARM/Geometry Models and FEA/Models/CAD/" /> 
+    
+    <option gravity = "0 0 -9.81" cone="elliptic">
+        <flag contact="enable" />
+    </option >
+
+    <default class="darm_meshes">
+        <mesh scale="0.001 0.001 0.001" />
+        <geom density="1250" rgba=".8 .8 .8 1"/>
+        <tendon rgba=".5 .5 .5 1" />
+    </default>
+
+    <asset>
+        <include file="assets.xml" />
+	</asset>
+
+	<worldbody>
+        <light diffuse=".5 .5 .5" pos="0 0 3" dir="0 0 -1"/>
+		<geom type="plane" size="0.5 0.5 0.1" material="ground"/>
+
+        <include file="darm_hand.xml" />
+	</worldbody>
+
+    <contact>
+        <include file="contact_exclusions.xml" />
+    </contact>
+
+    <tendon>
+        <include file="tendon.xml" />
+    </tendon>
+
+    <!-- <tendon>
+        <spatial name="dorsal_interossei_ii" width="0.0004">
+            <site site="dorsal_interossei_ii_origin" />
+            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" />
+            <site site="flexor_ii_carpals_tunnel" />
+            <site site="flexor_ii_metacarpals_tunnel" />
+            <geom geom="mcp_ii_wrap" sidesite="mcp_ii_wrap_palmar_sidesite" />
+            <site site="dorsal_interossei_ii_insertion" />
+            <geom geom="pp_ii_wrap" />//
+            <site site="pp_ii_dorsal_interossei_tunnel" />
+            <geom geom="pip_ii_wrap" sidesite="pip_ii_wrap_dorsal_sidesite" />
+            <site site="mp_ii_extensor_hood_insertion" />
+            <geom geom="dip_ii_wrap" sidesite="dip_ii_wrap_dorsal_sidesite" />
+            <site site="dp_ii_extensor_hood_insertion" />
+        </spatial>
+
+        <spatial name="palmar_interossei_ii" width="0.0004">
+            <site site="palmar_interossei_ii_origin" />
+            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" />
+            <site site="flexor_ii_carpals_tunnel" />
+            <site site="flexor_ii_metacarpals_tunnel" />
+            <geom geom="mcp_ii_wrap" sidesite="mcp_ii_wrap_palmar_sidesite" />
+            <site site="palmar_interossei_ii_insertion" />
+            <geom geom="pp_ii_wrap" />//
+            <site site="pp_ii_palmar_interossei_tunnel" />
+            <geom geom="pip_ii_wrap" sidesite="pip_ii_wrap_dorsal_sidesite" /> 
+            <site site="mp_ii_extensor_hood_insertion" />
+            <geom geom="dip_ii_wrap" sidesite="dip_ii_wrap_dorsal_sidesite" />
+            <site site="dp_ii_extensor_hood_insertion" />
+        </spatial>
+
+        <spatial name="extensor_communis_ii" width="0.0004">
+            <site site="extensor_communis_ii_origin" />
+            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_dorsal_sidesite" />
+            <site site="extensor_communis_ii_carpals_tunnel" />
+            <site site="extensor_communis_ii_metacarpals_tunnel" />
+            <geom geom="mcp_ii_wrap" sidesite="mcp_ii_wrap_dorsal_sidesite" />
+            <site site="pp_ii_extensor_communis_insertion" />
+            <geom geom="pip_ii_wrap" sidesite="pip_ii_wrap_dorsal_sidesite" />
+            <site site="mp_ii_extensor_hood_insertion" />
+            <geom geom="dip_ii_wrap" sidesite="dip_ii_wrap_dorsal_sidesite" />
+            <site site="dp_ii_extensor_hood_insertion" />
+        </spatial>
+
+        <spatial name="flexor_profundus_ii" width="0.0004">
+            <site site="flexor_profundus_ii_origin" />
+            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" />
+            <site site="flexor_ii_carpals_tunnel" />
+            <site site="flexor_ii_metacarpals_tunnel" />
+            <geom geom="mcp_ii_wrap" sidesite="mcp_ii_wrap_palmar_sidesite" />
+            <site site="pp_ii_flexor_tunnel" />
+            <geom geom="pip_ii_wrap" sidesite="pip_ii_wrap_palmar_sidesite" />
+            <site site="flexor_superficialis_ii_insertion" />
+            <site site="mp_ii_flexor_tunnel" />
+            <geom geom="dip_ii_wrap" sidesite="dip_ii_wrap_palmar_sidesite" />
+            <site site="flexor_profundus_ii_insertion" />
+        </spatial>
+
+        <spatial name="flexor_superficialis_ii" width="0.0004">
+            <site site="flexor_superficialis_ii_origin" />
+            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" />
+            <site site="flexor_ii_carpals_tunnel" />
+            <site site="flexor_ii_metacarpals_tunnel" />
+            <geom geom="mcp_ii_wrap" sidesite="mcp_ii_wrap_palmar_sidesite" />
+            <site site="pp_ii_flexor_tunnel" />
+            <geom geom="pip_ii_wrap" sidesite="pip_ii_wrap_palmar_sidesite" />
+            <site site="flexor_superficialis_ii_insertion" />
+        </spatial>
+    </tendon> -->
+</mujoco>
