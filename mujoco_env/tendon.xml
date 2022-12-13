@@ -256,4 +256,30 @@
     <geom geom="pip_v_wrap" sidesite="pip_v_wrap_palmar_sidesite"/>
     <site site="flexor_superficialis_v_insertion"/>
   </spatial>
+  <spatial name="abductor_pollicis_brevis" width="0.0004">
+    <site site="abductor_pollicis_brevis_carpals_tunnel"/>
+    <geom geom="distal_cm_i_wrap" sidesite="distal_cm_i_wrap_dorsal_sidesite"/>
+    <site site="abductor_pollicis_brevis_insertion"/>
+  </spatial>
+  <spatial name="adductor_pollicis_oblique" width="0.0004">
+    <site site="adductor_pollicis_capitate_tunnel"/>
+    <geom geom="proximal_cm_i_wrap" sidesite="proximal_cm_i_wrap_palmar_sidesite"/>
+    <site site="adductor_pollicis_insertion"/>
+  </spatial>
+  <spatial name="adductor_pollicis_transverse" width="0.0004">
+    <site site="adductor_pollicis_metacarpals_iii_tunnel_i"/>
+    <site site="adductor_pollicis_metacarpals_iii_tunnel_ii"/>
+    <site site="adductor_pollicis_insertion"/>
+  </spatial>
+  <spatial name="flexor_pollicis_brevis" width="0.0004">
+    <site site="flexor_pollicis_brevis_carpals_tunnel"/>
+    <geom geom="distal_cm_i_wrap" sidesite="distal_cm_i_wrap_dorsal_sidesite"/>
+    <site site="flexor_pollicis_brevis_insertion"/>
+  </spatial>
+  <spatial name="opponens_pollicis" width="0.0004">
+    <site site="opponens_pollicis_carpals_tunnel"/>
+    <geom geom="distal_cm_i_wrap" sidesite="distal_cm_i_wrap_dorsal_sidesite"/>
+    <site site="opponens_pollicis_insertion_i"/>
+    <site site="opponens_pollicis_insertion_ii"/>
+  </spatial>
 </tendon>

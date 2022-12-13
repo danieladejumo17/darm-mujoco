@@ -51,5 +51,38 @@ Functions
 
 
 
-Extensors
-Long abductor and flexor
+Flexor Pollicis Longus
+Origin
+- Anterior surface of radius and interosseous membrane
+
+Insertions
+- Palmar surface of distal phalanx of thumb
+
+Functions
+- Metacarpophalangeal joint 1: Thumb flexion
+- Interphalangeal joint 1: Thumb flexion
+
+
+
+Extensor Pollicis Brevis
+Origin
+
+Insertions
+
+Functions
+
+
+Extensor Pollicis Longus
+Origin
+
+Insertions
+
+Functions
+
+
+Abductor Pollicis Longus
+Origin
+
+Insertions
+
+Functions

@@ -8,12 +8,18 @@
     <xacro:property name="rc_joint_length" value="0.0235" />
 
     <!-- Digit I -->
-    <xacro:property name="cm_i_translation" value="0.0223607 -0.0073321 0.0254833" />
+    <xacro:property name="cm_i_translation" value="${[0.0223607, -0.0073321, 0.0254833]}" />
     <xacro:property name="cm_i_rotation" value="24 -15 -75" />
-    <xacro:property name="cm_i_centre_block_offset" value="0 0 0.013" />
+    <xacro:property name="cm_i_centre_block_offset" value="${[0, 0, 0.013]}" />
     <xacro:property name="metacarpal_i_length" value="0.0395" />
     
     <xacro:property name="pp_i_length" value="0.0335" />
+    <xacro:property name="proximal_cm_i_radius" value="0.0085" />
+    <xacro:property name="distal_cm_i_radius" value="0.0075" />
+    <xacro:property name="mcp_i_radius" value="0.0075" />
+    <xacro:property name="ip_i_radius" value="0.0065" />
+
+    
 
     <!-- Digit II -->
     <xacro:property name="mcp_ii_translation" value="0.0293 0.0087 0.0908" />
@@ -241,6 +247,9 @@
                 <site name="flexor_pollicis_brevis_carpals_tunnel" pos="${flexor_pollicis_brevis_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
                 <site name="opponens_pollicis_carpals_tunnel" pos="${opponens_pollicis_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
 
+                <site name="proximal_cm_i_wrap_dorsal_sidesite" pos="${cm_i_translation[0]+1.2*proximal_cm_i_radius+sidesite_size} ${cm_i_translation[1]} ${cm_i_translation[2]}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+                <site name="proximal_cm_i_wrap_palmar_sidesite" pos="${cm_i_translation[0]-1.2*proximal_cm_i_radius-sidesite_size} ${cm_i_translation[1]} ${cm_i_translation[2]}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+
                 
                 <xacro:phalanges index="ii" mcp_translation="${mcp_ii_translation}" mcp_rotation="${mcp_ii_rotation}" 
                                 pp_length="${pp_ii_length}" mp_length="${mp_ii_length}" mcp_radius="${mcp_ii_radius}" 
@@ -290,7 +299,8 @@
                 
                 <xacro:phalanx_i index="i" cm_translation="${cm_i_translation}" cm_rotation="${cm_i_rotation}" 
                                 centre_block_offset="${cm_i_centre_block_offset}" metacarpal_length="${metacarpal_i_length}" 
-                                pp_length="${pp_i_length}" 
+                                pp_length="${pp_i_length}" proximal_cm_radius="${proximal_cm_i_radius}" 
+                                distal_cm_radius="${distal_cm_i_radius}" mcp_radius="${mcp_i_radius}" ip_radius="${ip_i_radius}"
                                 abductor_pollicis_brevis_insertion_tf="${abductor_pollicis_brevis_insertion_tf}"
                                 adductor_pollicis_insertion_tf="${adductor_pollicis_insertion_tf}"
                                 flexor_pollicis_brevis_insertion_tf="${flexor_pollicis_brevis_insertion_tf}"
