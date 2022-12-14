@@ -19,8 +19,6 @@
     <xacro:property name="mcp_i_radius" value="0.0075" />
     <xacro:property name="ip_i_radius" value="0.0065" />
 
-    
-
     <!-- Digit II -->
     <xacro:property name="mcp_ii_translation" value="0.0293 0.0087 0.0908" />
     <xacro:property name="mcp_ii_rotation" value="0 5 -10" />
@@ -161,6 +159,19 @@
     <xacro:property name="opponens_pollicis_carpals_tunnel_tf" value="0.0128 -0.00957 0.020" />
     <xacro:property name="opponens_pollicis_insertion_i_tf" value="0.0055 0.0048 0.009875" />
     <xacro:property name="opponens_pollicis_insertion_ii_tf" value="0.00543 0.005595 0.03379" />
+
+    <xacro:property name="flexor_pollicis_longus_insertion_tf" value="0.0 -0.005 0.007" />
+    <xacro:property name="flexor_pollicis_longus_origin_tf" value="-0.012 -0.013 -0.075" />
+
+    <xacro:property name="extensor_pollicis_brevis_insertion_tf" value="0.0 0.006 0.008" />
+    <xacro:property name="extensor_pollicis_brevis_origin_tf" value="0.012 0.013 -0.035" />
+
+    <xacro:property name="extensor_pollicis_longus_insertion_tf" value="0.0 0.005 0.007" />
+    <xacro:property name="extensor_pollicis_longus_origin_tf" value="0.012 0.013 -0.035" />
+
+    <xacro:property name="abductor_pollicis_longus_origin_tf" value="0.012 0.013 -0.035" />
+
+
     
 
     <!-- Tendon Origin Macro -->
@@ -206,6 +217,11 @@
         <xacro:tendon_origin site_name="dorsal_interossei_iii_origin" site_tf="${dorsal_interossei_iii_origin_tf}" />
         <xacro:tendon_origin site_name="dorsal_interossei_iv_origin" site_tf="${dorsal_interossei_iv_origin_tf}" />
         <xacro:tendon_origin site_name="dorsal_interossei_v_origin" site_tf="${dorsal_interossei_v_origin_tf}" />
+
+        <xacro:tendon_origin site_name="flexor_pollicis_longus_origin" site_tf="${flexor_pollicis_longus_origin_tf}" />
+        <xacro:tendon_origin site_name="extensor_pollicis_brevis_origin" site_tf="${extensor_pollicis_brevis_origin_tf}" />
+        <xacro:tendon_origin site_name="extensor_pollicis_longus_origin" site_tf="${extensor_pollicis_longus_origin_tf}" />
+        <xacro:tendon_origin site_name="abductor_pollicis_longus_origin" site_tf="${abductor_pollicis_longus_origin_tf}" />
 
 
         <!-- TODO: Measure this accurately from f360 -->
@@ -305,7 +321,10 @@
                                 adductor_pollicis_insertion_tf="${adductor_pollicis_insertion_tf}"
                                 flexor_pollicis_brevis_insertion_tf="${flexor_pollicis_brevis_insertion_tf}"
                                 opponens_pollicis_insertion_i_tf="${opponens_pollicis_insertion_i_tf}"
-                                opponens_pollicis_insertion_ii_tf="${opponens_pollicis_insertion_ii_tf}" />
+                                opponens_pollicis_insertion_ii_tf="${opponens_pollicis_insertion_ii_tf}"
+                                flexor_pollicis_longus_insertion_tf="${flexor_pollicis_longus_insertion_tf}"
+                                extensor_pollicis_brevis_insertion_tf="${extensor_pollicis_brevis_insertion_tf}"
+                                extensor_pollicis_longus_insertion_tf="${extensor_pollicis_longus_insertion_tf}" />
 
                 </body>
         </body>

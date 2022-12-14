@@ -102,7 +102,8 @@
 
     <xacro:macro name="phalanx_i" params="index cm_translation cm_rotation centre_block_offset metacarpal_length 
         pp_length proximal_cm_radius distal_cm_radius mcp_radius ip_radius abductor_pollicis_brevis_insertion_tf adductor_pollicis_insertion_tf flexor_pollicis_brevis_insertion_tf
-        opponens_pollicis_insertion_i_tf opponens_pollicis_insertion_ii_tf
+        opponens_pollicis_insertion_i_tf opponens_pollicis_insertion_ii_tf flexor_pollicis_longus_insertion_tf
+        extensor_pollicis_brevis_insertion_tf extensor_pollicis_longus_insertion_tf
         wrap_rgba:='0 0 1 0.2'">
         <body name="proximal_cm_i_centre_block" pos="${cm_translation[0]} ${cm_translation[1]} ${cm_translation[2]}" euler="${cm_rotation}">
             <joint type="hinge" axis="1 0 0" />
@@ -141,12 +142,18 @@
                             <site name="adductor_pollicis_insertion" pos="${adductor_pollicis_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
                             <site name="flexor_pollicis_brevis_insertion" pos="${flexor_pollicis_brevis_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
                             
+                            <site name="extensor_pollicis_brevis_insertion" pos="${extensor_pollicis_brevis_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
+
                             <site name="ip_${index}_wrap_dorsal_sidesite" pos="0 ${ip_radius+sidesite_size} ${pp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
                             <site name="ip_${index}_wrap_palmar_sidesite" pos="0 -${ip_radius+sidesite_size} ${pp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
 
                             <body name="distal_phalanx_${index}" pos="0 0 ${pp_length}" euler="0 0 0">
                                 <joint type="hinge" axis="1 0 0" />
                                 <geom type="mesh" mesh="distal_phalanx_${index}_mesh" rgba="0 0 1 1" />
+
+                                <site name="flexor_pollicis_longus_insertion" pos="${flexor_pollicis_longus_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
+                                <site name="extensor_pollicis_longus_insertion" pos="${extensor_pollicis_longus_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
+
                             </body>
                         </body>
                 </body>
