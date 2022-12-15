@@ -32,7 +32,7 @@
     <geom geom="dip_ii_wrap" sidesite="dip_ii_wrap_dorsal_sidesite"/>
     <site site="dp_ii_extensor_hood_insertion"/>
   </spatial>
-  <spatial name="extensor_communis_ii" width="0.0004">
+  <spatial limited="true" name="extensor_communis_ii" range="0.10 0.30" width="0.0004">
     <site site="extensor_communis_ii_origin"/>
     <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_dorsal_sidesite"/>
     <site site="extensor_communis_ii_carpals_tunnel"/>
@@ -95,7 +95,7 @@
     <geom geom="dip_iii_wrap" sidesite="dip_iii_wrap_dorsal_sidesite"/>
     <site site="dp_iii_extensor_hood_insertion"/>
   </spatial>
-  <spatial name="extensor_communis_iii" width="0.0004">
+  <spatial limited="true" name="extensor_communis_iii" range="0.10 0.30" width="0.0004">
     <site site="extensor_communis_iii_origin"/>
     <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_dorsal_sidesite"/>
     <site site="extensor_communis_iii_carpals_tunnel"/>
@@ -158,7 +158,7 @@
     <geom geom="dip_iv_wrap" sidesite="dip_iv_wrap_dorsal_sidesite"/>
     <site site="dp_iv_extensor_hood_insertion"/>
   </spatial>
-  <spatial name="extensor_communis_iv" width="0.0004">
+  <spatial limited="true" name="extensor_communis_iv" range="0.10 0.30" width="0.0004">
     <site site="extensor_communis_iv_origin"/>
     <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_dorsal_sidesite"/>
     <site site="extensor_communis_iv_carpals_tunnel"/>
@@ -221,7 +221,7 @@
     <geom geom="dip_v_wrap" sidesite="dip_v_wrap_dorsal_sidesite"/>
     <site site="dp_v_extensor_hood_insertion"/>
   </spatial>
-  <spatial name="extensor_communis_v" width="0.0004">
+  <spatial limited="true" name="extensor_communis_v" range="0.10 0.30" width="0.0004">
     <site site="extensor_communis_v_origin"/>
     <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_dorsal_sidesite"/>
     <site site="extensor_communis_v_carpals_tunnel"/>
@@ -256,8 +256,12 @@
     <geom geom="pip_v_wrap" sidesite="pip_v_wrap_palmar_sidesite"/>
     <site site="flexor_superficialis_v_insertion"/>
   </spatial>
+  <!-- Pollicis Muscles -->
   <spatial name="abductor_pollicis_brevis" width="0.0004">
+    <!-- Combined with the longus tendon -->
+    <site site="abductor_pollicis_longus_origin"/>
     <site site="abductor_pollicis_brevis_carpals_tunnel"/>
+    <!-- TODO: Add insertion at the base of metacarpal one | not carpals -->
     <geom geom="distal_cm_i_wrap" sidesite="distal_cm_i_wrap_dorsal_sidesite"/>
     <site site="abductor_pollicis_brevis_insertion"/>
   </spatial>
@@ -281,5 +285,46 @@
     <geom geom="distal_cm_i_wrap" sidesite="distal_cm_i_wrap_dorsal_sidesite"/>
     <site site="opponens_pollicis_insertion_i"/>
     <site site="opponens_pollicis_insertion_ii"/>
+  </spatial>
+  <spatial name="flexor_pollicis_longus" width="0.0004">
+    <site site="flexor_pollicis_longus_origin"/>
+    <site site="flexor_pollicis_longus_insertion"/>
+  </spatial>
+  <spatial name="extensor_pollicis_brevis" width="0.0004">
+    <site site="extensor_pollicis_brevis_origin"/>
+    <site site="extensor_pollicis_brevis_insertion"/>
+  </spatial>
+  <spatial name="extensor_pollicis_longus" width="0.0004">
+    <site site="extensor_pollicis_longus_origin"/>
+    <site site="extensor_pollicis_longus_insertion"/>
+  </spatial>
+  <!-- Combines with abductor pollicis brevis
+    <spatial name="abductor_pollicis_longus" width="0.0004">
+        <site site="abductor_pollicis_longus_origin" />
+        <site site="abductor_pollicis_brevis_carpals_tunnel" />
+    </spatial> -->
+  <!-- Digiti Minimi -->
+  <spatial name="opponens_digiti_minimi" width="0.0004">
+    <site site="opponens_digiti_minimi_origin"/>
+    <site site="opponens_digiti_minimi_carpals_tunnel"/>
+    <site site="opponens_digiti_minimi_insertion_i"/>
+    <site site="opponens_digiti_minimi_insertion_ii"/>
+  </spatial>
+  <!-- Carpals, RC Joint -->
+  <spatial name="flexor_carpi_radialis" width="0.0004">
+    <site site="flexor_carpi_radialis_origin"/>
+    <site site="flexor_carpi_radialis_insertion"/>
+  </spatial>
+  <spatial name="flexor_carpi_ulnaris" width="0.0004">
+    <site site="flexor_carpi_ulnaris_origin"/>
+    <site site="flexor_carpi_ulnaris_insertion"/>
+  </spatial>
+  <spatial name="extensor_carpi_radialis" width="0.0004">
+    <site site="extensor_carpi_radialis_origin"/>
+    <site site="extensor_carpi_radialis_insertion"/>
+  </spatial>
+  <spatial name="extensor_carpi_ulnaris" width="0.0004">
+    <site site="extensor_carpi_ulnaris_origin"/>
+    <site site="extensor_carpi_ulnaris_insertion"/>
   </spatial>
 </tendon>

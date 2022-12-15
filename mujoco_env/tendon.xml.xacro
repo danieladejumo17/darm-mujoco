@@ -75,8 +75,12 @@
     <xacro:phalanges_tendons index="iv" />
     <xacro:phalanges_tendons index="v" />
 
+    <!-- Pollicis Muscles -->
     <spatial name="abductor_pollicis_brevis" width="0.0004">
+        <!-- Combined with the longus tendon -->
+        <site site="abductor_pollicis_longus_origin" />
         <site site="abductor_pollicis_brevis_carpals_tunnel" />
+        <!-- TODO: Add insertion at the base of metacarpal one | not carpals -->
         <geom geom="distal_cm_i_wrap" sidesite="distal_cm_i_wrap_dorsal_sidesite" />
         <site site="abductor_pollicis_brevis_insertion" />
     </spatial>
@@ -104,5 +108,55 @@
         <geom geom="distal_cm_i_wrap" sidesite="distal_cm_i_wrap_dorsal_sidesite" />
         <site site="opponens_pollicis_insertion_i" />
         <site site="opponens_pollicis_insertion_ii" />
+    </spatial>
+
+    <spatial name="flexor_pollicis_longus" width="0.0004">
+        <site site="flexor_pollicis_longus_origin" />
+        <site site="flexor_pollicis_longus_insertion" />
+    </spatial>
+
+    <spatial name="extensor_pollicis_brevis" width="0.0004">
+        <site site="extensor_pollicis_brevis_origin" />
+        <site site="extensor_pollicis_brevis_insertion" />
+    </spatial>
+
+    <spatial name="extensor_pollicis_longus" width="0.0004">
+        <site site="extensor_pollicis_longus_origin" />
+        <site site="extensor_pollicis_longus_insertion" />
+    </spatial>
+
+    <!-- Combines with abductor pollicis brevis
+    <spatial name="abductor_pollicis_longus" width="0.0004">
+        <site site="abductor_pollicis_longus_origin" />
+        <site site="abductor_pollicis_brevis_carpals_tunnel" />
+    </spatial> -->
+
+    <!-- Digiti Minimi -->
+    <spatial name="opponens_digiti_minimi" width="0.0004">
+        <site site="opponens_digiti_minimi_origin" />
+        <site site="opponens_digiti_minimi_carpals_tunnel" />
+        <site site="opponens_digiti_minimi_insertion_i" />
+        <site site="opponens_digiti_minimi_insertion_ii" />
+    </spatial>
+
+    <!-- Carpals, RC Joint -->
+    <spatial name="flexor_carpi_radialis" width="0.0004">
+        <site site="flexor_carpi_radialis_origin" />
+        <site site="flexor_carpi_radialis_insertion" />
+    </spatial>
+
+    <spatial name="flexor_carpi_ulnaris" width="0.0004">
+        <site site="flexor_carpi_ulnaris_origin" />
+        <site site="flexor_carpi_ulnaris_insertion" />
+    </spatial>
+
+    <spatial name="extensor_carpi_radialis" width="0.0004">
+        <site site="extensor_carpi_radialis_origin" />
+        <site site="extensor_carpi_radialis_insertion" />
+    </spatial>
+
+    <spatial name="extensor_carpi_ulnaris" width="0.0004">
+        <site site="extensor_carpi_ulnaris_origin" />
+        <site site="extensor_carpi_ulnaris_insertion" />
     </spatial>
 </tendon>

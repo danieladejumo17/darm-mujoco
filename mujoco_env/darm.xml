@@ -5,10 +5,15 @@
         <flag contact="enable" />
     </option >
 
+    <size nconmax="1000" njmax="2000" />
+
     <default class="darm_meshes">
         <mesh scale="0.001 0.001 0.001" />
         <geom density="1250" rgba=".8 .8 .8 1"/>
         <tendon rgba=".5 .5 .5 1" />
+        <default class="wrap_geom">
+            <geom mass="0.001" />
+        </default>
     </default>
 
     <asset>

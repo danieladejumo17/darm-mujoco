@@ -11,18 +11,17 @@
         pp_rgba:='1 0 0 1' mp_rgba:='0 1 0 1' dp_rgba:='0 0 1 1' ">
 
         <body name="mcp_centre_block_${index}" pos="${mcp_translation}" euler="${mcp_rotation}">
-            <joint type="hinge" axis="0 1 0" />
+            <joint type="hinge" axis="0 1 0" limited="true" range="-20 20" />
             <geom type="mesh" mesh="mcp_centre_block_${index}_mesh" />
+            <!-- <geom class="wrap_geom" name="mcp_${index}_wrap" type="cylinder" size="${mcp_radius} ${mcp_radius}" euler="0 90 0" rgba="${wrap_rgba}" /> -->
 
             <site name="mcp_${index}_wrap_dorsal_sidesite" pos="0 ${mcp_radius+sidesite_size} 0" size="${sidesite_size}" rgba="${sidesite_rgba}" />
             <site name="mcp_${index}_wrap_palmar_sidesite" pos="0 -${mcp_radius+sidesite_size} 0" size="${sidesite_size}" rgba="${sidesite_rgba}" />
 
             <body name="proximal_phalanx_${index}" pos="0 0 0" euler="0 0 0">
-                <joint type="hinge" axis="1 0 0" />
+                <joint type="hinge" axis="1 0 0" limited="true" range="-45 90" />
                 <geom type="mesh" mesh="proximal_phalanx_${index}_mesh" rgba="${pp_rgba}" />
-                <geom name="mcp_${index}_wrap" type="cylinder" size="${mcp_radius} ${mcp_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
-                <!-- <geom name="pp_${index}_wrap" type="cylinder" pos="0 0 ${pp_length/5}" size="${1.2*pip_radius} ${pp_length/2}" euler="0 0 0" rgba="${wrap_rgba}" /> -->
-
+                
                 <site name="dorsal_interossei_${index}_insertion" pos="${dorsal_interossei_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
                 <site name="palmar_interossei_${index}_insertion" pos="${palmar_interossei_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
                 <site name="pp_${index}_extensor_communis_insertion" pos="${pp_extensor_communis_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
@@ -36,9 +35,9 @@
 
 
                 <body name="middle_phalanx_${index}" pos="0 0 ${pp_length}" euler="0 0 0">
-                    <joint type="hinge" axis="1 0 0" />
+                    <joint type="hinge" axis="1 0 0" limited="true" range="-10 90"/>
                     <geom type="mesh" mesh="middle_phalanx_${index}_mesh" rgba="${mp_rgba}" />
-                    <geom name="pip_${index}_wrap"  type="cylinder" size="${pip_radius} ${pip_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
+                    <geom class="wrap_geom" name="pip_${index}_wrap"  type="cylinder" size="${pip_radius} ${pip_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
 
                     <site name="flexor_superficialis_${index}_insertion" pos="${flexor_superficialis_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
                     <site name="mp_${index}_extensor_hood_insertion" pos="${mp_extensor_hood_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
@@ -50,9 +49,9 @@
                     <site name="dip_${index}_wrap_palmar_sidesite" pos="0 -${dip_radius+sidesite_size} ${mp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
     
                     <body name="distal_phalanx_${index}" pos="0 0 ${mp_length}" euler="0 0 0">
-                        <joint type="hinge" axis="1 0 0" />
+                        <joint type="hinge" axis="1 0 0" limited="true" range="-10 90"/>
                         <geom type="mesh" mesh="distal_phalanx_${index}_mesh" rgba="${dp_rgba}" />
-                        <geom name="dip_${index}_wrap" type="cylinder" size="${dip_radius} ${dip_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
+                        <geom class="wrap_geom" name="dip_${index}_wrap" type="cylinder" size="${dip_radius} ${dip_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
 
                         <site name="flexor_profundus_${index}_insertion" pos="${flexor_profundus_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
                         <site name="dp_${index}_extensor_hood_insertion" pos="${dp_extensor_hood_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
@@ -67,24 +66,29 @@
         mcp_rotation pp_length mp_length mcp_radius pip_radius dip_radius dorsal_interossei_insertion_tf 
         palmar_interossei_insertion_tf pp_extensor_communis_insertion_tf flexor_superficialis_insertion_tf
         mp_extensor_hood_insertion_tf flexor_profundus_insertion_tf dp_extensor_hood_insertion_tf
-        tunnelsite_size:=0.0015 tunnelsite_rgba:='0.5 0.5 0.5 1'">
-
+        opponens_digiti_minimi_insertion_i_tf opponens_digiti_minimi_insertion_ii_tf
+        tunnelsite_size:=0.0015 tunnelsite_rgba:='0.5 0.5 0.5 1' 
+        site_size:=0.002 site_rgba:='0.1 0.1 0.1 1'">
         <body name="proximal_cm_v_centre_block" pos="${cm_translation}" euler="${cm_rotation}">
-            <joint type="hinge" axis="1 0 0" />
+            <joint type="hinge" axis="1 0 0" limited="true" range="-10 10" />
             <geom type="mesh" mesh="proximal_cm_v_centre_block_mesh" />
             
             <body name="distal_cm_v_centre_block" pos="${centre_block_offset}" euler="0 0 0">
-                <joint type="hinge" axis="0 0 1" />
+                <joint type="hinge" axis="0 0 1" limited="true" range="-10 10" />
                 <geom type="mesh" mesh="distal_cm_v_centre_block_mesh" />
   
                 <body name="metacarpal_v" pos="0 0 ${metacarpal_length}" euler="0 0 0">
-                    <joint type="hinge" axis="0 1 0" pos="0 0 -${metacarpal_length}" />
+                    <joint type="hinge" axis="0 1 0" pos="0 0 -${metacarpal_length}"  limited="true" range="-5 5" />
                     <geom type="mesh" mesh="metacarpal_v_mesh" />
+                    <geom class="wrap_geom" pos="${mcp_translation}" name="mcp_${index}_wrap" type="cylinder" size="${mcp_radius} ${mcp_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
+
 
                     <site name="flexor_v_metacarpals_tunnel" pos="0 -0.009 -${metacarpal_length}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
                     <site name="extensor_communis_v_metacarpals_tunnel" pos="0 0.009 -${metacarpal_length}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
 
-                  
+                    <site name="opponens_digiti_minimi_insertion_i" pos="${opponens_digiti_minimi_insertion_i_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="opponens_digiti_minimi_insertion_ii" pos="${opponens_digiti_minimi_insertion_ii_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+
                     <xacro:phalanges index="${index}" mcp_translation="${mcp_translation}" mcp_rotation="${mcp_rotation}" 
                                     pp_length="${pp_length}" mp_length="${mp_length}" mcp_radius="${mcp_radius}" 
                                     pip_radius="${pip_radius}" dip_radius="${dip_radius}" 
@@ -104,26 +108,27 @@
         pp_length proximal_cm_radius distal_cm_radius mcp_radius ip_radius abductor_pollicis_brevis_insertion_tf adductor_pollicis_insertion_tf flexor_pollicis_brevis_insertion_tf
         opponens_pollicis_insertion_i_tf opponens_pollicis_insertion_ii_tf flexor_pollicis_longus_insertion_tf
         extensor_pollicis_brevis_insertion_tf extensor_pollicis_longus_insertion_tf
-        wrap_rgba:='0 0 1 0.2'">
+        wrap_rgba:='0 0 1 0.2' pp_rgba:='1 0 0 1' dp_rgba:='0 0 1 1' 
+        site_size:=0.002 site_rgba:='0.1 0.1 0.1 1'">
         <body name="proximal_cm_i_centre_block" pos="${cm_translation[0]} ${cm_translation[1]} ${cm_translation[2]}" euler="${cm_rotation}">
-            <joint type="hinge" axis="1 0 0" />
+            <joint type="hinge" axis="1 0 0" limited="true" range="-50 -10" />
             <geom type="mesh" mesh="proximal_cm_i_centre_block_mesh" />
-            <geom name="proximal_cm_i_wrap" type="cylinder" size="${proximal_cm_radius} 0.010" euler="0 90 0" rgba="${wrap_rgba}" />
+            <geom class="wrap_geom" name="proximal_cm_i_wrap" type="cylinder" size="${proximal_cm_radius} 0.010" euler="0 90 0" rgba="${wrap_rgba}" />
 
             <site name="distal_cm_${index}_wrap_dorsal_sidesite" pos="${distal_cm_radius+sidesite_size} 0 ${centre_block_offset[2]}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
             <site name="distal_cm_${index}_wrap_palmar_sidesite" pos="-${distal_cm_radius+sidesite_size} 0 ${centre_block_offset[2]}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
 
             
             <body name="distal_cm_i_centre_block" pos="${centre_block_offset[0]} ${centre_block_offset[1]} ${centre_block_offset[2]}" euler="0 0 0">
-                <joint type="hinge" axis="0 0 1" />
+                <joint type="hinge" axis="0 0 1" limited="true" range="-15 15" />
                 <geom type="mesh" mesh="distal_cm_i_centre_block_mesh" />
-                <geom name="distal_cm_i_wrap" type="cylinder" size="${distal_cm_radius} 0.009" euler="90 0 0" rgba="${wrap_rgba}" />
+                <geom class="wrap_geom" name="distal_cm_i_wrap" type="cylinder" size="${distal_cm_radius} 0.009" euler="90 0 0" rgba="${wrap_rgba}" />
 
   
                 <body name="metacarpal_i" pos="0 0 0" euler="0 0 0">
-                    <joint type="hinge" axis="0 1 0" pos="0 0 0" />
+                    <joint type="hinge" axis="0 1 0" pos="0 0 0" limited="true" range="-20 20" />
                     <geom type="mesh" mesh="metacarpal_i_mesh" />
-                    <geom name="mcp_i_wrap" type="cylinder" pos="0 0 ${metacarpal_length}" size="${mcp_radius} 0.008" euler="0 90 0" rgba="${wrap_rgba}" />
+                    <geom class="wrap_geom" name="mcp_i_wrap" type="cylinder" pos="0 0 ${metacarpal_length}" size="${mcp_radius} 0.008" euler="0 90 0" rgba="${wrap_rgba}" />
 
                     <site name="opponens_pollicis_insertion_i" pos="${opponens_pollicis_insertion_i_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
                     <site name="opponens_pollicis_insertion_ii" pos="${opponens_pollicis_insertion_ii_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
@@ -133,9 +138,9 @@
 
                 
                         <body name="proximal_phalanx_${index}" pos="0 0 ${metacarpal_length}" euler="0 0 0">
-                            <joint type="hinge" axis="1 0 0" />
-                            <geom type="mesh" mesh="proximal_phalanx_${index}_mesh" rgba="1 0 0 1" />
-                            <geom name="ip_i_wrap" type="cylinder" pos="0 0 ${pp_length}" size="${ip_radius} 0.008" euler="0 90 0" rgba="${wrap_rgba}" />
+                            <joint type="hinge" axis="1 0 0" limited="true" range="-10 90" />
+                            <geom type="mesh" mesh="proximal_phalanx_${index}_mesh" rgba="${pp_rgba}" />
+                            <geom class="wrap_geom" name="ip_i_wrap" type="cylinder" pos="0 0 ${pp_length}" size="${ip_radius} 0.008" euler="0 90 0" rgba="${wrap_rgba}" />
 
 
                             <site name="abductor_pollicis_brevis_insertion" pos="${abductor_pollicis_brevis_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
@@ -148,8 +153,8 @@
                             <site name="ip_${index}_wrap_palmar_sidesite" pos="0 -${ip_radius+sidesite_size} ${pp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
 
                             <body name="distal_phalanx_${index}" pos="0 0 ${pp_length}" euler="0 0 0">
-                                <joint type="hinge" axis="1 0 0" />
-                                <geom type="mesh" mesh="distal_phalanx_${index}_mesh" rgba="0 0 1 1" />
+                                <joint type="hinge" axis="1 0 0"  limited="true" range="-60 90" />
+                                <geom type="mesh" mesh="distal_phalanx_${index}_mesh" rgba="${dp_rgba}" />
 
                                 <site name="flexor_pollicis_longus_insertion" pos="${flexor_pollicis_longus_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
                                 <site name="extensor_pollicis_longus_insertion" pos="${extensor_pollicis_longus_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
