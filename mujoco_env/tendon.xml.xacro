@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tendon xmlns:xacro="http://wiki.ros.org/xacro">
+    <!-- TODO: Interossei Position on Metacarpals -->
+    <!-- TODO: Muscles with three fibres -->
     <xacro:macro name="phalanges_tendons" params="index">
         <spatial name="dorsal_interossei_${index}" width="0.0004">
             <site site="dorsal_interossei_${index}_origin" />
@@ -52,7 +54,7 @@
             <geom geom="mcp_${index}_wrap" sidesite="mcp_${index}_wrap_palmar_sidesite" />
             <site site="pp_${index}_flexor_tunnel" />
             <geom geom="pip_${index}_wrap" sidesite="pip_${index}_wrap_palmar_sidesite" />
-            <site site="flexor_superficialis_${index}_insertion" />
+            <!-- <site site="flexor_superficialis_${index}_insertion" /> -->
             <site site="mp_${index}_flexor_tunnel" />
             <geom geom="dip_${index}_wrap" sidesite="dip_${index}_wrap_palmar_sidesite" />
             <site site="flexor_profundus_${index}_insertion" />
@@ -70,40 +72,53 @@
         </spatial>
     </xacro:macro>
     
+
+
+
     <xacro:phalanges_tendons index="ii" />
     <xacro:phalanges_tendons index="iii" />
     <xacro:phalanges_tendons index="iv" />
     <xacro:phalanges_tendons index="v" />
 
+
+
     <!-- Pollicis Muscles -->
     <spatial name="abductor_pollicis_brevis" width="0.0004">
-        <!-- Combined with the longus tendon -->
-        <site site="abductor_pollicis_longus_origin" />
+        <site site="abductor_pollicis_brevis_origin" />
+        <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" />
         <site site="abductor_pollicis_brevis_carpals_tunnel" />
-        <!-- TODO: Add insertion at the base of metacarpal one | not carpals -->
         <geom geom="distal_cm_i_wrap" sidesite="distal_cm_i_wrap_dorsal_sidesite" />
         <site site="abductor_pollicis_brevis_insertion" />
     </spatial>
 
     <spatial name="adductor_pollicis_oblique" width="0.0004">
+        <site site="adductor_pollicis_origin" />
+        <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" /> 
         <site site="adductor_pollicis_capitate_tunnel" />
-        <geom geom="proximal_cm_i_wrap" sidesite="proximal_cm_i_wrap_palmar_sidesite" />
+        <geom geom="distal_cm_i_wrap" sidesite="proximal_cm_i_wrap_palmar_sidesite" />
         <site site="adductor_pollicis_insertion" />
     </spatial>
 
     <spatial name="adductor_pollicis_transverse" width="0.0004">
+        <site site="adductor_pollicis_origin" />
+        <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" /> 
+        <site site="adductor_pollicis_capitate_tunnel" />
         <site site="adductor_pollicis_metacarpals_iii_tunnel_i" />
         <site site="adductor_pollicis_metacarpals_iii_tunnel_ii" />
         <site site="adductor_pollicis_insertion" />
     </spatial>
 
     <spatial name="flexor_pollicis_brevis" width="0.0004">
+        <site site="flexor_pollicis_brevis_origin" />
+        <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" /> 
         <site site="flexor_pollicis_brevis_carpals_tunnel" />
         <geom geom="distal_cm_i_wrap" sidesite="distal_cm_i_wrap_dorsal_sidesite" />
         <site site="flexor_pollicis_brevis_insertion" />
     </spatial>
 
     <spatial name="opponens_pollicis" width="0.0004">
+        <site site="opponens_pollicis_origin" />
+        <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" /> 
         <site site="opponens_pollicis_carpals_tunnel" />
         <geom geom="distal_cm_i_wrap" sidesite="distal_cm_i_wrap_dorsal_sidesite" />
         <site site="opponens_pollicis_insertion_i" />
@@ -112,51 +127,86 @@
 
     <spatial name="flexor_pollicis_longus" width="0.0004">
         <site site="flexor_pollicis_longus_origin" />
+        <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" />
+        <site site="flexor_pollicis_brevis_carpals_tunnel" />
+        <geom geom="proximal_cm_i_wrap" sidesite="proximal_cm_i_wrap_palmar_sidesite" />
+        <site site="metacarpal_i_flexor_tunnel" />
+        <geom geom="mcp_i_wrap" sidesite="mcp_i_wrap_palmar_sidesite" />
+        <site site="pp_i_flexor_tunnel" />
+        <geom geom="ip_i_wrap" sidesite="ip_i_wrap_palmar_sidesite" />
         <site site="flexor_pollicis_longus_insertion" />
     </spatial>
 
     <spatial name="extensor_pollicis_brevis" width="0.0004">
         <site site="extensor_pollicis_brevis_origin" />
+        <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_dorsal_sidesite" />
+        <site site="extensor_pollicis_carpals_tunnel" />
+        <geom geom="proximal_cm_i_wrap" sidesite="proximal_cm_i_wrap_dorsal_sidesite" />
+        <site site="metacarpal_i_extensor_tunnel" />
+        <geom geom="mcp_i_wrap" sidesite="mcp_i_wrap_dorsal_sidesite" />
         <site site="extensor_pollicis_brevis_insertion" />
     </spatial>
 
     <spatial name="extensor_pollicis_longus" width="0.0004">
         <site site="extensor_pollicis_longus_origin" />
+        <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_dorsal_sidesite" />
+        <site site="extensor_pollicis_carpals_tunnel" />
+        <geom geom="proximal_cm_i_wrap" sidesite="proximal_cm_i_wrap_dorsal_sidesite" />
+        <site site="metacarpal_i_extensor_tunnel" />
+        <geom geom="mcp_i_wrap" sidesite="mcp_i_wrap_dorsal_sidesite" />
+        <site site="pp_i_extensor_tunnel" />
+        <geom geom="ip_i_wrap" sidesite="ip_i_wrap_dorsal_sidesite" />
         <site site="extensor_pollicis_longus_insertion" />
     </spatial>
 
-    <!-- Combines with abductor pollicis brevis
     <spatial name="abductor_pollicis_longus" width="0.0004">
         <site site="abductor_pollicis_longus_origin" />
-        <site site="abductor_pollicis_brevis_carpals_tunnel" />
-    </spatial> -->
+        <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_dorsal_sidesite" />
+        <site site="extensor_pollicis_carpals_tunnel" />
+        <geom geom="distal_cm_i_wrap" sidesite="distal_cm_i_wrap_dorsal_sidesite" />
+        <site site="abductor_pollicis_longus_insertion" />
+    </spatial>
+
+
+
 
     <!-- Digiti Minimi -->
     <spatial name="opponens_digiti_minimi" width="0.0004">
         <site site="opponens_digiti_minimi_origin" />
+        <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" />
         <site site="opponens_digiti_minimi_carpals_tunnel" />
+        <geom geom="proximal_cm_v_wrap" sidesite="proximal_cm_v_wrap_palmar_sidesite" />
+        <site site="opponens_digiti_minimi_distal_cm_v_tunnel" />
+        <geom geom="distal_cm_v_wrap" sidesite="distal_cm_v_wrap_ulnar_sidesite" />
         <site site="opponens_digiti_minimi_insertion_i" />
         <site site="opponens_digiti_minimi_insertion_ii" />
     </spatial>
 
+
+
+
     <!-- Carpals, RC Joint -->
-    <spatial name="flexor_carpi_radialis" width="0.0004">
+    <spatial name="flexor_carpi_radialis" width="0.0004" limited="true" range="0 0.07">
         <site site="flexor_carpi_radialis_origin" />
+        <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" />
         <site site="flexor_carpi_radialis_insertion" />
     </spatial>
 
-    <spatial name="flexor_carpi_ulnaris" width="0.0004">
+    <spatial name="flexor_carpi_ulnaris" width="0.0004" limited="true" range="0 0.07">
         <site site="flexor_carpi_ulnaris_origin" />
+        <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" />
         <site site="flexor_carpi_ulnaris_insertion" />
     </spatial>
 
     <spatial name="extensor_carpi_radialis" width="0.0004">
         <site site="extensor_carpi_radialis_origin" />
+        <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_dorsal_sidesite" />
         <site site="extensor_carpi_radialis_insertion" />
     </spatial>
 
     <spatial name="extensor_carpi_ulnaris" width="0.0004">
         <site site="extensor_carpi_ulnaris_origin" />
+        <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_dorsal_sidesite" />
         <site site="extensor_carpi_ulnaris_insertion" />
     </spatial>
 </tendon>

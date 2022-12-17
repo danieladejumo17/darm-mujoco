@@ -7,7 +7,6 @@
   <!-- Phalanges -->
   <body childclass="darm_meshes" euler="0 0 0" name="forearm" pos="0 0 0.12">
     <geom mesh="forearm_mesh" type="mesh"/>
-    <geom class="wrap_geom" euler="0 90 0" name="rc_joint_wrap" pos="0 0 0.032" rgba="0 0 1 0.2" size="0.012 0.0235" type="cylinder"/>
     <site name="rc_joint_wrap_dorsal_sidesite" pos="0 0.013 0.032" rgba="1 1 1 0.2" size="0.001"/>
     <site name="rc_joint_wrap_palmar_sidesite" pos="0 -0.013 0.032" rgba="1 1 1 0.2" size="0.001"/>
     <body>
@@ -132,8 +131,13 @@
     </body>
     <body>
       <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="flexor_pollicis_longus_origin_joint" pos="0.012 -0.013 -0.075" type="slide"/>
-      <site name="flexor_pollicis_longus_origin" pos="0.012 -0.013 -0.075" rgba="1 0.5 0.5 1" size="0.0015"/>
+      <joint axis="0 0 1" name="flexor_pollicis_longus_origin_joint" pos="0.008 -0.013 -0.075" type="slide"/>
+      <site name="flexor_pollicis_longus_origin" pos="0.008 -0.013 -0.075" rgba="1 0.5 0.5 1" size="0.0015"/>
+    </body>
+    <body>
+      <geom size="0.00075" type="sphere"/>
+      <joint axis="0 0 1" name="flexor_pollicis_brevis_origin_joint" pos="0.004 -0.013 -0.075" type="slide"/>
+      <site name="flexor_pollicis_brevis_origin" pos="0.004 -0.013 -0.075" rgba="1 0.5 0.5 1" size="0.0015"/>
     </body>
     <body>
       <geom size="0.00075" type="sphere"/>
@@ -152,13 +156,29 @@
     </body>
     <body>
       <geom size="0.00075" type="sphere"/>
+      <joint axis="0 0 1" name="abductor_pollicis_brevis_origin_joint" pos="0.012 -0.013 -0.075" type="slide"/>
+      <site name="abductor_pollicis_brevis_origin" pos="0.012 -0.013 -0.075" rgba="1 0.5 0.5 1" size="0.0015"/>
+    </body>
+    <body>
+      <geom size="0.00075" type="sphere"/>
+      <joint axis="0 0 1" name="opponens_pollicis_origin_joint" pos="0.0 -0.013 -0.075" type="slide"/>
+      <site name="opponens_pollicis_origin" pos="0.0 -0.013 -0.075" rgba="1 0.5 0.5 1" size="0.0015"/>
+    </body>
+    <body>
+      <geom size="0.00075" type="sphere"/>
+      <joint axis="0 0 1" name="adductor_pollicis_origin_joint" pos="0.0 -0.013 -0.085" type="slide"/>
+      <site name="adductor_pollicis_origin" pos="0.0 -0.013 -0.085" rgba="1 0.5 0.5 1" size="0.0015"/>
+    </body>
+    <body>
+      <geom size="0.00075" type="sphere"/>
       <joint axis="0 0 1" name="opponens_digiti_minimi_origin_joint" pos="-0.012 -0.013 -0.075" type="slide"/>
       <site name="opponens_digiti_minimi_origin" pos="-0.012 -0.013 -0.075" rgba="1 0.5 0.5 1" size="0.0015"/>
     </body>
     <!-- TODO: Measure this accurately from f360 -->
     <body euler="0 0 0" name="rc_centre_block" pos="0 0 0.032">
-      <!-- <joint type="hinge" axis="0 1 0" pos="0 0 -0.032" limited="true" range="-20 10" /> -->
+      <joint axis="0 1 0" limited="true" pos="0 0 -0.032" range="-20 10" type="hinge"/>
       <geom mesh="rc_centre_block_mesh" type="mesh"/>
+      <geom class="wrap_geom" euler="0 90 0" name="rc_joint_wrap" rgba="0 0 1 0.2" size="0.012 0.0235" type="cylinder"/>
       <body euler="0 0 0" name="carpals_metacarpals" pos="0 0 0">
         <joint axis="1 0 0" limited="true" range="-90 90" type="hinge"/>
         <geom mesh="carpals_metacarpals_mesh" type="mesh"/>
@@ -169,6 +189,7 @@
         <site name="flexor_carpi_ulnaris_insertion" pos="-0.0185 -0.012 0.016" rgba="0.5 0.5 0.5 1" size="0.0015"/>
         <site name="extensor_carpi_radialis_insertion" pos="0.021 0.01 0.016" rgba="0.5 0.5 0.5 1" size="0.0015"/>
         <site name="extensor_carpi_ulnaris_insertion" pos="-0.0185 0.012 0.016" rgba="0.5 0.5 0.5 1" size="0.0015"/>
+        <site name="extensor_pollicis_carpals_tunnel" pos="0.024 0.001 0.016" rgba="0.5 0.5 0.5 1" size="0.0015"/>
         <site name="extensor_communis_ii_carpals_tunnel" pos="0.012 0.011 0.015" rgba="0.5 0.5 0.5 1" size="0.0015"/>
         <site name="extensor_communis_iii_carpals_tunnel" pos="0.004 0.011 0.015" rgba="0.5 0.5 0.5 1" size="0.0015"/>
         <site name="extensor_communis_iv_carpals_tunnel" pos="-0.004 0.011 0.015" rgba="0.5 0.5 0.5 1" size="0.0015"/>
@@ -186,12 +207,12 @@
         <site name="abductor_pollicis_brevis_carpals_tunnel" pos="0.024963 -0.016395 0.022153" rgba="0.5 0.5 0.5 1" size="0.0015"/>
         <site name="adductor_pollicis_metacarpals_iii_tunnel_i" pos="0.009064 -0.000907 0.041" rgba="0.5 0.5 0.5 1" size="0.0015"/>
         <site name="adductor_pollicis_metacarpals_iii_tunnel_ii" pos="0.011 0.001949 0.070" rgba="0.5 0.5 0.5 1" size="0.0015"/>
-        <site name="adductor_pollicis_capitate_tunnel" pos="-0.001286 -0.010 0.016" rgba="0.5 0.5 0.5 1" size="0.0015"/>
+        <site name="adductor_pollicis_capitate_tunnel" pos="0.0 -0.010 0.016" rgba="0.5 0.5 0.5 1" size="0.0015"/>
         <site name="flexor_pollicis_brevis_carpals_tunnel" pos="0.0128 -0.00957 0.020" rgba="0.5 0.5 0.5 1" size="0.0015"/>
         <site name="opponens_pollicis_carpals_tunnel" pos="0.0128 -0.00957 0.020" rgba="0.5 0.5 0.5 1" size="0.0015"/>
         <site name="proximal_cm_i_wrap_dorsal_sidesite" pos="0.0335607 -0.0073321 0.0254833" rgba="1 1 1 0.2" size="0.001"/>
         <site name="proximal_cm_i_wrap_palmar_sidesite" pos="0.0111607 -0.0073321 0.0254833" rgba="1 1 1 0.2" size="0.001"/>
-        <site name="opponens_digiti_minimi_carpals_tunnel" pos="-0.004421 -0.010 0.016" rgba="0.5 0.5 0.5 1" size="0.0015"/>
+        <site name="opponens_digiti_minimi_carpals_tunnel" pos="-0.007 -0.010 0.016" rgba="0.5 0.5 0.5 1" size="0.0015"/>
         <body euler="0 5 -10" name="mcp_centre_block_ii" pos="0.0293 0.0087 0.0908">
           <joint axis="0 1 0" limited="true" range="-20 20" type="hinge"/>
           <geom mesh="mcp_centre_block_ii_mesh" type="mesh"/>
@@ -316,12 +337,17 @@
               <geom class="wrap_geom" euler="0 90 0" name="mcp_i_wrap" pos="0 0 0.0395" rgba="0 0 1 0.2" size="0.0075 0.008" type="cylinder"/>
               <site name="opponens_pollicis_insertion_i" pos="0.0055 0.0048 0.009875" rgba="0.5 0.5 0.5 1" size="0.0015"/>
               <site name="opponens_pollicis_insertion_ii" pos="0.00543 0.005595 0.03379" rgba="0.5 0.5 0.5 1" size="0.0015"/>
+              <site name="abductor_pollicis_longus_insertion" pos="0.0055 0.0 0.008" rgba="0.5 0.5 0.5 1" size="0.0015"/>
               <site name="mcp_i_wrap_dorsal_sidesite" pos="0 0.0085 0.0395" rgba="1 1 1 0.2" size="0.001"/>
               <site name="mcp_i_wrap_palmar_sidesite" pos="0 -0.0085 0.0395" rgba="1 1 1 0.2" size="0.001"/>
+              <site name="metacarpal_i_flexor_tunnel" pos="0.0 -0.0065 0.01975" rgba="0.5 0.5 0.5 1" size="0.0015"/>
+              <site name="metacarpal_i_extensor_tunnel" pos="0.0 0.0065 0.01975" rgba="0.5 0.5 0.5 1" size="0.0015"/>
               <body euler="0 0 0" name="proximal_phalanx_i" pos="0 0 0.0395">
                 <joint axis="1 0 0" limited="true" range="-10 90" type="hinge"/>
                 <geom mesh="proximal_phalanx_i_mesh" rgba="1 0 0 1" type="mesh"/>
                 <geom class="wrap_geom" euler="0 90 0" name="ip_i_wrap" pos="0 0 0.0335" rgba="0 0 1 0.2" size="0.0065 0.008" type="cylinder"/>
+                <site name="pp_i_flexor_tunnel" pos="0.0 -0.005 0.01675" rgba="1 0 0 1" size="0.0015"/>
+                <site name="pp_i_extensor_tunnel" pos="0.0 0.005 0.01675" rgba="1 0 0 1" size="0.0015"/>
                 <site name="abductor_pollicis_brevis_insertion" pos="0.008 0.0 0.0" rgba="0.5 0.5 0.5 1" size="0.0015"/>
                 <site name="adductor_pollicis_insertion" pos="-0.008 0.0 0.0" rgba="0.5 0.5 0.5 1" size="0.0015"/>
                 <site name="flexor_pollicis_brevis_insertion" pos="0.005 -0.005598 0.008406" rgba="0.5 0.5 0.5 1" size="0.0015"/>
@@ -341,9 +367,16 @@
         <body euler="0 -12 5" name="proximal_cm_v_centre_block" pos="-0.0171 0.0038 0.0360">
           <joint axis="1 0 0" limited="true" range="-10 10" type="hinge"/>
           <geom mesh="proximal_cm_v_centre_block_mesh" type="mesh"/>
+          <geom class="wrap_geom" euler="0 90 0" name="proximal_cm_v_wrap" rgba="0 0 1 0.2" size="0.007 0.009" type="cylinder"/>
+          <site name="proximal_cm_v_wrap_dorsal_sidesite" pos="0 0.008 0" rgba="1 1 1 0.2" size="0.001"/>
+          <site name="proximal_cm_v_wrap_palmar_sidesite" pos="0 -0.008 0" rgba="1 1 1 0.2" size="0.001"/>
           <body euler="0 0 0" name="distal_cm_v_centre_block" pos="0 0 0.014">
             <joint axis="0 0 1" limited="true" range="-10 10" type="hinge"/>
             <geom mesh="distal_cm_v_centre_block_mesh" type="mesh"/>
+            <geom class="wrap_geom" euler="90 0 0" name="distal_cm_v_wrap" rgba="0 0 1 0.2" size="0.007 0.008" type="cylinder"/>
+            <site name="distal_cm_v_wrap_ulnar_sidesite" pos="-0.008 0 0" rgba="1 1 1 0.2" size="0.001"/>
+            <site name="distal_cm_v_wrap_radial_sidesite" pos="0.008 0 0" rgba="1 1 1 0.2" size="0.001"/>
+            <site name="opponens_digiti_minimi_distal_cm_v_tunnel" pos="-0.0065 -0.0035 -0.007" rgba="0.5 0.5 0.5 1" size="0.0015"/>
             <body euler="0 0 0" name="metacarpal_v" pos="0 0 0.0349">
               <joint axis="0 1 0" limited="true" pos="0 0 -0.0349" range="-5 5" type="hinge"/>
               <geom mesh="metacarpal_v_mesh" type="mesh"/>
