@@ -216,11 +216,11 @@
 
     <!-- Tendon Origin Macro -->
     <xacro:macro name="tendon_origin" params="site_name site_tf">
-        <body>
-            <geom type="sphere" size="${.5*origin_site_size}" />
-            <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" />
-            <site name="${site_name}" pos="${site_tf}" size="${origin_site_size}" rgba="${origin_site_rgba}"/>
-        </body>
+        <site name="${site_name}" pos="${site_tf}" size="${origin_site_size}" rgba="${origin_site_rgba}"/>
+        <!-- <body> -->
+            <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+            <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+        <!-- </body> -->
     </xacro:macro>
     
     

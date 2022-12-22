@@ -12,8 +12,11 @@
         <geom density="1250" rgba=".8 .8 .8 1"/>
         <tendon rgba=".5 .5 .5 1" />
         <default class="wrap_geom">
-            <geom mass="0.001" />
+            <geom density="0.0" />
         </default>
+
+        <!-- Actuators -->
+        <!-- <general gaintype="fixed" gainprm="-1" biastype="none" biasprm="0" /> -->
     </default>
 
     <asset>
@@ -36,7 +39,31 @@
     </tendon>
 
     <actuator>
-        <motor name="flexor_carpi_radialis_actuator" joint="flexor_carpi_radialis_origin_joint"
-        ctrllimited="true"  ctrlrange="-1 1" forcelimited="true" forcerange="-2 2"/>
+        <include file="actuator.xml" />
     </actuator>
 </mujoco>
+
+
+        <!-- <spatial name="flexor_carpi_radialis" width="0.0004">
+            <site site="flexor_carpi_radialis_origin" />
+            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" />
+            <site site="flexor_carpi_radialis_insertion" />
+        </spatial>
+    
+        <spatial name="flexor_carpi_ulnaris" width="0.0004">
+            <site site="flexor_carpi_ulnaris_origin" />
+            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" />
+            <site site="flexor_carpi_ulnaris_insertion" />
+        </spatial>
+    
+        <spatial name="extensor_carpi_radialis" width="0.0004">
+            <site site="extensor_carpi_radialis_origin" />
+            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_dorsal_sidesite" />
+            <site site="extensor_carpi_radialis_insertion" />
+        </spatial>
+    
+        <spatial name="extensor_carpi_ulnaris" width="0.0004">
+            <site site="extensor_carpi_ulnaris_origin" />
+            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_dorsal_sidesite" />
+            <site site="extensor_carpi_ulnaris_insertion" />
+        </spatial> -->

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actuator xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <!-- A total of 34 muscles -->
+    <!-- Interosseis' location -->
+    <!-- Huge forces cause joint limits to be violated. Remove soft constraints -->
+    <!-- Tendon damping, Joint Damping and friction -->
+    <!-- For RL don't limit control -->
+    <!-- For RL - Dorsal Interossei muscle count. Understand the effect of sites on the dynamics and moment computation. See what constraint can help, or use pulley -->
+    <!-- adductor_pollicis_oblique is leading to Lateral rotation at the TMC joint change the line of action by adding a distal site-->
+    <xacro:property name="carpal_tendons" value="${[
+    'flexor_carpi_radialis', 'flexor_carpi_ulnaris',
+    'extensor_carpi_radialis', 'extensor_carpi_ulnaris' ]}" />
+
+    <xacro:property name="pollicis_tendons" value="${[
+    'adductor_pollicis_oblique', 'adductor_pollicis_transverse',
+    'abductor_pollicis_brevis', 'abductor_pollicis_longus',
+    'flexor_pollicis_brevis', 'flexor_pollicis_longus',
+    'extensor_pollicis_brevis', 'extensor_pollicis_longus',
+    'opponens_pollicis'
+    ]}" />
+
+    <xacro:property name="digiti_minimi_specific_tendons" value="${['opponens_digiti_minimi']}" />
+
+    <xacro:property name="digitorum_tendons" value="${[
+        'dorsal_interossei', 'palmar_interossei',
+        'extensor_communis', 'flexor_profundus',
+        'flexor_superficialis']}" />
+
+
+    <!-- MACRO TO UNROLL LOOP -->
+    <xacro:macro name="make_actuators" params="tendons:=^ ctrlrange:='0 1' index:='0'">
+        <xacro:if value="${tendons}">
+            <!-- pop first item from list -->
+            <xacro:property name="tendon_name" value="${tendons.pop(0)}"/>
+
+            <xacro:unless value="${index != '0'}">
+                <general name="${tendon_name}_actuator" tendon="${tendon_name}"
+                    gaintype="fixed" biastype="none" gainprm="-1" biasprm="0" ctrllimited="true" ctrlrange="${ctrlrange}"/>
+                
+                <!-- recursively call make_actuators -->
+                <xacro:make_actuators ctrlrange="${ctrlrange}" />
+            </xacro:unless>
+
+            <xacro:if value="${index != '0'}">
+                <general name="${tendon_name}_${index}_actuator" tendon="${tendon_name}_${index}"
+                    gaintype="fixed" biastype="none" gainprm="-1" biasprm="0" ctrllimited="true" ctrlrange="${ctrlrange}"/>
+                
+                <!-- recursively call make_actuators -->
+                <xacro:make_actuators ctrlrange="${ctrlrange}" index="${index}" />
+            </xacro:if>
+
+        </xacro:if>
+    </xacro:macro>
+
+
+    <!-- Create a List of Muscles -->
+    <xacro:make_actuators tendons="${carpal_tendons}" ctrlrange="0 20"/>
+    <xacro:make_actuators tendons="${pollicis_tendons}" ctrlrange="0 2"/>
+
+    <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="ii" ctrlrange="0 2"/>
+    <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iii" ctrlrange="0 2"/>
+    <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iv" ctrlrange="0 2"/>
+    <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="v" ctrlrange="0 2"/>
+
+    <xacro:make_actuators tendons="${digiti_minimi_specific_tendons}" ctrlrange="0 2"/>
+</actuator>

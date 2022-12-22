@@ -9,171 +9,171 @@
     <geom mesh="forearm_mesh" type="mesh"/>
     <site name="rc_joint_wrap_dorsal_sidesite" pos="0 0.013 0.032" rgba="1 1 1 0.2" size="0.001"/>
     <site name="rc_joint_wrap_palmar_sidesite" pos="0 -0.013 0.032" rgba="1 1 1 0.2" size="0.001"/>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="flexor_carpi_radialis_origin_joint" pos="0.012 -0.013 -0.085" type="slide"/>
-      <site name="flexor_carpi_radialis_origin" pos="0.012 -0.013 -0.085" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="flexor_carpi_ulnaris_origin_joint" pos="-0.012 -0.013 -0.085" type="slide"/>
-      <site name="flexor_carpi_ulnaris_origin" pos="-0.012 -0.013 -0.085" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="extensor_carpi_radialis_origin_joint" pos="0.012 0.013 -0.065" type="slide"/>
-      <site name="extensor_carpi_radialis_origin" pos="0.012 0.013 -0.065" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="extensor_carpi_ulnaris_origin_joint" pos="-0.012 0.013 -0.065" type="slide"/>
-      <site name="extensor_carpi_ulnaris_origin" pos="-0.012 0.013 -0.065" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="extensor_communis_ii_origin_joint" pos="0.012 0.013 -0.035" type="slide"/>
-      <site name="extensor_communis_ii_origin" pos="0.012 0.013 -0.035" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="extensor_communis_iii_origin_joint" pos="0.004 0.013 -0.035" type="slide"/>
-      <site name="extensor_communis_iii_origin" pos="0.004 0.013 -0.035" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="extensor_communis_iv_origin_joint" pos="-0.004 0.013 -0.035" type="slide"/>
-      <site name="extensor_communis_iv_origin" pos="-0.004 0.013 -0.035" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="extensor_communis_v_origin_joint" pos="-0.012 0.013 -0.035" type="slide"/>
-      <site name="extensor_communis_v_origin" pos="-0.012 0.013 -0.035" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="flexor_profundus_ii_origin_joint" pos="0.008 -0.013 -0.035" type="slide"/>
-      <site name="flexor_profundus_ii_origin" pos="0.008 -0.013 -0.035" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="flexor_profundus_iii_origin_joint" pos="0.002 -0.013 -0.035" type="slide"/>
-      <site name="flexor_profundus_iii_origin" pos="0.002 -0.013 -0.035" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="flexor_profundus_iv_origin_joint" pos="-0.002 -0.013 -0.035" type="slide"/>
-      <site name="flexor_profundus_iv_origin" pos="-0.002 -0.013 -0.035" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="flexor_profundus_v_origin_joint" pos="-0.008 -0.013 -0.035" type="slide"/>
-      <site name="flexor_profundus_v_origin" pos="-0.008 -0.013 -0.035" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="flexor_superficialis_ii_origin_joint" pos="0.012 -0.013 -0.065" type="slide"/>
-      <site name="flexor_superficialis_ii_origin" pos="0.012 -0.013 -0.065" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="flexor_superficialis_iii_origin_joint" pos="0.004 -0.013 -0.065" type="slide"/>
-      <site name="flexor_superficialis_iii_origin" pos="0.004 -0.013 -0.065" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="flexor_superficialis_iv_origin_joint" pos="-0.004 -0.013 -0.065" type="slide"/>
-      <site name="flexor_superficialis_iv_origin" pos="-0.004 -0.013 -0.065" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="flexor_superficialis_v_origin_joint" pos="-0.012 -0.013 -0.065" type="slide"/>
-      <site name="flexor_superficialis_v_origin" pos="-0.012 -0.013 -0.065" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="palmar_interossei_ii_origin_joint" pos="0.010 -0.013 -0.045" type="slide"/>
-      <site name="palmar_interossei_ii_origin" pos="0.010 -0.013 -0.045" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="palmar_interossei_iii_origin_joint" pos="0.003 -0.013 -0.045" type="slide"/>
-      <site name="palmar_interossei_iii_origin" pos="0.003 -0.013 -0.045" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="palmar_interossei_iv_origin_joint" pos="-0.003 -0.013 -0.045" type="slide"/>
-      <site name="palmar_interossei_iv_origin" pos="-0.003 -0.013 -0.045" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="palmar_interossei_v_origin_joint" pos="-0.010 -0.013 -0.045" type="slide"/>
-      <site name="palmar_interossei_v_origin" pos="-0.010 -0.013 -0.045" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="dorsal_interossei_ii_origin_joint" pos="0.010 -0.013 -0.055" type="slide"/>
-      <site name="dorsal_interossei_ii_origin" pos="0.010 -0.013 -0.055" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="dorsal_interossei_iii_origin_joint" pos="0.003 -0.013 -0.055" type="slide"/>
-      <site name="dorsal_interossei_iii_origin" pos="0.003 -0.013 -0.055" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="dorsal_interossei_iv_origin_joint" pos="-0.003 -0.013 -0.055" type="slide"/>
-      <site name="dorsal_interossei_iv_origin" pos="-0.003 -0.013 -0.055" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="dorsal_interossei_v_origin_joint" pos="-0.010 -0.013 -0.055" type="slide"/>
-      <site name="dorsal_interossei_v_origin" pos="-0.010 -0.013 -0.055" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="flexor_pollicis_longus_origin_joint" pos="0.008 -0.013 -0.075" type="slide"/>
-      <site name="flexor_pollicis_longus_origin" pos="0.008 -0.013 -0.075" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="flexor_pollicis_brevis_origin_joint" pos="0.004 -0.013 -0.075" type="slide"/>
-      <site name="flexor_pollicis_brevis_origin" pos="0.004 -0.013 -0.075" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="extensor_pollicis_brevis_origin_joint" pos="0.012 0.013 -0.045" type="slide"/>
-      <site name="extensor_pollicis_brevis_origin" pos="0.012 0.013 -0.045" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="extensor_pollicis_longus_origin_joint" pos="0.004 0.013 -0.045" type="slide"/>
-      <site name="extensor_pollicis_longus_origin" pos="0.004 0.013 -0.045" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="abductor_pollicis_longus_origin_joint" pos="0.012 0.013 -0.055" type="slide"/>
-      <site name="abductor_pollicis_longus_origin" pos="0.012 0.013 -0.055" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="abductor_pollicis_brevis_origin_joint" pos="0.012 -0.013 -0.075" type="slide"/>
-      <site name="abductor_pollicis_brevis_origin" pos="0.012 -0.013 -0.075" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="opponens_pollicis_origin_joint" pos="0.0 -0.013 -0.075" type="slide"/>
-      <site name="opponens_pollicis_origin" pos="0.0 -0.013 -0.075" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="adductor_pollicis_origin_joint" pos="0.0 -0.013 -0.085" type="slide"/>
-      <site name="adductor_pollicis_origin" pos="0.0 -0.013 -0.085" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
-    <body>
-      <geom size="0.00075" type="sphere"/>
-      <joint axis="0 0 1" name="opponens_digiti_minimi_origin_joint" pos="-0.012 -0.013 -0.075" type="slide"/>
-      <site name="opponens_digiti_minimi_origin" pos="-0.012 -0.013 -0.075" rgba="1 0.5 0.5 1" size="0.0015"/>
-    </body>
+    <site name="flexor_carpi_radialis_origin" pos="0.012 -0.013 -0.085" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="flexor_carpi_ulnaris_origin" pos="-0.012 -0.013 -0.085" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="extensor_carpi_radialis_origin" pos="0.012 0.013 -0.065" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="extensor_carpi_ulnaris_origin" pos="-0.012 0.013 -0.065" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="extensor_communis_ii_origin" pos="0.012 0.013 -0.035" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="extensor_communis_iii_origin" pos="0.004 0.013 -0.035" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="extensor_communis_iv_origin" pos="-0.004 0.013 -0.035" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="extensor_communis_v_origin" pos="-0.012 0.013 -0.035" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="flexor_profundus_ii_origin" pos="0.008 -0.013 -0.035" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="flexor_profundus_iii_origin" pos="0.002 -0.013 -0.035" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="flexor_profundus_iv_origin" pos="-0.002 -0.013 -0.035" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="flexor_profundus_v_origin" pos="-0.008 -0.013 -0.035" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="flexor_superficialis_ii_origin" pos="0.012 -0.013 -0.065" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="flexor_superficialis_iii_origin" pos="0.004 -0.013 -0.065" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="flexor_superficialis_iv_origin" pos="-0.004 -0.013 -0.065" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="flexor_superficialis_v_origin" pos="-0.012 -0.013 -0.065" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="palmar_interossei_ii_origin" pos="0.010 -0.013 -0.045" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="palmar_interossei_iii_origin" pos="0.003 -0.013 -0.045" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="palmar_interossei_iv_origin" pos="-0.003 -0.013 -0.045" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="palmar_interossei_v_origin" pos="-0.010 -0.013 -0.045" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="dorsal_interossei_ii_origin" pos="0.010 -0.013 -0.055" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="dorsal_interossei_iii_origin" pos="0.003 -0.013 -0.055" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="dorsal_interossei_iv_origin" pos="-0.003 -0.013 -0.055" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="dorsal_interossei_v_origin" pos="-0.010 -0.013 -0.055" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="flexor_pollicis_longus_origin" pos="0.008 -0.013 -0.075" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="flexor_pollicis_brevis_origin" pos="0.004 -0.013 -0.075" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="extensor_pollicis_brevis_origin" pos="0.012 0.013 -0.045" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="extensor_pollicis_longus_origin" pos="0.004 0.013 -0.045" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="abductor_pollicis_longus_origin" pos="0.012 0.013 -0.055" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="abductor_pollicis_brevis_origin" pos="0.012 -0.013 -0.075" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="opponens_pollicis_origin" pos="0.0 -0.013 -0.075" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="adductor_pollicis_origin" pos="0.0 -0.013 -0.085" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
+    <site name="opponens_digiti_minimi_origin" pos="-0.012 -0.013 -0.075" rgba="1 0.5 0.5 1" size="0.0015"/>
+    <!-- <body> -->
+    <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
+    <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
+    <!-- </body> -->
     <!-- TODO: Measure this accurately from f360 -->
     <body euler="0 0 0" name="rc_centre_block" pos="0 0 0.032">
       <joint axis="0 1 0" limited="true" pos="0 0 -0.032" range="-20 10" type="hinge"/>

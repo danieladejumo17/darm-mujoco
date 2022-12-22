@@ -119,3 +119,9 @@
         <muscle name="BE" tendon="BE"/>
     </actuator>
 </mujoco>
+
+<!-- https://mujoco.readthedocs.io/en/stable/XMLreference.html#actuator
+https://mujoco.readthedocs.io/en/stable/computation.html#geactuation
+https://mujoco.readthedocs.io/en/stable/modeling.html#cactuator
+https://mujoco.readthedocs.io/en/stable/search.html?q=tendon&check_keywords=yes&area=default
+https://mujoco.readthedocs.io/en/stable/overview.html?highlight=tendon#examples -->

@@ -344,12 +344,12 @@
     <site site="opponens_digiti_minimi_insertion_ii"/>
   </spatial>
   <!-- Carpals, RC Joint -->
-  <spatial limited="true" name="flexor_carpi_radialis" range="0 0.07" width="0.0004">
+  <spatial name="flexor_carpi_radialis" width="0.0004">
     <site site="flexor_carpi_radialis_origin"/>
     <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite"/>
     <site site="flexor_carpi_radialis_insertion"/>
   </spatial>
-  <spatial limited="true" name="flexor_carpi_ulnaris" range="0 0.07" width="0.0004">
+  <spatial name="flexor_carpi_ulnaris" width="0.0004">
     <site site="flexor_carpi_ulnaris_origin"/>
     <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite"/>
     <site site="flexor_carpi_ulnaris_insertion"/>
