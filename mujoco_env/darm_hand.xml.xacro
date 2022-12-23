@@ -111,6 +111,10 @@
     <xacro:property name="flexor_iii_metacarpals_tunnel_tf" value="0.007 0.0 0.051" />
     <xacro:property name="flexor_iv_metacarpals_tunnel_tf" value="-0.007 -0.005 0.051" />
 
+    <xacro:property name="dorsal_interossei_ii_metacarpals_tunnel_tf" value="0.034 0.002 0.074" />
+    <xacro:property name="palmar_interossei_ii_metacarpals_tunnel_tf" value="0.020 0.004 0.075" />
+    
+
     <xacro:property name="extensor_communis_ii_carpals_tunnel_tf" value="0.012 0.011 0.015" />
     <xacro:property name="extensor_communis_iii_carpals_tunnel_tf" value="0.004 0.011 0.015" />
     <xacro:property name="extensor_communis_iv_carpals_tunnel_tf" value="-0.004 0.011 0.015" />
@@ -320,6 +324,9 @@
                 <site name="flexor_ii_metacarpals_tunnel" pos="${flexor_ii_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
                 <site name="flexor_iii_metacarpals_tunnel" pos="${flexor_iii_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
                 <site name="flexor_iv_metacarpals_tunnel" pos="${flexor_iv_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+
+                <site name="dorsal_interossei_ii_metacarpals_tunnel" pos="${dorsal_interossei_ii_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                <site name="palmar_interossei_ii_metacarpals_tunnel" pos="${palmar_interossei_ii_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
 
                 <site name="flexor_ii_carpals_tunnel" pos="${flexor_ii_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
                 <site name="flexor_iii_carpals_tunnel" pos="${flexor_iii_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>

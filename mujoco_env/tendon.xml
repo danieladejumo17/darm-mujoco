@@ -9,6 +9,8 @@
     <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite"/>
     <site site="flexor_ii_carpals_tunnel"/>
     <site site="flexor_ii_metacarpals_tunnel"/>
+    <site site="dorsal_interossei_ii_metacarpals_tunnel"/>
+
     <geom geom="mcp_ii_wrap" sidesite="mcp_ii_wrap_palmar_sidesite"/>
     <site site="dorsal_interossei_ii_insertion"/>
     <!-- <geom geom="pp_${index}_wrap" /> -->
@@ -23,6 +25,8 @@
     <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite"/>
     <site site="flexor_ii_carpals_tunnel"/>
     <site site="flexor_ii_metacarpals_tunnel"/>
+    <site site="palmar_interossei_ii_metacarpals_tunnel"/>
+
     <geom geom="mcp_ii_wrap" sidesite="mcp_ii_wrap_palmar_sidesite"/>
     <site site="palmar_interossei_ii_insertion"/>
     <!-- <geom geom="pp_${index}_wrap" /> -->

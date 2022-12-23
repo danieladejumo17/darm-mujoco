@@ -2,7 +2,10 @@
 <actuator xmlns:xacro="http://wiki.ros.org/xacro">
 
     <!-- A total of 34 muscles -->
-    <!-- Interosseis' location -->
+
+    <!-- IN PROGRESS: Interosseis' location -->
+    <!-- Dorsal interossei I doesn't flex regularly -->
+    <!-- Add site for flexors too -->
     <!-- Huge forces cause joint limits to be violated. Remove soft constraints -->
     <!-- Tendon damping, Joint Damping and friction -->
     <!-- For RL don't limit control -->
