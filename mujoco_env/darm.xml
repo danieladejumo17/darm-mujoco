@@ -10,7 +10,13 @@
     <default class="darm_meshes">
         <mesh scale="0.001 0.001 0.001" />
         <geom density="1250" rgba=".8 .8 .8 1"/>
-        <tendon rgba=".5 .5 .5 1" />
+        
+        <tendon rgba=".5 .5 .5 1" /> <!-- stifness and damping not added intentionally-->
+        <!-- damping on tendon not recommended from docs -->
+        <!-- stiffness will only make sense if a fixed length is defined for the tendons -->
+        <joint solimplimit="0.98 0.9999 0.001 0.5 2" solreflimit="0.02 1.1" 
+                damping="0.00005" frictionloss="0.0001" />
+
         <default class="wrap_geom">
             <geom density="0.0" />
         </default>
