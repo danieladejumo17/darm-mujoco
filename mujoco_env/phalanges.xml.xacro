@@ -3,12 +3,13 @@
     <!-- Phalanges -->
 
     <!-- TODO: Groups -->
-    <xacro:macro name="phalanges" params="index mcp_translation mcp_rotation pp_length mp_length mcp_radius pip_radius 
+    <xacro:macro name="phalanges" params="index mcp_translation mcp_rotation pp_length mp_length dp_length mcp_radius pip_radius 
         dip_radius dorsal_interossei_insertion_tf palmar_interossei_insertion_tf pp_extensor_communis_insertion_tf
         flexor_superficialis_insertion_tf mp_extensor_hood_insertion_tf flexor_profundus_insertion_tf
         dp_extensor_hood_insertion_tf wrap_rgba:='0 0 1 0.2' site_rgba:='0.1 0.1 0.1 1' site_size:=0.002 
         sidesite_rgba:='1 1 1 0.2' sidesite_size:=0.001 tunnelsite_size:=0.0015
-        pp_rgba:='1 0 0 1' mp_rgba:='0 1 0 1' dp_rgba:='0 0 1 1' ">
+        pp_rgba:='1 0 0 1' mp_rgba:='0 1 0 1' dp_rgba:='0 0 1 1' 
+        fingertip_site_size=0.004 fingertip_site_rgba='1 0 0 0.5'">
 
         <body name="mcp_centre_block_${index}" pos="${mcp_translation}" euler="${mcp_rotation}">
             <joint type="hinge" axis="0 1 0" limited="true" range="-20 20" />
@@ -56,6 +57,7 @@
                         <site name="flexor_profundus_${index}_insertion" pos="${flexor_profundus_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
                         <site name="dp_${index}_extensor_hood_insertion" pos="${dp_extensor_hood_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
 
+                        <site name="fingertip_${index}" pos="0 0 ${dp_length}" size="${fingertip_site_size}" rgba="${fingertip_site_rgba}" />
                     </body>
                 </body>
             </body>
@@ -63,7 +65,7 @@
     </xacro:macro>
 
     <xacro:macro name="phalanx_v" params="index cm_translation cm_rotation centre_block_offset metacarpal_length mcp_translation 
-        mcp_rotation pp_length mp_length proximal_cm_radius distal_cm_radius mcp_radius pip_radius dip_radius dorsal_interossei_insertion_tf 
+        mcp_rotation pp_length mp_length dp_length proximal_cm_radius distal_cm_radius mcp_radius pip_radius dip_radius dorsal_interossei_insertion_tf 
         palmar_interossei_insertion_tf pp_extensor_communis_insertion_tf flexor_superficialis_insertion_tf
         mp_extensor_hood_insertion_tf flexor_profundus_insertion_tf dp_extensor_hood_insertion_tf
         opponens_digiti_minimi_insertion_i_tf opponens_digiti_minimi_insertion_ii_tf 
@@ -101,7 +103,8 @@
                     <site name="opponens_digiti_minimi_insertion_ii" pos="${opponens_digiti_minimi_insertion_ii_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
 
                     <xacro:phalanges index="${index}" mcp_translation="${mcp_translation}" mcp_rotation="${mcp_rotation}" 
-                                    pp_length="${pp_length}" mp_length="${mp_length}" mcp_radius="${mcp_radius}" 
+                                    pp_length="${pp_length}" mp_length="${mp_length}" dp_length="${dp_length}" 
+                                    mcp_radius="${mcp_radius}" 
                                     pip_radius="${pip_radius}" dip_radius="${dip_radius}" 
                                     dorsal_interossei_insertion_tf="${dorsal_interossei_insertion_tf}" 
                                     palmar_interossei_insertion_tf="${palmar_interossei_insertion_tf}" 
@@ -116,14 +119,15 @@
     </xacro:macro>
 
     <xacro:macro name="phalanx_i" params="index cm_translation cm_rotation centre_block_offset metacarpal_length 
-        pp_length proximal_cm_radius distal_cm_radius mcp_radius ip_radius abductor_pollicis_brevis_insertion_tf 
+        pp_length dp_length proximal_cm_radius distal_cm_radius mcp_radius ip_radius abductor_pollicis_brevis_insertion_tf 
         abductor_pollicis_longus_insertion_tf adductor_pollicis_insertion_tf flexor_pollicis_brevis_insertion_tf
         opponens_pollicis_insertion_i_tf opponens_pollicis_insertion_ii_tf flexor_pollicis_longus_insertion_tf
         extensor_pollicis_brevis_insertion_tf extensor_pollicis_longus_insertion_tf
         metacarpal_i_flexor_tunnel_tf pp_i_flexor_tunnel_tf metacarpal_i_extensor_tunnel_tf pp_i_extensor_tunnel_tf
         wrap_rgba:='0 0 1 0.2' pp_rgba:='1 0 0 1' dp_rgba:='0 0 1 1' 
         site_size:=0.002 site_rgba:='0.1 0.1 0.1 1'
-        tunnelsite_size:=0.0015 tunnelsite_rgba:='0.5 0.5 0.5 1' sidesite_rgba:='1 1 1 0.2' ">
+        tunnelsite_size:=0.0015 tunnelsite_rgba:='0.5 0.5 0.5 1' sidesite_rgba:='1 1 1 0.2' 
+        fingertip_site_size=0.004 fingertip_site_rgba='1 0 0 0.5' ">
         <body name="proximal_cm_i_centre_block" pos="${cm_translation[0]} ${cm_translation[1]} ${cm_translation[2]}" euler="${cm_rotation}">
             <joint type="hinge" axis="1 0 0" limited="true" range="-50 -10" />
             <geom type="mesh" mesh="proximal_cm_i_centre_block_mesh" />
@@ -180,6 +184,7 @@
                                 <site name="flexor_pollicis_longus_insertion" pos="${flexor_pollicis_longus_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
                                 <site name="extensor_pollicis_longus_insertion" pos="${extensor_pollicis_longus_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
 
+                                <site name="fingertip_${index}" pos="0 0 ${dp_length}" size="${fingertip_site_size}" rgba="${fingertip_site_rgba}" />
                             </body>
                         </body>
                 </body>

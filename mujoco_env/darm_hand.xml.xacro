@@ -14,6 +14,8 @@
     <xacro:property name="metacarpal_i_length" value="0.0395" />
     
     <xacro:property name="pp_i_length" value="0.0335" />
+    <!-- <xacro:property name="dp_i_length" value="0.0294" /> -->
+    <xacro:property name="dp_i_length" value="0.027" />
     <xacro:property name="proximal_cm_i_radius" value="0.0085" />
     <xacro:property name="distal_cm_i_radius" value="0.0075" />
     <xacro:property name="mcp_i_radius" value="0.0075" />
@@ -24,6 +26,7 @@
     <xacro:property name="mcp_ii_rotation" value="0 5 -10" />
     <xacro:property name="pp_ii_length" value="0.0488" />
     <xacro:property name="mp_ii_length" value="0.0268" />
+    <xacro:property name="dp_ii_length" value="0.0211" />
 
     <xacro:property name="mcp_ii_radius" value="0.0110" />
     <xacro:property name="pip_ii_radius" value="0.0065" />
@@ -41,6 +44,7 @@
     <xacro:property name="mcp_iii_rotation" value="0 0 0" />
     <xacro:property name="pp_iii_length" value="0.0520" />
     <xacro:property name="mp_iii_length" value="0.0335" />
+    <xacro:property name="dp_iii_length" value="0.0204" />
 
     <xacro:property name="mcp_iii_radius" value="0.0110" />
     <xacro:property name="pip_iii_radius" value="0.0070" />
@@ -58,6 +62,7 @@
     <xacro:property name="mcp_iv_rotation" value="0 -5 5" />
     <xacro:property name="pp_iv_length" value="0.0487" />
     <xacro:property name="mp_iv_length" value="0.0330" />
+    <xacro:property name="dp_iv_length" value="0.0202" />
 
     <xacro:property name="mcp_iv_radius" value="0.0095" />
     <xacro:property name="pip_iv_radius" value="0.0065" />
@@ -80,6 +85,7 @@
     <xacro:property name="mcp_v_rotation" value="0 0 0" />
     <xacro:property name="pp_v_length" value="0.0416" />
     <xacro:property name="mp_v_length" value="0.0247" />
+    <xacro:property name="dp_v_length" value="0.0185" />
 
     <xacro:property name="proximal_cm_v_radius" value="0.007" />
     <xacro:property name="distal_cm_v_radius" value="0.007" />
@@ -346,7 +352,8 @@
                 <site name="opponens_digiti_minimi_carpals_tunnel" pos="${opponens_digiti_minimi_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}" />
                 
                 <xacro:phalanges index="ii" mcp_translation="${mcp_ii_translation}" mcp_rotation="${mcp_ii_rotation}" 
-                                pp_length="${pp_ii_length}" mp_length="${mp_ii_length}" mcp_radius="${mcp_ii_radius}" 
+                                pp_length="${pp_ii_length}" mp_length="${mp_ii_length}" dp_length="${dp_ii_length}"
+                                mcp_radius="${mcp_ii_radius}" 
                                 pip_radius="${pip_ii_radius}" dip_radius="${dip_ii_radius}"
                                 dorsal_interossei_insertion_tf="${dorsal_interossei_ii_insertion_tf}"
                                 palmar_interossei_insertion_tf="${palmar_interossei_ii_insertion_tf}"
@@ -357,7 +364,8 @@
                                 dp_extensor_hood_insertion_tf="${dp_ii_extensor_hood_insertion_tf}" />
 
                 <xacro:phalanges index="iii" mcp_translation="${mcp_iii_translation}" mcp_rotation="${mcp_iii_rotation}" 
-                                pp_length="${pp_iii_length}" mp_length="${mp_iii_length}" mcp_radius="${mcp_iii_radius}" 
+                                pp_length="${pp_iii_length}" mp_length="${mp_iii_length}" dp_length="${dp_iii_length}"
+                                mcp_radius="${mcp_iii_radius}" 
                                 pip_radius="${pip_iii_radius}" dip_radius="${dip_iii_radius}"
                                 dorsal_interossei_insertion_tf="${dorsal_interossei_iii_insertion_tf}"
                                 palmar_interossei_insertion_tf="${palmar_interossei_iii_insertion_tf}"
@@ -368,7 +376,8 @@
                                 dp_extensor_hood_insertion_tf="${dp_iii_extensor_hood_insertion_tf}" />
 
                 <xacro:phalanges index="iv" mcp_translation="${mcp_iv_translation}" mcp_rotation="${mcp_iv_rotation}" 
-                                pp_length="${pp_iv_length}" mp_length="${mp_iv_length}" mcp_radius="${mcp_iv_radius}" 
+                                pp_length="${pp_iv_length}" mp_length="${mp_iv_length}" dp_length="${dp_iv_length}"
+                                mcp_radius="${mcp_iv_radius}" 
                                 pip_radius="${pip_iv_radius}" dip_radius="${dip_iv_radius}"
                                 dorsal_interossei_insertion_tf="${dorsal_interossei_iv_insertion_tf}"
                                 palmar_interossei_insertion_tf="${palmar_interossei_iv_insertion_tf}"
@@ -380,7 +389,7 @@
                 
                 <xacro:phalanx_i index="i" cm_translation="${cm_i_translation}" cm_rotation="${cm_i_rotation}" 
                                 centre_block_offset="${cm_i_centre_block_offset}" metacarpal_length="${metacarpal_i_length}" 
-                                pp_length="${pp_i_length}" proximal_cm_radius="${proximal_cm_i_radius}" 
+                                pp_length="${pp_i_length}" dp_length="${dp_i_length}" proximal_cm_radius="${proximal_cm_i_radius}" 
                                 distal_cm_radius="${distal_cm_i_radius}" mcp_radius="${mcp_i_radius}" ip_radius="${ip_i_radius}"
                                 abductor_pollicis_brevis_insertion_tf="${abductor_pollicis_brevis_insertion_tf}"
                                 abductor_pollicis_longus_insertion_tf="${abductor_pollicis_longus_insertion_tf}"
@@ -399,7 +408,7 @@
                 <xacro:phalanx_v index="v" cm_translation="${cm_v_translation}" cm_rotation="${cm_v_rotation}" 
                                 centre_block_offset="${cm_v_centre_block_offset}" metacarpal_length="${metacarpal_v_length}" 
                                 mcp_translation="${mcp_v_translation}" mcp_rotation="${mcp_v_rotation}" pp_length="${pp_v_length}" 
-                                mp_length="${mp_v_length}" proximal_cm_radius="${proximal_cm_v_radius}" 
+                                mp_length="${mp_v_length}" dp_length="${dp_v_length}" proximal_cm_radius="${proximal_cm_v_radius}" 
                                 distal_cm_radius="${distal_cm_v_radius}" mcp_radius="${mcp_v_radius}" 
                                 pip_radius="${pip_v_radius}" dip_radius="${dip_v_radius}"
                                 dorsal_interossei_insertion_tf="${dorsal_interossei_v_insertion_tf}"

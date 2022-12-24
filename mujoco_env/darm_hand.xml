@@ -247,6 +247,7 @@
                 <geom class="wrap_geom" euler="0 90 0" name="dip_ii_wrap" rgba="0 0 1 0.2" size="0.0055 0.0055" type="cylinder"/>
                 <site name="flexor_profundus_ii_insertion" pos="0 -0.004 0.007" rgba="0.1 0.1 0.1 1" size="0.002"/>
                 <site name="dp_ii_extensor_hood_insertion" pos="0 0.004 0.007" rgba="0.1 0.1 0.1 1" size="0.002"/>
+                <site name="fingertip_ii" pos="0 0 0.0211" rgba="1 0 0 0.5" size="0.004"/>
               </body>
             </body>
           </body>
@@ -283,6 +284,7 @@
                 <geom class="wrap_geom" euler="0 90 0" name="dip_iii_wrap" rgba="0 0 1 0.2" size="0.006 0.006" type="cylinder"/>
                 <site name="flexor_profundus_iii_insertion" pos="0 -0.005 0.007" rgba="0.1 0.1 0.1 1" size="0.002"/>
                 <site name="dp_iii_extensor_hood_insertion" pos="0 0.005 0.007" rgba="0.1 0.1 0.1 1" size="0.002"/>
+                <site name="fingertip_iii" pos="0 0 0.0204" rgba="1 0 0 0.5" size="0.004"/>
               </body>
             </body>
           </body>
@@ -319,6 +321,7 @@
                 <geom class="wrap_geom" euler="0 90 0" name="dip_iv_wrap" rgba="0 0 1 0.2" size="0.0055 0.0055" type="cylinder"/>
                 <site name="flexor_profundus_iv_insertion" pos="0 -0.004 0.007" rgba="0.1 0.1 0.1 1" size="0.002"/>
                 <site name="dp_iv_extensor_hood_insertion" pos="0 0.004 0.007" rgba="0.1 0.1 0.1 1" size="0.002"/>
+                <site name="fingertip_iv" pos="0 0 0.0202" rgba="1 0 0 0.5" size="0.004"/>
               </body>
             </body>
           </body>
@@ -361,6 +364,7 @@
                   <geom mesh="distal_phalanx_i_mesh" rgba="0 0 1 1" type="mesh"/>
                   <site name="flexor_pollicis_longus_insertion" pos="0.0 -0.005 0.007" rgba="0.1 0.1 0.1 1" size="0.002"/>
                   <site name="extensor_pollicis_longus_insertion" pos="0.0 0.005 0.007" rgba="0.1 0.1 0.1 1" size="0.002"/>
+                  <site name="fingertip_i" pos="0 0 0.027" rgba="1 0 0 0.5" size="0.004"/>
                 </body>
               </body>
             </body>
@@ -419,6 +423,7 @@
                       <geom class="wrap_geom" euler="0 90 0" name="dip_v_wrap" rgba="0 0 1 0.2" size="0.005 0.005" type="cylinder"/>
                       <site name="flexor_profundus_v_insertion" pos="0 -0.004 0.007" rgba="0.1 0.1 0.1 1" size="0.002"/>
                       <site name="dp_v_extensor_hood_insertion" pos="0 0.004 0.007" rgba="0.1 0.1 0.1 1" size="0.002"/>
+                      <site name="fingertip_v" pos="0 0 0.0185" rgba="1 0 0 0.5" size="0.004"/>
                     </body>
                   </body>
                 </body>
