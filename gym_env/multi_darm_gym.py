@@ -12,21 +12,23 @@ class DARMEnv(gym.Env):
 
     # TODO: Single finger: Actuators, Fingertip Observations, ...
 
-    def __init__(self, render_mode=None, reaction_time=0.08) -> None:
+    def __init__(self, n_hands=1, render_mode=None, reaction_time=0.08) -> None:
         super().__init__()
 
         # Load the Model
+        self.n_hands = n_hands
         self._load_model("../mujoco_env/darm.xml")
         if not (self.model and self.data):
             raise "Error loading model"
         self._get_fingertip_indices()
 
         # Define Observation Space
-        self.observation_space = gym.spaces.Box(low=-np.inf, high=np.inf, shape=(2*15,), dtype=float)
+        self.observation_space = gym.spaces.Box(low=-np.inf, high=np.inf, 
+                                                shape=(self.n_hands*2*15,), dtype=float)
         
         # Define Action Space
         self.action_space = gym.spaces.Box(low=np.array([0.0]*self.model.nu), 
-                                            high=np.array([20.0]*4 + [2.0]*(self.model.nu-4)), 
+                                            high=np.array(([20.0]*4 + [2.0]*(self.model.nu//self.n_hands-4))*self.n_hands), 
                                             shape=(self.model.nu,), dtype=float)
 
         # Env Parameters
@@ -60,12 +62,18 @@ class DARMEnv(gym.Env):
 
     def _get_fingertip_indices(self):
         # FIXME: For independent finger training
-        indices = ["i", "ii", "iii", "iv", "v"]
-        self.fingertip_indices = [mj.mj_name2id(self.model, int(mj.mjtObj.mjOBJ_SITE), f"fingertip_{i}") for i in indices]
-    
+        fingertip_names = [[f"hand{j}_fingertip_{i}" for i in ["i", "ii", "iii", "iv", "v"]] for j in range(1,self.n_hands+1)]
+        fingertip_names = np.array(fingertip_names).flatten()
+        self.fingertip_indices = np.array([mj.mj_name2id(self.model, int(mj.mjtObj.mjOBJ_SITE), name) for name in fingertip_names]).reshape((-1,5))
+
     def _get_obs(self):
-        return np.concatenate((np.array([self.data.site_xpos[i] for i in self.fingertip_indices]).flatten(),
-                             self.target_obs))
+        obs = []
+        for i in range(self.n_hands):
+            fingertip_idxs = self.fingertip_indices[i, :]
+            target_obs = self.target_obs[i, :]
+            obs.append(np.concatenate((np.array([self.data.site_xpos[i] for i in fingertip_idxs]).flatten(),
+                             target_obs)))
+        return np.array(obs).flatten()
 
     def _get_info(self):
         return {"sim_time": self.data.time}
@@ -124,7 +132,7 @@ class DARMEnv(gym.Env):
         mj.mj_forward(self.model, self.data)
 
         # Create a new goal
-        self.target_obs = np.random.random((15,))   # TODO:
+        self.target_obs = np.ones((self.n_hands, 15,))   # TODO:
 
         observation = self._get_obs()
         info = self._get_info()

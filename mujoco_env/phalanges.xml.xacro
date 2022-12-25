@@ -3,7 +3,7 @@
     <!-- Phalanges -->
 
     <!-- TODO: Groups -->
-    <xacro:macro name="phalanges" params="index mcp_translation mcp_rotation pp_length mp_length dp_length mcp_radius pip_radius 
+    <xacro:macro name="phalanges" params="hand_name index mcp_translation mcp_rotation pp_length mp_length dp_length mcp_radius pip_radius 
         dip_radius dorsal_interossei_insertion_tf palmar_interossei_insertion_tf pp_extensor_communis_insertion_tf
         flexor_superficialis_insertion_tf mp_extensor_hood_insertion_tf flexor_profundus_insertion_tf
         dp_extensor_hood_insertion_tf wrap_rgba:='0 0 1 0.2' site_rgba:='0.1 0.1 0.1 1' site_size:=0.002 
@@ -11,98 +11,101 @@
         pp_rgba:='1 0 0 1' mp_rgba:='0 1 0 1' dp_rgba:='0 0 1 1' 
         fingertip_site_size=0.004 fingertip_site_rgba='1 0 0 0.5'">
 
-        <body name="mcp_centre_block_${index}" pos="${mcp_translation}" euler="${mcp_rotation}">
+        <body name="${hand_name}_mcp_centre_block_${index}" pos="${mcp_translation}" euler="${mcp_rotation}">
             <joint type="hinge" axis="0 1 0" limited="true" range="-20 20" />
             <geom type="mesh" mesh="mcp_centre_block_${index}_mesh" />
-            <!-- <geom class="wrap_geom" name="mcp_${index}_wrap" type="cylinder" size="${mcp_radius} ${mcp_radius}" euler="0 90 0" rgba="${wrap_rgba}" /> -->
 
-            <site name="mcp_${index}_wrap_dorsal_sidesite" pos="0 ${mcp_radius+sidesite_size} 0" size="${sidesite_size}" rgba="${sidesite_rgba}" />
-            <site name="mcp_${index}_wrap_palmar_sidesite" pos="0 -${mcp_radius+sidesite_size} 0" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+            <site name="${hand_name}_mcp_${index}_wrap_dorsal_sidesite" pos="0 ${mcp_radius+sidesite_size} 0" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+            <site name="${hand_name}_mcp_${index}_wrap_palmar_sidesite" pos="0 -${mcp_radius+sidesite_size} 0" size="${sidesite_size}" rgba="${sidesite_rgba}" />
 
-            <body name="proximal_phalanx_${index}" pos="0 0 0" euler="0 0 0">
+            <body name="${hand_name}_proximal_phalanx_${index}" pos="0 0 0" euler="0 0 0">
                 <joint type="hinge" axis="1 0 0" limited="true" range="-45 90" />
                 <geom type="mesh" mesh="proximal_phalanx_${index}_mesh" rgba="${pp_rgba}" />
                 
-                <site name="dorsal_interossei_${index}_insertion" pos="${dorsal_interossei_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
-                <site name="palmar_interossei_${index}_insertion" pos="${palmar_interossei_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
-                <site name="pp_${index}_extensor_communis_insertion" pos="${pp_extensor_communis_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
+                <site name="${hand_name}_dorsal_interossei_${index}_insertion" pos="${dorsal_interossei_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
+                <site name="${hand_name}_palmar_interossei_${index}_insertion" pos="${palmar_interossei_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
+                <site name="${hand_name}_pp_${index}_extensor_communis_insertion" pos="${pp_extensor_communis_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
                 
-                <site name="pp_${index}_dorsal_interossei_tunnel" pos="${pip_radius} ${0.9*pip_radius} ${pp_length - pip_radius}" size="${tunnelsite_size}" rgba="${pp_rgba}"/>
-                <site name="pp_${index}_palmar_interossei_tunnel" pos="-${pip_radius} ${0.9*pip_radius} ${pp_length - pip_radius}" size="${tunnelsite_size}" rgba="${pp_rgba}"/>
-                <site name="pp_${index}_flexor_tunnel" pos="0 -${0.85*pip_radius} ${pp_length/2}" size="${tunnelsite_size}" rgba="${pp_rgba}"/>
+                <site name="${hand_name}_pp_${index}_dorsal_interossei_tunnel" pos="${pip_radius} ${0.9*pip_radius} ${pp_length - pip_radius}" size="${tunnelsite_size}" rgba="${pp_rgba}"/>
+                <site name="${hand_name}_pp_${index}_palmar_interossei_tunnel" pos="-${pip_radius} ${0.9*pip_radius} ${pp_length - pip_radius}" size="${tunnelsite_size}" rgba="${pp_rgba}"/>
+                <site name="${hand_name}_pp_${index}_flexor_tunnel" pos="0 -${0.85*pip_radius} ${pp_length/2}" size="${tunnelsite_size}" rgba="${pp_rgba}"/>
                 
-                <site name="pip_${index}_wrap_dorsal_sidesite" pos="0 ${pip_radius+sidesite_size} ${pp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
-                <site name="pip_${index}_wrap_palmar_sidesite" pos="0 -${pip_radius+sidesite_size} ${pp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+                <site name="${hand_name}_pip_${index}_wrap_dorsal_sidesite" pos="0 ${pip_radius+sidesite_size} ${pp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+                <site name="${hand_name}_pip_${index}_wrap_palmar_sidesite" pos="0 -${pip_radius+sidesite_size} ${pp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
 
 
-                <body name="middle_phalanx_${index}" pos="0 0 ${pp_length}" euler="0 0 0">
+                <body name="${hand_name}_middle_phalanx_${index}" pos="0 0 ${pp_length}" euler="0 0 0">
                     <joint type="hinge" axis="1 0 0" limited="true" range="-10 90"/>
                     <geom type="mesh" mesh="middle_phalanx_${index}_mesh" rgba="${mp_rgba}" />
-                    <geom class="wrap_geom" name="pip_${index}_wrap"  type="cylinder" size="${pip_radius} ${pip_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
+                    <geom class="wrap_geom" name="${hand_name}_pip_${index}_wrap"  type="cylinder" size="${pip_radius} ${pip_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
 
-                    <site name="flexor_superficialis_${index}_insertion" pos="${flexor_superficialis_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
-                    <site name="mp_${index}_extensor_hood_insertion" pos="${mp_extensor_hood_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
+                    <site name="${hand_name}_flexor_superficialis_${index}_insertion" pos="${flexor_superficialis_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
+                    <site name="${hand_name}_mp_${index}_extensor_hood_insertion" pos="${mp_extensor_hood_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
                     
-                    <site name="mp_${index}_flexor_tunnel" pos="0 -${0.75*dip_radius} ${mp_length/1.75}" size="${tunnelsite_size}" rgba="${mp_rgba}"/>
+                    <site name="${hand_name}_mp_${index}_flexor_tunnel" pos="0 -${0.75*dip_radius} ${mp_length/1.75}" size="${tunnelsite_size}" rgba="${mp_rgba}"/>
 
 
-                    <site name="dip_${index}_wrap_dorsal_sidesite" pos="0 ${dip_radius+sidesite_size} ${mp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
-                    <site name="dip_${index}_wrap_palmar_sidesite" pos="0 -${dip_radius+sidesite_size} ${mp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+                    <site name="${hand_name}_dip_${index}_wrap_dorsal_sidesite" pos="0 ${dip_radius+sidesite_size} ${mp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+                    <site name="${hand_name}_dip_${index}_wrap_palmar_sidesite" pos="0 -${dip_radius+sidesite_size} ${mp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
     
-                    <body name="distal_phalanx_${index}" pos="0 0 ${mp_length}" euler="0 0 0">
+                    <body name="${hand_name}_distal_phalanx_${index}" pos="0 0 ${mp_length}" euler="0 0 0">
                         <joint type="hinge" axis="1 0 0" limited="true" range="-10 90"/>
                         <geom type="mesh" mesh="distal_phalanx_${index}_mesh" rgba="${dp_rgba}" />
-                        <geom class="wrap_geom" name="dip_${index}_wrap" type="cylinder" size="${dip_radius} ${dip_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
+                        <geom class="wrap_geom" name="${hand_name}_dip_${index}_wrap" type="cylinder" size="${dip_radius} ${dip_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
 
-                        <site name="flexor_profundus_${index}_insertion" pos="${flexor_profundus_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
-                        <site name="dp_${index}_extensor_hood_insertion" pos="${dp_extensor_hood_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
+                        <site name="${hand_name}_flexor_profundus_${index}_insertion" pos="${flexor_profundus_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
+                        <site name="${hand_name}_dp_${index}_extensor_hood_insertion" pos="${dp_extensor_hood_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
 
-                        <site name="fingertip_${index}" pos="0 0 ${dp_length}" size="${fingertip_site_size}" rgba="${fingertip_site_rgba}" />
+                        <site name="${hand_name}_fingertip_${index}" pos="0 0 ${dp_length}" size="${fingertip_site_size}" rgba="${fingertip_site_rgba}" />
                     </body>
                 </body>
             </body>
         </body>
     </xacro:macro>
 
-    <xacro:macro name="phalanx_v" params="index cm_translation cm_rotation centre_block_offset metacarpal_length mcp_translation 
+    <xacro:macro name="phalanx_v" params="hand_name index cm_translation cm_rotation centre_block_offset metacarpal_length mcp_translation 
         mcp_rotation pp_length mp_length dp_length proximal_cm_radius distal_cm_radius mcp_radius pip_radius dip_radius dorsal_interossei_insertion_tf 
         palmar_interossei_insertion_tf pp_extensor_communis_insertion_tf flexor_superficialis_insertion_tf
         mp_extensor_hood_insertion_tf flexor_profundus_insertion_tf dp_extensor_hood_insertion_tf
         opponens_digiti_minimi_insertion_i_tf opponens_digiti_minimi_insertion_ii_tf 
-        opponens_digiti_minimi_distal_cm_v_tunnel_tf
+        opponens_digiti_minimi_distal_cm_v_tunnel_tf dorsal_interossei_metacarpals_tunnel_tf
+        palmar_interossei_metacarpals_tunnel_tf
         tunnelsite_size:=0.0015 tunnelsite_rgba:='0.5 0.5 0.5 1' sidesite_rgba:='1 1 1 0.2' 
         sidesite_size:=0.001 site_size:=0.002 site_rgba:='0.1 0.1 0.1 1'">
-        <body name="proximal_cm_v_centre_block" pos="${cm_translation}" euler="${cm_rotation}">
+        <body name="${hand_name}_proximal_cm_v_centre_block" pos="${cm_translation}" euler="${cm_rotation}">
             <joint type="hinge" axis="1 0 0" limited="true" range="-10 10" />
             <geom type="mesh" mesh="proximal_cm_v_centre_block_mesh" />
-            <geom class="wrap_geom" name="proximal_cm_v_wrap" type="cylinder" size="${proximal_cm_radius} 0.009" euler="0 90 0" rgba="${wrap_rgba}" />
+            <geom class="wrap_geom" name="${hand_name}_proximal_cm_v_wrap" type="cylinder" size="${proximal_cm_radius} 0.009" euler="0 90 0" rgba="${wrap_rgba}" />
             
-            <site name="proximal_cm_v_wrap_dorsal_sidesite" pos="0 ${proximal_cm_radius+sidesite_size} 0" size="${sidesite_size}" rgba="${sidesite_rgba}" />
-            <site name="proximal_cm_v_wrap_palmar_sidesite" pos="0 -${proximal_cm_radius+sidesite_size} 0" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+            <site name="${hand_name}_proximal_cm_v_wrap_dorsal_sidesite" pos="0 ${proximal_cm_radius+sidesite_size} 0" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+            <site name="${hand_name}_proximal_cm_v_wrap_palmar_sidesite" pos="0 -${proximal_cm_radius+sidesite_size} 0" size="${sidesite_size}" rgba="${sidesite_rgba}" />
 
-            <body name="distal_cm_v_centre_block" pos="${centre_block_offset}" euler="0 0 0">
+            <body name="${hand_name}_distal_cm_v_centre_block" pos="${centre_block_offset}" euler="0 0 0">
                 <joint type="hinge" axis="0 0 1" limited="true" range="-10 10" />
                 <geom type="mesh" mesh="distal_cm_v_centre_block_mesh" />
-                <geom class="wrap_geom" name="distal_cm_v_wrap" type="cylinder" size="${distal_cm_radius} 0.008" euler="90 0 0" rgba="${wrap_rgba}" />
+                <geom class="wrap_geom" name="${hand_name}_distal_cm_v_wrap" type="cylinder" size="${distal_cm_radius} 0.008" euler="90 0 0" rgba="${wrap_rgba}" />
                 
-                <site name="distal_cm_v_wrap_ulnar_sidesite" pos="-${distal_cm_radius+sidesite_size} 0 0" size="${sidesite_size}" rgba="${sidesite_rgba}" />
-                <site name="distal_cm_v_wrap_radial_sidesite" pos="${distal_cm_radius+sidesite_size} 0 0" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+                <site name="${hand_name}_distal_cm_v_wrap_ulnar_sidesite" pos="-${distal_cm_radius+sidesite_size} 0 0" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+                <site name="${hand_name}_distal_cm_v_wrap_radial_sidesite" pos="${distal_cm_radius+sidesite_size} 0 0" size="${sidesite_size}" rgba="${sidesite_rgba}" />
 
-                <site name="opponens_digiti_minimi_distal_cm_v_tunnel" pos="${opponens_digiti_minimi_distal_cm_v_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                <site name="${hand_name}_opponens_digiti_minimi_distal_cm_v_tunnel" pos="${opponens_digiti_minimi_distal_cm_v_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
 
-                <body name="metacarpal_v" pos="0 0 ${metacarpal_length}" euler="0 0 0">
+                <body name="${hand_name}_metacarpal_v" pos="0 0 ${metacarpal_length}" euler="0 0 0">
                     <joint type="hinge" axis="0 1 0" pos="0 0 -${metacarpal_length}"  limited="true" range="-5 5" />
                     <geom type="mesh" mesh="metacarpal_v_mesh" />
-                    <geom class="wrap_geom" pos="${mcp_translation}" name="mcp_${index}_wrap" type="cylinder" size="${mcp_radius} ${mcp_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
+                    <geom class="wrap_geom" pos="${mcp_translation}" name="${hand_name}_mcp_${index}_wrap" type="cylinder" size="${mcp_radius} ${mcp_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
 
 
-                    <site name="flexor_v_metacarpals_tunnel" pos="0 -0.009 -${metacarpal_length}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                    <site name="extensor_communis_v_metacarpals_tunnel" pos="0 0.009 -${metacarpal_length}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_flexor_v_metacarpals_tunnel" pos="0 -0.009 -${metacarpal_length}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_extensor_communis_v_metacarpals_tunnel" pos="0 0.009 -${metacarpal_length}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_dorsal_interossei_v_metacarpals_tunnel" pos="${dorsal_interossei_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_palmar_interossei_v_metacarpals_tunnel" pos="${palmar_interossei_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
 
-                    <site name="opponens_digiti_minimi_insertion_i" pos="${opponens_digiti_minimi_insertion_i_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                    <site name="opponens_digiti_minimi_insertion_ii" pos="${opponens_digiti_minimi_insertion_ii_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    
+                    <site name="${hand_name}_opponens_digiti_minimi_insertion_i" pos="${opponens_digiti_minimi_insertion_i_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_opponens_digiti_minimi_insertion_ii" pos="${opponens_digiti_minimi_insertion_ii_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
 
-                    <xacro:phalanges index="${index}" mcp_translation="${mcp_translation}" mcp_rotation="${mcp_rotation}" 
+                    <xacro:phalanges hand_name="${hand_name}" index="${index}" mcp_translation="${mcp_translation}" mcp_rotation="${mcp_rotation}" 
                                     pp_length="${pp_length}" mp_length="${mp_length}" dp_length="${dp_length}" 
                                     mcp_radius="${mcp_radius}" 
                                     pip_radius="${pip_radius}" dip_radius="${dip_radius}" 
@@ -118,7 +121,7 @@
         </body>
     </xacro:macro>
 
-    <xacro:macro name="phalanx_i" params="index cm_translation cm_rotation centre_block_offset metacarpal_length 
+    <xacro:macro name="phalanx_i" params="hand_name index cm_translation cm_rotation centre_block_offset metacarpal_length 
         pp_length dp_length proximal_cm_radius distal_cm_radius mcp_radius ip_radius abductor_pollicis_brevis_insertion_tf 
         abductor_pollicis_longus_insertion_tf adductor_pollicis_insertion_tf flexor_pollicis_brevis_insertion_tf
         opponens_pollicis_insertion_i_tf opponens_pollicis_insertion_ii_tf flexor_pollicis_longus_insertion_tf
@@ -128,63 +131,63 @@
         site_size:=0.002 site_rgba:='0.1 0.1 0.1 1'
         tunnelsite_size:=0.0015 tunnelsite_rgba:='0.5 0.5 0.5 1' sidesite_rgba:='1 1 1 0.2' 
         fingertip_site_size=0.004 fingertip_site_rgba='1 0 0 0.5' ">
-        <body name="proximal_cm_i_centre_block" pos="${cm_translation[0]} ${cm_translation[1]} ${cm_translation[2]}" euler="${cm_rotation}">
+        <body name="${hand_name}_proximal_cm_i_centre_block" pos="${cm_translation[0]} ${cm_translation[1]} ${cm_translation[2]}" euler="${cm_rotation}">
             <joint type="hinge" axis="1 0 0" limited="true" range="-50 -10" />
             <geom type="mesh" mesh="proximal_cm_i_centre_block_mesh" />
-            <geom class="wrap_geom" name="proximal_cm_i_wrap" type="cylinder" size="${proximal_cm_radius} 0.010" euler="0 90 0" rgba="${wrap_rgba}" />
+            <geom class="wrap_geom" name="${hand_name}_proximal_cm_i_wrap" type="cylinder" size="${proximal_cm_radius} 0.010" euler="0 90 0" rgba="${wrap_rgba}" />
 
-            <site name="distal_cm_${index}_wrap_dorsal_sidesite" pos="${distal_cm_radius+sidesite_size} 0 ${centre_block_offset[2]}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
-            <site name="distal_cm_${index}_wrap_palmar_sidesite" pos="-${distal_cm_radius+sidesite_size} 0 ${centre_block_offset[2]}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+            <site name="${hand_name}_distal_cm_${index}_wrap_dorsal_sidesite" pos="${distal_cm_radius+sidesite_size} 0 ${centre_block_offset[2]}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+            <site name="${hand_name}_distal_cm_${index}_wrap_palmar_sidesite" pos="-${distal_cm_radius+sidesite_size} 0 ${centre_block_offset[2]}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
 
             
-            <body name="distal_cm_i_centre_block" pos="${centre_block_offset[0]} ${centre_block_offset[1]} ${centre_block_offset[2]}" euler="0 0 0">
+            <body name="${hand_name}_distal_cm_i_centre_block" pos="${centre_block_offset[0]} ${centre_block_offset[1]} ${centre_block_offset[2]}" euler="0 0 0">
                 <joint type="hinge" axis="0 0 1" limited="true" range="-15 15" />
                 <geom type="mesh" mesh="distal_cm_i_centre_block_mesh" />
-                <geom class="wrap_geom" name="distal_cm_i_wrap" type="cylinder" size="${distal_cm_radius} 0.009" euler="90 0 0" rgba="${wrap_rgba}" />
+                <geom class="wrap_geom" name="${hand_name}_distal_cm_i_wrap" type="cylinder" size="${distal_cm_radius} 0.009" euler="90 0 0" rgba="${wrap_rgba}" />
 
   
-                <body name="metacarpal_i" pos="0 0 0" euler="0 0 0">
+                <body name="${hand_name}_metacarpal_i" pos="0 0 0" euler="0 0 0">
                     <joint type="hinge" axis="0 1 0" pos="0 0 0" limited="true" range="-20 20" />
                     <geom type="mesh" mesh="metacarpal_i_mesh" />
-                    <geom class="wrap_geom" name="mcp_i_wrap" type="cylinder" pos="0 0 ${metacarpal_length}" size="${mcp_radius} 0.008" euler="0 90 0" rgba="${wrap_rgba}" />
+                    <geom class="wrap_geom" name="${hand_name}_mcp_i_wrap" type="cylinder" pos="0 0 ${metacarpal_length}" size="${mcp_radius} 0.008" euler="0 90 0" rgba="${wrap_rgba}" />
 
-                    <site name="opponens_pollicis_insertion_i" pos="${opponens_pollicis_insertion_i_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                    <site name="opponens_pollicis_insertion_ii" pos="${opponens_pollicis_insertion_ii_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_opponens_pollicis_insertion_i" pos="${opponens_pollicis_insertion_i_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_opponens_pollicis_insertion_ii" pos="${opponens_pollicis_insertion_ii_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
                     
-                    <site name="abductor_pollicis_longus_insertion" pos="${abductor_pollicis_longus_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_abductor_pollicis_longus_insertion" pos="${abductor_pollicis_longus_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
                     
-                    <site name="mcp_${index}_wrap_dorsal_sidesite" pos="0 ${mcp_radius+sidesite_size} ${metacarpal_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
-                    <site name="mcp_${index}_wrap_palmar_sidesite" pos="0 -${mcp_radius+sidesite_size} ${metacarpal_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+                    <site name="${hand_name}_mcp_${index}_wrap_dorsal_sidesite" pos="0 ${mcp_radius+sidesite_size} ${metacarpal_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+                    <site name="${hand_name}_mcp_${index}_wrap_palmar_sidesite" pos="0 -${mcp_radius+sidesite_size} ${metacarpal_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
 
-                    <site name="metacarpal_i_flexor_tunnel" pos="${metacarpal_i_flexor_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                    <site name="metacarpal_i_extensor_tunnel" pos="${metacarpal_i_extensor_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_metacarpal_i_flexor_tunnel" pos="${metacarpal_i_flexor_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_metacarpal_i_extensor_tunnel" pos="${metacarpal_i_extensor_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
 
                 
-                        <body name="proximal_phalanx_${index}" pos="0 0 ${metacarpal_length}" euler="0 0 0">
+                        <body name="${hand_name}_proximal_phalanx_${index}" pos="0 0 ${metacarpal_length}" euler="0 0 0">
                             <joint type="hinge" axis="1 0 0" limited="true" range="-10 90" />
                             <geom type="mesh" mesh="proximal_phalanx_${index}_mesh" rgba="${pp_rgba}" />
-                            <geom class="wrap_geom" name="ip_i_wrap" type="cylinder" pos="0 0 ${pp_length}" size="${ip_radius} 0.008" euler="0 90 0" rgba="${wrap_rgba}" />
+                            <geom class="wrap_geom" name="${hand_name}_ip_i_wrap" type="cylinder" pos="0 0 ${pp_length}" size="${ip_radius} 0.008" euler="0 90 0" rgba="${wrap_rgba}" />
 
-                            <site name="pp_i_flexor_tunnel" pos="${pp_i_flexor_tunnel_tf}" size="${tunnel_site_size}" rgba="${pp_rgba}"/>
-                            <site name="pp_i_extensor_tunnel" pos="${pp_i_extensor_tunnel_tf}" size="${tunnel_site_size}" rgba="${pp_rgba}"/>
+                            <site name="${hand_name}_pp_i_flexor_tunnel" pos="${pp_i_flexor_tunnel_tf}" size="${tunnel_site_size}" rgba="${pp_rgba}"/>
+                            <site name="${hand_name}_pp_i_extensor_tunnel" pos="${pp_i_extensor_tunnel_tf}" size="${tunnel_site_size}" rgba="${pp_rgba}"/>
 
-                            <site name="abductor_pollicis_brevis_insertion" pos="${abductor_pollicis_brevis_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                            <site name="adductor_pollicis_insertion" pos="${adductor_pollicis_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                            <site name="flexor_pollicis_brevis_insertion" pos="${flexor_pollicis_brevis_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                            <site name="${hand_name}_abductor_pollicis_brevis_insertion" pos="${abductor_pollicis_brevis_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                            <site name="${hand_name}_adductor_pollicis_insertion" pos="${adductor_pollicis_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                            <site name="${hand_name}_flexor_pollicis_brevis_insertion" pos="${flexor_pollicis_brevis_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
                             
-                            <site name="extensor_pollicis_brevis_insertion" pos="${extensor_pollicis_brevis_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
+                            <site name="${hand_name}_extensor_pollicis_brevis_insertion" pos="${extensor_pollicis_brevis_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
 
-                            <site name="ip_${index}_wrap_dorsal_sidesite" pos="0 ${ip_radius+sidesite_size} ${pp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
-                            <site name="ip_${index}_wrap_palmar_sidesite" pos="0 -${ip_radius+sidesite_size} ${pp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+                            <site name="${hand_name}_ip_${index}_wrap_dorsal_sidesite" pos="0 ${ip_radius+sidesite_size} ${pp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+                            <site name="${hand_name}_ip_${index}_wrap_palmar_sidesite" pos="0 -${ip_radius+sidesite_size} ${pp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
 
-                            <body name="distal_phalanx_${index}" pos="0 0 ${pp_length}" euler="0 0 0">
+                            <body name="${hand_name}_distal_phalanx_${index}" pos="0 0 ${pp_length}" euler="0 0 0">
                                 <joint type="hinge" axis="1 0 0"  limited="true" range="-60 90" />
                                 <geom type="mesh" mesh="distal_phalanx_${index}_mesh" rgba="${dp_rgba}" />
 
-                                <site name="flexor_pollicis_longus_insertion" pos="${flexor_pollicis_longus_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
-                                <site name="extensor_pollicis_longus_insertion" pos="${extensor_pollicis_longus_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
+                                <site name="${hand_name}_flexor_pollicis_longus_insertion" pos="${flexor_pollicis_longus_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
+                                <site name="${hand_name}_extensor_pollicis_longus_insertion" pos="${extensor_pollicis_longus_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
 
-                                <site name="fingertip_${index}" pos="0 0 ${dp_length}" size="${fingertip_site_size}" rgba="${fingertip_site_rgba}" />
+                                <site name="${hand_name}_fingertip_${index}" pos="0 0 ${dp_length}" size="${fingertip_site_size}" rgba="${fingertip_site_rgba}" />
                             </body>
                         </body>
                 </body>

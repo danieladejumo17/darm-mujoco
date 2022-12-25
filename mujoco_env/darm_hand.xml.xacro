@@ -119,6 +119,13 @@
 
     <xacro:property name="dorsal_interossei_ii_metacarpals_tunnel_tf" value="0.034 0.002 0.074" />
     <xacro:property name="palmar_interossei_ii_metacarpals_tunnel_tf" value="0.020 0.004 0.075" />
+    <xacro:property name="dorsal_interossei_iii_metacarpals_tunnel_tf" value="0.015 0.002 0.077" />
+    <xacro:property name="palmar_interossei_iii_metacarpals_tunnel_tf" value="0.002 0.002 0.077" />
+    <xacro:property name="dorsal_interossei_iv_metacarpals_tunnel_tf" value="-0.0025 -0.003 0.076" />
+    <xacro:property name="palmar_interossei_iv_metacarpals_tunnel_tf" value="-0.015 -0.004 0.075" />
+    <xacro:property name="dorsal_interossei_v_metacarpals_tunnel_tf" value="0.006 -0.006 -0.013" />
+    <xacro:property name="palmar_interossei_v_metacarpals_tunnel_tf" value="-0.006 -0.006 -0.013" />
+    
     
 
     <xacro:property name="extensor_communis_ii_carpals_tunnel_tf" value="0.012 0.011 0.015" />
@@ -218,211 +225,213 @@
 
 
 
-
-
-
-
-    
-
     <!-- Tendon Origin Macro -->
     <xacro:macro name="tendon_origin" params="site_name site_tf">
         <site name="${site_name}" pos="${site_tf}" size="${origin_site_size}" rgba="${origin_site_rgba}"/>
-        <!-- <body> -->
-            <!-- <geom type="sphere" size="${.5*origin_site_size}" /> -->
-            <!-- <joint name="${site_name}_joint" type="slide" axis="0 0 1" pos="${site_tf}" /> -->
-        <!-- </body> -->
     </xacro:macro>
     
-    
+    <!-- DARM Hand -->
+    <xacro:macro name="darm_hand" params="hand_name pos">
+        <body name="${hand_name}_forearm" pos="${pos}" euler="0 0 0" childclass="darm_meshes">
+            <geom type="mesh" mesh="forearm_mesh" />
+            
+            <site name="${hand_name}_rc_joint_wrap_dorsal_sidesite" pos="0 ${rc_joint_radius+sidesite_size} ${rc_joint_tf[2]}" 
+                size="${sidesite_size}" rgba="${sidesite_rgba}" />
+            <site name="${hand_name}_rc_joint_wrap_palmar_sidesite" pos="0 -${rc_joint_radius+sidesite_size} ${rc_joint_tf[2]}" 
+                size="${sidesite_size}" rgba="${sidesite_rgba}" />
 
-    <body name="forearm" pos="0 0 0.12" euler="0 0 0" childclass="darm_meshes">
-        <geom type="mesh" mesh="forearm_mesh" />
-        
-        <site name="rc_joint_wrap_dorsal_sidesite" pos="0 ${rc_joint_radius+sidesite_size} ${rc_joint_tf[2]}" 
-            size="${sidesite_size}" rgba="${sidesite_rgba}" />
-        <site name="rc_joint_wrap_palmar_sidesite" pos="0 -${rc_joint_radius+sidesite_size} ${rc_joint_tf[2]}" 
-            size="${sidesite_size}" rgba="${sidesite_rgba}" />
+            <xacro:tendon_origin site_name="${hand_name}_flexor_carpi_radialis_origin" site_tf="${flexor_carpi_radialis_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_flexor_carpi_ulnaris_origin" site_tf="${flexor_carpi_ulnaris_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_extensor_carpi_radialis_origin" site_tf="${extensor_carpi_radialis_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_extensor_carpi_ulnaris_origin" site_tf="${extensor_carpi_ulnaris_origin_tf}" />
+            
+            <xacro:tendon_origin site_name="${hand_name}_extensor_communis_ii_origin" site_tf="${extensor_communis_ii_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_extensor_communis_iii_origin" site_tf="${extensor_communis_iii_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_extensor_communis_iv_origin" site_tf="${extensor_communis_iv_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_extensor_communis_v_origin" site_tf="${extensor_communis_v_origin_tf}" />
 
-        <xacro:tendon_origin site_name="flexor_carpi_radialis_origin" site_tf="${flexor_carpi_radialis_origin_tf}" />
-        <xacro:tendon_origin site_name="flexor_carpi_ulnaris_origin" site_tf="${flexor_carpi_ulnaris_origin_tf}" />
-        <xacro:tendon_origin site_name="extensor_carpi_radialis_origin" site_tf="${extensor_carpi_radialis_origin_tf}" />
-        <xacro:tendon_origin site_name="extensor_carpi_ulnaris_origin" site_tf="${extensor_carpi_ulnaris_origin_tf}" />
-        
-        <xacro:tendon_origin site_name="extensor_communis_ii_origin" site_tf="${extensor_communis_ii_origin_tf}" />
-        <xacro:tendon_origin site_name="extensor_communis_iii_origin" site_tf="${extensor_communis_iii_origin_tf}" />
-        <xacro:tendon_origin site_name="extensor_communis_iv_origin" site_tf="${extensor_communis_iv_origin_tf}" />
-        <xacro:tendon_origin site_name="extensor_communis_v_origin" site_tf="${extensor_communis_v_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_flexor_profundus_ii_origin" site_tf="${flexor_profundus_ii_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_flexor_profundus_iii_origin" site_tf="${flexor_profundus_iii_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_flexor_profundus_iv_origin" site_tf="${flexor_profundus_iv_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_flexor_profundus_v_origin" site_tf="${flexor_profundus_v_origin_tf}" />
 
-        <xacro:tendon_origin site_name="flexor_profundus_ii_origin" site_tf="${flexor_profundus_ii_origin_tf}" />
-        <xacro:tendon_origin site_name="flexor_profundus_iii_origin" site_tf="${flexor_profundus_iii_origin_tf}" />
-        <xacro:tendon_origin site_name="flexor_profundus_iv_origin" site_tf="${flexor_profundus_iv_origin_tf}" />
-        <xacro:tendon_origin site_name="flexor_profundus_v_origin" site_tf="${flexor_profundus_v_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_flexor_superficialis_ii_origin" site_tf="${flexor_superficialis_ii_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_flexor_superficialis_iii_origin" site_tf="${flexor_superficialis_iii_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_flexor_superficialis_iv_origin" site_tf="${flexor_superficialis_iv_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_flexor_superficialis_v_origin" site_tf="${flexor_superficialis_v_origin_tf}" />
 
-        <xacro:tendon_origin site_name="flexor_superficialis_ii_origin" site_tf="${flexor_superficialis_ii_origin_tf}" />
-        <xacro:tendon_origin site_name="flexor_superficialis_iii_origin" site_tf="${flexor_superficialis_iii_origin_tf}" />
-        <xacro:tendon_origin site_name="flexor_superficialis_iv_origin" site_tf="${flexor_superficialis_iv_origin_tf}" />
-        <xacro:tendon_origin site_name="flexor_superficialis_v_origin" site_tf="${flexor_superficialis_v_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_palmar_interossei_ii_origin" site_tf="${palmar_interossei_ii_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_palmar_interossei_iii_origin" site_tf="${palmar_interossei_iii_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_palmar_interossei_iv_origin" site_tf="${palmar_interossei_iv_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_palmar_interossei_v_origin" site_tf="${palmar_interossei_v_origin_tf}" />
 
-        <xacro:tendon_origin site_name="palmar_interossei_ii_origin" site_tf="${palmar_interossei_ii_origin_tf}" />
-        <xacro:tendon_origin site_name="palmar_interossei_iii_origin" site_tf="${palmar_interossei_iii_origin_tf}" />
-        <xacro:tendon_origin site_name="palmar_interossei_iv_origin" site_tf="${palmar_interossei_iv_origin_tf}" />
-        <xacro:tendon_origin site_name="palmar_interossei_v_origin" site_tf="${palmar_interossei_v_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_dorsal_interossei_ii_origin" site_tf="${dorsal_interossei_ii_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_dorsal_interossei_iii_origin" site_tf="${dorsal_interossei_iii_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_dorsal_interossei_iv_origin" site_tf="${dorsal_interossei_iv_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_dorsal_interossei_v_origin" site_tf="${dorsal_interossei_v_origin_tf}" />
 
-        <xacro:tendon_origin site_name="dorsal_interossei_ii_origin" site_tf="${dorsal_interossei_ii_origin_tf}" />
-        <xacro:tendon_origin site_name="dorsal_interossei_iii_origin" site_tf="${dorsal_interossei_iii_origin_tf}" />
-        <xacro:tendon_origin site_name="dorsal_interossei_iv_origin" site_tf="${dorsal_interossei_iv_origin_tf}" />
-        <xacro:tendon_origin site_name="dorsal_interossei_v_origin" site_tf="${dorsal_interossei_v_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_flexor_pollicis_longus_origin" site_tf="${flexor_pollicis_longus_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_flexor_pollicis_brevis_origin" site_tf="${flexor_pollicis_brevis_origin_tf}" />
+            
+            <xacro:tendon_origin site_name="${hand_name}_extensor_pollicis_brevis_origin" site_tf="${extensor_pollicis_brevis_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_extensor_pollicis_longus_origin" site_tf="${extensor_pollicis_longus_origin_tf}" />
+            
+            <xacro:tendon_origin site_name="${hand_name}_abductor_pollicis_longus_origin" site_tf="${abductor_pollicis_longus_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_abductor_pollicis_brevis_origin" site_tf="${abductor_pollicis_brevis_origin_tf}" />
+            
+            <xacro:tendon_origin site_name="${hand_name}_opponens_pollicis_origin" site_tf="${opponens_pollicis_origin_tf}" />
+            <xacro:tendon_origin site_name="${hand_name}_adductor_pollicis_origin" site_tf="${adductor_pollicis_origin_tf}" />
+            
+            <xacro:tendon_origin site_name="${hand_name}_opponens_digiti_minimi_origin" site_tf="${opponens_digiti_minimi_origin_tf}" />
+            
 
-        <xacro:tendon_origin site_name="flexor_pollicis_longus_origin" site_tf="${flexor_pollicis_longus_origin_tf}" />
-        <xacro:tendon_origin site_name="flexor_pollicis_brevis_origin" site_tf="${flexor_pollicis_brevis_origin_tf}" />
-        
-        <xacro:tendon_origin site_name="extensor_pollicis_brevis_origin" site_tf="${extensor_pollicis_brevis_origin_tf}" />
-        <xacro:tendon_origin site_name="extensor_pollicis_longus_origin" site_tf="${extensor_pollicis_longus_origin_tf}" />
-        
-        <xacro:tendon_origin site_name="abductor_pollicis_longus_origin" site_tf="${abductor_pollicis_longus_origin_tf}" />
-        <xacro:tendon_origin site_name="abductor_pollicis_brevis_origin" site_tf="${abductor_pollicis_brevis_origin_tf}" />
-        
-        <xacro:tendon_origin site_name="opponens_pollicis_origin" site_tf="${opponens_pollicis_origin_tf}" />
-        <xacro:tendon_origin site_name="adductor_pollicis_origin" site_tf="${adductor_pollicis_origin_tf}" />
-        
-        <xacro:tendon_origin site_name="opponens_digiti_minimi_origin" site_tf="${opponens_digiti_minimi_origin_tf}" />
-        
+            <!-- TODO: Measure this accurately from f360 -->
+            <body name="${hand_name}_rc_centre_block" pos="${rc_joint_tf[0]} ${rc_joint_tf[1]} ${rc_joint_tf[2]}" euler="0 0 0">
+                <joint type="hinge" axis="0 1 0" pos="0 0 -0.032" limited="true" range="-20 10" />
+                <geom type="mesh" mesh="rc_centre_block_mesh" />
+                <geom class="wrap_geom" name="${hand_name}_rc_joint_wrap" type="cylinder"  
+                    size="${rc_joint_radius} ${rc_joint_length}" euler="0 90 0" rgba="${wrap_rgba}" />
 
-        <!-- TODO: Measure this accurately from f360 -->
-        <body name="rc_centre_block" pos="${rc_joint_tf[0]} ${rc_joint_tf[1]} ${rc_joint_tf[2]}" euler="0 0 0">
-            <joint type="hinge" axis="0 1 0" pos="0 0 -0.032" limited="true" range="-20 10" />
-            <geom type="mesh" mesh="rc_centre_block_mesh" />
-            <geom class="wrap_geom" name="rc_joint_wrap" type="cylinder"  
-                size="${rc_joint_radius} ${rc_joint_length}" euler="0 90 0" rgba="${wrap_rgba}" />
-
-            <body name="carpals_metacarpals" pos="0 0 0" euler="0 0 0">
-                <joint type="hinge" axis="1 0 0" limited="true" range="-90 90" />
-                <geom type="mesh" mesh="carpals_metacarpals_mesh" />
-                <geom class="wrap_geom" pos="${mcp_ii_translation}" name="mcp_ii_wrap" type="cylinder" size="${mcp_ii_radius} ${mcp_ii_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
-                <geom class="wrap_geom" pos="${mcp_iii_translation}" name="mcp_iii_wrap" type="cylinder" size="${mcp_iii_radius} ${mcp_iii_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
-                <geom class="wrap_geom" pos="${mcp_iv_translation}" name="mcp_iv_wrap" type="cylinder" size="${mcp_iv_radius} ${mcp_iv_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
-
-
-                <site name="flexor_carpi_radialis_insertion" pos="${flexor_carpi_radialis_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="flexor_carpi_ulnaris_insertion" pos="${flexor_carpi_ulnaris_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="extensor_carpi_radialis_insertion" pos="${extensor_carpi_radialis_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="extensor_carpi_ulnaris_insertion" pos="${extensor_carpi_ulnaris_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-
-                <site name="extensor_pollicis_carpals_tunnel" pos="${extensor_pollicis_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                <body name="${hand_name}_carpals_metacarpals" pos="0 0 0" euler="0 0 0">
+                    <joint type="hinge" axis="1 0 0" limited="true" range="-80 80" />
+                    <geom type="mesh" mesh="carpals_metacarpals_mesh" />
+                    <geom class="wrap_geom" pos="${mcp_ii_translation}" name="${hand_name}_mcp_ii_wrap" type="cylinder" size="${mcp_ii_radius} ${mcp_ii_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
+                    <geom class="wrap_geom" pos="${mcp_iii_translation}" name="${hand_name}_mcp_iii_wrap" type="cylinder" size="${mcp_iii_radius} ${mcp_iii_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
+                    <geom class="wrap_geom" pos="${mcp_iv_translation}" name="${hand_name}_mcp_iv_wrap" type="cylinder" size="${mcp_iv_radius} ${mcp_iv_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
 
 
-                <site name="extensor_communis_ii_carpals_tunnel" pos="${extensor_communis_ii_carpals_tunnel_tf}" 
-                    size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="extensor_communis_iii_carpals_tunnel" pos="${extensor_communis_iii_carpals_tunnel_tf}" 
-                    size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="extensor_communis_iv_carpals_tunnel" pos="${extensor_communis_iv_carpals_tunnel_tf}" 
-                    size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="extensor_communis_v_carpals_tunnel" pos="${extensor_communis_v_carpals_tunnel_tf}" 
+                    <site name="${hand_name}_flexor_carpi_radialis_insertion" pos="${flexor_carpi_radialis_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_flexor_carpi_ulnaris_insertion" pos="${flexor_carpi_ulnaris_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_extensor_carpi_radialis_insertion" pos="${extensor_carpi_radialis_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_extensor_carpi_ulnaris_insertion" pos="${extensor_carpi_ulnaris_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+
+                    <site name="${hand_name}_extensor_pollicis_carpals_tunnel" pos="${extensor_pollicis_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+
+
+                    <site name="${hand_name}_extensor_communis_ii_carpals_tunnel" pos="${extensor_communis_ii_carpals_tunnel_tf}" 
+                        size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_extensor_communis_iii_carpals_tunnel" pos="${extensor_communis_iii_carpals_tunnel_tf}" 
+                        size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_extensor_communis_iv_carpals_tunnel" pos="${extensor_communis_iv_carpals_tunnel_tf}" 
+                        size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_extensor_communis_v_carpals_tunnel" pos="${extensor_communis_v_carpals_tunnel_tf}" 
+                            size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+
+                    <site name="${hand_name}_extensor_communis_ii_metacarpals_tunnel" pos="${extensor_communis_ii_metacarpals_tunnel_tf}" 
+                        size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_extensor_communis_iii_metacarpals_tunnel" pos="${extensor_communis_iii_metacarpals_tunnel_tf}" 
+                        size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_extensor_communis_iv_metacarpals_tunnel" pos="${extensor_communis_iv_metacarpals_tunnel_tf}" 
                         size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
 
-                <site name="extensor_communis_ii_metacarpals_tunnel" pos="${extensor_communis_ii_metacarpals_tunnel_tf}" 
-                    size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="extensor_communis_iii_metacarpals_tunnel" pos="${extensor_communis_iii_metacarpals_tunnel_tf}" 
-                    size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="extensor_communis_iv_metacarpals_tunnel" pos="${extensor_communis_iv_metacarpals_tunnel_tf}" 
-                    size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_flexor_ii_metacarpals_tunnel" pos="${flexor_ii_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_flexor_iii_metacarpals_tunnel" pos="${flexor_iii_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_flexor_iv_metacarpals_tunnel" pos="${flexor_iv_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
 
-                <site name="flexor_ii_metacarpals_tunnel" pos="${flexor_ii_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="flexor_iii_metacarpals_tunnel" pos="${flexor_iii_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="flexor_iv_metacarpals_tunnel" pos="${flexor_iv_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_dorsal_interossei_ii_metacarpals_tunnel" pos="${dorsal_interossei_ii_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_palmar_interossei_ii_metacarpals_tunnel" pos="${palmar_interossei_ii_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_dorsal_interossei_iii_metacarpals_tunnel" pos="${dorsal_interossei_iii_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_palmar_interossei_iii_metacarpals_tunnel" pos="${palmar_interossei_iii_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_dorsal_interossei_iv_metacarpals_tunnel" pos="${dorsal_interossei_iv_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_palmar_interossei_iv_metacarpals_tunnel" pos="${palmar_interossei_iv_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
 
-                <site name="dorsal_interossei_ii_metacarpals_tunnel" pos="${dorsal_interossei_ii_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="palmar_interossei_ii_metacarpals_tunnel" pos="${palmar_interossei_ii_metacarpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
 
-                <site name="flexor_ii_carpals_tunnel" pos="${flexor_ii_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="flexor_iii_carpals_tunnel" pos="${flexor_iii_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="flexor_iv_carpals_tunnel" pos="${flexor_iv_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="flexor_v_carpals_tunnel" pos="${flexor_v_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                
-                <site name="abductor_pollicis_brevis_carpals_tunnel" pos="${abductor_pollicis_brevis_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="adductor_pollicis_metacarpals_iii_tunnel_i" pos="${adductor_pollicis_metacarpals_iii_tunnel_i_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="adductor_pollicis_metacarpals_iii_tunnel_ii" pos="${adductor_pollicis_metacarpals_iii_tunnel_ii_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="adductor_pollicis_capitate_tunnel" pos="${adductor_pollicis_capitate_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="flexor_pollicis_brevis_carpals_tunnel" pos="${flexor_pollicis_brevis_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
-                <site name="opponens_pollicis_carpals_tunnel" pos="${opponens_pollicis_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_flexor_ii_carpals_tunnel" pos="${flexor_ii_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_flexor_iii_carpals_tunnel" pos="${flexor_iii_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_flexor_iv_carpals_tunnel" pos="${flexor_iv_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_flexor_v_carpals_tunnel" pos="${flexor_v_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    
+                    <site name="${hand_name}_abductor_pollicis_brevis_carpals_tunnel" pos="${abductor_pollicis_brevis_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_adductor_pollicis_metacarpals_iii_tunnel_i" pos="${adductor_pollicis_metacarpals_iii_tunnel_i_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_adductor_pollicis_metacarpals_iii_tunnel_ii" pos="${adductor_pollicis_metacarpals_iii_tunnel_ii_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_adductor_pollicis_capitate_tunnel" pos="${adductor_pollicis_capitate_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_flexor_pollicis_brevis_carpals_tunnel" pos="${flexor_pollicis_brevis_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
+                    <site name="${hand_name}_opponens_pollicis_carpals_tunnel" pos="${opponens_pollicis_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
 
-                <site name="proximal_cm_i_wrap_dorsal_sidesite" pos="${cm_i_translation[0]+1.2*proximal_cm_i_radius+sidesite_size} ${cm_i_translation[1]} ${cm_i_translation[2]}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
-                <site name="proximal_cm_i_wrap_palmar_sidesite" pos="${cm_i_translation[0]-1.2*proximal_cm_i_radius-sidesite_size} ${cm_i_translation[1]} ${cm_i_translation[2]}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
-                
-                <site name="opponens_digiti_minimi_carpals_tunnel" pos="${opponens_digiti_minimi_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}" />
-                
-                <xacro:phalanges index="ii" mcp_translation="${mcp_ii_translation}" mcp_rotation="${mcp_ii_rotation}" 
-                                pp_length="${pp_ii_length}" mp_length="${mp_ii_length}" dp_length="${dp_ii_length}"
-                                mcp_radius="${mcp_ii_radius}" 
-                                pip_radius="${pip_ii_radius}" dip_radius="${dip_ii_radius}"
-                                dorsal_interossei_insertion_tf="${dorsal_interossei_ii_insertion_tf}"
-                                palmar_interossei_insertion_tf="${palmar_interossei_ii_insertion_tf}"
-                                pp_extensor_communis_insertion_tf="${pp_ii_extensor_communis_insertion_tf}"
-                                flexor_superficialis_insertion_tf="${flexor_superficialis_ii_insertion_tf}"
-                                mp_extensor_hood_insertion_tf="${mp_ii_extensor_hood_insertion_tf}"
-                                flexor_profundus_insertion_tf="${flexor_profundus_ii_insertion_tf}"
-                                dp_extensor_hood_insertion_tf="${dp_ii_extensor_hood_insertion_tf}" />
+                    <site name="${hand_name}_proximal_cm_i_wrap_dorsal_sidesite" pos="${cm_i_translation[0]+1.2*proximal_cm_i_radius+sidesite_size} ${cm_i_translation[1]} ${cm_i_translation[2]}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+                    <site name="${hand_name}_proximal_cm_i_wrap_palmar_sidesite" pos="${cm_i_translation[0]-1.2*proximal_cm_i_radius-sidesite_size} ${cm_i_translation[1]} ${cm_i_translation[2]}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
+                    
+                    <site name="${hand_name}_opponens_digiti_minimi_carpals_tunnel" pos="${opponens_digiti_minimi_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}" />
+                    
+                    <xacro:phalanges hand_name="${hand_name}" index="ii" mcp_translation="${mcp_ii_translation}" mcp_rotation="${mcp_ii_rotation}" 
+                                    pp_length="${pp_ii_length}" mp_length="${mp_ii_length}" dp_length="${dp_ii_length}"
+                                    mcp_radius="${mcp_ii_radius}" 
+                                    pip_radius="${pip_ii_radius}" dip_radius="${dip_ii_radius}"
+                                    dorsal_interossei_insertion_tf="${dorsal_interossei_ii_insertion_tf}"
+                                    palmar_interossei_insertion_tf="${palmar_interossei_ii_insertion_tf}"
+                                    pp_extensor_communis_insertion_tf="${pp_ii_extensor_communis_insertion_tf}"
+                                    flexor_superficialis_insertion_tf="${flexor_superficialis_ii_insertion_tf}"
+                                    mp_extensor_hood_insertion_tf="${mp_ii_extensor_hood_insertion_tf}"
+                                    flexor_profundus_insertion_tf="${flexor_profundus_ii_insertion_tf}"
+                                    dp_extensor_hood_insertion_tf="${dp_ii_extensor_hood_insertion_tf}" />
 
-                <xacro:phalanges index="iii" mcp_translation="${mcp_iii_translation}" mcp_rotation="${mcp_iii_rotation}" 
-                                pp_length="${pp_iii_length}" mp_length="${mp_iii_length}" dp_length="${dp_iii_length}"
-                                mcp_radius="${mcp_iii_radius}" 
-                                pip_radius="${pip_iii_radius}" dip_radius="${dip_iii_radius}"
-                                dorsal_interossei_insertion_tf="${dorsal_interossei_iii_insertion_tf}"
-                                palmar_interossei_insertion_tf="${palmar_interossei_iii_insertion_tf}"
-                                pp_extensor_communis_insertion_tf="${pp_iii_extensor_communis_insertion_tf}"
-                                flexor_superficialis_insertion_tf="${flexor_superficialis_iii_insertion_tf}"
-                                mp_extensor_hood_insertion_tf="${mp_iii_extensor_hood_insertion_tf}"
-                                flexor_profundus_insertion_tf="${flexor_profundus_iii_insertion_tf}"
-                                dp_extensor_hood_insertion_tf="${dp_iii_extensor_hood_insertion_tf}" />
+                    <xacro:phalanges hand_name="${hand_name}" index="iii" mcp_translation="${mcp_iii_translation}" mcp_rotation="${mcp_iii_rotation}" 
+                                    pp_length="${pp_iii_length}" mp_length="${mp_iii_length}" dp_length="${dp_iii_length}"
+                                    mcp_radius="${mcp_iii_radius}" 
+                                    pip_radius="${pip_iii_radius}" dip_radius="${dip_iii_radius}"
+                                    dorsal_interossei_insertion_tf="${dorsal_interossei_iii_insertion_tf}"
+                                    palmar_interossei_insertion_tf="${palmar_interossei_iii_insertion_tf}"
+                                    pp_extensor_communis_insertion_tf="${pp_iii_extensor_communis_insertion_tf}"
+                                    flexor_superficialis_insertion_tf="${flexor_superficialis_iii_insertion_tf}"
+                                    mp_extensor_hood_insertion_tf="${mp_iii_extensor_hood_insertion_tf}"
+                                    flexor_profundus_insertion_tf="${flexor_profundus_iii_insertion_tf}"
+                                    dp_extensor_hood_insertion_tf="${dp_iii_extensor_hood_insertion_tf}" />
 
-                <xacro:phalanges index="iv" mcp_translation="${mcp_iv_translation}" mcp_rotation="${mcp_iv_rotation}" 
-                                pp_length="${pp_iv_length}" mp_length="${mp_iv_length}" dp_length="${dp_iv_length}"
-                                mcp_radius="${mcp_iv_radius}" 
-                                pip_radius="${pip_iv_radius}" dip_radius="${dip_iv_radius}"
-                                dorsal_interossei_insertion_tf="${dorsal_interossei_iv_insertion_tf}"
-                                palmar_interossei_insertion_tf="${palmar_interossei_iv_insertion_tf}"
-                                pp_extensor_communis_insertion_tf="${pp_iv_extensor_communis_insertion_tf}"
-                                flexor_superficialis_insertion_tf="${flexor_superficialis_iv_insertion_tf}"
-                                mp_extensor_hood_insertion_tf="${mp_iv_extensor_hood_insertion_tf}"
-                                flexor_profundus_insertion_tf="${flexor_profundus_iv_insertion_tf}"
-                                dp_extensor_hood_insertion_tf="${dp_iv_extensor_hood_insertion_tf}" />
-                
-                <xacro:phalanx_i index="i" cm_translation="${cm_i_translation}" cm_rotation="${cm_i_rotation}" 
-                                centre_block_offset="${cm_i_centre_block_offset}" metacarpal_length="${metacarpal_i_length}" 
-                                pp_length="${pp_i_length}" dp_length="${dp_i_length}" proximal_cm_radius="${proximal_cm_i_radius}" 
-                                distal_cm_radius="${distal_cm_i_radius}" mcp_radius="${mcp_i_radius}" ip_radius="${ip_i_radius}"
-                                abductor_pollicis_brevis_insertion_tf="${abductor_pollicis_brevis_insertion_tf}"
-                                abductor_pollicis_longus_insertion_tf="${abductor_pollicis_longus_insertion_tf}"
-                                adductor_pollicis_insertion_tf="${adductor_pollicis_insertion_tf}"
-                                flexor_pollicis_brevis_insertion_tf="${flexor_pollicis_brevis_insertion_tf}"
-                                opponens_pollicis_insertion_i_tf="${opponens_pollicis_insertion_i_tf}"
-                                opponens_pollicis_insertion_ii_tf="${opponens_pollicis_insertion_ii_tf}"
-                                flexor_pollicis_longus_insertion_tf="${flexor_pollicis_longus_insertion_tf}"
-                                extensor_pollicis_brevis_insertion_tf="${extensor_pollicis_brevis_insertion_tf}"
-                                extensor_pollicis_longus_insertion_tf="${extensor_pollicis_longus_insertion_tf}"
-                                metacarpal_i_flexor_tunnel_tf="${metacarpal_i_flexor_tunnel_tf}" 
-                                metacarpal_i_extensor_tunnel_tf="${metacarpal_i_extensor_tunnel_tf}" 
-                                pp_i_flexor_tunnel_tf="${pp_i_flexor_tunnel_tf}"
-                                pp_i_extensor_tunnel_tf="${pp_i_extensor_tunnel_tf}" />
+                    <xacro:phalanges hand_name="${hand_name}" index="iv" mcp_translation="${mcp_iv_translation}" mcp_rotation="${mcp_iv_rotation}" 
+                                    pp_length="${pp_iv_length}" mp_length="${mp_iv_length}" dp_length="${dp_iv_length}"
+                                    mcp_radius="${mcp_iv_radius}" 
+                                    pip_radius="${pip_iv_radius}" dip_radius="${dip_iv_radius}"
+                                    dorsal_interossei_insertion_tf="${dorsal_interossei_iv_insertion_tf}"
+                                    palmar_interossei_insertion_tf="${palmar_interossei_iv_insertion_tf}"
+                                    pp_extensor_communis_insertion_tf="${pp_iv_extensor_communis_insertion_tf}"
+                                    flexor_superficialis_insertion_tf="${flexor_superficialis_iv_insertion_tf}"
+                                    mp_extensor_hood_insertion_tf="${mp_iv_extensor_hood_insertion_tf}"
+                                    flexor_profundus_insertion_tf="${flexor_profundus_iv_insertion_tf}"
+                                    dp_extensor_hood_insertion_tf="${dp_iv_extensor_hood_insertion_tf}" />
+                    
+                    <xacro:phalanx_i hand_name="${hand_name}" index="i" cm_translation="${cm_i_translation}" cm_rotation="${cm_i_rotation}" 
+                                    centre_block_offset="${cm_i_centre_block_offset}" metacarpal_length="${metacarpal_i_length}" 
+                                    pp_length="${pp_i_length}" dp_length="${dp_i_length}" proximal_cm_radius="${proximal_cm_i_radius}" 
+                                    distal_cm_radius="${distal_cm_i_radius}" mcp_radius="${mcp_i_radius}" ip_radius="${ip_i_radius}"
+                                    abductor_pollicis_brevis_insertion_tf="${abductor_pollicis_brevis_insertion_tf}"
+                                    abductor_pollicis_longus_insertion_tf="${abductor_pollicis_longus_insertion_tf}"
+                                    adductor_pollicis_insertion_tf="${adductor_pollicis_insertion_tf}"
+                                    flexor_pollicis_brevis_insertion_tf="${flexor_pollicis_brevis_insertion_tf}"
+                                    opponens_pollicis_insertion_i_tf="${opponens_pollicis_insertion_i_tf}"
+                                    opponens_pollicis_insertion_ii_tf="${opponens_pollicis_insertion_ii_tf}"
+                                    flexor_pollicis_longus_insertion_tf="${flexor_pollicis_longus_insertion_tf}"
+                                    extensor_pollicis_brevis_insertion_tf="${extensor_pollicis_brevis_insertion_tf}"
+                                    extensor_pollicis_longus_insertion_tf="${extensor_pollicis_longus_insertion_tf}"
+                                    metacarpal_i_flexor_tunnel_tf="${metacarpal_i_flexor_tunnel_tf}" 
+                                    metacarpal_i_extensor_tunnel_tf="${metacarpal_i_extensor_tunnel_tf}" 
+                                    pp_i_flexor_tunnel_tf="${pp_i_flexor_tunnel_tf}"
+                                    pp_i_extensor_tunnel_tf="${pp_i_extensor_tunnel_tf}" />
 
-                <xacro:phalanx_v index="v" cm_translation="${cm_v_translation}" cm_rotation="${cm_v_rotation}" 
-                                centre_block_offset="${cm_v_centre_block_offset}" metacarpal_length="${metacarpal_v_length}" 
-                                mcp_translation="${mcp_v_translation}" mcp_rotation="${mcp_v_rotation}" pp_length="${pp_v_length}" 
-                                mp_length="${mp_v_length}" dp_length="${dp_v_length}" proximal_cm_radius="${proximal_cm_v_radius}" 
-                                distal_cm_radius="${distal_cm_v_radius}" mcp_radius="${mcp_v_radius}" 
-                                pip_radius="${pip_v_radius}" dip_radius="${dip_v_radius}"
-                                dorsal_interossei_insertion_tf="${dorsal_interossei_v_insertion_tf}"
-                                palmar_interossei_insertion_tf="${palmar_interossei_v_insertion_tf}"
-                                pp_extensor_communis_insertion_tf="${pp_v_extensor_communis_insertion_tf}"
-                                flexor_superficialis_insertion_tf="${flexor_superficialis_v_insertion_tf}"
-                                mp_extensor_hood_insertion_tf="${mp_v_extensor_hood_insertion_tf}"
-                                flexor_profundus_insertion_tf="${flexor_profundus_v_insertion_tf}"
-                                dp_extensor_hood_insertion_tf="${dp_v_extensor_hood_insertion_tf}" 
-                                opponens_digiti_minimi_insertion_i_tf="${opponens_digiti_minimi_insertion_i_tf}"
-                                opponens_digiti_minimi_insertion_ii_tf="${opponens_digiti_minimi_insertion_ii_tf}"
-                                opponens_digiti_minimi_distal_cm_v_tunnel_tf="${opponens_digiti_minimi_distal_cm_v_tunnel_tf}" />
+                    <xacro:phalanx_v hand_name="${hand_name}" index="v" cm_translation="${cm_v_translation}" cm_rotation="${cm_v_rotation}" 
+                                    centre_block_offset="${cm_v_centre_block_offset}" metacarpal_length="${metacarpal_v_length}" 
+                                    mcp_translation="${mcp_v_translation}" mcp_rotation="${mcp_v_rotation}" pp_length="${pp_v_length}" 
+                                    mp_length="${mp_v_length}" dp_length="${dp_v_length}" proximal_cm_radius="${proximal_cm_v_radius}" 
+                                    distal_cm_radius="${distal_cm_v_radius}" mcp_radius="${mcp_v_radius}" 
+                                    pip_radius="${pip_v_radius}" dip_radius="${dip_v_radius}" 
+                                    dorsal_interossei_metacarpals_tunnel_tf="${dorsal_interossei_v_metacarpals_tunnel_tf}" 
+                                    palmar_interossei_metacarpals_tunnel_tf="${palmar_interossei_v_metacarpals_tunnel_tf}" 
+                                    dorsal_interossei_insertion_tf="${dorsal_interossei_v_insertion_tf}" 
+                                    palmar_interossei_insertion_tf="${palmar_interossei_v_insertion_tf}" 
+                                    pp_extensor_communis_insertion_tf="${pp_v_extensor_communis_insertion_tf}" 
+                                    flexor_superficialis_insertion_tf="${flexor_superficialis_v_insertion_tf}" 
+                                    mp_extensor_hood_insertion_tf="${mp_v_extensor_hood_insertion_tf}" 
+                                    flexor_profundus_insertion_tf="${flexor_profundus_v_insertion_tf}" 
+                                    dp_extensor_hood_insertion_tf="${dp_v_extensor_hood_insertion_tf}" 
+                                    opponens_digiti_minimi_insertion_i_tf="${opponens_digiti_minimi_insertion_i_tf}" 
+                                    opponens_digiti_minimi_insertion_ii_tf="${opponens_digiti_minimi_insertion_ii_tf}" 
+                                    opponens_digiti_minimi_distal_cm_v_tunnel_tf="${opponens_digiti_minimi_distal_cm_v_tunnel_tf}" />
 
+                </body>
             </body>
         </body>
-    </body>
+    </xacro:macro>
+
+    <xacro:darm_hand hand_name="hand1" pos="0 0 0.12" />
+    <!-- <xacro:darm_hand hand_name="hand2" pos="0.5 0 0.12" />
+    <xacro:darm_hand hand_name="hand3" pos="-0.5 0 0.12" /> -->
 </worldbody>

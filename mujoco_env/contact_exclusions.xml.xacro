@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contact xmlns:xacro="http://wiki.ros.org/xacro">
+    <!-- TODO: Exclude contact in wraps -->
+    <!-- TODO: Eclude contacts in Phalanx I -->
+
+    <xacro:macro name="hand_contacts" params="hand_name">
+        <!-- Carapals-Wrist -->
+        <exclude body1="${hand_name}_carpals_metacarpals" body2="${hand_name}_rc_centre_block" />
+        <exclude body1="${hand_name}_rc_centre_block" body2="${hand_name}_forearm" />
+        <exclude body1="${hand_name}_carpals_metacarpals" body2="${hand_name}_forearm" />
+
+
+        <!-- PHALANGES I -->
+        <exclude body1="${hand_name}_proximal_cm_i_centre_block" body2="${hand_name}_carpals_metacarpals" />
+        <exclude body1="${hand_name}_distal_cm_i_centre_block" body2="${hand_name}_proximal_cm_i_centre_block" />
+        <exclude body1="${hand_name}_distal_cm_i_centre_block" body2="${hand_name}_carpals_metacarpals" />
+        <exclude body1="${hand_name}_metacarpal_i" body2="${hand_name}_distal_cm_i_centre_block" />
+        <exclude body1="${hand_name}_metacarpal_i" body2="${hand_name}_proximal_cm_i_centre_block" />
+        <exclude body1="${hand_name}_metacarpal_i" body2="${hand_name}_carpals_metacarpals" />
+
+        <exclude body1="${hand_name}_proximal_phalanx_i" body2="${hand_name}_metacarpal_i" />
+        <exclude body1="${hand_name}_distal_phalanx_i" body2="${hand_name}_proximal_phalanx_i" />
+
+        <!-- PHALANGES II -->
+        <exclude body1="${hand_name}_mcp_centre_block_ii" body2="${hand_name}_carpals_metacarpals" />
+        <exclude body1="${hand_name}_proximal_phalanx_ii" body2="${hand_name}_mcp_centre_block_ii" />
+        <exclude body1="${hand_name}_proximal_phalanx_ii" body2="${hand_name}_carpals_metacarpals" />
+
+        <exclude body1="${hand_name}_middle_phalanx_ii" body2="${hand_name}_proximal_phalanx_ii" />
+        <exclude body1="${hand_name}_distal_phalanx_ii" body2="${hand_name}_middle_phalanx_ii" />
+
+        <!-- PHALANGES III -->
+        <exclude body1="${hand_name}_mcp_centre_block_iii" body2="${hand_name}_carpals_metacarpals" />
+        <exclude body1="${hand_name}_proximal_phalanx_iii" body2="${hand_name}_mcp_centre_block_iii" />
+        <exclude body1="${hand_name}_proximal_phalanx_iii" body2="${hand_name}_carpals_metacarpals" />
+
+        <exclude body1="${hand_name}_middle_phalanx_iii" body2="${hand_name}_proximal_phalanx_iii" />
+        <exclude body1="${hand_name}_distal_phalanx_iii" body2="${hand_name}_middle_phalanx_iii" />
+
+        <!-- PHALANGES IV -->
+        <exclude body1="${hand_name}_mcp_centre_block_iv" body2="${hand_name}_carpals_metacarpals" />
+        <exclude body1="${hand_name}_proximal_phalanx_iv" body2="${hand_name}_mcp_centre_block_iv" />
+        <exclude body1="${hand_name}_proximal_phalanx_iv" body2="${hand_name}_carpals_metacarpals" />
+
+        <exclude body1="${hand_name}_middle_phalanx_iv" body2="${hand_name}_proximal_phalanx_iv" />
+        <exclude body1="${hand_name}_distal_phalanx_iv" body2="${hand_name}_middle_phalanx_iv" />
+
+        <!-- PHALANGES V -->
+        <exclude body1="${hand_name}_proximal_cm_v_centre_block" body2="${hand_name}_carpals_metacarpals" />
+        <exclude body1="${hand_name}_distal_cm_v_centre_block" body2="${hand_name}_proximal_cm_v_centre_block" />
+        <exclude body1="${hand_name}_distal_cm_v_centre_block" body2="${hand_name}_carpals_metacarpals" />
+        <exclude body1="${hand_name}_metacarpal_v" body2="${hand_name}_distal_cm_v_centre_block" />
+        <exclude body1="${hand_name}_metacarpal_v" body2="${hand_name}_proximal_cm_v_centre_block" />
+        <exclude body1="${hand_name}_metacarpal_v" body2="${hand_name}_carpals_metacarpals" />
+
+        <exclude body1="${hand_name}_mcp_centre_block_v" body2="${hand_name}_metacarpal_v" />
+        <exclude body1="${hand_name}_proximal_phalanx_v" body2="${hand_name}_mcp_centre_block_v" />
+        <exclude body1="${hand_name}_proximal_phalanx_v" body2="${hand_name}_metacarpal_v" />
+
+        <exclude body1="${hand_name}_middle_phalanx_v" body2="${hand_name}_proximal_phalanx_v" />
+        <exclude body1="${hand_name}_distal_phalanx_v" body2="${hand_name}_middle_phalanx_v" />
+
+        <!-- MCP Wrap Geom -->
+        <!-- <exclude body1="${hand_name}_mcp_centre_block__ii" body2="${hand_name}_mcp_centre_block__iii" /> -->
+        <!-- <exclude body1="${hand_name}_mcp_centre_block__iii" body2="${hand_name}_mcp_centre_block__iv" /> -->
+        <!-- <exclude body1="${hand_name}_mcp_centre_block__iv" body2="${hand_name}_mcp_centre_block__v" /> -->
+    </xacro:macro>
+
+    <xacro:hand_contacts hand_name="hand1" />
+    <!-- <xacro:hand_contacts hand_name="hand2" />
+    <xacro:hand_contacts hand_name="hand3" /> -->
+</contact>

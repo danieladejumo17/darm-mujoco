@@ -1,11 +1,11 @@
-<mujoco>
+<mujoco model="DARM">
     <compiler meshdir="/media/daniel/8442A3E642A3DAE6/Users/Daniel Adejumo/Documents/MATLAB/DARM/Geometry Models and FEA/Models/CAD/" /> 
     
     <option gravity = "0 0 -9.81" cone="elliptic">
         <flag contact="enable" />
     </option >
 
-    <size nconmax="1000" njmax="2000" />
+    <!-- <size nconmax="1000" njmax="2000" /> -->
 
     <default class="darm_meshes">
         <mesh scale="0.001 0.001 0.001" />
@@ -48,28 +48,3 @@
         <include file="actuator.xml" />
     </actuator>
 </mujoco>
-
-
-        <!-- <spatial name="flexor_carpi_radialis" width="0.0004">
-            <site site="flexor_carpi_radialis_origin" />
-            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" />
-            <site site="flexor_carpi_radialis_insertion" />
-        </spatial>
-    
-        <spatial name="flexor_carpi_ulnaris" width="0.0004">
-            <site site="flexor_carpi_ulnaris_origin" />
-            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_palmar_sidesite" />
-            <site site="flexor_carpi_ulnaris_insertion" />
-        </spatial>
-    
-        <spatial name="extensor_carpi_radialis" width="0.0004">
-            <site site="extensor_carpi_radialis_origin" />
-            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_dorsal_sidesite" />
-            <site site="extensor_carpi_radialis_insertion" />
-        </spatial>
-    
-        <spatial name="extensor_carpi_ulnaris" width="0.0004">
-            <site site="extensor_carpi_ulnaris_origin" />
-            <geom geom="rc_joint_wrap" sidesite="rc_joint_wrap_dorsal_sidesite" />
-            <site site="extensor_carpi_ulnaris_insertion" />
-        </spatial> -->
