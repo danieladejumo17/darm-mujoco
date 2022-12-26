@@ -5,21 +5,37 @@ import gym
 import mujoco as mj
 from mujoco.glfw import glfw
 
+from pathlib import Path
 
+
+TARGETS_FILE = Path(__file__).parent.parent/"darm_targets.npy"
 
 class DARMEnv(gym.Env):
     metadata = {"render_modes": ["human"], "render_fps": 1}
 
     # TODO: Single finger: Actuators, Fingertip Observations, ...
 
-    def __init__(self, render_mode=None, reaction_time=0.08) -> None:
+    def __init__(self, render_mode=None, reaction_time=0.08, hand_name="hand1") -> None:
         super().__init__()
+
+        # Env Parameters
+        assert render_mode is None or render_mode in self.metadata["render_modes"]
+        self.render_mode = render_mode
+        self.hand_name = hand_name
+        self.reaction_time = reaction_time
+        self.ep_start_time = 0  # episode start time
 
         # Load the Model
         self._load_model("../mujoco_env/darm.xml")
         if not (self.model and self.data):
             raise "Error loading model"
         self._get_fingertip_indices()
+
+        # Load targets
+        with open(TARGETS_FILE, 'rb') as f:
+            # np.array([np.random.random((15)) for _ in range(5)])
+            self.targets = np.load(f)
+        self.targets_len = len(self.targets)
 
         # Define Observation Space
         self.observation_space = gym.spaces.Box(low=-np.inf, high=np.inf, shape=(2*15,), dtype=float)
@@ -28,11 +44,6 @@ class DARMEnv(gym.Env):
         self.action_space = gym.spaces.Box(low=np.array([0.0]*self.model.nu), 
                                             high=np.array([20.0]*4 + [2.0]*(self.model.nu-4)), 
                                             shape=(self.model.nu,), dtype=float)
-
-        # Env Parameters
-        self.reaction_time = reaction_time
-        assert render_mode is None or render_mode in self.metadata["render_modes"]
-        self.render_mode = render_mode
 
         # For Human Rendering
         self.window = None
@@ -61,14 +72,14 @@ class DARMEnv(gym.Env):
     def _get_fingertip_indices(self):
         # FIXME: For independent finger training
         indices = ["i", "ii", "iii", "iv", "v"]
-        self.fingertip_indices = [mj.mj_name2id(self.model, int(mj.mjtObj.mjOBJ_SITE), f"fingertip_{i}") for i in indices]
+        self.fingertip_indices = [mj.mj_name2id(self.model, int(mj.mjtObj.mjOBJ_SITE), f"{self.hand_name}_fingertip_{i}") for i in indices]
     
     def _get_obs(self):
         return np.concatenate((np.array([self.data.site_xpos[i] for i in self.fingertip_indices]).flatten(),
                              self.target_obs))
 
     def _get_info(self):
-        return {"sim_time": self.data.time}
+        return {"sim_time": self.data.time - self.ep_start_time}
 
     def _norm_to_target(self, obs):
         """
@@ -117,14 +128,21 @@ class DARMEnv(gym.Env):
     def _get_done(self, new_state):
         return all(self._norm_to_target(new_state) < 0.004)
 
-    def reset(self, seed=None, options=None):
-        super().reset(seed=seed)
-
+    # def reset(self, seed=None, options=None):
+        # super().reset()
+    def reset(self, **kwargs):
+        # Reset Model. TODO: Consider not reseting the model, let next goal run from the old state
         mj.mj_resetData(self.model, self.data)
         mj.mj_forward(self.model, self.data)
-
+        
         # Create a new goal
-        self.target_obs = np.random.random((15,))   # TODO:
+        self.target_obs = self.targets[np.random.randint(0, self.targets_len)]
+        if self.render_mode == "human":
+            a = self._get_obs()[:15].reshape(5,3)
+            self.data.mocap_pos = self.target_obs.reshape(5,3)
+        mj.mj_forward(self.model, self.data)    # TODO: See possibility of turning thumb here
+        self.ep_start_time = self.data.time
+
 
         observation = self._get_obs()
         info = self._get_info()
@@ -132,7 +150,7 @@ class DARMEnv(gym.Env):
         if self.render_mode == "human":
             self._render_frame()
 
-        return observation, info
+        return observation #, info
 
     def step(self, action):
         prev_obs = self._get_obs()
@@ -153,7 +171,7 @@ class DARMEnv(gym.Env):
         if self.render_mode == "human":
             self._render_frame()
 
-        return new_obs, reward, self._get_done(new_obs), False, self._get_info()
+        return new_obs, reward, self._get_done(new_obs), self._get_info()   # False, self._get_info()
         
     def render(self):
         if self.render_mode == "human":
@@ -175,10 +193,10 @@ class DARMEnv(gym.Env):
             self.scene = mj.MjvScene(self.model, maxgeom=10000)
             self.context = mj.MjrContext(self.model, mj.mjtFontScale.mjFONTSCALE_150.value)
 
-            self.cam.azimuth = 90
-            self.cam.elevation = -45
-            self.cam.distance = 2
-            self.cam.lookat = np.array([0.0, 0.0, 0])
+            self.cam.azimuth = 110
+            self.cam.elevation = -24
+            self.cam.distance = 0.36
+            self.cam.lookat = np.array([0.006, -0.004,  0.215])
 
             # For callback functions TODO:
             self.window_button_left = False
@@ -245,7 +263,7 @@ class DARMEnv(gym.Env):
             glfw.set_cursor_pos_callback(self.window, mouse_move)
             glfw.set_mouse_button_callback(self.window, mouse_button)
             glfw.set_scroll_callback(self.window, scroll)
-
+        
         # Get Framebuffer Viewport
         vp_width, vp_height = glfw.get_framebuffer_size(self.window)
         viewport = mj.MjrRect(0, 0, vp_width, vp_height)

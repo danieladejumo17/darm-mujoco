@@ -5,6 +5,21 @@
 <!-- =================================================================================== -->
 <worldbody>
   <!-- Phalanges -->
+  <body mocap="true" name="hand1_fingertip_i_target" pos="0 0.25 0">
+    <geom rgba="1 0 0 1" size="0.004" type="sphere"/>
+  </body>
+  <body mocap="true" name="hand1_fingertip_ii_target" pos="0 0.25 0">
+    <geom rgba="0 1 0 1" size="0.004" type="sphere"/>
+  </body>
+  <body mocap="true" name="hand1_fingertip_iii_target" pos="0 0.25 0">
+    <geom rgba="0 0 1 1" size="0.004" type="sphere"/>
+  </body>
+  <body mocap="true" name="hand1_fingertip_iv_target" pos="0 0.25 0">
+    <geom rgba="1 1 1 1" size="0.004" type="sphere"/>
+  </body>
+  <body mocap="true" name="hand1_fingertip_v_target" pos="0 0.25 0">
+    <geom rgba="0.7 0.3 0 1" size="0.004" type="sphere"/>
+  </body>
   <body childclass="darm_meshes" euler="0 0 0" name="hand1_forearm" pos="0 0 0.12">
     <geom mesh="forearm_mesh" type="mesh"/>
     <site name="hand1_rc_joint_wrap_dorsal_sidesite" pos="0 0.013 0.032" rgba="1 1 1 0.2" size="0.001"/>

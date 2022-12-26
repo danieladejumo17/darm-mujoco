@@ -224,14 +224,32 @@
     <xacro:property name="extensor_carpi_ulnaris_origin_tf" value="-0.012 0.013 -0.065" />
 
 
+    <!-- MOCAPS -->
+    <xacro:property name="fingertip_target_mocap_size" value="0.004" />
+    <xacro:property name="fingertip_target_mocap_rgba" value="1 0 0 1" />
+
+
 
     <!-- Tendon Origin Macro -->
     <xacro:macro name="tendon_origin" params="site_name site_tf">
         <site name="${site_name}" pos="${site_tf}" size="${origin_site_size}" rgba="${origin_site_rgba}"/>
     </xacro:macro>
+
+    <!-- Fingertip Mocap Target -->
+    <xacro:macro name="fingertip_target" params="hand_name name rgba:=${fingertip_target_mocap_rgba}">
+        <body name="${hand_name}_${name}" pos="0 0.25 0" mocap="true" >
+            <geom type="sphere" size="${fingertip_target_mocap_size}" rgba="${rgba}" />
+        </body>
+    </xacro:macro>
     
     <!-- DARM Hand -->
     <xacro:macro name="darm_hand" params="hand_name pos">
+        <xacro:fingertip_target hand_name="${hand_name}" name="fingertip_i_target" rgba="1 0 0 1" />
+        <xacro:fingertip_target hand_name="${hand_name}" name="fingertip_ii_target" rgba="0 1 0 1" />
+        <xacro:fingertip_target hand_name="${hand_name}" name="fingertip_iii_target" rgba="0 0 1 1" />
+        <xacro:fingertip_target hand_name="${hand_name}" name="fingertip_iv_target" rgba="1 1 1 1" />
+        <xacro:fingertip_target hand_name="${hand_name}" name="fingertip_v_target" rgba="0.7 0.3 0 1" />
+        
         <body name="${hand_name}_forearm" pos="${pos}" euler="0 0 0" childclass="darm_meshes">
             <geom type="mesh" mesh="forearm_mesh" />
             
