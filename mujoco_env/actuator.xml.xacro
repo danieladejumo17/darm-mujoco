@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actuator xmlns:xacro="http://wiki.ros.org/xacro">
 
+    <xacro:arg name="single_finger" default="false" />
+    <xacro:arg name="no_wrist" default="false" />
+
     <!-- A total of 34 muscles -->
 
     <!-- TODO: IN PROGRESS: Interosseis' location -->
@@ -59,15 +62,26 @@
 
 
         <!-- Create a List of Muscles -->
-        <xacro:make_actuators tendons="${list(carpal_tendons)}" ctrlrange="0 20"/>
-        <xacro:make_actuators tendons="${list(pollicis_tendons)}" ctrlrange="0 2"/>
-
+        <!-- Digit II -->
         <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="ii" ctrlrange="0 2"/>
-        <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iii" ctrlrange="0 2"/>
-        <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iv" ctrlrange="0 2"/>
-        <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="v" ctrlrange="0 2"/>
 
-        <xacro:make_actuators tendons="${list(digiti_minimi_specific_tendons)}" ctrlrange="0 2"/>
+        <!-- Carpal Tendon Actuators -->
+        <xacro:property name="s_finger" value="$(arg single_finger)" />
+        <xacro:property name="n_wrist" value="$(arg no_wrist)" />
+        <xacro:unless value="${s_finger or n_wrist}">
+            <xacro:make_actuators tendons="${list(carpal_tendons)}" ctrlrange="0 20"/>
+        </xacro:unless>
+
+        <!-- Pollicis, Digit III-V, Digiti Minimi Specific Tendon Actuators -->
+        <xacro:unless value="$(arg single_finger)">
+            <xacro:make_actuators tendons="${list(pollicis_tendons)}" ctrlrange="0 2"/>
+
+            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iii" ctrlrange="0 2"/>
+            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iv" ctrlrange="0 2"/>
+            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="v" ctrlrange="0 2"/>
+
+            <xacro:make_actuators tendons="${list(digiti_minimi_specific_tendons)}" ctrlrange="0 2"/>
+        </xacro:unless>
     </xacro:macro>
 
     <xacro:hand_actuators hand_name="hand1" />
