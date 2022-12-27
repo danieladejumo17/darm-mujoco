@@ -14,9 +14,24 @@
                 <site site="${hand_name}_flexor_${index}_carpals_tunnel" />
                 <site site="${hand_name}_flexor_${index}_metacarpals_tunnel" />
                 <site site="${hand_name}_dorsal_interossei_${index}_metacarpals_tunnel" />
+
+                <pulley divisor="3" />
+                <site site="${hand_name}_dorsal_interossei_${index}_metacarpals_tunnel" />
                 <geom geom="${hand_name}_mcp_${index}_wrap" sidesite="${hand_name}_mcp_${index}_wrap_palmar_sidesite" />
                 <site site="${hand_name}_dorsal_interossei_${index}_insertion" />
-                <!-- <geom geom="${hand_name}_pp_${index}_wrap" /> -->
+
+                <pulley divisor="3" />
+                <site site="${hand_name}_dorsal_interossei_${index}_metacarpals_tunnel" />
+                <geom geom="${hand_name}_mcp_${index}_wrap" sidesite="${hand_name}_mcp_${index}_wrap_palmar_sidesite" />
+                <site site="${hand_name}_dorsal_interossei_${index}_insertion" />
+                <site site="${hand_name}_pp_${index}_dorsal_interossei_tunnel" />
+                <geom geom="${hand_name}_pip_${index}_wrap" sidesite="${hand_name}_pip_${index}_wrap_dorsal_sidesite" />
+                <site site="${hand_name}_mp_${index}_extensor_hood_insertion" />
+
+                <pulley divisor="3" />
+                <site site="${hand_name}_dorsal_interossei_${index}_metacarpals_tunnel" />
+                <geom geom="${hand_name}_mcp_${index}_wrap" sidesite="${hand_name}_mcp_${index}_wrap_palmar_sidesite" />
+                <site site="${hand_name}_dorsal_interossei_${index}_insertion" />
                 <site site="${hand_name}_pp_${index}_dorsal_interossei_tunnel" />
                 <geom geom="${hand_name}_pip_${index}_wrap" sidesite="${hand_name}_pip_${index}_wrap_dorsal_sidesite" />
                 <site site="${hand_name}_mp_${index}_extensor_hood_insertion" />
@@ -30,9 +45,24 @@
                 <site site="${hand_name}_flexor_${index}_carpals_tunnel" />
                 <site site="${hand_name}_flexor_${index}_metacarpals_tunnel" />
                 <site site="${hand_name}_palmar_interossei_${index}_metacarpals_tunnel" />
+
+                <pulley divisor="3" />
+                <site site="${hand_name}_palmar_interossei_${index}_metacarpals_tunnel" />
                 <geom geom="${hand_name}_mcp_${index}_wrap" sidesite="${hand_name}_mcp_${index}_wrap_palmar_sidesite" />
                 <site site="${hand_name}_palmar_interossei_${index}_insertion" />
-                <!-- <geom geom="${hand_name}_pp_${index}_wrap" /> -->
+
+                <pulley divisor="3" />
+                <site site="${hand_name}_palmar_interossei_${index}_metacarpals_tunnel" />
+                <geom geom="${hand_name}_mcp_${index}_wrap" sidesite="${hand_name}_mcp_${index}_wrap_palmar_sidesite" />
+                <site site="${hand_name}_palmar_interossei_${index}_insertion" />
+                <site site="${hand_name}_pp_${index}_palmar_interossei_tunnel" />
+                <geom geom="${hand_name}_pip_${index}_wrap" sidesite="${hand_name}_pip_${index}_wrap_dorsal_sidesite" /> 
+                <site site="${hand_name}_mp_${index}_extensor_hood_insertion" />
+
+                <pulley divisor="3" />
+                <site site="${hand_name}_palmar_interossei_${index}_metacarpals_tunnel" />
+                <geom geom="${hand_name}_mcp_${index}_wrap" sidesite="${hand_name}_mcp_${index}_wrap_palmar_sidesite" />
+                <site site="${hand_name}_palmar_interossei_${index}_insertion" />
                 <site site="${hand_name}_pp_${index}_palmar_interossei_tunnel" />
                 <geom geom="${hand_name}_pip_${index}_wrap" sidesite="${hand_name}_pip_${index}_wrap_dorsal_sidesite" /> 
                 <site site="${hand_name}_mp_${index}_extensor_hood_insertion" />
@@ -44,6 +74,21 @@
                 <site site="${hand_name}_extensor_communis_${index}_origin" />
                 <geom geom="${hand_name}_rc_joint_wrap" sidesite="${hand_name}_rc_joint_wrap_dorsal_sidesite" />
                 <site site="${hand_name}_extensor_communis_${index}_carpals_tunnel" />
+                <site site="${hand_name}_extensor_communis_${index}_metacarpals_tunnel" />
+
+                <pulley divisor="3" />
+                <site site="${hand_name}_extensor_communis_${index}_metacarpals_tunnel" />
+                <geom geom="${hand_name}_mcp_${index}_wrap" sidesite="${hand_name}_mcp_${index}_wrap_dorsal_sidesite" />
+                <site site="${hand_name}_pp_${index}_extensor_communis_insertion" />
+
+                <pulley divisor="3" />
+                <site site="${hand_name}_extensor_communis_${index}_metacarpals_tunnel" />
+                <geom geom="${hand_name}_mcp_${index}_wrap" sidesite="${hand_name}_mcp_${index}_wrap_dorsal_sidesite" />
+                <site site="${hand_name}_pp_${index}_extensor_communis_insertion" />
+                <geom geom="${hand_name}_pip_${index}_wrap" sidesite="${hand_name}_pip_${index}_wrap_dorsal_sidesite" />
+                <site site="${hand_name}_mp_${index}_extensor_hood_insertion" />
+
+                <pulley divisor="3" />
                 <site site="${hand_name}_extensor_communis_${index}_metacarpals_tunnel" />
                 <geom geom="${hand_name}_mcp_${index}_wrap" sidesite="${hand_name}_mcp_${index}_wrap_dorsal_sidesite" />
                 <site site="${hand_name}_pp_${index}_extensor_communis_insertion" />

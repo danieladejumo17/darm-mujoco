@@ -1,8 +1,8 @@
 from setuptools import setup
 
 setup(
-    name="gym_env",
+    name="darm_gym_env",
     version="0.0.1",
-    install_requires=["gym==0.26.0"],
-    packages=["gym_env"]
+    install_requires=[],
+    packages=["darm_gym_env"]
 )

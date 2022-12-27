@@ -8,12 +8,11 @@ from mujoco.glfw import glfw
 from pathlib import Path
 
 
-TARGETS_FILE = Path(__file__).parent.parent/"darm_targets.npy"
+TARGETS_FILE = "/home/daniel/DARM/darm_mujoco/darm_sf_joint_space_targets.npy"
+DARM_XML_FILE = "/home/daniel/DARM/darm_mujoco/mujoco_env/darm.xml"
 
-class DARMEnv(gym.Env):
+class DARMSFEnv(gym.Env):
     metadata = {"render_modes": ["human"], "render_fps": 1}
-
-    # TODO: Single finger: Actuators, Fingertip Observations, ...
 
     def __init__(self, render_mode=None, reaction_time=0.08, hand_name="hand1") -> None:
         super().__init__()
@@ -38,23 +37,24 @@ class DARMEnv(gym.Env):
         self.targets_len = len(self.targets)
 
         # Define Observation Space
-        self.observation_space = gym.spaces.Box(low=-np.inf, high=np.inf, shape=(2*15,), dtype=float)
+        self.observation_space = gym.spaces.Box(low=-np.inf, high=np.inf, 
+                                                shape=(2*3*len(self.fingertip_indices),), 
+                                                dtype=np.float32)
         
         # Define Action Space
+        # NOTE: Watch out for Box upper limit if Carpal Actuators are involved
         self.action_space = gym.spaces.Box(low=np.array([0.0]*self.model.nu), 
-                                            high=np.array([20.0]*4 + [2.0]*(self.model.nu-4)), 
-                                            shape=(self.model.nu,), dtype=float)
+                                            high=np.array([1.0]*self.model.nu), 
+                                            shape=(self.model.nu,), dtype=np.float32)
 
         # For Human Rendering
         self.window = None
         self.window_size = 1200, 900
 
     def _load_model(self, xml_path):
-        dirname = os.path.dirname(__file__)
-        abspath = os.path.join(dirname + "/" + xml_path)
-        xml_path = abspath
-
+        xml_path = DARM_XML_FILE
         self.model = mj.MjModel.from_xml_path(xml_path)
+
         if self.model: 
             print("Loaded XML file successfully") 
         else:
@@ -70,8 +70,7 @@ class DARMEnv(gym.Env):
         pass
 
     def _get_fingertip_indices(self):
-        # FIXME: For independent finger training
-        indices = ["i", "ii", "iii", "iv", "v"]
+        indices = ["ii"]
         self.fingertip_indices = [mj.mj_name2id(self.model, int(mj.mjtObj.mjOBJ_SITE), f"{self.hand_name}_fingertip_{i}") for i in indices]
     
     def _get_obs(self):
@@ -109,13 +108,13 @@ class DARMEnv(gym.Env):
         # Change in Norm to Target
         prev_norm = self._norm_to_target(state)
         new_norm = self._norm_to_target(new_state)
-        norm_reward = -1 + sum(new_norm > prev_norm)*(-1/5)
+        norm_reward = -1 + sum(new_norm > prev_norm)*(-1/len(self.fingertip_indices))
 
         # Velocity Correction
         previous_pos = state[:len(state)//2].reshape((-1,3))
         new_pos = new_state[:len(new_state)//2].reshape((-1,3))
         vel = np.linalg.norm(new_pos-previous_pos, ord=2, axis=-1) / time_delta
-        vel_reward = (-0.3 + 0.3*np.exp(-1*vel)).mean() # scale vel beween [-1,-5]
+        vel_reward = (-0.3 + 0.3*np.exp(-1*vel)).mean() # scale vel term in exp beween [-1,-5]
         
         # Effort Correction
         action_reward = (-0.2 + 0.2*np.exp(-1*action)).mean()
@@ -138,14 +137,13 @@ class DARMEnv(gym.Env):
         # Create a new goal
         self.target_obs = self.targets[np.random.randint(0, self.targets_len)]
         if self.render_mode == "human":
-            a = self._get_obs()[:15].reshape(5,3)
-            self.data.mocap_pos = self.target_obs.reshape(5,3)
+            self.data.mocap_pos = self.target_obs.reshape(len(self.fingertip_indices),3)
         mj.mj_forward(self.model, self.data)    # TODO: See possibility of turning thumb here
         self.ep_start_time = self.data.time
 
 
         observation = self._get_obs()
-        info = self._get_info()
+        # info = self._get_info()
 
         if self.render_mode == "human":
             self._render_frame()
@@ -172,8 +170,13 @@ class DARMEnv(gym.Env):
             self._render_frame()
 
         return new_obs, reward, self._get_done(new_obs), self._get_info()   # False, self._get_info()
-        
-    def render(self):
+
+    def forward(self, joint_conf):
+        self.data.qpos = joint_conf
+        mj.mj_forward(self.model, self.data)
+        return self._get_obs()
+
+    def render(self, mode, **kwargs):
         if self.render_mode == "human":
             self._render_frame()
 

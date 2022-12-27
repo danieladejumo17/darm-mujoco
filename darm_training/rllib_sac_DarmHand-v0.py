@@ -4,7 +4,7 @@ import ray.tune as tune
 import ray
 
 import gym
-from gym_env import DARMEnv
+from darm_gym_env import DARMEnv
 
 env = gym.make("darm/DarmHand-v0", render_mode="human", hand_name="hand1")
 tune.register_env("darm/DarmHand-v0", lambda env_ctx: env)

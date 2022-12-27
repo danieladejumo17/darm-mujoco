@@ -62,25 +62,25 @@
 
 
         <!-- Create a List of Muscles -->
-        <!-- Digit II -->
-        <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="ii" ctrlrange="0 2"/>
-
         <!-- Carpal Tendon Actuators -->
         <xacro:property name="s_finger" value="$(arg single_finger)" />
         <xacro:property name="n_wrist" value="$(arg no_wrist)" />
         <xacro:unless value="${s_finger or n_wrist}">
-            <xacro:make_actuators tendons="${list(carpal_tendons)}" ctrlrange="0 20"/>
+            <xacro:make_actuators tendons="${list(carpal_tendons)}" ctrlrange="0 6"/>
         </xacro:unless>
+
+        <!-- Digit II -->
+        <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="ii" ctrlrange="0 1"/>
 
         <!-- Pollicis, Digit III-V, Digiti Minimi Specific Tendon Actuators -->
         <xacro:unless value="$(arg single_finger)">
-            <xacro:make_actuators tendons="${list(pollicis_tendons)}" ctrlrange="0 2"/>
+            <xacro:make_actuators tendons="${list(pollicis_tendons)}" ctrlrange="0 1"/>
 
-            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iii" ctrlrange="0 2"/>
-            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iv" ctrlrange="0 2"/>
-            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="v" ctrlrange="0 2"/>
+            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iii" ctrlrange="0 1"/>
+            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iv" ctrlrange="0 1"/>
+            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="v" ctrlrange="0 1"/>
 
-            <xacro:make_actuators tendons="${list(digiti_minimi_specific_tendons)}" ctrlrange="0 2"/>
+            <xacro:make_actuators tendons="${list(digiti_minimi_specific_tendons)}" ctrlrange="0 1"/>
         </xacro:unless>
     </xacro:macro>
 

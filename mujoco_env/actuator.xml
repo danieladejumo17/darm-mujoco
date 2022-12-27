@@ -5,11 +5,11 @@
 <!-- =================================================================================== -->
 <actuator>
   <!-- A total of 34 muscles -->
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 2" gainprm="-1" gaintype="fixed" name="hand1_dorsal_interossei_ii_actuator" tendon="hand1_dorsal_interossei_ii"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 2" gainprm="-1" gaintype="fixed" name="hand1_palmar_interossei_ii_actuator" tendon="hand1_palmar_interossei_ii"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 2" gainprm="-1" gaintype="fixed" name="hand1_extensor_communis_ii_actuator" tendon="hand1_extensor_communis_ii"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 2" gainprm="-1" gaintype="fixed" name="hand1_flexor_profundus_ii_actuator" tendon="hand1_flexor_profundus_ii"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 2" gainprm="-1" gaintype="fixed" name="hand1_flexor_superficialis_ii_actuator" tendon="hand1_flexor_superficialis_ii"/>
+  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 1" gainprm="-1" gaintype="fixed" name="hand1_dorsal_interossei_ii_actuator" tendon="hand1_dorsal_interossei_ii"/>
+  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 1" gainprm="-1" gaintype="fixed" name="hand1_palmar_interossei_ii_actuator" tendon="hand1_palmar_interossei_ii"/>
+  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 1" gainprm="-1" gaintype="fixed" name="hand1_extensor_communis_ii_actuator" tendon="hand1_extensor_communis_ii"/>
+  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 1" gainprm="-1" gaintype="fixed" name="hand1_flexor_profundus_ii_actuator" tendon="hand1_flexor_profundus_ii"/>
+  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 1" gainprm="-1" gaintype="fixed" name="hand1_flexor_superficialis_ii_actuator" tendon="hand1_flexor_superficialis_ii"/>
   <!-- <xacro:hand_actuators hand_name="hand2" />
     <xacro:hand_actuators hand_name="hand3" /> -->
 </actuator>

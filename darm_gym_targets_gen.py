@@ -1,5 +1,5 @@
 import gym
-from gym_env import DARMEnv
+from darm_gym_env import DARMEnv
 import time
 import random
 import numpy as np

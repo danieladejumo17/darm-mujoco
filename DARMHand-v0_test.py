@@ -1,5 +1,5 @@
 import gym
-from gym_env import DARMEnv
+from darm_gym_env import DARMEnv
 import time
 import random
 
@@ -12,7 +12,7 @@ start = time.time()
 while not done:
     ac = env.action_space.sample()
     if random.random() > 0.5: 
-        ac[0:4] = [0.0, 0.0, 20.0, 20.0]
+        ac[0:4] = [0.0, 0.0, 5.7, 5.7]
     obs, rew, term, trunc, info = env.step(ac)
     done = term or trunc
     env.render()
@@ -20,9 +20,10 @@ while not done:
     if done:
         env.reset()
         done = False
+
+        print(f"Duration: {time.time() - start}")
+        print(info)
     # TODO: Address links going beyond their limits
     # TODO: Add trucation signal from closing window
 
-print(f"Duration: {time.time() - start}")
-print(info)
 env.close()

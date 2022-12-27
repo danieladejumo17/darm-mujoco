@@ -248,6 +248,7 @@
     
     <!-- DARM Hand -->
     <xacro:macro name="darm_hand" params="hand_name pos">
+        <!-- NOTE: Only the required mocap bodies should be exposed -->
         <xacro:fingertip_target hand_name="${hand_name}" name="fingertip_ii_target" rgba="0 1 0 1" />
         <xacro:unless value="$(arg single_finger)">
             <xacro:fingertip_target hand_name="${hand_name}" name="fingertip_i_target" rgba="1 0 0 1" />
