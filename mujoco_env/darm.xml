@@ -1,5 +1,6 @@
 <mujoco model="DARM">
-    <compiler meshdir="/media/daniel/8442A3E642A3DAE6/Users/Daniel Adejumo/Documents/MATLAB/DARM/Geometry Models and FEA/Models/CAD/" /> 
+    <compiler meshdir="./mesh/CAD/" /> 
+    <!-- <compiler meshdir="/media/daniel/8442A3E642A3DAE6/Users/Daniel Adejumo/Documents/MATLAB/DARM/Geometry Models and FEA/Models/CAD/" />  -->
     
     <option gravity = "0 0 -9.81" cone="elliptic">
         <flag contact="enable" />

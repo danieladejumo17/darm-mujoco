@@ -8,8 +8,8 @@ from mujoco.glfw import glfw
 from pathlib import Path
 
 
-TARGETS_FILE = "/home/daniel/DARM/darm_mujoco/darm_sf_joint_space_targets.npy"
-DARM_XML_FILE = "/home/daniel/DARM/darm_mujoco/mujoco_env/darm.xml"
+TARGETS_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_sf_joint_space_targets.npy"
+DARM_XML_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/mujoco_env/darm.xml"
 
 class DARMSFEnv(gym.Env):
     metadata = {"render_modes": ["human"], "render_fps": 1}
@@ -30,6 +30,13 @@ class DARMSFEnv(gym.Env):
             raise "Error loading model"
         self._get_fingertip_indices()
 
+        # Get Ref Position
+        # The ref pos will remain fixed since it was taken before simulation started
+        mj.mj_forward(self.model, self.data)
+        finger_idx = "ii"
+        ref_body_idx = mj.mj_name2id(self.model, int(mj.mjtObj.mjOBJ_BODY), f"{self.hand_name}_mcp_centre_block_{finger_idx}")
+        self.ref_pos = np.array(self.data.xpos[ref_body_idx])
+
         # Load targets
         with open(TARGETS_FILE, 'rb') as f:
             # np.array([np.random.random((15)) for _ in range(5)])
@@ -44,7 +51,7 @@ class DARMSFEnv(gym.Env):
         # Define Action Space
         # NOTE: Watch out for Box upper limit if Carpal Actuators are involved
         self.action_space = gym.spaces.Box(low=np.array([0.0]*self.model.nu), 
-                                            high=np.array([1.0]*self.model.nu), 
+                                            high=np.array([2.0]*self.model.nu), 
                                             shape=(self.model.nu,), dtype=np.float32)
 
         # For Human Rendering
@@ -74,7 +81,7 @@ class DARMSFEnv(gym.Env):
         self.fingertip_indices = [mj.mj_name2id(self.model, int(mj.mjtObj.mjOBJ_SITE), f"{self.hand_name}_fingertip_{i}") for i in indices]
     
     def _get_obs(self):
-        return np.concatenate((np.array([self.data.site_xpos[i] for i in self.fingertip_indices]).flatten(),
+        return np.concatenate((np.array([(np.array(self.data.site_xpos[i]) - self.ref_pos) for i in self.fingertip_indices]).flatten(),
                              self.target_obs))
 
     def _get_info(self):
@@ -131,13 +138,13 @@ class DARMSFEnv(gym.Env):
         # super().reset()
     def reset(self, **kwargs):
         # Reset Model. TODO: Consider not reseting the model, let next goal run from the old state
-        mj.mj_resetData(self.model, self.data)
-        mj.mj_forward(self.model, self.data)
+        # mj.mj_resetData(self.model, self.data)
+        # mj.mj_forward(self.model, self.data)
         
         # Create a new goal
         self.target_obs = self.targets[np.random.randint(0, self.targets_len)]
         if self.render_mode == "human":
-            self.data.mocap_pos = self.target_obs.reshape(len(self.fingertip_indices),3)
+            self.data.mocap_pos = self.target_obs.reshape(len(self.fingertip_indices),3) + self.ref_pos
         mj.mj_forward(self.model, self.data)    # TODO: See possibility of turning thumb here
         self.ep_start_time = self.data.time
 

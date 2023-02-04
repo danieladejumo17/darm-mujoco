@@ -8,7 +8,7 @@ from mujoco.glfw import glfw
 from pathlib import Path
 
 
-TARGETS_FILE = Path(__file__).parent.parent/"darm_targets.npy"
+TARGETS_FILE = Path(__file__).parent.parent/"darm_targets.npy REF_POSE TODO"
 
 class DARMEnv(gym.Env):
     metadata = {"render_modes": ["human"], "render_fps": 1}
@@ -43,7 +43,7 @@ class DARMEnv(gym.Env):
         # Define Action Space
         # NOTE: Watch out for Box upper limit if Carpal Actuators are involved
         self.action_space = gym.spaces.Box(low=np.array([0.0]*self.model.nu), 
-                                            high=np.array([6.0]*4 + [1.0]*(self.model.nu-4)), 
+                                            high=np.array([10.0]*4 + [2.0]*(self.model.nu-4)), 
                                             shape=(self.model.nu,), dtype=float)
 
         # For Human Rendering
@@ -133,13 +133,13 @@ class DARMEnv(gym.Env):
         # super().reset()
     def reset(self, **kwargs):
         # Reset Model. TODO: Consider not reseting the model, let next goal run from the old state
-        mj.mj_resetData(self.model, self.data)
-        mj.mj_forward(self.model, self.data)
+        # mj.mj_resetData(self.model, self.data)
+        # mj.mj_forward(self.model, self.data)
         
         # Create a new goal
         self.target_obs = self.targets[np.random.randint(0, self.targets_len)]
         if self.render_mode == "human":
-            # NOTE: Set the finger index properly here
+            # BUG: Set the finger index properly here [ii, i, iii, iv, v]
             self.data.mocap_pos = self.target_obs.reshape(len(self.fingertip_indices),3)
         mj.mj_forward(self.model, self.data)    # TODO: See possibility of turning thumb here
         self.ep_start_time = self.data.time
