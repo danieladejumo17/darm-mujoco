@@ -1,1 +1,2 @@
 mujoco_env/darm_windows.xml
+darm_gym_env/__pycache__/*
