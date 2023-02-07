@@ -3,7 +3,6 @@ setup.py
 darm_gym_env/__init__.py
 darm_gym_env/darm_gym.py
 darm_gym_env/darm_sf_gym.py
-darm_gym_env/env_test.py
 darm_gym_env/multi_darm_gym.py
 darm_gym_env.egg-info/PKG-INFO
 darm_gym_env.egg-info/SOURCES.txt

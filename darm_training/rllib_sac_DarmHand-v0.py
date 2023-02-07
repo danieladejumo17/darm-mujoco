@@ -7,7 +7,8 @@ import gym
 from darm_gym_env import DARMEnv
 
 env = gym.make("darm/DarmHand-v0", render_mode="human", hand_name="hand1")
-tune.register_env("darm/DarmHand-v0", lambda env_ctx: env)
+tune.register_env("darm/DarmHand-v0", lambda env_ctx: env)  # see how to do this more properly from the doc
+# https://docs.ray.io/en/latest/rllib/rllib-env.html
 
 env = gym.make("darm/DarmHand-v0")
 ray.rllib.utils.check_env(env)
