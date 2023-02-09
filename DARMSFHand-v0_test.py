@@ -8,14 +8,18 @@ done = False
 obs = env.reset()
 
 start = time.time()
+episode_return = 0
 while not done:
     ac = env.action_space.sample()
     obs, rew, done, info = env.step(ac)
+    episode_return += rew
     env.render()
 
     if done:
         print(f"Duration: {time.time() - start}")
         print(info)
+        print(f"Return: {episode_return}")
+        episode_return = 0
         start = time.time()
 
         env.reset()
