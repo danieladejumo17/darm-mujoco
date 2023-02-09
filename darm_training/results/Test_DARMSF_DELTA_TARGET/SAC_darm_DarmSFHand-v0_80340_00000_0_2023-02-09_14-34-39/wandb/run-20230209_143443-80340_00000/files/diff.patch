@@ -1,0 +1,150 @@
+diff --git a/darm_training/rllib_ppo_cartpole-v1.py b/darm_training/rllib_ppo_cartpole-v1.py
+deleted file mode 100644
+index 935aa17..0000000
+--- a/darm_training/rllib_ppo_cartpole-v1.py
++++ /dev/null
+@@ -1,22 +0,0 @@
+-from ray.rllib.algorithms.ppo import PPOConfig
+-from ray.tune.logger import pretty_print
+-
+-
+-algo = (
+-    PPOConfig()
+-    .rollouts(num_rollout_workers=1)
+-    .resources(num_gpus=0)
+-    .environment(env="CartPole-v1")
+-    .framework("torch")
+-    .build()
+-    # .training(model={"fcnet_hiddens": [64, 64]})
+-    # .evaluation(evaluation_num_workers=1)
+-)
+-
+-for i in range(10):
+-    result = algo.train()
+-    print(pretty_print(result))
+-
+-    if i % 5 == 0:
+-        checkpoint_dir = algo.save()
+-        print(f"Checkpoint saved in directory {checkpoint_dir}")
+\ No newline at end of file
+diff --git a/darm_training/rllib_ppo_taxi-v3.py b/darm_training/rllib_ppo_taxi-v3.py
+deleted file mode 100644
+index a3c20f2..0000000
+--- a/darm_training/rllib_ppo_taxi-v3.py
++++ /dev/null
+@@ -1,17 +0,0 @@
+-from ray.rllib.algorithms.ppo import PPOConfig
+-
+-config = (  # 1. Configure the algorithm,
+-    PPOConfig()
+-    .environment("Taxi-v3")
+-    .rollouts(num_rollout_workers=2)
+-    .framework("torch")
+-    .training(model={"fcnet_hiddens": [64, 64]})
+-    .evaluation(evaluation_num_workers=1)
+-)
+-
+-algo = config.build()  # 2. build the algorithm,
+-
+-for _ in range(5):
+-    print(algo.train())  # 3. train it,
+-
+-algo.evaluate()  # 4. and evaluate it.
+\ No newline at end of file
+diff --git a/darm_training/rllib_sac_DarmHand-v0.py b/darm_training/rllib_sac_DarmHand-v0.py
+deleted file mode 100644
+index 39b48df..0000000
+--- a/darm_training/rllib_sac_DarmHand-v0.py
++++ /dev/null
+@@ -1,45 +0,0 @@
+-from ray.rllib.algorithms.sac import SACConfig
+-from ray.tune.logger import pretty_print
+-import ray.tune as tune
+-import ray
+-
+-import gym
+-from darm_gym_env import DARMEnv
+-
+-env = gym.make("darm/DarmHand-v0", render_mode="human", hand_name="hand1")
+-tune.register_env("darm/DarmHand-v0", lambda env_ctx: env)  # see how to do this more properly from the doc
+-# https://docs.ray.io/en/latest/rllib/rllib-env.html
+-
+-env = gym.make("darm/DarmHand-v0")
+-ray.rllib.utils.check_env(env)
+-
+-algo = (
+-    SACConfig()
+-    .rollouts(num_rollout_workers=4, rollout_fragment_length=1)
+-    .resources(num_gpus=0)
+-    .environment(env="HalfCheetah-v3", normalize_actions=True)
+-    .framework("torch")
+-    .reporting(min_sample_timesteps_per_iteration=1000)
+-    .training(q_model_config={"fcnet_activation": "relu", "fcnet_hiddens": [256, 256]},
+-                policy_model_config={"fcnet_activation": "relu", "fcnet_hiddens": [256, 256]},
+-                tau=0.005,
+-                n_step=1,
+-                train_batch_size=256,
+-                target_network_update_freq=1,
+-                replay_buffer_config={"type": "MultiAgentPrioritizedReplayBuffer"},
+-                num_steps_sampled_before_learning_starts=10000,
+-                optimization_config={"actor_learning_rate": 0.0003, "critic_learning_rate": 0.0003, 
+-                                    "entropy_learning_rate": 0.0003},
+-                clip_actions=False
+-            )
+-    .build()
+-    # .evaluation(evaluation_num_workers=1)
+-)
+-
+-for i in range(20):
+-    result = algo.train()
+-
+-    if i % 5 == 0 or i == 9:
+-        print(pretty_print(result))
+-        checkpoint_dir = algo.save()
+-        print(f"Checkpoint saved in directory {checkpoint_dir}")
+diff --git a/darm_training/rllib_sac_cartpole-v1.py b/darm_training/rllib_sac_cartpole-v1.py
+deleted file mode 100644
+index 9a0c1b9..0000000
+--- a/darm_training/rllib_sac_cartpole-v1.py
++++ /dev/null
+@@ -1,11 +0,0 @@
+-from ray.rllib.algorithms.sac import SACConfig
+-from ray.tune.logger import pretty_print
+-
+-config = SACConfig().training(gamma=0.9, lr=0.01)  
+-config = config.resources(num_gpus=0)  
+-config = config.rollouts(num_rollout_workers=4, num_envs_per_worker=4)
+-config = config.framework("torch")  
+-print(config.to_dict())  
+-# Build a Algorithm object from the config and run 1 training iteration.
+-algo = config.build(env="CartPole-v1")  
+-print(pretty_print(algo.train()))
+diff --git a/darm_training/sb3_sac_pendulum-v1.py b/darm_training/sb3_sac_pendulum-v1.py
+deleted file mode 100644
+index 12ce4ee..0000000
+--- a/darm_training/sb3_sac_pendulum-v1.py
++++ /dev/null
+@@ -1,22 +0,0 @@
+-import gym
+-import numpy as np
+-
+-from stable_baselines3 import SAC
+-
+-env = gym.make("Pendulum-v1")
+-
+-model = SAC("MlpPolicy", env, verbose=1)
+-model.learn(total_timesteps=10000, log_interval=4)
+-model.save("sac_pendulum")
+-
+-del model # remove to demonstrate saving and loading
+-
+-model = SAC.load("sac_pendulum")
+-
+-obs = env.reset()
+-while True:
+-    action, _states = model.predict(obs, deterministic=True)
+-    obs, reward, done, info = env.step(action)
+-    env.render()
+-    if done:
+-      obs = env.reset()
+\ No newline at end of file
