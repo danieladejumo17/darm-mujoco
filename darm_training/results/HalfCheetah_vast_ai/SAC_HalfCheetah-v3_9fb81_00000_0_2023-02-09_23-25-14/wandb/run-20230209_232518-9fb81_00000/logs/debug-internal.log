@@ -1,0 +1,218 @@
+2023-02-09 23:25:18,630 INFO    StreamThr :5269 [internal.py:wandb_internal():87] W&B internal server running at pid: 5269, started at: 2023-02-09 23:25:18.629911
+2023-02-09 23:25:18,636 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status
+2023-02-09 23:25:18,644 INFO    WriterThread:5269 [datastore.py:open_for_write():85] open: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/run-9fb81_00000.wandb
+2023-02-09 23:25:18,645 DEBUG   SenderThread:5269 [sender.py:send():336] send: header
+2023-02-09 23:25:18,690 DEBUG   SenderThread:5269 [sender.py:send():336] send: run
+2023-02-09 23:25:20,066 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: check_version
+2023-02-09 23:25:20,075 INFO    SenderThread:5269 [dir_watcher.py:__init__():216] watching files in: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files
+2023-02-09 23:25:20,075 INFO    SenderThread:5269 [sender.py:_start_run_threads():1067] run started: 9fb81_00000 with start time 1675981518.633458
+2023-02-09 23:25:20,075 DEBUG   SenderThread:5269 [sender.py:send_request():363] send_request: summary_record
+2023-02-09 23:25:20,075 INFO    SenderThread:5269 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-02-09 23:25:20,076 DEBUG   SenderThread:5269 [sender.py:send_request():363] send_request: check_version
+2023-02-09 23:25:21,054 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: run_start
+2023-02-09 23:25:21,056 DEBUG   HandlerThread:5269 [system_info.py:__init__():31] System info init
+2023-02-09 23:25:21,056 DEBUG   HandlerThread:5269 [system_info.py:__init__():46] System info init done
+2023-02-09 23:25:21,056 INFO    HandlerThread:5269 [system_monitor.py:start():151] Starting system monitor
+2023-02-09 23:25:21,057 INFO    SystemMonitor:5269 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-02-09 23:25:21,057 INFO    HandlerThread:5269 [system_monitor.py:probe():172] Collecting system info
+2023-02-09 23:25:21,061 INFO    SystemMonitor:5269 [interfaces.py:start():168] Started cpu
+2023-02-09 23:25:21,062 INFO    SystemMonitor:5269 [interfaces.py:start():168] Started disk
+2023-02-09 23:25:21,062 INFO    SystemMonitor:5269 [interfaces.py:start():168] Started memory
+2023-02-09 23:25:21,065 INFO    SystemMonitor:5269 [interfaces.py:start():168] Started network
+2023-02-09 23:25:21,079 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/wandb-summary.json
+2023-02-09 23:25:21,081 DEBUG   HandlerThread:5269 [system_info.py:probe():195] Probing system
+2023-02-09 23:25:21,090 DEBUG   HandlerThread:5269 [system_info.py:_probe_git():180] Probing git
+2023-02-09 23:25:21,121 DEBUG   HandlerThread:5269 [system_info.py:_probe_git():188] Probing git done
+2023-02-09 23:25:21,121 DEBUG   HandlerThread:5269 [system_info.py:probe():241] Probing system done
+2023-02-09 23:25:21,121 DEBUG   HandlerThread:5269 [system_monitor.py:probe():181] {'os': 'Linux-5.4.0-42-generic-x86_64-with-glibc2.17', 'python': '3.8.12', 'heartbeatAt': '2023-02-09T22:25:21.082078', 'startedAt': '2023-02-09T22:25:18.617716', 'docker': None, 'cuda': None, 'args': None, 'state': 'running', 'program': 'DARM/darm_mujoco/darm_training/halfcheetah_test.ipynb', 'root': '/home/daniel/DARM/darm_mujoco', 'git': {'remote': 'git@github.com:danieladejumo17/darm-mujoco.git', 'commit': 'a584ded6300121e5f323657952f8cc95c398d411'}, 'email': 'adejumodaniel17@gmail.com', 'host': 'Daniel', 'username': 'daniel', 'executable': '/home/daniel/miniconda3/bin/python3.8', 'cpu_count': 2, 'cpu_count_logical': 4, 'cpu_freq': {'current': 2699.9995, 'min': 400.0, 'max': 2800.0}, 'cpu_freq_per_core': [{'current': 2699.999, 'min': 400.0, 'max': 2800.0}, {'current': 2700.0, 'min': 400.0, 'max': 2800.0}, {'current': 2700.0, 'min': 400.0, 'max': 2800.0}, {'current': 2699.999, 'min': 400.0, 'max': 2800.0}], 'disk': {'total': 29.658042907714844, 'used': 27.0062255859375}, 'memory': {'total': 7.455364227294922}}
+2023-02-09 23:25:21,122 INFO    HandlerThread:5269 [system_monitor.py:probe():182] Finished collecting system info
+2023-02-09 23:25:21,122 INFO    HandlerThread:5269 [system_monitor.py:probe():185] Publishing system info
+2023-02-09 23:25:21,122 DEBUG   HandlerThread:5269 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-02-09 23:25:21,123 DEBUG   HandlerThread:5269 [system_info.py:_save_pip():67] Saving pip packages done
+2023-02-09 23:25:21,123 DEBUG   HandlerThread:5269 [system_info.py:_save_conda():74] Saving list of conda packages installed into the current environment
+2023-02-09 23:25:22,076 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/conda-environment.yaml
+2023-02-09 23:25:22,076 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/requirements.txt
+2023-02-09 23:25:28,759 DEBUG   HandlerThread:5269 [system_info.py:_save_conda():86] Saving conda packages done
+2023-02-09 23:25:28,759 DEBUG   HandlerThread:5269 [system_info.py:_save_code():89] Saving code
+2023-02-09 23:25:28,759 WARNING HandlerThread:5269 [system_info.py:_save_code():91] unable to save code -- program entry not found
+2023-02-09 23:25:28,759 DEBUG   HandlerThread:5269 [system_info.py:_save_patches():127] Saving git patches
+2023-02-09 23:25:28,951 DEBUG   HandlerThread:5269 [system_info.py:_save_patches():169] Saving git patches done
+2023-02-09 23:25:28,952 INFO    HandlerThread:5269 [system_monitor.py:probe():187] Finished publishing system info
+2023-02-09 23:25:28,968 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:25:28,969 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:25:28,970 DEBUG   SenderThread:5269 [sender.py:send():336] send: files
+2023-02-09 23:25:28,970 INFO    SenderThread:5269 [sender.py:_save_file():1321] saving file wandb-metadata.json with policy now
+2023-02-09 23:25:28,971 INFO    SenderThread:5269 [sender.py:_save_file():1321] saving file diff.patch with policy now
+2023-02-09 23:25:29,008 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: stop_status
+2023-02-09 23:25:29,008 DEBUG   SenderThread:5269 [sender.py:send_request():363] send_request: stop_status
+2023-02-09 23:25:29,078 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/conda-environment.yaml
+2023-02-09 23:25:29,078 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/diff.patch
+2023-02-09 23:25:29,078 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/wandb-metadata.json
+2023-02-09 23:25:29,573 DEBUG   SenderThread:5269 [sender.py:send():336] send: telemetry
+2023-02-09 23:25:29,574 DEBUG   SenderThread:5269 [sender.py:send():336] send: telemetry
+2023-02-09 23:25:29,575 DEBUG   SenderThread:5269 [sender.py:send():336] send: config
+2023-02-09 23:25:29,575 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:25:30,295 INFO    wandb-upload_0:5269 [upload_job.py:push():138] Uploaded file /tmp/tmp7ib8t_3wwandb/00nmifht-wandb-metadata.json
+2023-02-09 23:25:32,174 DEBUG   SenderThread:5269 [sender.py:send():336] send: config
+2023-02-09 23:25:32,175 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: partial_history
+2023-02-09 23:25:32,191 DEBUG   SenderThread:5269 [sender.py:send():336] send: history
+2023-02-09 23:25:32,192 DEBUG   SenderThread:5269 [sender.py:send_request():363] send_request: summary_record
+2023-02-09 23:25:32,196 INFO    SenderThread:5269 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-02-09 23:25:33,079 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/wandb-summary.json
+2023-02-09 23:25:35,197 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:25:35,530 DEBUG   SenderThread:5269 [sender.py:send():336] send: config
+2023-02-09 23:25:35,531 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: partial_history
+2023-02-09 23:25:35,533 DEBUG   SenderThread:5269 [sender.py:send():336] send: history
+2023-02-09 23:25:35,534 DEBUG   SenderThread:5269 [sender.py:send_request():363] send_request: summary_record
+2023-02-09 23:25:35,535 INFO    SenderThread:5269 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-02-09 23:25:36,080 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/wandb-summary.json
+2023-02-09 23:25:38,486 DEBUG   SenderThread:5269 [sender.py:send():336] send: config
+2023-02-09 23:25:38,489 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: partial_history
+2023-02-09 23:25:38,495 DEBUG   SenderThread:5269 [sender.py:send():336] send: history
+2023-02-09 23:25:38,495 DEBUG   SenderThread:5269 [sender.py:send_request():363] send_request: summary_record
+2023-02-09 23:25:38,496 INFO    SenderThread:5269 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-02-09 23:25:39,081 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/wandb-summary.json
+2023-02-09 23:25:40,117 INFO    wandb-upload_1:5269 [upload_job.py:push():138] Uploaded file /tmp/tmp7ib8t_3wwandb/q3e997oo-diff.patch
+2023-02-09 23:25:40,497 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:25:41,566 DEBUG   SenderThread:5269 [sender.py:send():336] send: config
+2023-02-09 23:25:41,567 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: partial_history
+2023-02-09 23:25:41,575 DEBUG   SenderThread:5269 [sender.py:send():336] send: history
+2023-02-09 23:25:41,576 DEBUG   SenderThread:5269 [sender.py:send_request():363] send_request: summary_record
+2023-02-09 23:25:41,577 INFO    SenderThread:5269 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-02-09 23:25:42,082 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/wandb-summary.json
+2023-02-09 23:25:44,008 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:25:45,252 DEBUG   SenderThread:5269 [sender.py:send():336] send: config
+2023-02-09 23:25:45,254 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: partial_history
+2023-02-09 23:25:45,256 DEBUG   SenderThread:5269 [sender.py:send():336] send: history
+2023-02-09 23:25:45,257 DEBUG   SenderThread:5269 [sender.py:send_request():363] send_request: summary_record
+2023-02-09 23:25:45,257 INFO    SenderThread:5269 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-02-09 23:25:46,084 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/wandb-summary.json
+2023-02-09 23:25:46,258 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:25:49,008 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:25:49,403 DEBUG   SenderThread:5269 [sender.py:send():336] send: config
+2023-02-09 23:25:49,405 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: partial_history
+2023-02-09 23:25:49,410 DEBUG   SenderThread:5269 [sender.py:send():336] send: history
+2023-02-09 23:25:49,410 DEBUG   SenderThread:5269 [sender.py:send_request():363] send_request: summary_record
+2023-02-09 23:25:49,411 INFO    SenderThread:5269 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-02-09 23:25:50,085 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/wandb-summary.json
+2023-02-09 23:25:51,417 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:25:53,086 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/config.yaml
+2023-02-09 23:25:53,981 DEBUG   SenderThread:5269 [sender.py:send():336] send: config
+2023-02-09 23:25:53,982 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: partial_history
+2023-02-09 23:25:53,985 DEBUG   SenderThread:5269 [sender.py:send():336] send: history
+2023-02-09 23:25:53,986 DEBUG   SenderThread:5269 [sender.py:send_request():363] send_request: summary_record
+2023-02-09 23:25:53,990 INFO    SenderThread:5269 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-02-09 23:25:54,009 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:25:54,087 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/wandb-summary.json
+2023-02-09 23:25:57,991 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:25:59,009 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:25:59,819 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: partial_history
+2023-02-09 23:25:59,828 DEBUG   SenderThread:5269 [sender.py:send():336] send: config
+2023-02-09 23:25:59,829 DEBUG   SenderThread:5269 [sender.py:send():336] send: history
+2023-02-09 23:25:59,830 DEBUG   SenderThread:5269 [sender.py:send_request():363] send_request: summary_record
+2023-02-09 23:25:59,830 INFO    SenderThread:5269 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-02-09 23:26:00,089 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/wandb-summary.json
+2023-02-09 23:26:03,055 DEBUG   SenderThread:5269 [sender.py:send():336] send: config
+2023-02-09 23:26:03,057 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:26:03,057 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: partial_history
+2023-02-09 23:26:03,059 DEBUG   SenderThread:5269 [sender.py:send():336] send: history
+2023-02-09 23:26:03,060 DEBUG   SenderThread:5269 [sender.py:send_request():363] send_request: summary_record
+2023-02-09 23:26:03,062 INFO    SenderThread:5269 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-02-09 23:26:03,090 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/wandb-summary.json
+2023-02-09 23:26:04,010 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:26:07,381 DEBUG   SenderThread:5269 [sender.py:send():336] send: config
+2023-02-09 23:26:07,383 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: partial_history
+2023-02-09 23:26:07,390 DEBUG   SenderThread:5269 [sender.py:send():336] send: history
+2023-02-09 23:26:07,391 DEBUG   SenderThread:5269 [sender.py:send_request():363] send_request: summary_record
+2023-02-09 23:26:07,394 INFO    SenderThread:5269 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-02-09 23:26:08,092 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/wandb-summary.json
+2023-02-09 23:26:08,395 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:26:09,011 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:26:13,396 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:26:14,012 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:26:18,397 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:26:19,012 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:26:21,065 DEBUG   SystemMonitor:5269 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2023-02-09 23:26:21,066 DEBUG   SenderThread:5269 [sender.py:send():336] send: stats
+2023-02-09 23:26:24,013 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:26:24,073 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:26:25,098 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/config.yaml
+2023-02-09 23:26:29,014 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:26:29,845 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:26:34,015 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:26:34,846 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:26:39,016 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:26:39,847 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:26:44,016 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:26:44,847 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:26:49,018 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:26:49,848 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:26:51,067 DEBUG   SenderThread:5269 [sender.py:send():336] send: stats
+2023-02-09 23:26:54,018 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:26:55,068 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:26:59,019 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:27:00,068 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:27:01,885 DEBUG   SenderThread:5269 [sender.py:send():336] send: config
+2023-02-09 23:27:01,889 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: partial_history
+2023-02-09 23:27:01,895 DEBUG   SenderThread:5269 [sender.py:send():336] send: history
+2023-02-09 23:27:01,896 DEBUG   SenderThread:5269 [sender.py:send_request():363] send_request: summary_record
+2023-02-09 23:27:01,900 INFO    SenderThread:5269 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-02-09 23:27:02,110 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/wandb-summary.json
+2023-02-09 23:27:04,020 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:27:05,901 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:27:09,021 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:27:10,901 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:27:14,022 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:27:15,902 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:27:19,023 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:27:20,903 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:27:21,067 DEBUG   SenderThread:5269 [sender.py:send():336] send: stats
+2023-02-09 23:27:24,023 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:27:26,073 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:27:27,118 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/config.yaml
+2023-02-09 23:27:29,024 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:27:31,602 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:27:34,026 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:27:36,603 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:27:39,027 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:27:41,603 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:27:44,027 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:27:46,604 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:27:49,028 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:27:51,068 DEBUG   SenderThread:5269 [sender.py:send():336] send: stats
+2023-02-09 23:27:52,068 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:27:54,029 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:27:57,129 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/output.log
+2023-02-09 23:27:57,772 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:27:59,030 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:27:59,131 INFO    Thread-13 :5269 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/HalfCheetah_vast_ai/SAC_HalfCheetah-v3_9fb81_00000_0_2023-02-09_23-25-14/wandb/run-20230209_232518-9fb81_00000/files/output.log
+2023-02-09 23:28:02,773 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:28:04,032 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:28:07,775 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:28:09,035 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:28:12,776 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:28:14,036 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:28:17,778 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:28:19,038 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:28:21,071 DEBUG   SenderThread:5269 [sender.py:send():336] send: stats
+2023-02-09 23:28:23,073 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:28:24,041 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:28:28,074 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:28:29,043 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:28:33,075 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:28:34,044 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:28:38,077 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:28:39,047 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:28:43,078 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:28:44,047 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:28:48,079 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:28:49,049 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:28:51,073 DEBUG   SenderThread:5269 [sender.py:send():336] send: stats
+2023-02-09 23:28:54,051 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:28:54,075 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:28:59,054 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:28:59,078 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:29:04,056 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:29:04,080 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
+2023-02-09 23:29:09,058 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-09 23:29:09,081 DEBUG   HandlerThread:5269 [handler.py:handle_request():144] handle_request: status_report
