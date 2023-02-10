@@ -207,6 +207,8 @@ class DARMSFEnv(gym.Env):
         if self.render_mode == "human":
             self._render_frame()
 
+        
+
         return new_obs, reward, self._get_done(new_obs), self._get_info()   # False, self._get_info()
 
     def forward(self, joint_conf):
