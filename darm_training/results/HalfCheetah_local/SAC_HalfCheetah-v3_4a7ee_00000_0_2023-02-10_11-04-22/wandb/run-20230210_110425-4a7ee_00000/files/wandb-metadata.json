@@ -1,0 +1,56 @@
+{
+    "os": "Linux-5.4.0-42-generic-x86_64-with-glibc2.17",
+    "python": "3.8.12",
+    "heartbeatAt": "2023-02-10T10:04:27.844295",
+    "startedAt": "2023-02-10T10:04:25.749692",
+    "docker": null,
+    "cuda": null,
+    "args": null,
+    "state": "running",
+    "program": "DARM/darm_mujoco/darm_training/halfcheetah_test.ipynb",
+    "root": "/home/daniel/DARM/darm_mujoco",
+    "git": {
+        "remote": "git@github.com:danieladejumo17/darm-mujoco.git",
+        "commit": "9c8d0d1d61ed8212bec46ad32aabba73a6dce1fe"
+    },
+    "email": "adejumodaniel17@gmail.com",
+    "host": "Daniel",
+    "username": "daniel",
+    "executable": "/home/daniel/miniconda3/bin/python3.8",
+    "cpu_count": 2,
+    "cpu_count_logical": 4,
+    "cpu_freq": {
+        "current": 2699.99975,
+        "min": 400.0,
+        "max": 2800.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2700.001,
+            "min": 400.0,
+            "max": 2800.0
+        },
+        {
+            "current": 2699.999,
+            "min": 400.0,
+            "max": 2800.0
+        },
+        {
+            "current": 2700.0,
+            "min": 400.0,
+            "max": 2800.0
+        },
+        {
+            "current": 2699.999,
+            "min": 400.0,
+            "max": 2800.0
+        }
+    ],
+    "disk": {
+        "total": 29.658042907714844,
+        "used": 26.993526458740234
+    },
+    "memory": {
+        "total": 7.455364227294922
+    }
+}
