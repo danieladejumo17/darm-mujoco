@@ -16,3 +16,4 @@ setup(
 # nans at the beginning means no episode has been completed as yet
 # avoid shared cpus - low utilization
 # avoid low bandwidth - long install times
+# only checkpoints from the latest run is resumed
