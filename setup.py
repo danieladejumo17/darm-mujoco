@@ -8,3 +8,11 @@ setup(
 )
 
 # 392c8a47eb0658eb5c71190757a69110e2140f4a
+
+# install gcc
+# update python
+# read number of cpus
+
+# nans at the beginning means no episode has been completed as yet
+# avoid shared cpus - low utilization
+# avoid low bandwidth - long install times
