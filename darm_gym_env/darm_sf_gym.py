@@ -65,6 +65,7 @@ class DARMSFEnv(gym.Env):
         
         # Define Action Space
         # NOTE: Watch out for Box upper limit if Carpal Actuators are involved
+        # FIXME: Fix action range in reward function
         self.action_space = gym.spaces.Box(low=np.array([0.0]*self.model.nu), 
                                             high=np.array([2.0]*self.model.nu), 
                                             shape=(self.model.nu,), dtype=np.float32)
@@ -123,7 +124,7 @@ class DARMSFEnv(gym.Env):
         If norm to target reduces: -1 else (-1 + x) where x is a neg. number 
                 proportional to number of fingers with increased norms
         // Punish high velocity according to the eqution: -0.3 + 0.3*np.exp(-1*vel): DEPR
-        Punish high torque according to the equation: -0.5 + 0.5*np.exp(-1*action)  # abs action value
+        Punish high torque according to the equation: -0.5 + 0.5*np.exp(-1*action)
         Reward reaching target with a tolerance of 4mm: 250
         """
 
@@ -139,7 +140,8 @@ class DARMSFEnv(gym.Env):
         # vel_reward = (-0.3 + 0.3*np.exp(-1*vel)).mean() # scale vel term in exp beween [-1,-5]
         
         # Effort Correction
-        action_reward = (-0.5 + 0.5*np.exp(-1*np.abs(action))).mean()
+        action = np.clip(action, 0.0, 2.0)
+        action_reward = (-0.5 + 0.5*np.exp(-1*action)).mean()
 
         # Reach Target Reward
         target_reward = 250 if self._get_done(new_state) else 0
