@@ -96,7 +96,7 @@ custom_resources_per_worker:
   value: {}
 date:
   desc: null
-  value: 2023-02-11_19-17-04
+  value: 2023-02-11_19-20-21
 disable_env_checking:
   desc: null
   value: false
@@ -290,11 +290,11 @@ multiagent:
     count_steps_by: env_steps
     observation_fn: null
     policies:
-      default_policy: <ray.rllib.policy.policy.PolicySpec object at 0x7f4074191d60>
+      default_policy: <ray.rllib.policy.policy.PolicySpec object at 0x7f4074124ac0>
     policies_to_train: null
     policy_map_cache: null
     policy_map_capacity: 100
-    policy_mapping_fn: <function AlgorithmConfig.__init__.<locals>.<lambda> at 0x7f4074148700>
+    policy_mapping_fn: <function AlgorithmConfig.__init__.<locals>.<lambda> at 0x7f40740223a0>
 n_step:
   desc: null
   value: 1

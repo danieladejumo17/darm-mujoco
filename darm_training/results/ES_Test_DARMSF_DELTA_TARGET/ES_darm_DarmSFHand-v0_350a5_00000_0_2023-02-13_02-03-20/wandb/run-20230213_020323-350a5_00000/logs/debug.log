@@ -1,0 +1,36 @@
+2023-02-13 02:03:23,536 INFO    MainThread:12368 [wandb_setup.py:_flush():68] Configure stats pid to 12368
+2023-02-13 02:03:23,537 INFO    MainThread:12368 [wandb_setup.py:_flush():68] Loading settings from /home/daniel/.config/wandb/settings
+2023-02-13 02:03:23,537 INFO    MainThread:12368 [wandb_setup.py:_flush():68] Loading settings from /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_350a5_00000_0_2023-02-13_02-03-20/wandb/settings
+2023-02-13 02:03:23,537 INFO    MainThread:12368 [wandb_setup.py:_flush():68] Loading settings from environment variables: {'_require_service': 'True', 'api_key': '***REDACTED***', 'start_method': 'thread'}
+2023-02-13 02:03:23,537 INFO    MainThread:12368 [wandb_setup.py:_flush():68] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2023-02-13 02:03:23,537 INFO    MainThread:12368 [wandb_init.py:_log_setup():492] Logging user logs to /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_350a5_00000_0_2023-02-13_02-03-20/wandb/run-20230213_020323-350a5_00000/logs/debug.log
+2023-02-13 02:03:23,537 INFO    MainThread:12368 [wandb_init.py:_log_setup():493] Logging internal logs to /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_350a5_00000_0_2023-02-13_02-03-20/wandb/run-20230213_020323-350a5_00000/logs/debug-internal.log
+2023-02-13 02:03:23,537 INFO    MainThread:12368 [wandb_init.py:_jupyter_setup():438] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x7f2b225ab8e0>
+2023-02-13 02:03:23,538 INFO    MainThread:12368 [wandb_init.py:init():532] calling init triggers
+2023-02-13 02:03:23,538 INFO    MainThread:12368 [wandb_init.py:init():538] wandb.init called with sweep_config: {}
+config: {'env': 'DARMSFHand-v0', 'num_rollout_workers': 3, 'num_envs_per_worker': 8, 'recreate_failed_workers': True, 'num_consecutive_worker_failures_tolerance': 10, 'restart_failed_sub_environments': True, 'num_gpus': 0, 'framework': 'torch'}
+2023-02-13 02:03:23,538 INFO    MainThread:12368 [wandb_init.py:init():588] starting backend
+2023-02-13 02:03:23,538 INFO    MainThread:12368 [wandb_init.py:init():592] setting up manager
+2023-02-13 02:03:23,545 INFO    MainThread:12368 [wandb_init.py:init():599] backend started and connected
+2023-02-13 02:03:23,553 INFO    MainThread:12368 [wandb_run.py:_label_probe_notebook():1203] probe notebook
+2023-02-13 02:03:23,554 INFO    MainThread:12368 [wandb_run.py:_label_probe_notebook():1213] Unable to probe notebook: 'NoneType' object has no attribute 'get'
+2023-02-13 02:03:23,554 INFO    MainThread:12368 [wandb_init.py:init():687] updated telemetry
+2023-02-13 02:03:23,605 INFO    MainThread:12368 [wandb_init.py:init():727] communicating run to backend with 60.0 second timeout
+2023-02-13 02:03:24,970 INFO    MainThread:12368 [wandb_run.py:_on_init():2134] communicating current version
+2023-02-13 02:03:25,663 INFO    MainThread:12368 [wandb_run.py:_on_init():2143] got version response 
+2023-02-13 02:03:25,663 INFO    MainThread:12368 [wandb_init.py:init():775] starting run threads in backend
+2023-02-13 02:03:32,893 INFO    MainThread:12368 [wandb_run.py:_console_start():2114] atexit reg
+2023-02-13 02:03:32,894 INFO    MainThread:12368 [wandb_run.py:_redirect():1969] redirect: SettingsConsole.WRAP_RAW
+2023-02-13 02:03:32,894 INFO    MainThread:12368 [wandb_run.py:_redirect():2034] Wrapping output streams.
+2023-02-13 02:03:32,894 INFO    MainThread:12368 [wandb_run.py:_redirect():2059] Redirects installed.
+2023-02-13 02:03:32,896 INFO    MainThread:12368 [wandb_init.py:init():817] run started, returning control to user process
+2023-02-13 02:03:32,896 INFO    MainThread:12368 [wandb_config.py:__setitem__():155] config set trial_log_path = /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_350a5_00000_0_2023-02-13_02-03-20 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f2b73c77ca0>>
+2023-02-13 02:03:32,897 INFO    MainThread:12368 [wandb_run.py:_config_callback():1250] config_cb trial_log_path /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_350a5_00000_0_2023-02-13_02-03-20 None
+2023-02-13 02:04:41,996 INFO    MainThread:12368 [wandb_run.py:_finish():1854] finishing run danieladejumo/DARM/350a5_00000
+2023-02-13 02:04:42,077 INFO    MainThread:12368 [jupyter.py:save_history():478] saving 8 cells to _session_history.ipynb
+2023-02-13 02:04:42,078 INFO    MainThread:12368 [wandb_run.py:_config_callback():1250] config_cb ('_wandb', 'session_history') code/_session_history.ipynb None
+2023-02-13 02:04:42,083 INFO    MainThread:12368 [jupyter.py:_save_ipynb():390] looking for notebook: DARM/darm_mujoco/darm_training/darm_sf_hand_rllib_es.ipynb
+2023-02-13 02:04:42,083 INFO    MainThread:12368 [wandb_init.py:_jupyter_teardown():420] cleaning up jupyter logic
+2023-02-13 02:04:42,083 INFO    MainThread:12368 [wandb_run.py:_atexit_cleanup():2083] got exitcode: 0
+2023-02-13 02:04:42,083 INFO    MainThread:12368 [wandb_run.py:_restore():2066] restore
+2023-02-13 02:04:42,083 INFO    MainThread:12368 [wandb_run.py:_restore():2072] restore done

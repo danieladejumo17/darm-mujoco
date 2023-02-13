@@ -1,0 +1,78 @@
+2023-02-13 02:01:57,340 INFO    StreamThr :11497 [internal.py:wandb_internal():87] W&B internal server running at pid: 11497, started at: 2023-02-13 02:01:57.340013
+2023-02-13 02:01:57,347 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: status
+2023-02-13 02:01:57,358 INFO    WriterThread:11497 [datastore.py:open_for_write():85] open: /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_01e6d_00000_0_2023-02-13_02-01-54/wandb/run-20230213_020157-01e6d_00000/run-01e6d_00000.wandb
+2023-02-13 02:01:57,359 DEBUG   SenderThread:11497 [sender.py:send():336] send: header
+2023-02-13 02:01:57,405 DEBUG   SenderThread:11497 [sender.py:send():336] send: run
+2023-02-13 02:01:57,408 INFO    SenderThread:11497 [sender.py:_maybe_setup_resume():723] checking resume status for None/DARM/01e6d_00000
+2023-02-13 02:01:58,545 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: check_version
+2023-02-13 02:01:58,549 INFO    SenderThread:11497 [dir_watcher.py:__init__():216] watching files in: /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_01e6d_00000_0_2023-02-13_02-01-54/wandb/run-20230213_020157-01e6d_00000/files
+2023-02-13 02:01:58,550 INFO    SenderThread:11497 [sender.py:_start_run_threads():1067] run started: 01e6d_00000 with start time 1676250117.345344
+2023-02-13 02:01:58,550 DEBUG   SenderThread:11497 [sender.py:send_request():363] send_request: summary_record
+2023-02-13 02:01:58,550 INFO    SenderThread:11497 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-02-13 02:01:58,550 DEBUG   SenderThread:11497 [sender.py:send_request():363] send_request: check_version
+2023-02-13 02:01:59,553 INFO    Thread-13 :11497 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_01e6d_00000_0_2023-02-13_02-01-54/wandb/run-20230213_020157-01e6d_00000/files/wandb-summary.json
+2023-02-13 02:01:59,574 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: run_start
+2023-02-13 02:01:59,576 DEBUG   HandlerThread:11497 [system_info.py:__init__():31] System info init
+2023-02-13 02:01:59,576 DEBUG   HandlerThread:11497 [system_info.py:__init__():46] System info init done
+2023-02-13 02:01:59,576 INFO    HandlerThread:11497 [system_monitor.py:start():151] Starting system monitor
+2023-02-13 02:01:59,576 INFO    SystemMonitor:11497 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-02-13 02:01:59,576 INFO    HandlerThread:11497 [system_monitor.py:probe():172] Collecting system info
+2023-02-13 02:01:59,577 INFO    SystemMonitor:11497 [interfaces.py:start():168] Started cpu
+2023-02-13 02:01:59,578 INFO    SystemMonitor:11497 [interfaces.py:start():168] Started disk
+2023-02-13 02:01:59,581 INFO    SystemMonitor:11497 [interfaces.py:start():168] Started memory
+2023-02-13 02:01:59,582 INFO    SystemMonitor:11497 [interfaces.py:start():168] Started network
+2023-02-13 02:01:59,599 DEBUG   HandlerThread:11497 [system_info.py:probe():195] Probing system
+2023-02-13 02:01:59,604 DEBUG   HandlerThread:11497 [system_info.py:_probe_git():180] Probing git
+2023-02-13 02:01:59,624 DEBUG   HandlerThread:11497 [system_info.py:_probe_git():188] Probing git done
+2023-02-13 02:01:59,624 DEBUG   HandlerThread:11497 [system_info.py:probe():241] Probing system done
+2023-02-13 02:01:59,624 DEBUG   HandlerThread:11497 [system_monitor.py:probe():181] {'os': 'Linux-5.4.0-42-generic-x86_64-with-glibc2.17', 'python': '3.8.12', 'heartbeatAt': '2023-02-13T01:01:59.599821', 'startedAt': '2023-02-13T01:01:57.323514', 'docker': None, 'cuda': None, 'args': None, 'state': 'running', 'program': 'DARM/darm_mujoco/darm_training/darm_sf_hand_rllib_es.ipynb', 'root': '/home/daniel/DARM/darm_mujoco', 'git': {'remote': 'git@github.com:danieladejumo17/darm-mujoco.git', 'commit': 'afe940488b7903728c91fc450f7a21f4fa2d3965'}, 'email': 'adejumodaniel17@gmail.com', 'host': 'Daniel', 'username': 'daniel', 'executable': '/home/daniel/miniconda3/bin/python3.8', 'cpu_count': 2, 'cpu_count_logical': 4, 'cpu_freq': {'current': 2720.4182499999997, 'min': 400.0, 'max': 2800.0}, 'cpu_freq_per_core': [{'current': 2706.633, 'min': 400.0, 'max': 2800.0}, {'current': 2700.072, 'min': 400.0, 'max': 2800.0}, {'current': 2775.049, 'min': 400.0, 'max': 2800.0}, {'current': 2699.919, 'min': 400.0, 'max': 2800.0}], 'disk': {'total': 29.658042907714844, 'used': 28.040531158447266}, 'memory': {'total': 7.455356597900391}}
+2023-02-13 02:01:59,624 INFO    HandlerThread:11497 [system_monitor.py:probe():182] Finished collecting system info
+2023-02-13 02:01:59,624 INFO    HandlerThread:11497 [system_monitor.py:probe():185] Publishing system info
+2023-02-13 02:01:59,624 DEBUG   HandlerThread:11497 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-02-13 02:01:59,625 DEBUG   HandlerThread:11497 [system_info.py:_save_pip():67] Saving pip packages done
+2023-02-13 02:01:59,625 DEBUG   HandlerThread:11497 [system_info.py:_save_conda():74] Saving list of conda packages installed into the current environment
+2023-02-13 02:02:00,554 INFO    Thread-13 :11497 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_01e6d_00000_0_2023-02-13_02-01-54/wandb/run-20230213_020157-01e6d_00000/files/requirements.txt
+2023-02-13 02:02:00,555 INFO    Thread-13 :11497 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_01e6d_00000_0_2023-02-13_02-01-54/wandb/run-20230213_020157-01e6d_00000/files/conda-environment.yaml
+2023-02-13 02:02:04,555 INFO    Thread-13 :11497 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_01e6d_00000_0_2023-02-13_02-01-54/wandb/run-20230213_020157-01e6d_00000/files/conda-environment.yaml
+2023-02-13 02:02:04,593 DEBUG   HandlerThread:11497 [system_info.py:_save_conda():86] Saving conda packages done
+2023-02-13 02:02:04,593 DEBUG   HandlerThread:11497 [system_info.py:_save_code():89] Saving code
+2023-02-13 02:02:04,593 WARNING HandlerThread:11497 [system_info.py:_save_code():91] unable to save code -- program entry not found
+2023-02-13 02:02:04,593 DEBUG   HandlerThread:11497 [system_info.py:_save_patches():127] Saving git patches
+2023-02-13 02:02:04,805 DEBUG   HandlerThread:11497 [system_info.py:_save_patches():169] Saving git patches done
+2023-02-13 02:02:04,805 INFO    HandlerThread:11497 [system_monitor.py:probe():187] Finished publishing system info
+2023-02-13 02:02:04,816 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: status_report
+2023-02-13 02:02:04,816 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-13 02:02:04,817 DEBUG   SenderThread:11497 [sender.py:send():336] send: files
+2023-02-13 02:02:04,817 INFO    SenderThread:11497 [sender.py:_save_file():1321] saving file wandb-metadata.json with policy now
+2023-02-13 02:02:04,817 INFO    SenderThread:11497 [sender.py:_save_file():1321] saving file diff.patch with policy now
+2023-02-13 02:02:04,861 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: stop_status
+2023-02-13 02:02:04,863 DEBUG   SenderThread:11497 [sender.py:send_request():363] send_request: stop_status
+2023-02-13 02:02:05,294 DEBUG   SenderThread:11497 [sender.py:send():336] send: telemetry
+2023-02-13 02:02:05,295 DEBUG   SenderThread:11497 [sender.py:send():336] send: telemetry
+2023-02-13 02:02:05,297 DEBUG   SenderThread:11497 [sender.py:send():336] send: config
+2023-02-13 02:02:05,555 INFO    Thread-13 :11497 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_01e6d_00000_0_2023-02-13_02-01-54/wandb/run-20230213_020157-01e6d_00000/files/diff.patch
+2023-02-13 02:02:05,556 INFO    Thread-13 :11497 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_01e6d_00000_0_2023-02-13_02-01-54/wandb/run-20230213_020157-01e6d_00000/files/wandb-metadata.json
+2023-02-13 02:02:06,092 INFO    wandb-upload_0:11497 [upload_job.py:push():138] Uploaded file /tmp/tmpukq48t8jwandb/kp1g5r7o-wandb-metadata.json
+2023-02-13 02:02:08,159 INFO    wandb-upload_1:11497 [upload_job.py:push():138] Uploaded file /tmp/tmpukq48t8jwandb/0jdjprds-diff.patch
+2023-02-13 02:02:08,300 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: status_report
+2023-02-13 02:02:13,300 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: status_report
+2023-02-13 02:02:18,301 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: status_report
+2023-02-13 02:02:19,856 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-13 02:02:19,857 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-13 02:02:23,302 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: status_report
+2023-02-13 02:02:24,857 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-13 02:02:28,308 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: status_report
+2023-02-13 02:02:29,565 INFO    Thread-13 :11497 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_01e6d_00000_0_2023-02-13_02-01-54/wandb/run-20230213_020157-01e6d_00000/files/config.yaml
+2023-02-13 02:02:29,565 INFO    Thread-13 :11497 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_01e6d_00000_0_2023-02-13_02-01-54/wandb/run-20230213_020157-01e6d_00000/files/output.log
+2023-02-13 02:02:29,858 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-13 02:02:31,564 INFO    Thread-13 :11497 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_01e6d_00000_0_2023-02-13_02-01-54/wandb/run-20230213_020157-01e6d_00000/files/output.log
+2023-02-13 02:02:33,965 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: status_report
+2023-02-13 02:02:34,860 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-13 02:02:38,967 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: status_report
+2023-02-13 02:02:39,861 DEBUG   HandlerThread:11497 [handler.py:handle_request():144] handle_request: keepalive
+2023-02-13 02:02:41,574 INFO    Thread-13 :11497 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_01e6d_00000_0_2023-02-13_02-01-54/wandb/run-20230213_020157-01e6d_00000/files/output.log
+2023-02-13 02:02:41,597 ERROR   cpu       :11497 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=11484)
+2023-02-13 02:02:41,598 ERROR   cpu       :11497 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=11484)
+2023-02-13 02:02:41,607 ERROR   memory    :11497 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=11484)
+2023-02-13 02:02:41,608 ERROR   memory    :11497 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=11484)
+2023-02-13 02:02:42,585 INFO    MainThread:11497 [internal.py:handle_exit():77] Internal process exited

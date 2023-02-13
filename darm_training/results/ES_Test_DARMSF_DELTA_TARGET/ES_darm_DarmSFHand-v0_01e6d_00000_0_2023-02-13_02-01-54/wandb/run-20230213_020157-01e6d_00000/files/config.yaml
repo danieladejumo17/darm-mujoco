@@ -1,0 +1,60 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.13.10
+    framework: torch
+    is_jupyter_run: true
+    is_kaggle_kernel: false
+    python_version: 3.8.12
+    start_time: 1676250117.345344
+    t:
+      1:
+      - 1
+      - 30
+      - 55
+      2:
+      - 1
+      - 30
+      - 55
+      3:
+      - 13
+      - 14
+      - 15
+      - 16
+      - 19
+      - 23
+      4: 3.8.12
+      5: 0.13.10
+      8:
+      - 1
+      - 8
+      - 9
+env:
+  desc: null
+  value: DARMSFHand-v0
+framework:
+  desc: null
+  value: torch
+num_consecutive_worker_failures_tolerance:
+  desc: null
+  value: 10
+num_envs_per_worker:
+  desc: null
+  value: 4
+num_gpus:
+  desc: null
+  value: 0
+num_rollout_workers:
+  desc: null
+  value: 3
+recreate_failed_workers:
+  desc: null
+  value: true
+restart_failed_sub_environments:
+  desc: null
+  value: true
+trial_log_path:
+  desc: null
+  value: /home/daniel/DARM/darm_mujoco/darm_training/results/ES_Test_DARMSF_DELTA_TARGET/ES_darm_DarmSFHand-v0_01e6d_00000_0_2023-02-13_02-01-54
