@@ -129,9 +129,11 @@ class DARMSFEnv(gym.Env):
         """
 
         # Change in Norm to Target
-        prev_norm = self._norm_to_target(state)
-        new_norm = self._norm_to_target(new_state)
-        norm_reward = -1 + sum(new_norm > prev_norm)*(-1/len(self.fingertip_indices))
+        # prev_norm = self._norm_to_target(state)
+        # new_norm = self._norm_to_target(new_state)
+        # norm_reward = -1 + sum(new_norm > prev_norm)*(-1/len(self.fingertip_indices))
+
+        norm_reward = -40*self._norm_to_target(state)
 
         # Velocity Correction
         # previous_pos = state[:len(state)//2].reshape((-1,3))
@@ -140,15 +142,15 @@ class DARMSFEnv(gym.Env):
         # vel_reward = (-0.3 + 0.3*np.exp(-1*vel)).mean() # scale vel term in exp beween [-1,-5]
         
         # Effort Correction
-        action = np.clip(action, 0.0, 2.0)
-        action_reward = (-0.5 + 0.5*np.exp(-1*action)).mean()
+        # action_reward = (-0.5 + 0.5*np.exp(-1*action)).mean()
+
+        ctrl_reward = -0.1*np.sum((0.5*action)**2)
 
         # Reach Target Reward
-        target_reward = 250 if self._get_done(new_state) else 0
+        reach_reward = 100 if self._get_done(new_state) else 0
 
-        # return (norm_reward + vel_reward + action_reward + target_reward)
-        reward_info = {"norm_reward": norm_reward, "action_reward": action_reward, "target_reward": target_reward}
-        return (norm_reward + action_reward + target_reward), reward_info
+        reward_info = {"norm_reward": norm_reward, "ctrl_reward": ctrl_reward, "reach_reward": reach_reward}
+        return (norm_reward + ctrl_reward + reach_reward), reward_info
 
     def _get_done(self, new_state):
         return all(self._norm_to_target(new_state) < self.min_th)
@@ -193,6 +195,9 @@ class DARMSFEnv(gym.Env):
 
     def step(self, action):
         prev_obs = self._get_obs()
+
+        # FIXME: READ Action range from self.<>
+        action = np.clip(action, 0.0, 2.0)
         self.data.ctrl[0 : self.model.nu] = action
         time_prev = self.data.time   # simulation time in seconds
 
