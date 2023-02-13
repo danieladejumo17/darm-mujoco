@@ -17,3 +17,4 @@ setup(
 # avoid shared cpus - low utilization
 # avoid low bandwidth - long install times
 # only checkpoints from the latest run is resumed
+# always check pwd before running 

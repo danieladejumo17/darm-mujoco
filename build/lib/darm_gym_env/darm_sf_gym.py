@@ -123,7 +123,7 @@ class DARMSFEnv(gym.Env):
         If norm to target reduces: -1 else (-1 + x) where x is a neg. number 
                 proportional to number of fingers with increased norms
         // Punish high velocity according to the eqution: -0.3 + 0.3*np.exp(-1*vel): DEPR
-        Punish high torque according to the equation: -0.5 + 0.5*np.exp(-1*action)
+        Punish high torque according to the equation: -0.5 + 0.5*np.exp(-1*action)  # abs action value
         Reward reaching target with a tolerance of 4mm: 250
         """
 
@@ -139,13 +139,14 @@ class DARMSFEnv(gym.Env):
         # vel_reward = (-0.3 + 0.3*np.exp(-1*vel)).mean() # scale vel term in exp beween [-1,-5]
         
         # Effort Correction
-        action_reward = (-0.5 + 0.5*np.exp(-1*action)).mean()
+        action_reward = (-0.5 + 0.5*np.exp(-1*np.abs(action))).mean()
 
         # Reach Target Reward
         target_reward = 250 if self._get_done(new_state) else 0
 
         # return (norm_reward + vel_reward + action_reward + target_reward)
-        return (norm_reward + action_reward + target_reward)
+        reward_info = {"norm_reward": norm_reward, "action_reward": action_reward, "target_reward": target_reward}
+        return (norm_reward + action_reward + target_reward), reward_info
 
     def _get_done(self, new_state):
         return all(self._norm_to_target(new_state) < self.min_th)
@@ -202,14 +203,14 @@ class DARMSFEnv(gym.Env):
         new_obs = self._get_obs()
 
         # Get Reward
-        reward = self._get_reward(prev_obs, action, new_obs, time_after-time_prev)
+        reward, reward_info = self._get_reward(prev_obs, action, new_obs, time_after-time_prev)
 
         if self.render_mode == "human":
             self._render_frame()
 
         
 
-        return new_obs, reward, self._get_done(new_obs), self._get_info()   # False, self._get_info()
+        return new_obs, reward, self._get_done(new_obs), {**self._get_info(), "reward": {**reward_info}}   # False, self._get_info()
 
     def forward(self, joint_conf):
         self.data.qpos = joint_conf
