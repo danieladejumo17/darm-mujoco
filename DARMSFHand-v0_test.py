@@ -22,7 +22,7 @@ while not done:
         episode_return = 0
         start = time.time()
 
-        env.reset()
+        obs = env.reset()
         done = False
 
     # TODO: Address links going beyond their limits
