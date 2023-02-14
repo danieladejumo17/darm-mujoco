@@ -255,12 +255,12 @@ class DARMSFEnv(gym.Env):
         # Get Reward
         rwd_dict = self._get_reward(prev_obs, action, new_obs, time_after-time_prev)
         reward = rwd_dict["dense"].mean()
-        done = all(rwd_dict["solved"]) or any(rwd_dict["done"])
+        done = any(rwd_dict["done"])    # all(rwd_dict["solved"]) or any(rwd_dict["done"])
 
         # if self.render_mode == "human":
         #     self._render_frame()
         
-        return new_obs, reward, done, {**self._get_info(), "reward": {**rwd_dict}}   # False, self._get_info()
+        return new_obs, reward, done, {**self._get_info(), "action": action, "reward": {**rwd_dict}}   # False, self._get_info()
         # return new_obs, reward, self._get_done(new_obs), {**self._get_info(), "reward": {**reward_info}}   # False, self._get_info()
 
     def forward(self, joint_conf):

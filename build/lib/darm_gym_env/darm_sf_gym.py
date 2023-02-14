@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import collections
 
 import gym
 import mujoco as mj
@@ -38,6 +39,16 @@ class DARMSFEnv(gym.Env):
         # TODO: The following data should be read from mujoco
         self.min_joint_vals = np.array(min_joint_vals)*(np.pi/180)
         self.max_joint_vals = np.array(max_joint_vals)*(np.pi/180)
+
+        self.rwd_keys_wt = dict(
+            reach = 1.0,
+            bonus = 4.0,
+            penalty = 50,
+            act_reg = 0.1,
+            sparse = 1,
+            solved = 1,
+            done = 1
+        )
 
         # Load the Model
         self._load_model("../mujoco_env/darm.xml")
@@ -128,31 +139,58 @@ class DARMSFEnv(gym.Env):
         Reward reaching target with a tolerance of 4mm: 250
         """
 
-        # Change in Norm to Target
-        prev_norm = self._norm_to_target(state)
-        new_norm = self._norm_to_target(new_state)
-        # norm_reward = -1 + sum(new_norm > prev_norm)*(-1/len(self.fingertip_indices))
-        norm_reward = 1 if new_norm < prev_norm else -1
-
-# FINGER SEEMS TO AVOID TOUCHING THE GOAL
-        # norm_reward = -40*self._norm_to_target(state)   # max: -3.2
-
-        # Velocity Correction
-        # previous_pos = state[:len(state)//2].reshape((-1,3))
-        # new_pos = new_state[:len(new_state)//2].reshape((-1,3))
-        # vel = np.linalg.norm(new_pos-previous_pos, ord=2, axis=-1) / time_delta
-        # vel_reward = (-0.3 + 0.3*np.exp(-1*vel)).mean() # scale vel term in exp beween [-1,-5]
+        reach_dist = self._norm_to_target(new_state)    # NOTE: Single finger
+        near_th = self.min_th
+        far_th = 2*self.max_target_th
+        # Use 0.5 to scale down reward to [0 1] from [0 2]
+        # TODO: Let action range of model be limited to 1. Scale action input in mujoco model
+        # NOTE: Some of the fingers in five fingered hand have more than five actuators
+        act_mag = np.linalg.norm(0.5*action.reshape(-1, 5)) # reshape action to (-1,5), ensure nu is ordered from mujoco
         
-        # Effort Correction
-        # action_reward = (-0.5 + 0.5*np.exp(-1*action)).mean()
+        rwd_dict = collections.OrderedDict((
+            # Optional Keys
+            ('reach',   -1.*reach_dist),
+            ('bonus',   1.*(reach_dist<2*near_th) + 1.*(reach_dist<near_th)),
+            ('act_reg', -1.*act_mag),
+            ('penalty', -1.*(reach_dist>far_th)),
+            # Must keys
+            ('sparse',  -1.*reach_dist),
+            ('solved',  reach_dist<near_th),
+            ('done',    reach_dist > far_th),
+        ))
 
-        ctrl_reward = -0.1*np.sum((0.5*action)**2)  # max: -0.4
+        rwd_dict['dense'] = np.sum([wt*rwd_dict[key] for key, wt in self.rwd_keys_wt.items()], axis=0)
+        return rwd_dict
 
-        # Reach Target Reward
-        reach_reward = 100 if self._get_done(new_state) else 0
 
-        reward_info = {"norm_reward": norm_reward, "ctrl_reward": ctrl_reward, "reach_reward": reach_reward}
-        return (norm_reward + ctrl_reward + reach_reward), reward_info
+        # # Change in Norm to Target
+        # prev_norm = self._norm_to_target(state)
+        # new_norm = self._norm_to_target(new_state)
+        # # norm_reward = -1 + sum(new_norm > prev_norm)*(-1/len(self.fingertip_indices))
+        # norm_reward = 1 if new_norm < prev_norm else -1
+
+        # # agent takes advantage of +1 by turning all arounf
+        # # implement far_th and near_th
+        # # essentially use the myosuite reward function
+
+        # # norm_reward = -40*self._norm_to_target(state)   # max: -3.2
+
+        # # Velocity Correction
+        # # previous_pos = state[:len(state)//2].reshape((-1,3))
+        # # new_pos = new_state[:len(new_state)//2].reshape((-1,3))
+        # # vel = np.linalg.norm(new_pos-previous_pos, ord=2, axis=-1) / time_delta
+        # # vel_reward = (-0.3 + 0.3*np.exp(-1*vel)).mean() # scale vel term in exp beween [-1,-5]
+        
+        # # Effort Correction
+        # # action_reward = (-0.5 + 0.5*np.exp(-1*action)).mean()
+
+        # ctrl_reward = -0.1*np.sum((0.5*action)**2)  # max: -0.4
+
+        # # Reach Target Reward
+        # reach_reward = 100 if self._get_done(new_state) else 0
+
+        # reward_info = {"norm_reward": norm_reward, "ctrl_reward": ctrl_reward, "reach_reward": reach_reward}
+        # return (norm_reward + ctrl_reward + reach_reward), reward_info
 
     def _get_done(self, new_state):
         return all(self._norm_to_target(new_state) < self.min_th)
@@ -211,15 +249,19 @@ class DARMSFEnv(gym.Env):
         # Get new observation
         new_obs = self._get_obs()
 
-        # Get Reward
-        reward, reward_info = self._get_reward(prev_obs, action, new_obs, time_after-time_prev)
-
         if self.render_mode == "human":
             self._render_frame()
 
-        
+        # Get Reward
+        rwd_dict = self._get_reward(prev_obs, action, new_obs, time_after-time_prev)
+        reward = rwd_dict["dense"].mean()
+        done = any(rwd_dict["done"])    # all(rwd_dict["solved"]) or any(rwd_dict["done"])
 
-        return new_obs, reward, self._get_done(new_obs), {**self._get_info(), "reward": {**reward_info}}   # False, self._get_info()
+        # if self.render_mode == "human":
+        #     self._render_frame()
+        
+        return new_obs, reward, done, {**self._get_info(), "action": action, "reward": {**rwd_dict}}   # False, self._get_info()
+        # return new_obs, reward, self._get_done(new_obs), {**self._get_info(), "reward": {**reward_info}}   # False, self._get_info()
 
     def forward(self, joint_conf):
         self.data.qpos = joint_conf
