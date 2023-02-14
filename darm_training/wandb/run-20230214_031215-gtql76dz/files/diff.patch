@@ -1,0 +1,1468 @@
+diff --git a/darm_gym_env/__pycache__/darm_sf_gym.cpython-38.pyc b/darm_gym_env/__pycache__/darm_sf_gym.cpython-38.pyc
+index 515122f..b43c176 100644
+Binary files a/darm_gym_env/__pycache__/darm_sf_gym.cpython-38.pyc and b/darm_gym_env/__pycache__/darm_sf_gym.cpython-38.pyc differ
+diff --git a/darm_gym_env/darm_sf_gym.py b/darm_gym_env/darm_sf_gym.py
+index 0c0fba0..7ca95bb 100644
+--- a/darm_gym_env/darm_sf_gym.py
++++ b/darm_gym_env/darm_sf_gym.py
+@@ -132,8 +132,9 @@ class DARMSFEnv(gym.Env):
+         # prev_norm = self._norm_to_target(state)
+         # new_norm = self._norm_to_target(new_state)
+         # norm_reward = -1 + sum(new_norm > prev_norm)*(-1/len(self.fingertip_indices))
+-
+-        norm_reward = -40*self._norm_to_target(state)
++,s,s,s,s,s  FIX REWRD
++# FINGER SEEMS TO AVOID TOUCHING THE GOAL
++        norm_reward = -40*self._norm_to_target(state)   # max: -3.2
+ 
+         # Velocity Correction
+         # previous_pos = state[:len(state)//2].reshape((-1,3))
+@@ -144,7 +145,7 @@ class DARMSFEnv(gym.Env):
+         # Effort Correction
+         # action_reward = (-0.5 + 0.5*np.exp(-1*action)).mean()
+ 
+-        ctrl_reward = -0.1*np.sum((0.5*action)**2)
++        ctrl_reward = -0.1*np.sum((0.5*action)**2)  # max: -0.4
+ 
+         # Reach Target Reward
+         reach_reward = 100 if self._get_done(new_state) else 0
+diff --git a/darm_training/.ipynb_checkpoints/darm_sf_hand_rllib_es-checkpoint.ipynb b/darm_training/.ipynb_checkpoints/darm_sf_hand_rllib_es-checkpoint.ipynb
+index dcadd06..c74785e 100644
+--- a/darm_training/.ipynb_checkpoints/darm_sf_hand_rllib_es-checkpoint.ipynb
++++ b/darm_training/.ipynb_checkpoints/darm_sf_hand_rllib_es-checkpoint.ipynb
+@@ -54,10 +54,22 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": null,
++   "execution_count": 3,
+    "id": "1faaeaf7-f077-4e44-a4aa-4e81374219e6",
+    "metadata": {},
+-   "outputs": [],
++   "outputs": [
++    {
++     "name": "stdout",
++     "output_type": "stream",
++     "text": [
++      "gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0\n",
++      "Copyright (C) 2017 Free Software Foundation, Inc.\n",
++      "This is free software; see the source for copying conditions.  There is NO\n",
++      "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n",
++      "\n"
++     ]
++    }
++   ],
+    "source": [
+     "# Check if GCC is installed\n",
+     "!gcc --version"
+@@ -321,7 +333,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": null,
++   "execution_count": 4,
+    "id": "07e3679f-78c0-46dd-a387-c2b63c39958a",
+    "metadata": {},
+    "outputs": [],
+@@ -343,7 +355,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 3,
++   "execution_count": 5,
+    "id": "b9c7e52e-b467-4d91-8fe9-d1035e51c932",
+    "metadata": {},
+    "outputs": [],
+@@ -372,7 +384,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 4,
++   "execution_count": 6,
+    "id": "0ee4bf2a-d82c-4aaa-b278-f11a080e28af",
+    "metadata": {},
+    "outputs": [],
+@@ -397,7 +409,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 5,
++   "execution_count": 7,
+    "id": "4a0ed8ba-4f6b-47f9-b0e7-37d0eec71647",
+    "metadata": {
+     "tags": []
+@@ -2318,7 +2330,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 6,
++   "execution_count": 20,
+    "id": "ed17fb23-77b1-4e35-95b7-a44b6e342691",
+    "metadata": {
+     "tags": []
+@@ -2327,10 +2339,10 @@
+     {
+      "data": {
+       "text/plain": [
+-       "<ray.tune.tuner.Tuner at 0x7f82b90c1220>"
++       "<ray.tune.tuner.Tuner at 0x7f6c3902e130>"
+       ]
+      },
+-     "execution_count": 6,
++     "execution_count": 20,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -2341,7 +2353,7 @@
+     "\n",
+     "# Restore Interrupted run\n",
+     "tuner = tune.Tuner.restore(\n",
+-    "    f\"{os.getenv('DARM_MUJOCO_PATH')}/darm_training/results/SF_rllib_es_vast\",\n",
++    "    f\"{os.getenv('DARM_MUJOCO_PATH')}/darm_training/results/SF_rllib_es_vast_ai\",\n",
+     "    resume_errored=True\n",
+     ")\n",
+     "tuner"
+@@ -2349,7 +2361,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 7,
++   "execution_count": 21,
+    "id": "160c2790-f9ac-41cb-8198-d571d2c51332",
+    "metadata": {
+     "tags": []
+@@ -2358,10 +2370,10 @@
+     {
+      "data": {
+       "text/plain": [
+-       "<ray.tune.result_grid.ResultGrid at 0x7f82b8f2ce50>"
++       "<ray.tune.result_grid.ResultGrid at 0x7f6c38ad9400>"
+       ]
+      },
+-     "execution_count": 7,
++     "execution_count": 21,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -2373,7 +2385,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 8,
++   "execution_count": 22,
+    "id": "ace959cb-3e05-4caa-8dd9-f00bbab33eb0",
+    "metadata": {
+     "tags": []
+@@ -2382,10 +2394,10 @@
+     {
+      "data": {
+       "text/plain": [
+-       "Result(metrics={'episode_reward_mean': 266.62735, 'episode_len_mean': 100.0, 'timesteps_this_iter': 120910, 'info': {'weights_norm': 598.2583, 'grad_norm': 4.5833297, 'update_ratio': 0.025018256, 'episodes_this_iter': 1212, 'episodes_so_far': 47290}, 'done': True, 'trial_id': 'f5823_00000', 'perf': {'cpu_util_percent': 59.660000000000004, 'ram_util_percent': 19.2}, 'experiment_tag': '0'}, error=None, log_dir=PosixPath('/home/daniel/DARM/darm_mujoco/darm_training/results/SF_rllib_es_vast/ES_darm_DarmSFHand-v0_f5823_00000_0_2023-02-13_01-37-21'))"
++       "Result(metrics={'episode_reward_mean': -96.625786, 'episode_len_mean': 89.0, 'timesteps_this_iter': 102498, 'info': {'weights_norm': 621.68445, 'grad_norm': 5.121456, 'update_ratio': 0.02451004, 'episodes_this_iter': 1092, 'episodes_so_far': 226560}, 'done': False, 'trial_id': 'ba596_00000', 'perf': {'cpu_util_percent': 63.24545454545454, 'ram_util_percent': 88.29999999999998}, 'experiment_tag': '0'}, error=None, log_dir=PosixPath('/home/daniel/DARM/darm_mujoco/darm_training/results/SF_rllib_es_vast_ai/ES_darm_DarmSFHand-v0_ba596_00000_0_2023-02-14_00-30-05'))"
+       ]
+      },
+-     "execution_count": 8,
++     "execution_count": 22,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -2398,34 +2410,50 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 9,
++   "execution_count": 23,
+    "id": "beca7170-c89a-402c-afb7-ce88cf5524b7",
+    "metadata": {
+     "tags": []
+    },
++   "outputs": [],
++   "source": [
++    "# Get the best checkpoint corresponding to the best result.\n",
++    "best_checkpoint = best_result.checkpoint\n",
++    "best_checkpoint\n",
++    "# best_checkpoint = \"/home/daniel/DARM/darm_mujoco/darm_training/results/SF_rllib_es_vast_ai/ES_darm_DarmSFHand-v0_ba596_00000_0_2023-02-14_00-30-05/checkpoint_000100\""
++   ]
++  },
++  {
++   "cell_type": "code",
++   "execution_count": 24,
++   "id": "c13525d9-27ad-4603-a317-f85efec9487c",
++   "metadata": {},
+    "outputs": [
+     {
+-     "data": {
+-      "text/plain": [
+-       "Checkpoint(local_path=/home/daniel/DARM/darm_mujoco/darm_training/results/SF_rllib_es_vast/ES_darm_DarmSFHand-v0_f5823_00000_0_2023-02-13_01-37-21/checkpoint_000039)"
+-      ]
+-     },
+-     "execution_count": 9,
+-     "metadata": {},
+-     "output_type": "execute_result"
++     "ename": "AttributeError",
++     "evalue": "'NoneType' object has no attribute '_local_path'",
++     "output_type": "error",
++     "traceback": [
++      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
++      "\u001b[0;31mAttributeError\u001b[0m                            Traceback (most recent call last)",
++      "Input \u001b[0;32mIn [24]\u001b[0m, in \u001b[0;36m<cell line: 1>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0m \u001b[43mbest_checkpoint\u001b[49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43m_local_path\u001b[49m\n",
++      "\u001b[0;31mAttributeError\u001b[0m: 'NoneType' object has no attribute '_local_path'"
++     ]
+     }
+    ],
+    "source": [
+-    "# Get the best checkpoint corresponding to the best result.\n",
+-    "best_checkpoint = best_result.checkpoint\n",
+-    "best_checkpoint"
++    "best_checkpoint._local_path"
+    ]
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 10,
++   "execution_count": 25,
+    "id": "3b9e8a43-146c-4a5b-99b7-12384ff38b84",
+    "metadata": {
++    "collapsed": true,
++    "jupyter": {
++     "outputs_hidden": true
++    },
+     "tags": []
+    },
+    "outputs": [
+@@ -2442,33 +2470,64 @@
+      "text": [
+       "/home/daniel/miniconda3/lib/python3.8/site-packages/gym/spaces/box.py:73: UserWarning: \u001b[33mWARN: Box bound precision lowered by casting to float32\u001b[0m\n",
+       "  logger.warn(\n",
+-      "2023-02-13 04:28:21,796\tINFO worker.py:1538 -- Started a local Ray instance.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:28:30,708 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111611904; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:28:40,716 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111689728; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:28:50,722 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111665152; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:29:00,731 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111611904; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "2023-02-13 04:29:04,657\tINFO es.py:401 -- Creating actors.\n",
+-      "2023-02-13 04:29:04,714\tINFO trainable.py:172 -- Trainable.setup took 47.133 seconds. If your trainable is slow to initialize, consider setting reuse_actors=True to reduce actor creation overheads.\n",
+-      "2023-02-13 04:29:04,718\tWARNING util.py:66 -- Install gputil for GPU system monitoring.\n",
+-      "2023-02-13 04:29:05,052\tINFO filter_manager.py:34 -- Synchronizing filters ...\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:29:10,739 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111566848; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[36m(Worker pid=32112)\u001b[0m /home/daniel/miniconda3/lib/python3.8/site-packages/gym/spaces/box.py:73: UserWarning: \u001b[33mWARN: Box bound precision lowered by casting to float32\u001b[0m\n",
+-      "\u001b[2m\u001b[36m(Worker pid=32112)\u001b[0m   logger.warn(\n",
+-      "\u001b[2m\u001b[36m(Worker pid=32111)\u001b[0m /home/daniel/miniconda3/lib/python3.8/site-packages/gym/spaces/box.py:73: UserWarning: \u001b[33mWARN: Box bound precision lowered by casting to float32\u001b[0m\n",
+-      "\u001b[2m\u001b[36m(Worker pid=32111)\u001b[0m   logger.warn(\n",
+-      "\u001b[2m\u001b[36m(Worker pid=32112)\u001b[0m 2023-02-13 04:29:13,052\tINFO policy.py:1147 -- Policy (worker=local) running on CPU.\n",
+-      "\u001b[2m\u001b[36m(Worker pid=32112)\u001b[0m 2023-02-13 04:29:13,052\tINFO torch_policy.py:184 -- Found 0 visible cuda devices.\n",
+-      "2023-02-13 04:29:13,139\tINFO filter_manager.py:55 -- Updating remote filters ...\n",
+-      "2023-02-13 04:29:13,150\tINFO trainable.py:790 -- Restored on 192.168.84.35 from checkpoint: /home/daniel/DARM/darm_mujoco/darm_training/results/SF_rllib_es_vast/ES_darm_DarmSFHand-v0_f5823_00000_0_2023-02-13_01-37-21/checkpoint_000039\n",
+-      "2023-02-13 04:29:13,151\tINFO trainable.py:799 -- Current state after restoring: {'_iteration': 39, '_timesteps_total': 4696651, '_time_total': 151.35283851623535, '_episodes_total': None}\n"
++      "2023-02-14 02:59:30,390\tINFO worker.py:1538 -- Started a local Ray instance.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 02:59:39,315 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 74452992; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 02:59:49,324 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 74260480; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 02:59:59,330 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 74199040; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "2023-02-14 03:00:00,275\tINFO es.py:401 -- Creating actors.\n",
++      "2023-02-14 03:00:00,613\tINFO trainable.py:172 -- Trainable.setup took 34.775 seconds. If your trainable is slow to initialize, consider setting reuse_actors=True to reduce actor creation overheads.\n",
++      "2023-02-14 03:00:00,615\tWARNING util.py:66 -- Install gputil for GPU system monitoring.\n",
++      "2023-02-14 03:00:00,666\tINFO filter_manager.py:34 -- Synchronizing filters ...\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:00:09,340 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 74149888; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[36m(Worker pid=13432)\u001b[0m /home/daniel/miniconda3/lib/python3.8/site-packages/gym/spaces/box.py:73: UserWarning: \u001b[33mWARN: Box bound precision lowered by casting to float32\u001b[0m\n",
++      "\u001b[2m\u001b[36m(Worker pid=13432)\u001b[0m   logger.warn(\n",
++      "\u001b[2m\u001b[36m(Worker pid=13432)\u001b[0m 2023-02-14 03:00:11,701\tINFO policy.py:1147 -- Policy (worker=local) running on CPU.\n",
++      "\u001b[2m\u001b[36m(Worker pid=13432)\u001b[0m 2023-02-14 03:00:11,701\tINFO torch_policy.py:184 -- Found 0 visible cuda devices.\n",
++      "2023-02-14 03:00:11,878\tINFO filter_manager.py:55 -- Updating remote filters ...\n"
+      ]
+     },
+     {
+      "name": "stdout",
+      "output_type": "stream",
+      "text": [
+-      "\u001b[2m\u001b[36m(Worker pid=32112)\u001b[0m Loaded XML file successfully\n",
+-      "\u001b[2m\u001b[36m(Worker pid=32111)\u001b[0m Loaded XML file successfully\n"
++      "\u001b[2m\u001b[36m(Worker pid=13432)\u001b[0m Loaded XML file successfully\n"
++     ]
++    },
++    {
++     "name": "stderr",
++     "output_type": "stream",
++     "text": [
++      "\u001b[2m\u001b[36m(Worker pid=13433)\u001b[0m /home/daniel/miniconda3/lib/python3.8/site-packages/gym/spaces/box.py:73: UserWarning: \u001b[33mWARN: Box bound precision lowered by casting to float32\u001b[0m\n",
++      "\u001b[2m\u001b[36m(Worker pid=13433)\u001b[0m   logger.warn(\n",
++      "\u001b[2m\u001b[36m(Worker pid=13433)\u001b[0m 2023-02-14 03:00:11,856\tINFO policy.py:1147 -- Policy (worker=local) running on CPU.\n",
++      "\u001b[2m\u001b[36m(Worker pid=13433)\u001b[0m 2023-02-14 03:00:11,857\tINFO torch_policy.py:184 -- Found 0 visible cuda devices.\n",
++      "\u001b[2m\u001b[36m(Worker pid=13431)\u001b[0m /home/daniel/miniconda3/lib/python3.8/site-packages/gym/spaces/box.py:73: UserWarning: \u001b[33mWARN: Box bound precision lowered by casting to float32\u001b[0m\n",
++      "\u001b[2m\u001b[36m(Worker pid=13431)\u001b[0m   logger.warn(\n",
++      "\u001b[2m\u001b[36m(Worker pid=13431)\u001b[0m 2023-02-14 03:00:11,864\tINFO policy.py:1147 -- Policy (worker=local) running on CPU.\n",
++      "\u001b[2m\u001b[36m(Worker pid=13431)\u001b[0m 2023-02-14 03:00:11,864\tINFO torch_policy.py:184 -- Found 0 visible cuda devices.\n",
++      "2023-02-14 03:00:11,895\tINFO trainable.py:790 -- Restored on 192.168.84.36 from checkpoint: /home/daniel/DARM/darm_mujoco/darm_training/results/SF_rllib_es_vast_ai/ES_darm_DarmSFHand-v0_ba596_00000_0_2023-02-14_00-30-05/checkpoint\n",
++      "2023-02-14 03:00:11,897\tINFO trainable.py:799 -- Current state after restoring: {'_iteration': 200, '_timesteps_total': 21097912, '_time_total': 2187.795172929764, '_episodes_total': None}\n"
++     ]
++    },
++    {
++     "name": "stdout",
++     "output_type": "stream",
++     "text": [
++      "\u001b[2m\u001b[36m(Worker pid=13433)\u001b[0m Loaded XML file successfully\n",
++      "\u001b[2m\u001b[36m(Worker pid=13431)\u001b[0m Loaded XML file successfully\n"
++     ]
++    },
++    {
++     "name": "stderr",
++     "output_type": "stream",
++     "text": [
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:00:19,350 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 74067968; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:00:29,361 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 73969664; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:00:30,358 E 13144 13144] (raylet) node_manager.cc:3097: 1 Workers (tasks / actors) killed due to memory pressure (OOM), 0 Workers crashed due to other reasons at node (ID: 7f37027982e3c4e87eadca1df4b6fba92936b85b5d5787fba86bbd49, IP: 192.168.84.36) over the last time period. To see more information about the Workers killed on this node, use `ray logs raylet.out -ip 192.168.84.36`\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m \n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m Refer to the documentation on how to address the out of memory issue: https://docs.ray.io/en/latest/ray-core/scheduling/ray-oom-prevention.html. Consider provisioning more memory on this node or reducing task parallelism by requesting more CPUs per task. To adjust the kill threshold, set the environment variable `RAY_memory_usage_threshold` when starting Ray. To disable worker killing, set the environment variable `RAY_memory_monitor_refresh_ms` to zero.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:00:39,371 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 73912320; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:00:49,386 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 73900032; capacity: 31845081088. Object creation will fail if spilling is required.\n"
+      ]
+     }
+    ],
+@@ -2479,7 +2538,26 @@
+     "# algo\n",
+     "\n",
+     "algo = config.build()\n",
+-    "algo.restore(best_checkpoint._local_path)"
++    "# algo.restore(best_checkpoint._local_path)\n",
++    "algo.restore(\"/home/daniel/DARM/darm_mujoco/darm_training/results/SF_rllib_es_vast_ai/ES_darm_DarmSFHand-v0_ba596_00000_0_2023-02-14_00-30-05/checkpoint\")"
++   ]
++  },
++  {
++   "cell_type": "code",
++   "execution_count": 19,
++   "id": "c0862378-ea72-4588-b011-89a021968823",
++   "metadata": {},
++   "outputs": [
++    {
++     "name": "stdout",
++     "output_type": "stream",
++     "text": [
++      "algorithm_state.pkl  rllib_checkpoint.json\n"
++     ]
++    }
++   ],
++   "source": [
++    "!ls /home/daniel/DARM/darm_mujoco/darm_training/results/SF_rllib_es_vast_ai/ES_darm_DarmSFHand-v0_ba596_00000_0_2023-02-14_00-30-05/checkpoint"
+    ]
+   },
+   {
+@@ -2855,7 +2933,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 19,
++   "execution_count": 63,
+    "id": "9358c3e3-de5f-4c5e-b284-0884e276e62a",
+    "metadata": {
+     "tags": []
+@@ -2865,14 +2943,33 @@
+      "name": "stdout",
+      "output_type": "stream",
+      "text": [
+-      "Loaded XML file successfully\n"
++      "Loaded XML file successfully\n",
++      "Step Reward: [-1.31704631], \n",
++      " Action: [-0.721797   -0.65120614 -0.37408024 -0.3842584   0.20022504] \n",
++      " Info: {'sim_time': 8.149999999999391, 'reward': {'norm_reward': array([-1.31604405]), 'ctrl_reward': -0.001002251636236906, 'reach_reward': 0}, 'TimeLimit.truncated': True} \n",
++      "\n",
++      "\n",
++      "\n"
+      ]
+     },
++    {
++     "data": {
++      "text/plain": [
++       "array([-90.73994657])"
++      ]
++     },
++     "execution_count": 63,
++     "metadata": {},
++     "output_type": "execute_result"
++    },
+     {
+      "name": "stderr",
+      "output_type": "stream",
+      "text": [
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:29:50,816 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111525888; capacity: 31845081088. Object creation will fail if spilling is required.\n"
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:11:30,484 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 72933376; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:11:40,497 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 72908800; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:11:50,514 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 72912896; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:12:00,529 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 72916992; capacity: 31845081088. Object creation will fail if spilling is required.\n"
+      ]
+     }
+    ],
+@@ -2889,14 +2986,20 @@
+     "    action = algo.compute_single_action(obs)\n",
+     "    obs,rew, done, info = env.step(action)\n",
+     "    episode_reward += rew\n",
+-    "    # print(f\"Step Reward: {rew}, \\n Action: {action} \\n Info: {info} \\n\\n\\n\")\n",
++    "    if info[\"reward\"][\"reach_reward\"] == 100:\n",
++    "        print(\"Done\")\n",
++    "        obs = env.reset()\n",
++    "    \n",
++    "print(f\"Step Reward: {rew}, \\n Action: {action} \\n Info: {info} \\n\\n\\n\")\n",
++    "\n",
++    "env.close()\n",
+     "\n",
+-    "env.close()"
++    "episode_reward"
+    ]
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 20,
++   "execution_count": 27,
+    "id": "0e72ce2d-6251-4194-98df-34e22b63751c",
+    "metadata": {
+     "tags": []
+@@ -2905,10 +3008,10 @@
+     {
+      "data": {
+       "text/plain": [
+-       "-208.81383975222707"
++       "array([-193.7561124])"
+       ]
+      },
+-     "execution_count": 20,
++     "execution_count": 27,
+      "metadata": {},
+      "output_type": "execute_result"
+     },
+@@ -2916,187 +3019,9 @@
+      "name": "stderr",
+      "output_type": "stream",
+      "text": [
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:30:00,837 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111513600; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:30:10,852 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111497216; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:30:20,869 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111489024; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:30:30,887 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111443968; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:30:40,900 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111435776; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:30:50,917 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111411200; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:31:00,932 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111407104; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:31:10,951 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111407104; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:31:20,970 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111390720; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:31:30,988 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 114110464; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:31:41,010 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 114032640; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:31:51,029 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 114028544; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:32:01,051 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 114020352; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:32:11,071 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113991680; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:32:21,088 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113979392; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:32:31,106 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113872896; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:32:41,123 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113881088; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:32:51,142 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113876992; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:33:01,161 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113876992; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:33:11,179 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113852416; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:33:21,191 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113905664; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:33:31,208 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113848320; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:33:41,223 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113872896; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:33:51,239 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113868800; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:34:01,256 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113860608; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:34:11,275 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113819648; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:34:21,294 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113807360; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:34:31,312 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113766400; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:34:41,327 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113770496; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:34:51,342 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113725440; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:35:01,368 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113729536; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:35:11,386 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113750016; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:35:21,406 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113709056; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:35:31,428 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113676288; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:35:41,448 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113618944; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:35:51,465 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113577984; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:36:01,484 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113553408; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:36:11,504 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113520640; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:36:21,523 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113508352; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:36:31,541 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113487872; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:36:41,557 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113487872; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:36:51,574 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113471488; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:37:01,587 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113483776; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:37:11,598 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113328128; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:37:21,613 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113311744; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:37:31,628 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113291264; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:37:41,643 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113291264; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:37:51,656 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113250304; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:38:01,675 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113242112; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:38:11,692 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113221632; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:38:21,710 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113217536; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:38:31,728 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113192960; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:38:41,744 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113172480; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:38:51,764 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113143808; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:39:01,783 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113143808; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:39:11,804 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113115136; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:39:21,824 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113090560; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:39:31,840 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113082368; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:39:41,861 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113074176; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:39:51,883 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113049600; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:40:01,903 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113008640; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:40:11,920 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112975872; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:40:21,927 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112750592; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:40:31,938 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112664576; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:40:41,950 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112607232; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:40:51,962 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112566272; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:41:01,979 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112431104; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:41:11,992 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112279552; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:41:22,012 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112214016; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:41:32,024 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112066560; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:41:42,039 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111984640; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:41:52,053 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111767552; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:42:02,067 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111673344; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:42:12,089 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111648768; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:42:22,105 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111480832; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:42:32,120 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111308800; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:42:42,137 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111296512; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:42:52,152 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111243264; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:43:02,169 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111243264; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:43:12,185 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111226880; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:43:22,204 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111202304; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:43:32,224 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111198208; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:43:42,242 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111194112; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:43:52,260 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111169536; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:44:02,279 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111165440; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:44:12,298 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111153152; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:44:22,325 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111124480; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:44:32,342 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111112192; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:44:42,361 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111112192; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:44:52,382 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111063040; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:45:02,402 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111022080; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:45:12,420 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111013888; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:45:22,436 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110948352; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:45:32,449 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110886912; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:45:42,463 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110710784; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:45:52,476 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110731264; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:46:02,489 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110694400; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:46:12,504 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110641152; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:46:22,521 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110526464; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:46:32,541 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110534656; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:46:42,561 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110534656; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:46:52,583 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110505984; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:47:02,603 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110469120; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:47:12,617 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110338048; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:47:22,630 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110227456; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:47:32,644 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110170112; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:47:42,659 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110129152; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:47:52,676 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110067712; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:48:02,694 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110043136; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:48:12,711 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110034944; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:48:22,730 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109998080; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:48:32,747 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109993984; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:48:42,763 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109989888; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:48:52,779 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109965312; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:49:02,795 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109912064; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:49:12,810 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109899776; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:49:22,828 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109858816; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:49:32,847 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109850624; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:49:42,866 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109850624; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:49:52,881 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109850624; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:50:02,896 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109793280; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:50:12,910 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109789184; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:50:22,929 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109756416; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:50:32,948 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109711360; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:50:42,962 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109633536; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:50:52,980 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109592576; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:51:02,996 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109502464; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:51:13,011 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109490176; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:51:23,029 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109445120; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:51:33,046 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109445120; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:51:43,064 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109441024; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:51:53,079 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109441024; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:52:03,096 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109441024; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:52:13,113 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109395968; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:52:23,132 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109350912; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:52:33,150 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109350912; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:52:43,167 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109342720; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:52:53,185 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109305856; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:53:03,201 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109293568; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:53:13,216 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109264896; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:53:23,238 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109219840; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:53:33,259 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109215744; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:53:43,283 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109215744; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:53:53,301 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109215744; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:54:03,322 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109211648; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:54:13,338 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109182976; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:54:23,359 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109154304; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:54:33,379 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109150208; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:54:43,398 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109150208; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:54:53,419 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109109248; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:55:03,438 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109096960; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:55:13,457 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109072384; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:55:23,479 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109031424; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:55:33,499 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109027328; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:55:43,519 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108994560; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:55:53,539 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109015040; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:56:03,561 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109039616; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:56:13,580 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109023232; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:56:23,599 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108994560; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:56:33,618 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108994560; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:56:43,636 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108990464; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:56:53,654 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109002752; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:57:03,670 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108920832; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:57:13,688 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108920832; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:57:23,704 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108859392; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:57:33,716 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108859392; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:57:43,725 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108855296; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:57:53,742 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108855296; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:58:03,758 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108830720; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:58:13,769 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108806144; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:58:23,780 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108773376; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:58:33,795 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108769280; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:58:43,813 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108769280; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:58:53,831 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108744704; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:59:03,845 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112037888; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:59:13,861 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112050176; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:59:23,880 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112009216; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:59:33,899 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111996928; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:59:43,913 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112005120; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:59:53,923 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111960064; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 05:00:03,938 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111923200; capacity: 31845081088. Object creation will fail if spilling is required.\n"
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:00:59,402 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 73900032; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:01:09,418 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 73908224; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:01:19,435 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 73908224; capacity: 31845081088. Object creation will fail if spilling is required.\n"
+      ]
+     }
+    ],
+@@ -3104,10 +3029,127 @@
+     "episode_reward"
+    ]
+   },
++  {
++   "cell_type": "code",
++   "execution_count": 6,
++   "id": "1f42fe0e-96f4-403d-8018-af9f40ff5ade",
++   "metadata": {},
++   "outputs": [
++    {
++     "name": "stderr",
++     "output_type": "stream",
++     "text": [
++      "\u001b[34m\u001b[1mwandb\u001b[0m: Currently logged in as: \u001b[33mdanieladejumo\u001b[0m. Use \u001b[1m`wandb login --relogin`\u001b[0m to force relogin\n"
++     ]
++    },
++    {
++     "data": {
++      "text/html": [
++       "Tracking run with wandb version 0.13.10"
++      ],
++      "text/plain": [
++       "<IPython.core.display.HTML object>"
++      ]
++     },
++     "metadata": {},
++     "output_type": "display_data"
++    },
++    {
++     "data": {
++      "text/html": [
++       "Run data is saved locally in <code>/home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230214_015038-mxe12lb8</code>"
++      ],
++      "text/plain": [
++       "<IPython.core.display.HTML object>"
++      ]
++     },
++     "metadata": {},
++     "output_type": "display_data"
++    },
++    {
++     "data": {
++      "text/html": [
++       "Syncing run <strong><a href='https://wandb.ai/danieladejumo/darm_mujoco-darm_training/runs/mxe12lb8' target=\"_blank\">cherishing-hug-2</a></strong> to <a href='https://wandb.ai/danieladejumo/darm_mujoco-darm_training' target=\"_blank\">Weights & Biases</a> (<a href='https://wandb.me/run' target=\"_blank\">docs</a>)<br/>"
++      ],
++      "text/plain": [
++       "<IPython.core.display.HTML object>"
++      ]
++     },
++     "metadata": {},
++     "output_type": "display_data"
++    },
++    {
++     "data": {
++      "text/html": [
++       " View project at <a href='https://wandb.ai/danieladejumo/darm_mujoco-darm_training' target=\"_blank\">https://wandb.ai/danieladejumo/darm_mujoco-darm_training</a>"
++      ],
++      "text/plain": [
++       "<IPython.core.display.HTML object>"
++      ]
++     },
++     "metadata": {},
++     "output_type": "display_data"
++    },
++    {
++     "data": {
++      "text/html": [
++       " View run at <a href='https://wandb.ai/danieladejumo/darm_mujoco-darm_training/runs/mxe12lb8' target=\"_blank\">https://wandb.ai/danieladejumo/darm_mujoco-darm_training/runs/mxe12lb8</a>"
++      ],
++      "text/plain": [
++       "<IPython.core.display.HTML object>"
++      ]
++     },
++     "metadata": {},
++     "output_type": "display_data"
++    }
++   ],
++   "source": [
++    "import wandb\n",
++    "run = wandb.init()"
++   ]
++  },
++  {
++   "cell_type": "code",
++   "execution_count": 10,
++   "id": "479975aa-8999-4078-a7f6-366e7a6741b8",
++   "metadata": {},
++   "outputs": [],
++   "source": [
++    "artifact = run.use_artifact('danieladejumo/DARM/checkpoint_SF_rllib_es_vast_ai:v3', type='model')"
++   ]
++  },
++  {
++   "cell_type": "code",
++   "execution_count": 11,
++   "id": "c454ebe0-1ce6-46e5-a746-f755e30b3249",
++   "metadata": {},
++   "outputs": [
++    {
++     "name": "stderr",
++     "output_type": "stream",
++     "text": [
++      "\u001b[34m\u001b[1mwandb\u001b[0m:   4 of 4 files downloaded.  \n"
++     ]
++    }
++   ],
++   "source": [
++    "artifact_dir = artifact.download(root=\" /home/daniel/DARM/darm_mujoco/darm_training/results/vast_ai_checkpoints\")"
++   ]
++  },
++  {
++   "cell_type": "code",
++   "execution_count": 12,
++   "id": "565687a2-2ed9-45d7-bb57-1076532240bc",
++   "metadata": {},
++   "outputs": [],
++   "source": [
++    "!ls /home/daniel/DARM/darm_mujoco/darm_training/results/vast_ai_checkpoints"
++   ]
++  },
+   {
+    "cell_type": "code",
+    "execution_count": null,
+-   "id": "7b47d165-189f-45fe-973c-27b0b13451ab",
++   "id": "8796aa46-1398-4920-98d2-693db504af5f",
+    "metadata": {},
+    "outputs": [],
+    "source": []
+diff --git a/darm_training/darm_sf_hand_rllib_es.ipynb b/darm_training/darm_sf_hand_rllib_es.ipynb
+index dcadd06..c74785e 100644
+--- a/darm_training/darm_sf_hand_rllib_es.ipynb
++++ b/darm_training/darm_sf_hand_rllib_es.ipynb
+@@ -54,10 +54,22 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": null,
++   "execution_count": 3,
+    "id": "1faaeaf7-f077-4e44-a4aa-4e81374219e6",
+    "metadata": {},
+-   "outputs": [],
++   "outputs": [
++    {
++     "name": "stdout",
++     "output_type": "stream",
++     "text": [
++      "gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0\n",
++      "Copyright (C) 2017 Free Software Foundation, Inc.\n",
++      "This is free software; see the source for copying conditions.  There is NO\n",
++      "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n",
++      "\n"
++     ]
++    }
++   ],
+    "source": [
+     "# Check if GCC is installed\n",
+     "!gcc --version"
+@@ -321,7 +333,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": null,
++   "execution_count": 4,
+    "id": "07e3679f-78c0-46dd-a387-c2b63c39958a",
+    "metadata": {},
+    "outputs": [],
+@@ -343,7 +355,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 3,
++   "execution_count": 5,
+    "id": "b9c7e52e-b467-4d91-8fe9-d1035e51c932",
+    "metadata": {},
+    "outputs": [],
+@@ -372,7 +384,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 4,
++   "execution_count": 6,
+    "id": "0ee4bf2a-d82c-4aaa-b278-f11a080e28af",
+    "metadata": {},
+    "outputs": [],
+@@ -397,7 +409,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 5,
++   "execution_count": 7,
+    "id": "4a0ed8ba-4f6b-47f9-b0e7-37d0eec71647",
+    "metadata": {
+     "tags": []
+@@ -2318,7 +2330,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 6,
++   "execution_count": 20,
+    "id": "ed17fb23-77b1-4e35-95b7-a44b6e342691",
+    "metadata": {
+     "tags": []
+@@ -2327,10 +2339,10 @@
+     {
+      "data": {
+       "text/plain": [
+-       "<ray.tune.tuner.Tuner at 0x7f82b90c1220>"
++       "<ray.tune.tuner.Tuner at 0x7f6c3902e130>"
+       ]
+      },
+-     "execution_count": 6,
++     "execution_count": 20,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -2341,7 +2353,7 @@
+     "\n",
+     "# Restore Interrupted run\n",
+     "tuner = tune.Tuner.restore(\n",
+-    "    f\"{os.getenv('DARM_MUJOCO_PATH')}/darm_training/results/SF_rllib_es_vast\",\n",
++    "    f\"{os.getenv('DARM_MUJOCO_PATH')}/darm_training/results/SF_rllib_es_vast_ai\",\n",
+     "    resume_errored=True\n",
+     ")\n",
+     "tuner"
+@@ -2349,7 +2361,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 7,
++   "execution_count": 21,
+    "id": "160c2790-f9ac-41cb-8198-d571d2c51332",
+    "metadata": {
+     "tags": []
+@@ -2358,10 +2370,10 @@
+     {
+      "data": {
+       "text/plain": [
+-       "<ray.tune.result_grid.ResultGrid at 0x7f82b8f2ce50>"
++       "<ray.tune.result_grid.ResultGrid at 0x7f6c38ad9400>"
+       ]
+      },
+-     "execution_count": 7,
++     "execution_count": 21,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -2373,7 +2385,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 8,
++   "execution_count": 22,
+    "id": "ace959cb-3e05-4caa-8dd9-f00bbab33eb0",
+    "metadata": {
+     "tags": []
+@@ -2382,10 +2394,10 @@
+     {
+      "data": {
+       "text/plain": [
+-       "Result(metrics={'episode_reward_mean': 266.62735, 'episode_len_mean': 100.0, 'timesteps_this_iter': 120910, 'info': {'weights_norm': 598.2583, 'grad_norm': 4.5833297, 'update_ratio': 0.025018256, 'episodes_this_iter': 1212, 'episodes_so_far': 47290}, 'done': True, 'trial_id': 'f5823_00000', 'perf': {'cpu_util_percent': 59.660000000000004, 'ram_util_percent': 19.2}, 'experiment_tag': '0'}, error=None, log_dir=PosixPath('/home/daniel/DARM/darm_mujoco/darm_training/results/SF_rllib_es_vast/ES_darm_DarmSFHand-v0_f5823_00000_0_2023-02-13_01-37-21'))"
++       "Result(metrics={'episode_reward_mean': -96.625786, 'episode_len_mean': 89.0, 'timesteps_this_iter': 102498, 'info': {'weights_norm': 621.68445, 'grad_norm': 5.121456, 'update_ratio': 0.02451004, 'episodes_this_iter': 1092, 'episodes_so_far': 226560}, 'done': False, 'trial_id': 'ba596_00000', 'perf': {'cpu_util_percent': 63.24545454545454, 'ram_util_percent': 88.29999999999998}, 'experiment_tag': '0'}, error=None, log_dir=PosixPath('/home/daniel/DARM/darm_mujoco/darm_training/results/SF_rllib_es_vast_ai/ES_darm_DarmSFHand-v0_ba596_00000_0_2023-02-14_00-30-05'))"
+       ]
+      },
+-     "execution_count": 8,
++     "execution_count": 22,
+      "metadata": {},
+      "output_type": "execute_result"
+     }
+@@ -2398,34 +2410,50 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 9,
++   "execution_count": 23,
+    "id": "beca7170-c89a-402c-afb7-ce88cf5524b7",
+    "metadata": {
+     "tags": []
+    },
++   "outputs": [],
++   "source": [
++    "# Get the best checkpoint corresponding to the best result.\n",
++    "best_checkpoint = best_result.checkpoint\n",
++    "best_checkpoint\n",
++    "# best_checkpoint = \"/home/daniel/DARM/darm_mujoco/darm_training/results/SF_rllib_es_vast_ai/ES_darm_DarmSFHand-v0_ba596_00000_0_2023-02-14_00-30-05/checkpoint_000100\""
++   ]
++  },
++  {
++   "cell_type": "code",
++   "execution_count": 24,
++   "id": "c13525d9-27ad-4603-a317-f85efec9487c",
++   "metadata": {},
+    "outputs": [
+     {
+-     "data": {
+-      "text/plain": [
+-       "Checkpoint(local_path=/home/daniel/DARM/darm_mujoco/darm_training/results/SF_rllib_es_vast/ES_darm_DarmSFHand-v0_f5823_00000_0_2023-02-13_01-37-21/checkpoint_000039)"
+-      ]
+-     },
+-     "execution_count": 9,
+-     "metadata": {},
+-     "output_type": "execute_result"
++     "ename": "AttributeError",
++     "evalue": "'NoneType' object has no attribute '_local_path'",
++     "output_type": "error",
++     "traceback": [
++      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
++      "\u001b[0;31mAttributeError\u001b[0m                            Traceback (most recent call last)",
++      "Input \u001b[0;32mIn [24]\u001b[0m, in \u001b[0;36m<cell line: 1>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0m \u001b[43mbest_checkpoint\u001b[49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43m_local_path\u001b[49m\n",
++      "\u001b[0;31mAttributeError\u001b[0m: 'NoneType' object has no attribute '_local_path'"
++     ]
+     }
+    ],
+    "source": [
+-    "# Get the best checkpoint corresponding to the best result.\n",
+-    "best_checkpoint = best_result.checkpoint\n",
+-    "best_checkpoint"
++    "best_checkpoint._local_path"
+    ]
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 10,
++   "execution_count": 25,
+    "id": "3b9e8a43-146c-4a5b-99b7-12384ff38b84",
+    "metadata": {
++    "collapsed": true,
++    "jupyter": {
++     "outputs_hidden": true
++    },
+     "tags": []
+    },
+    "outputs": [
+@@ -2442,33 +2470,64 @@
+      "text": [
+       "/home/daniel/miniconda3/lib/python3.8/site-packages/gym/spaces/box.py:73: UserWarning: \u001b[33mWARN: Box bound precision lowered by casting to float32\u001b[0m\n",
+       "  logger.warn(\n",
+-      "2023-02-13 04:28:21,796\tINFO worker.py:1538 -- Started a local Ray instance.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:28:30,708 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111611904; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:28:40,716 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111689728; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:28:50,722 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111665152; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:29:00,731 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111611904; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "2023-02-13 04:29:04,657\tINFO es.py:401 -- Creating actors.\n",
+-      "2023-02-13 04:29:04,714\tINFO trainable.py:172 -- Trainable.setup took 47.133 seconds. If your trainable is slow to initialize, consider setting reuse_actors=True to reduce actor creation overheads.\n",
+-      "2023-02-13 04:29:04,718\tWARNING util.py:66 -- Install gputil for GPU system monitoring.\n",
+-      "2023-02-13 04:29:05,052\tINFO filter_manager.py:34 -- Synchronizing filters ...\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:29:10,739 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111566848; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[36m(Worker pid=32112)\u001b[0m /home/daniel/miniconda3/lib/python3.8/site-packages/gym/spaces/box.py:73: UserWarning: \u001b[33mWARN: Box bound precision lowered by casting to float32\u001b[0m\n",
+-      "\u001b[2m\u001b[36m(Worker pid=32112)\u001b[0m   logger.warn(\n",
+-      "\u001b[2m\u001b[36m(Worker pid=32111)\u001b[0m /home/daniel/miniconda3/lib/python3.8/site-packages/gym/spaces/box.py:73: UserWarning: \u001b[33mWARN: Box bound precision lowered by casting to float32\u001b[0m\n",
+-      "\u001b[2m\u001b[36m(Worker pid=32111)\u001b[0m   logger.warn(\n",
+-      "\u001b[2m\u001b[36m(Worker pid=32112)\u001b[0m 2023-02-13 04:29:13,052\tINFO policy.py:1147 -- Policy (worker=local) running on CPU.\n",
+-      "\u001b[2m\u001b[36m(Worker pid=32112)\u001b[0m 2023-02-13 04:29:13,052\tINFO torch_policy.py:184 -- Found 0 visible cuda devices.\n",
+-      "2023-02-13 04:29:13,139\tINFO filter_manager.py:55 -- Updating remote filters ...\n",
+-      "2023-02-13 04:29:13,150\tINFO trainable.py:790 -- Restored on 192.168.84.35 from checkpoint: /home/daniel/DARM/darm_mujoco/darm_training/results/SF_rllib_es_vast/ES_darm_DarmSFHand-v0_f5823_00000_0_2023-02-13_01-37-21/checkpoint_000039\n",
+-      "2023-02-13 04:29:13,151\tINFO trainable.py:799 -- Current state after restoring: {'_iteration': 39, '_timesteps_total': 4696651, '_time_total': 151.35283851623535, '_episodes_total': None}\n"
++      "2023-02-14 02:59:30,390\tINFO worker.py:1538 -- Started a local Ray instance.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 02:59:39,315 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 74452992; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 02:59:49,324 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 74260480; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 02:59:59,330 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 74199040; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "2023-02-14 03:00:00,275\tINFO es.py:401 -- Creating actors.\n",
++      "2023-02-14 03:00:00,613\tINFO trainable.py:172 -- Trainable.setup took 34.775 seconds. If your trainable is slow to initialize, consider setting reuse_actors=True to reduce actor creation overheads.\n",
++      "2023-02-14 03:00:00,615\tWARNING util.py:66 -- Install gputil for GPU system monitoring.\n",
++      "2023-02-14 03:00:00,666\tINFO filter_manager.py:34 -- Synchronizing filters ...\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:00:09,340 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 74149888; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[36m(Worker pid=13432)\u001b[0m /home/daniel/miniconda3/lib/python3.8/site-packages/gym/spaces/box.py:73: UserWarning: \u001b[33mWARN: Box bound precision lowered by casting to float32\u001b[0m\n",
++      "\u001b[2m\u001b[36m(Worker pid=13432)\u001b[0m   logger.warn(\n",
++      "\u001b[2m\u001b[36m(Worker pid=13432)\u001b[0m 2023-02-14 03:00:11,701\tINFO policy.py:1147 -- Policy (worker=local) running on CPU.\n",
++      "\u001b[2m\u001b[36m(Worker pid=13432)\u001b[0m 2023-02-14 03:00:11,701\tINFO torch_policy.py:184 -- Found 0 visible cuda devices.\n",
++      "2023-02-14 03:00:11,878\tINFO filter_manager.py:55 -- Updating remote filters ...\n"
+      ]
+     },
+     {
+      "name": "stdout",
+      "output_type": "stream",
+      "text": [
+-      "\u001b[2m\u001b[36m(Worker pid=32112)\u001b[0m Loaded XML file successfully\n",
+-      "\u001b[2m\u001b[36m(Worker pid=32111)\u001b[0m Loaded XML file successfully\n"
++      "\u001b[2m\u001b[36m(Worker pid=13432)\u001b[0m Loaded XML file successfully\n"
++     ]
++    },
++    {
++     "name": "stderr",
++     "output_type": "stream",
++     "text": [
++      "\u001b[2m\u001b[36m(Worker pid=13433)\u001b[0m /home/daniel/miniconda3/lib/python3.8/site-packages/gym/spaces/box.py:73: UserWarning: \u001b[33mWARN: Box bound precision lowered by casting to float32\u001b[0m\n",
++      "\u001b[2m\u001b[36m(Worker pid=13433)\u001b[0m   logger.warn(\n",
++      "\u001b[2m\u001b[36m(Worker pid=13433)\u001b[0m 2023-02-14 03:00:11,856\tINFO policy.py:1147 -- Policy (worker=local) running on CPU.\n",
++      "\u001b[2m\u001b[36m(Worker pid=13433)\u001b[0m 2023-02-14 03:00:11,857\tINFO torch_policy.py:184 -- Found 0 visible cuda devices.\n",
++      "\u001b[2m\u001b[36m(Worker pid=13431)\u001b[0m /home/daniel/miniconda3/lib/python3.8/site-packages/gym/spaces/box.py:73: UserWarning: \u001b[33mWARN: Box bound precision lowered by casting to float32\u001b[0m\n",
++      "\u001b[2m\u001b[36m(Worker pid=13431)\u001b[0m   logger.warn(\n",
++      "\u001b[2m\u001b[36m(Worker pid=13431)\u001b[0m 2023-02-14 03:00:11,864\tINFO policy.py:1147 -- Policy (worker=local) running on CPU.\n",
++      "\u001b[2m\u001b[36m(Worker pid=13431)\u001b[0m 2023-02-14 03:00:11,864\tINFO torch_policy.py:184 -- Found 0 visible cuda devices.\n",
++      "2023-02-14 03:00:11,895\tINFO trainable.py:790 -- Restored on 192.168.84.36 from checkpoint: /home/daniel/DARM/darm_mujoco/darm_training/results/SF_rllib_es_vast_ai/ES_darm_DarmSFHand-v0_ba596_00000_0_2023-02-14_00-30-05/checkpoint\n",
++      "2023-02-14 03:00:11,897\tINFO trainable.py:799 -- Current state after restoring: {'_iteration': 200, '_timesteps_total': 21097912, '_time_total': 2187.795172929764, '_episodes_total': None}\n"
++     ]
++    },
++    {
++     "name": "stdout",
++     "output_type": "stream",
++     "text": [
++      "\u001b[2m\u001b[36m(Worker pid=13433)\u001b[0m Loaded XML file successfully\n",
++      "\u001b[2m\u001b[36m(Worker pid=13431)\u001b[0m Loaded XML file successfully\n"
++     ]
++    },
++    {
++     "name": "stderr",
++     "output_type": "stream",
++     "text": [
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:00:19,350 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 74067968; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:00:29,361 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 73969664; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:00:30,358 E 13144 13144] (raylet) node_manager.cc:3097: 1 Workers (tasks / actors) killed due to memory pressure (OOM), 0 Workers crashed due to other reasons at node (ID: 7f37027982e3c4e87eadca1df4b6fba92936b85b5d5787fba86bbd49, IP: 192.168.84.36) over the last time period. To see more information about the Workers killed on this node, use `ray logs raylet.out -ip 192.168.84.36`\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m \n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m Refer to the documentation on how to address the out of memory issue: https://docs.ray.io/en/latest/ray-core/scheduling/ray-oom-prevention.html. Consider provisioning more memory on this node or reducing task parallelism by requesting more CPUs per task. To adjust the kill threshold, set the environment variable `RAY_memory_usage_threshold` when starting Ray. To disable worker killing, set the environment variable `RAY_memory_monitor_refresh_ms` to zero.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:00:39,371 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 73912320; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:00:49,386 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 73900032; capacity: 31845081088. Object creation will fail if spilling is required.\n"
+      ]
+     }
+    ],
+@@ -2479,7 +2538,26 @@
+     "# algo\n",
+     "\n",
+     "algo = config.build()\n",
+-    "algo.restore(best_checkpoint._local_path)"
++    "# algo.restore(best_checkpoint._local_path)\n",
++    "algo.restore(\"/home/daniel/DARM/darm_mujoco/darm_training/results/SF_rllib_es_vast_ai/ES_darm_DarmSFHand-v0_ba596_00000_0_2023-02-14_00-30-05/checkpoint\")"
++   ]
++  },
++  {
++   "cell_type": "code",
++   "execution_count": 19,
++   "id": "c0862378-ea72-4588-b011-89a021968823",
++   "metadata": {},
++   "outputs": [
++    {
++     "name": "stdout",
++     "output_type": "stream",
++     "text": [
++      "algorithm_state.pkl  rllib_checkpoint.json\n"
++     ]
++    }
++   ],
++   "source": [
++    "!ls /home/daniel/DARM/darm_mujoco/darm_training/results/SF_rllib_es_vast_ai/ES_darm_DarmSFHand-v0_ba596_00000_0_2023-02-14_00-30-05/checkpoint"
+    ]
+   },
+   {
+@@ -2855,7 +2933,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 19,
++   "execution_count": 63,
+    "id": "9358c3e3-de5f-4c5e-b284-0884e276e62a",
+    "metadata": {
+     "tags": []
+@@ -2865,14 +2943,33 @@
+      "name": "stdout",
+      "output_type": "stream",
+      "text": [
+-      "Loaded XML file successfully\n"
++      "Loaded XML file successfully\n",
++      "Step Reward: [-1.31704631], \n",
++      " Action: [-0.721797   -0.65120614 -0.37408024 -0.3842584   0.20022504] \n",
++      " Info: {'sim_time': 8.149999999999391, 'reward': {'norm_reward': array([-1.31604405]), 'ctrl_reward': -0.001002251636236906, 'reach_reward': 0}, 'TimeLimit.truncated': True} \n",
++      "\n",
++      "\n",
++      "\n"
+      ]
+     },
++    {
++     "data": {
++      "text/plain": [
++       "array([-90.73994657])"
++      ]
++     },
++     "execution_count": 63,
++     "metadata": {},
++     "output_type": "execute_result"
++    },
+     {
+      "name": "stderr",
+      "output_type": "stream",
+      "text": [
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:29:50,816 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111525888; capacity: 31845081088. Object creation will fail if spilling is required.\n"
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:11:30,484 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 72933376; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:11:40,497 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 72908800; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:11:50,514 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 72912896; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:12:00,529 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 72916992; capacity: 31845081088. Object creation will fail if spilling is required.\n"
+      ]
+     }
+    ],
+@@ -2889,14 +2986,20 @@
+     "    action = algo.compute_single_action(obs)\n",
+     "    obs,rew, done, info = env.step(action)\n",
+     "    episode_reward += rew\n",
+-    "    # print(f\"Step Reward: {rew}, \\n Action: {action} \\n Info: {info} \\n\\n\\n\")\n",
++    "    if info[\"reward\"][\"reach_reward\"] == 100:\n",
++    "        print(\"Done\")\n",
++    "        obs = env.reset()\n",
++    "    \n",
++    "print(f\"Step Reward: {rew}, \\n Action: {action} \\n Info: {info} \\n\\n\\n\")\n",
++    "\n",
++    "env.close()\n",
+     "\n",
+-    "env.close()"
++    "episode_reward"
+    ]
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 20,
++   "execution_count": 27,
+    "id": "0e72ce2d-6251-4194-98df-34e22b63751c",
+    "metadata": {
+     "tags": []
+@@ -2905,10 +3008,10 @@
+     {
+      "data": {
+       "text/plain": [
+-       "-208.81383975222707"
++       "array([-193.7561124])"
+       ]
+      },
+-     "execution_count": 20,
++     "execution_count": 27,
+      "metadata": {},
+      "output_type": "execute_result"
+     },
+@@ -2916,187 +3019,9 @@
+      "name": "stderr",
+      "output_type": "stream",
+      "text": [
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:30:00,837 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111513600; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:30:10,852 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111497216; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:30:20,869 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111489024; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:30:30,887 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111443968; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:30:40,900 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111435776; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:30:50,917 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111411200; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:31:00,932 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111407104; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:31:10,951 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111407104; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:31:20,970 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111390720; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:31:30,988 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 114110464; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:31:41,010 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 114032640; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:31:51,029 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 114028544; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:32:01,051 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 114020352; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:32:11,071 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113991680; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:32:21,088 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113979392; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:32:31,106 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113872896; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:32:41,123 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113881088; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:32:51,142 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113876992; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:33:01,161 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113876992; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:33:11,179 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113852416; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:33:21,191 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113905664; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:33:31,208 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113848320; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:33:41,223 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113872896; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:33:51,239 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113868800; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:34:01,256 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113860608; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:34:11,275 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113819648; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:34:21,294 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113807360; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:34:31,312 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113766400; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:34:41,327 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113770496; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:34:51,342 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113725440; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:35:01,368 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113729536; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:35:11,386 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113750016; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:35:21,406 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113709056; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:35:31,428 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113676288; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:35:41,448 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113618944; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:35:51,465 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113577984; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:36:01,484 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113553408; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:36:11,504 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113520640; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:36:21,523 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113508352; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:36:31,541 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113487872; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:36:41,557 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113487872; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:36:51,574 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113471488; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:37:01,587 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113483776; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:37:11,598 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113328128; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:37:21,613 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113311744; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:37:31,628 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113291264; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:37:41,643 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113291264; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:37:51,656 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113250304; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:38:01,675 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113242112; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:38:11,692 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113221632; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:38:21,710 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113217536; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:38:31,728 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113192960; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:38:41,744 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113172480; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:38:51,764 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113143808; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:39:01,783 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113143808; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:39:11,804 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113115136; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:39:21,824 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113090560; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:39:31,840 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113082368; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:39:41,861 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113074176; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:39:51,883 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113049600; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:40:01,903 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 113008640; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:40:11,920 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112975872; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:40:21,927 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112750592; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:40:31,938 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112664576; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:40:41,950 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112607232; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:40:51,962 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112566272; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:41:01,979 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112431104; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:41:11,992 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112279552; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:41:22,012 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112214016; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:41:32,024 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112066560; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:41:42,039 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111984640; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:41:52,053 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111767552; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:42:02,067 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111673344; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:42:12,089 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111648768; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:42:22,105 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111480832; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:42:32,120 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111308800; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:42:42,137 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111296512; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:42:52,152 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111243264; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:43:02,169 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111243264; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:43:12,185 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111226880; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:43:22,204 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111202304; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:43:32,224 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111198208; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:43:42,242 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111194112; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:43:52,260 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111169536; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:44:02,279 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111165440; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:44:12,298 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111153152; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:44:22,325 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111124480; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:44:32,342 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111112192; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:44:42,361 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111112192; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:44:52,382 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111063040; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:45:02,402 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111022080; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:45:12,420 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111013888; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:45:22,436 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110948352; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:45:32,449 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110886912; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:45:42,463 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110710784; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:45:52,476 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110731264; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:46:02,489 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110694400; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:46:12,504 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110641152; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:46:22,521 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110526464; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:46:32,541 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110534656; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:46:42,561 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110534656; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:46:52,583 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110505984; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:47:02,603 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110469120; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:47:12,617 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110338048; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:47:22,630 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110227456; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:47:32,644 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110170112; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:47:42,659 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110129152; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:47:52,676 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110067712; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:48:02,694 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110043136; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:48:12,711 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 110034944; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:48:22,730 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109998080; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:48:32,747 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109993984; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:48:42,763 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109989888; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:48:52,779 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109965312; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:49:02,795 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109912064; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:49:12,810 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109899776; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:49:22,828 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109858816; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:49:32,847 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109850624; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:49:42,866 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109850624; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:49:52,881 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109850624; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:50:02,896 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109793280; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:50:12,910 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109789184; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:50:22,929 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109756416; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:50:32,948 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109711360; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:50:42,962 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109633536; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:50:52,980 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109592576; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:51:02,996 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109502464; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:51:13,011 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109490176; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:51:23,029 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109445120; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:51:33,046 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109445120; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:51:43,064 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109441024; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:51:53,079 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109441024; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:52:03,096 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109441024; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:52:13,113 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109395968; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:52:23,132 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109350912; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:52:33,150 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109350912; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:52:43,167 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109342720; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:52:53,185 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109305856; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:53:03,201 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109293568; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:53:13,216 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109264896; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:53:23,238 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109219840; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:53:33,259 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109215744; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:53:43,283 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109215744; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:53:53,301 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109215744; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:54:03,322 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109211648; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:54:13,338 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109182976; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:54:23,359 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109154304; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:54:33,379 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109150208; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:54:43,398 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109150208; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:54:53,419 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109109248; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:55:03,438 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109096960; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:55:13,457 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109072384; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:55:23,479 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109031424; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:55:33,499 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109027328; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:55:43,519 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108994560; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:55:53,539 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109015040; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:56:03,561 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109039616; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:56:13,580 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109023232; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:56:23,599 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108994560; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:56:33,618 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108994560; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:56:43,636 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108990464; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:56:53,654 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 109002752; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:57:03,670 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108920832; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:57:13,688 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108920832; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:57:23,704 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108859392; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:57:33,716 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108859392; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:57:43,725 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108855296; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:57:53,742 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108855296; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:58:03,758 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108830720; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:58:13,769 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108806144; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:58:23,780 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108773376; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:58:33,795 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108769280; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:58:43,813 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108769280; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:58:53,831 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 108744704; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:59:03,845 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112037888; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:59:13,861 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112050176; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:59:23,880 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112009216; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:59:33,899 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111996928; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:59:43,913 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 112005120; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 04:59:53,923 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111960064; capacity: 31845081088. Object creation will fail if spilling is required.\n",
+-      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-13 05:00:03,938 E 31814 31866] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-13_04-28-18_596978_31563 is over 95% full, available space: 111923200; capacity: 31845081088. Object creation will fail if spilling is required.\n"
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:00:59,402 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 73900032; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:01:09,418 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 73908224; capacity: 31845081088. Object creation will fail if spilling is required.\n",
++      "\u001b[2m\u001b[33m(raylet)\u001b[0m [2023-02-14 03:01:19,435 E 13144 13195] (raylet) file_system_monitor.cc:105: /tmp/ray/session_2023-02-14_02-59-27_105877_12500 is over 95% full, available space: 73908224; capacity: 31845081088. Object creation will fail if spilling is required.\n"
+      ]
+     }
+    ],
+@@ -3104,10 +3029,127 @@
+     "episode_reward"
+    ]
+   },
++  {
++   "cell_type": "code",
++   "execution_count": 6,
++   "id": "1f42fe0e-96f4-403d-8018-af9f40ff5ade",
++   "metadata": {},
++   "outputs": [
++    {
++     "name": "stderr",
++     "output_type": "stream",
++     "text": [
++      "\u001b[34m\u001b[1mwandb\u001b[0m: Currently logged in as: \u001b[33mdanieladejumo\u001b[0m. Use \u001b[1m`wandb login --relogin`\u001b[0m to force relogin\n"
++     ]
++    },
++    {
++     "data": {
++      "text/html": [
++       "Tracking run with wandb version 0.13.10"
++      ],
++      "text/plain": [
++       "<IPython.core.display.HTML object>"
++      ]
++     },
++     "metadata": {},
++     "output_type": "display_data"
++    },
++    {
++     "data": {
++      "text/html": [
++       "Run data is saved locally in <code>/home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230214_015038-mxe12lb8</code>"
++      ],
++      "text/plain": [
++       "<IPython.core.display.HTML object>"
++      ]
++     },
++     "metadata": {},
++     "output_type": "display_data"
++    },
++    {
++     "data": {
++      "text/html": [
++       "Syncing run <strong><a href='https://wandb.ai/danieladejumo/darm_mujoco-darm_training/runs/mxe12lb8' target=\"_blank\">cherishing-hug-2</a></strong> to <a href='https://wandb.ai/danieladejumo/darm_mujoco-darm_training' target=\"_blank\">Weights & Biases</a> (<a href='https://wandb.me/run' target=\"_blank\">docs</a>)<br/>"
++      ],
++      "text/plain": [
++       "<IPython.core.display.HTML object>"
++      ]
++     },
++     "metadata": {},
++     "output_type": "display_data"
++    },
++    {
++     "data": {
++      "text/html": [
++       " View project at <a href='https://wandb.ai/danieladejumo/darm_mujoco-darm_training' target=\"_blank\">https://wandb.ai/danieladejumo/darm_mujoco-darm_training</a>"
++      ],
++      "text/plain": [
++       "<IPython.core.display.HTML object>"
++      ]
++     },
++     "metadata": {},
++     "output_type": "display_data"
++    },
++    {
++     "data": {
++      "text/html": [
++       " View run at <a href='https://wandb.ai/danieladejumo/darm_mujoco-darm_training/runs/mxe12lb8' target=\"_blank\">https://wandb.ai/danieladejumo/darm_mujoco-darm_training/runs/mxe12lb8</a>"
++      ],
++      "text/plain": [
++       "<IPython.core.display.HTML object>"
++      ]
++     },
++     "metadata": {},
++     "output_type": "display_data"
++    }
++   ],
++   "source": [
++    "import wandb\n",
++    "run = wandb.init()"
++   ]
++  },
++  {
++   "cell_type": "code",
++   "execution_count": 10,
++   "id": "479975aa-8999-4078-a7f6-366e7a6741b8",
++   "metadata": {},
++   "outputs": [],
++   "source": [
++    "artifact = run.use_artifact('danieladejumo/DARM/checkpoint_SF_rllib_es_vast_ai:v3', type='model')"
++   ]
++  },
++  {
++   "cell_type": "code",
++   "execution_count": 11,
++   "id": "c454ebe0-1ce6-46e5-a746-f755e30b3249",
++   "metadata": {},
++   "outputs": [
++    {
++     "name": "stderr",
++     "output_type": "stream",
++     "text": [
++      "\u001b[34m\u001b[1mwandb\u001b[0m:   4 of 4 files downloaded.  \n"
++     ]
++    }
++   ],
++   "source": [
++    "artifact_dir = artifact.download(root=\" /home/daniel/DARM/darm_mujoco/darm_training/results/vast_ai_checkpoints\")"
++   ]
++  },
++  {
++   "cell_type": "code",
++   "execution_count": 12,
++   "id": "565687a2-2ed9-45d7-bb57-1076532240bc",
++   "metadata": {},
++   "outputs": [],
++   "source": [
++    "!ls /home/daniel/DARM/darm_mujoco/darm_training/results/vast_ai_checkpoints"
++   ]
++  },
+   {
+    "cell_type": "code",
+    "execution_count": null,
+-   "id": "7b47d165-189f-45fe-973c-27b0b13451ab",
++   "id": "8796aa46-1398-4920-98d2-693db504af5f",
+    "metadata": {},
+    "outputs": [],
+    "source": []

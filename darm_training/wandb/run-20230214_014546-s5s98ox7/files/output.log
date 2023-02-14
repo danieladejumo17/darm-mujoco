@@ -1,0 +1,6 @@
+
+[34m[1mwandb[39m[22m:   4 of 4 files downloaded.
+ls: cannot access '/home/daniel/DARM/darm_mujoco/darm_training/results/vast_ai_checkpoints': No such file or directory
+[34m[1mwandb[39m[22m:   4 of 4 files downloaded.
+[34m[1mwandb[39m[22m:   4 of 4 files downloaded.
+mkdir: cannot create directory ‘/home/daniel/DARM/darm_mujoco/darm_training/results/vast_ai_checkpoints’: File exists

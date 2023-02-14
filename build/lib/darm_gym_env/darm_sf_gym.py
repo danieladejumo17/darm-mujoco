@@ -129,11 +129,13 @@ class DARMSFEnv(gym.Env):
         """
 
         # Change in Norm to Target
-        # prev_norm = self._norm_to_target(state)
-        # new_norm = self._norm_to_target(new_state)
+        prev_norm = self._norm_to_target(state)
+        new_norm = self._norm_to_target(new_state)
         # norm_reward = -1 + sum(new_norm > prev_norm)*(-1/len(self.fingertip_indices))
+        norm_reward = 1 if new_norm < prev_norm else -1
 
-        norm_reward = -40*self._norm_to_target(state)
+# FINGER SEEMS TO AVOID TOUCHING THE GOAL
+        # norm_reward = -40*self._norm_to_target(state)   # max: -3.2
 
         # Velocity Correction
         # previous_pos = state[:len(state)//2].reshape((-1,3))
@@ -144,7 +146,7 @@ class DARMSFEnv(gym.Env):
         # Effort Correction
         # action_reward = (-0.5 + 0.5*np.exp(-1*action)).mean()
 
-        ctrl_reward = -0.1*np.sum((0.5*action)**2)
+        ctrl_reward = -0.1*np.sum((0.5*action)**2)  # max: -0.4
 
         # Reach Target Reward
         reach_reward = 100 if self._get_done(new_state) else 0
