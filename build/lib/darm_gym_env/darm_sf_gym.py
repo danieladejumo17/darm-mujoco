@@ -76,9 +76,9 @@ class DARMSFEnv(gym.Env):
         
         # Define Action Space
         # NOTE: Watch out for Box upper limit if Carpal Actuators are involved
-        # FIXME: Fix action range in reward function
-        self.action_space = gym.spaces.Box(low=np.array([0.0]*self.model.nu), 
-                                            high=np.array([2.0]*self.model.nu), 
+        # FIXME: Fix action range in reward and step functions. Current ==> [0,2] after denorm
+        self.action_space = gym.spaces.Box(low=np.array([-1.0]*self.model.nu), 
+                                            high=np.array([1.0]*self.model.nu), 
                                             shape=(self.model.nu,), dtype=np.float32)
 
         # For Human Rendering
@@ -237,7 +237,11 @@ class DARMSFEnv(gym.Env):
         prev_obs = self._get_obs()
 
         # FIXME: READ Action range from self.<>
-        action = np.clip(action, 0.0, 2.0)
+        # action from model is in the range [-1,1]
+        # action + 1 === [0, 2]
+        # action * x === [0, 2x]
+        action = (action + 1)*1
+        action = np.clip(action, 0, 2)
         self.data.ctrl[0 : self.model.nu] = action
         time_prev = self.data.time   # simulation time in seconds
 

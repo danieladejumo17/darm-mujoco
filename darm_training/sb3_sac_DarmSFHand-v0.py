@@ -25,7 +25,7 @@ if __name__ == "__main__":
     
 
     try:
-        model.learn(total_timesteps=10_000_000, log_interval=8, tb_log_name="PlainDarmEnv")
+        model.learn(total_timesteps=10_000_000, log_interval=8, tb_log_name="PlainDarmSFEnv")
         # Add calbacks
     except Exception as e:
         print("Exception caught:")

@@ -1,4 +1,0 @@
-
-[34m[1mwandb[39m[22m: Adding directory to artifact (/workspace/darm-mujoco/darm_training/results/SF_rllib_es_vast_ai/ES_darm_DarmSFHand-v0_ba596_00000_0_2023-02-14_00-30-05/checkpoint_000050)... Done. 0.0s
-[34m[1mwandb[39m[22m: Adding directory to artifact (/workspace/darm-mujoco/darm_training/results/SF_rllib_es_vast_ai/ES_darm_DarmSFHand-v0_ba596_00000_0_2023-02-14_00-30-05/checkpoint_000100)... Done. 0.0s
-2023-02-14 00:55:16,721	WARNING tune.py:690 -- Stop signal received (e.g. via SIGINT/Ctrl+C), ending Ray Tune run. This will try to checkpoint the experiment state one last time. Press CTRL+C (or send SIGINT/SIGKILL/SIGTERM) to skip.

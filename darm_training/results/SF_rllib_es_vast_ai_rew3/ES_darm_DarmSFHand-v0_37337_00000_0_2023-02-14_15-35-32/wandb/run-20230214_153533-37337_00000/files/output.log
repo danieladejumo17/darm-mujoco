@@ -1,5 +1,0 @@
-
-[34m[1mwandb[39m[22m: Adding directory to artifact (/workspace/darm-mujoco/darm_training/results/SF_rllib_es_vast_ai_rew3/ES_darm_DarmSFHand-v0_37337_00000_0_2023-02-14_15-35-32/checkpoint_000050)... Done. 0.0s
-[34m[1mwandb[39m[22m: Adding directory to artifact (/workspace/darm-mujoco/darm_training/results/SF_rllib_es_vast_ai_rew3/ES_darm_DarmSFHand-v0_37337_00000_0_2023-02-14_15-35-32/checkpoint_000100)... Done. 0.0s
-[34m[1mwandb[39m[22m: Adding directory to artifact (/workspace/darm-mujoco/darm_training/results/SF_rllib_es_vast_ai_rew3/ES_darm_DarmSFHand-v0_37337_00000_0_2023-02-14_15-35-32/checkpoint_000150)... Done. 0.0s
-[34m[1mwandb[39m[22m: Adding directory to artifact (/workspace/darm-mujoco/darm_training/results/SF_rllib_es_vast_ai_rew3/ES_darm_DarmSFHand-v0_37337_00000_0_2023-02-14_15-35-32/checkpoint_000200)... Done. 0.0s
