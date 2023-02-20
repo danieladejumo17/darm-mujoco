@@ -6,11 +6,11 @@ from gym.envs.registration import register
 register(
     id="darm/DarmHand-v0",
     entry_point="darm_gym_env:DARMEnv",
-    max_episode_steps=100
+    max_episode_steps=1000
 )
 
 register(
     id="darm/DarmSFHand-v0",
     entry_point="darm_gym_env:DARMSFEnv",
-    max_episode_steps=100
+    max_episode_steps=1000
 )
