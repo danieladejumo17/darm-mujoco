@@ -71,12 +71,13 @@ class DARMSFEnv(gym.Env):
 
         # Define Observation Space
         self.observation_space = gym.spaces.Box(low=-np.inf, high=np.inf, 
-                                                shape=(2*3*len(self.fingertip_indices),), 
+                                                shape=(3*3*len(self.fingertip_indices),), 
                                                 dtype=np.float32)
         
         # Define Action Space
         # NOTE: Watch out for Box upper limit if Carpal Actuators are involved
         # FIXME: Fix action range in reward and step functions. Current ==> [0,2] after denorm
+        # Define a mujoco action range array used for scaling
         self.action_space = gym.spaces.Box(low=np.array([-1.0]*self.model.nu), 
                                             high=np.array([1.0]*self.model.nu), 
                                             shape=(self.model.nu,), dtype=np.float32)
@@ -107,9 +108,16 @@ class DARMSFEnv(gym.Env):
         indices = ["ii"]
         self.fingertip_indices = [mj.mj_name2id(self.model, int(mj.mjtObj.mjOBJ_SITE), f"{self.hand_name}_fingertip_{i}") for i in indices]
     
-    def _get_obs(self):
+    def _get_obs(self, prev_obs, new_obs, action_time=None):
+        if not action_time:
+            # if no action time velocity is zero. i.e. after reset
+            vel_obs = np.zeros((3,))
+        elif action_time: 
+            vel_obs = (prev_obs[:3] - new_obs[:3])/action_time
+
         return np.concatenate((np.array([(np.array(self.data.site_xpos[i]) - self.ref_pos) for i in self.fingertip_indices]).flatten(),
-                             self.target_obs))
+                             self.target_obs,
+                             vel_obs))
 
     def _get_info(self):
         return {"sim_time": self.data.time - self.ep_start_time}
@@ -120,10 +128,10 @@ class DARMSFEnv(gym.Env):
         obs: an observation from the observation space [...fingertip_pos, ...target_pos]
         """
         obs = obs.reshape((-1, 3))
-        n_fingertips = len(obs)//2
+        n_fingertips = len(self.fingertip_indices)
 
         fingertip_poses = obs[0:n_fingertips]
-        target_poses = obs[n_fingertips:]
+        target_poses = obs[n_fingertips:2*n_fingertips]
 
         return np.linalg.norm(fingertip_poses-target_poses, ord=2, axis=-1)
 
@@ -145,7 +153,7 @@ class DARMSFEnv(gym.Env):
         # Use 0.5 to scale down reward to [0 1] from [0 2]
         # TODO: Let action range of model be limited to 1. Scale action input in mujoco model
         # NOTE: Some of the fingers in five fingered hand have more than five actuators
-        act_mag = np.linalg.norm(0.5*action.reshape(-1, 5)) # reshape action to (-1,5), ensure nu is ordered from mujoco
+        act_mag = np.linalg.norm((1/5)*action.reshape(-1, 5)) # reshape action to (-1,5), ensure nu is ordered from mujoco
         
         rwd_dict = collections.OrderedDict((
             # Optional Keys
@@ -176,8 +184,8 @@ class DARMSFEnv(gym.Env):
         # # norm_reward = -40*self._norm_to_target(state)   # max: -3.2
 
         # # Velocity Correction
-        # # previous_pos = state[:len(state)//2].reshape((-1,3))
-        # # new_pos = new_state[:len(new_state)//2].reshape((-1,3))
+        # # previous_pos = state[:3*len(self.fingertip_indices)].reshape((-1,3))
+        # # new_pos = new_state[:3*len(self.fingertip_indices)].reshape((-1,3))
         # # vel = np.linalg.norm(new_pos-previous_pos, ord=2, axis=-1) / time_delta
         # # vel_reward = (-0.3 + 0.3*np.exp(-1*vel)).mean() # scale vel term in exp beween [-1,-5]
         
@@ -211,7 +219,7 @@ class DARMSFEnv(gym.Env):
             target_joint_state = np.clip(a=joint_state + joint_state_delta, 
                                         a_min=self.min_joint_vals, 
                                         a_max=self.max_joint_vals)
-            self.target_obs = self.forward(target_joint_state)[:3]
+            self.target_obs = self.forward(target_joint_state)[:3*len(self.fingertip_indices)]
             # self.target_obs = self.targets[np.random.randint(0, self.targets_len)]
             
             # MOCAPS for visualization
@@ -234,14 +242,14 @@ class DARMSFEnv(gym.Env):
         return observation #, self._get_info()
 
     def step(self, action):
-        prev_obs = self._get_obs()
+        prev_obs = self._get_obs(prev_obs=None, new_obs=None, action_time=None)
 
         # FIXME: READ Action range from self.<>
         # action from model is in the range [-1,1]
         # action + 1 === [0, 2]
         # action * x === [0, 2x]
-        action = (action + 1)*1
-        action = np.clip(action, 0, 2)
+        action = (action + 1)*2.5  # [0, 5]
+        action = np.clip(action, 0, 5)
         self.data.ctrl[0 : self.model.nu] = action
         time_prev = self.data.time   # simulation time in seconds
 
@@ -251,7 +259,11 @@ class DARMSFEnv(gym.Env):
         time_after = self.data.time # time after performing action
 
         # Get new observation
-        new_obs = self._get_obs()
+        new_obs = self._get_obs(prev_obs=None, new_obs=None, action_time=None)
+        # include velocity in new obs
+        new_obs = self._get_obs(prev_obs=prev_obs,
+                                new_obs=new_obs, 
+                                action_time=time_after-time_prev)
 
         if self.render_mode == "human":
             self._render_frame()
@@ -270,7 +282,7 @@ class DARMSFEnv(gym.Env):
     def forward(self, joint_conf):
         self.data.qpos = joint_conf
         mj.mj_forward(self.model, self.data)
-        return self._get_obs()
+        return self._get_obs(prev_obs=None, new_obs=None, action_time=None)
 
     def render(self, mode, **kwargs):
         if self.render_mode == "human":

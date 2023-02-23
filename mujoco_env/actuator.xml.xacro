@@ -36,7 +36,7 @@
 
     <xacro:macro name="hand_actuators" params="hand_name">
         <!-- MACRO TO UNROLL LOOP -->
-        <xacro:macro name="make_actuators" params="tendons:=^ ctrlrange:='0 2' index:='0'">
+        <xacro:macro name="make_actuators" params="tendons:=^ ctrlrange:='0 5' index:='0'">
             <xacro:if value="${tendons}">
                 <!-- pop first item from list -->
                 <xacro:property name="tendon_name" value="${tendons.pop(0)}"/>
@@ -70,17 +70,17 @@
         </xacro:unless>
 
         <!-- Digit II -->
-        <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="ii" ctrlrange="0 2"/>
+        <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="ii" ctrlrange="0 5"/>
 
         <!-- Pollicis, Digit III-V, Digiti Minimi Specific Tendon Actuators -->
         <xacro:unless value="$(arg single_finger)">
-            <xacro:make_actuators tendons="${list(pollicis_tendons)}" ctrlrange="0 2"/>
+            <xacro:make_actuators tendons="${list(pollicis_tendons)}" ctrlrange="0 5"/>
 
-            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iii" ctrlrange="0 2"/>
-            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iv" ctrlrange="0 2"/>
-            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="v" ctrlrange="0 2"/>
+            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iii" ctrlrange="0 5"/>
+            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iv" ctrlrange="0 5"/>
+            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="v" ctrlrange="0 5"/>
 
-            <xacro:make_actuators tendons="${list(digiti_minimi_specific_tendons)}" ctrlrange="0 2"/>
+            <xacro:make_actuators tendons="${list(digiti_minimi_specific_tendons)}" ctrlrange="0 5"/>
         </xacro:unless>
     </xacro:macro>
 

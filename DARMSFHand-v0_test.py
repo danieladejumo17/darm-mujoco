@@ -12,6 +12,7 @@ episode_return = 0
 while not done:
     ac = env.action_space.sample()
     obs, rew, done, info = env.step(ac)
+    # obs is in m and m/s. It can be scaled before passing into model in cm and cm/s
     episode_return += rew
     env.render()
 
