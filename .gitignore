@@ -3,3 +3,5 @@ darm_gym_env/__pycache__/
 dist/
 darm_gym_env.egg-info/
 build/
+/home/daniel/DARM/darm_mujoco/darm_gym_env/DARMHand_MFNW_start_state.npy
+/home/daniel/DARM/darm_mujoco/darm_gym_env/DARMHand_SF_start_state.npy
