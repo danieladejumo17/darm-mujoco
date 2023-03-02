@@ -1,0 +1,259 @@
+Loaded XML file successfully
+Loaded XML file successfully
+/home/daniel/miniconda3/lib/python3.8/site-packages/gym/spaces/box.py:73: UserWarning: [33mWARN: Box bound precision lowered by casting to float32
+  logger.warn(
+Loaded XML file successfully
+Loaded XML file successfully
+Loaded XML file successfully
+Loaded XML file successfully
+Using cpu device
+Loaded XML file successfully
+Logging to /home/daniel/DARM/darm_mujoco/darm_training/results/darm_sf_hand/test1_SF_SB3_SAC_4/test1_SF_SB3_SAC_4_1
+/home/daniel/miniconda3/lib/python3.8/site-packages/numpy/core/fromnumeric.py:86: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 67.2     |
+|    ep_rew_mean     | -38.4    |
+| time/              |          |
+|    episodes        | 20       |
+|    fps             | 282      |
+|    time_elapsed    | 5        |
+|    total_timesteps | 1434     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 63.6     |
+|    ep_rew_mean     | -27.9    |
+| time/              |          |
+|    episodes        | 40       |
+|    fps             | 264      |
+|    time_elapsed    | 10       |
+|    total_timesteps | 2688     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 61.2     |
+|    ep_rew_mean     | -32.3    |
+| time/              |          |
+|    episodes        | 60       |
+|    fps             | 260      |
+|    time_elapsed    | 15       |
+|    total_timesteps | 4086     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 67.6     |
+|    ep_rew_mean     | -32.5    |
+| time/              |          |
+|    episodes        | 80       |
+|    fps             | 267      |
+|    time_elapsed    | 21       |
+|    total_timesteps | 5856     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 77.1     |
+|    ep_rew_mean     | -25.8    |
+| time/              |          |
+|    episodes        | 100      |
+|    fps             | 262      |
+|    time_elapsed    | 30       |
+|    total_timesteps | 8034     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 79       |
+|    ep_rew_mean     | -17.4    |
+| time/              |          |
+|    episodes        | 120      |
+|    fps             | 260      |
+|    time_elapsed    | 36       |
+|    total_timesteps | 9636     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 85.3     |
+|    ep_rew_mean     | -21.3    |
+| time/              |          |
+|    episodes        | 140      |
+|    fps             | 256      |
+|    time_elapsed    | 45       |
+|    total_timesteps | 11622    |
+---------------------------------
+Eval num_timesteps=12000, episode_reward=-34.65 +/- 18.42
+Episode length: 85.60 +/- 93.42
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 85.6     |
+|    mean_reward     | -34.6    |
+| time/              |          |
+|    total_timesteps | 12000    |
+---------------------------------
+New best mean reward!
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 94.9     |
+|    ep_rew_mean     | -19      |
+| time/              |          |
+|    episodes        | 160      |
+|    fps             | 244      |
+|    time_elapsed    | 56       |
+|    total_timesteps | 13836    |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 98.6     |
+|    ep_rew_mean     | -11.1    |
+| time/              |          |
+|    episodes        | 180      |
+|    fps             | 248      |
+|    time_elapsed    | 62       |
+|    total_timesteps | 15582    |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 91.3     |
+|    ep_rew_mean     | -11.8    |
+| time/              |          |
+|    episodes        | 200      |
+|    fps             | 243      |
+|    time_elapsed    | 70       |
+|    total_timesteps | 17154    |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 95.2     |
+|    ep_rew_mean     | -18      |
+| time/              |          |
+|    episodes        | 220      |
+|    fps             | 247      |
+|    time_elapsed    | 77       |
+|    total_timesteps | 19296    |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 97       |
+|    ep_rew_mean     | -17.8    |
+| time/              |          |
+|    episodes        | 240      |
+|    fps             | 245      |
+|    time_elapsed    | 85       |
+|    total_timesteps | 21138    |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 96.8     |
+|    ep_rew_mean     | -18.8    |
+| time/              |          |
+|    episodes        | 260      |
+|    fps             | 248      |
+|    time_elapsed    | 94       |
+|    total_timesteps | 23502    |
+---------------------------------
+Eval num_timesteps=24000, episode_reward=-36.06 +/- 13.13
+Episode length: 85.00 +/- 93.90
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 85       |
+|    mean_reward     | -36.1    |
+| time/              |          |
+|    total_timesteps | 24000    |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 96       |
+|    ep_rew_mean     | -25      |
+| time/              |          |
+|    episodes        | 280      |
+|    fps             | 242      |
+|    time_elapsed    | 104      |
+|    total_timesteps | 25290    |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 97.3     |
+|    ep_rew_mean     | -31.5    |
+| time/              |          |
+|    episodes        | 300      |
+|    fps             | 244      |
+|    time_elapsed    | 110      |
+|    total_timesteps | 27090    |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 101      |
+|    ep_rew_mean     | -32.6    |
+| time/              |          |
+|    episodes        | 320      |
+|    fps             | 243      |
+|    time_elapsed    | 119      |
+|    total_timesteps | 29178    |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 102      |
+|    ep_rew_mean     | -22.7    |
+| time/              |          |
+|    episodes        | 340      |
+|    fps             | 242      |
+|    time_elapsed    | 129      |
+|    total_timesteps | 31380    |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 98.2     |
+|    ep_rew_mean     | -20.3    |
+| time/              |          |
+|    episodes        | 360      |
+|    fps             | 243      |
+|    time_elapsed    | 135      |
+|    total_timesteps | 33066    |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 97.4     |
+|    ep_rew_mean     | -21.1    |
+| time/              |          |
+|    episodes        | 380      |
+|    fps             | 244      |
+|    time_elapsed    | 143      |
+|    total_timesteps | 35088    |
+---------------------------------
+Eval num_timesteps=36000, episode_reward=-40.24 +/- 11.28
+Episode length: 45.80 +/- 77.13
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 45.8     |
+|    mean_reward     | -40.2    |
+| time/              |          |
+|    total_timesteps | 36000    |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 97.5     |
+|    ep_rew_mean     | -21.5    |
+| time/              |          |
+|    episodes        | 400      |
+|    fps             | 243      |
+|    time_elapsed    | 150      |
+|    total_timesteps | 36576    |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 95.8     |
+|    ep_rew_mean     | -22      |
+| time/              |          |
+|    episodes        | 420      |
+|    fps             | 243      |
+|    time_elapsed    | 159      |
+|    total_timesteps | 38916    |
+---------------------------------
+Saving last checkpoint
+Last checkpoint saved in: /home/daniel/DARM/darm_mujoco/darm_training/results/darm_sf_hand/test1_SF_SB3_SAC_4/models/last_model
+Loaded XML file successfully
+Loaded XML file successfully
+Loaded XML file successfully
+-31.248395999999996 20.343810217126677
+100%|██████████| 1/1 [00:00<00:00,  3.40it/s]
+Loaded XML file successfully

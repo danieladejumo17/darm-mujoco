@@ -1,0 +1,1 @@
+{"global_step": 1950, "_timestamp": 1677689157.7561316, "rollout/ep_len_mean": 2.9000000953674316, "rollout/ep_rew_mean": -24.63835334777832, "time/fps": 2.0, "_runtime": 990.1302247047424, "_step": 29}

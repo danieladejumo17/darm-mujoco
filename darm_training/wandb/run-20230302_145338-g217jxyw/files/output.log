@@ -1,0 +1,66 @@
+
+Loaded XML file successfully
+/home/daniel/miniconda3/lib/python3.8/site-packages/gym/spaces/box.py:73: UserWarning: [33mWARN: Box bound precision lowered by casting to float32
+  logger.warn(
+Loaded XML file successfully
+Loaded XML file successfully
+Loaded XML file successfully
+Loaded XML file successfully
+Loaded XML file successfully
+Using cpu device
+Loaded XML file successfully
+Logging to /home/daniel/DARM/darm_mujoco/darm_training/results/darm_mf_hand/test1_MF_SB3_SAC/test1_MF_SB3_SAC_2
+/home/daniel/miniconda3/lib/python3.8/site-packages/numpy/core/fromnumeric.py:86: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
+----------------------------------
+| rollout/           |           |
+|    ep_len_mean     | 107       |
+|    ep_rew_mean     | -3.98e+03 |
+| time/              |           |
+|    episodes        | 20        |
+|    fps             | 20        |
+|    time_elapsed    | 126       |
+|    total_timesteps | 2550      |
+----------------------------------
+----------------------------------
+| rollout/           |           |
+|    ep_len_mean     | 94.2      |
+|    ep_rew_mean     | -3.55e+03 |
+| time/              |           |
+|    episodes        | 40        |
+|    fps             | 20        |
+|    time_elapsed    | 205       |
+|    total_timesteps | 4272      |
+----------------------------------
+----------------------------------
+| rollout/           |           |
+|    ep_len_mean     | 96        |
+|    ep_rew_mean     | -3.55e+03 |
+| time/              |           |
+|    episodes        | 60        |
+|    fps             | 20        |
+|    time_elapsed    | 291       |
+|    total_timesteps | 6000      |
+----------------------------------
+----------------------------------
+| rollout/           |           |
+|    ep_len_mean     | 92.6      |
+|    ep_rew_mean     | -3.39e+03 |
+| time/              |           |
+|    episodes        | 80        |
+|    fps             | 19        |
+|    time_elapsed    | 391       |
+|    total_timesteps | 7578      |
+----------------------------------
+----------------------------------
+| rollout/           |           |
+|    ep_len_mean     | 91.1      |
+|    ep_rew_mean     | -3.29e+03 |
+| time/              |           |
+|    episodes        | 100       |
+|    fps             | 18        |
+|    time_elapsed    | 514       |
+|    total_timesteps | 9276      |
+----------------------------------
+Saving last checkpoint
+Last checkpoint saved in: /home/daniel/DARM/darm_mujoco/darm_training/results/darm_mf_hand/test1_MF_SB3_SAC/models/last_model

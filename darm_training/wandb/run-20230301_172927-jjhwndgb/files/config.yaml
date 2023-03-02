@@ -1,0 +1,373 @@
+wandb_version: 1
+
+_current_progress_remaining:
+  desc: null
+  value: 1
+_custom_logger:
+  desc: null
+  value: 'False'
+_episode_num:
+  desc: null
+  value: 0
+_episode_storage:
+  desc: null
+  value: None
+_last_episode_starts:
+  desc: null
+  value: '[ True  True  True  True  True  True]'
+_last_obs:
+  desc: null
+  value: "[[ 3.46868658e+00 -9.37048244e+00  1.00374308e+01  1.66930282e+00\n  -1.08906231e+01\
+    \  1.28638659e+01 -2.00882833e-03 -8.62730408e+00\n   3.61855388e+00 -1.13051450e+00\
+    \ -1.05271730e+01  2.79026723e+00\n  -5.96210623e+00 -8.25740528e+00  9.85863781e+00\
+    \  3.62308931e+00\n  -1.09186268e+01  7.81611633e+00  1.19960797e+00 -1.33991280e+01\n\
+    \   1.06678514e+01  4.38884413e-03 -9.92100811e+00  1.74433994e+00\n  -8.88684809e-01\
+    \ -9.05544472e+00 -5.05912721e-01 -6.46817541e+00\n  -1.06423321e+01  8.08256435e+00\
+    \  0.00000000e+00  0.00000000e+00\n   0.00000000e+00  0.00000000e+00  0.00000000e+00\
+    \  0.00000000e+00\n   0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n\
+    \   0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n   0.00000000e+00]\n\
+    \ [ 2.50403023e+00 -1.54141784e+00  1.18670645e+01  3.41218114e+00\n   3.25164819e+00\
+    \  1.76524372e+01  9.67500329e-01 -3.09185886e+00\n   1.23518467e+01 -3.04792905e+00\
+    \  2.35813951e+00  1.79090118e+01\n  -1.28826010e+00 -3.01000714e+00  7.71681309e+00\
+    \  2.09242415e+00\n   1.21916962e+00  1.11531944e+01  1.73951972e+00  5.87074614e+00\n\
+    \   1.65162792e+01  6.28852487e-01 -7.47700334e-01  1.25423565e+01\n  -3.87705994e+00\
+    \  4.65204859e+00  1.68245907e+01 -1.55018425e+00\n   6.33306205e-02  7.04436493e+00\
+    \  0.00000000e+00  0.00000000e+00\n   0.00000000e+00  0.00000000e+00  0.00000000e+00\
+    \  0.00000000e+00\n   0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n\
+    \   0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n   0.00000000e+00]\n\
+    \ [-1.34302115e+00 -9.88658428e+00 -2.84535313e+00  4.80687857e+00\n  -1.70589237e+01\
+    \  2.66879201e+00 -1.09404244e-01 -1.31571274e+01\n  -1.00629771e+00 -1.69418859e+00\
+    \ -1.36412621e+01 -3.26686645e+00\n  -5.37272024e+00 -1.48419657e+01  5.04993057e+00\
+    \ -1.31255543e+00\n  -8.50733185e+00 -3.42412400e+00  5.19214106e+00 -1.77842751e+01\n\
+    \   3.09777617e+00  2.63081521e-01 -1.23869181e+01 -3.91016150e+00\n  -2.02729106e+00\
+    \ -1.32469902e+01 -4.00492811e+00 -4.60855389e+00\n  -1.53017979e+01  1.35973179e+00\
+    \  0.00000000e+00  0.00000000e+00\n   0.00000000e+00  0.00000000e+00  0.00000000e+00\
+    \  0.00000000e+00\n   0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n\
+    \   0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n   0.00000000e+00]\n\
+    \ [-7.75346681e-02 -6.74984074e+00  1.08101487e+00  2.70732713e+00\n  -1.30334902e+01\
+    \  2.03726268e+00  1.79600704e+00 -1.50729132e+01\n   1.21254015e+01 -6.67387068e-01\
+    \ -1.32201853e+01  9.57261276e+00\n  -1.63465166e+00 -8.07403183e+00 -4.32675064e-01\
+    \  1.02982879e+00\n  -6.61252069e+00  2.91290474e+00  2.71776724e+00 -1.15964680e+01\n\
+    \   4.39528894e+00  1.93148243e+00 -1.23193178e+01  1.46533403e+01\n  -3.43509942e-01\
+    \ -1.10384283e+01  1.21051168e+01 -1.67146420e+00\n  -9.13611126e+00  2.52146363e+00\
+    \  0.00000000e+00  0.00000000e+00\n   0.00000000e+00  0.00000000e+00  0.00000000e+00\
+    \  0.00000000e+00\n   0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n\
+    \   0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n   0.00000000e+00]\n\
+    \ [ 3.18395346e-01  1.01468458e+01  7.23820066e+00  4.42134571e+00\n   1.33358755e+01\
+    \  6.02851105e+00 -1.69622278e+00  1.75315666e+01\n   2.76981902e+00 -1.06985927e+00\
+    \  3.71972656e+00  1.04420786e+01\n  -5.57428932e+00  1.20181541e+01  8.77015018e+00\
+    \  8.79083037e-01\n   1.14283390e+01  5.55500221e+00  4.76000929e+00  1.40501795e+01\n\
+    \   3.73966908e+00 -9.51513588e-01  1.80798607e+01  1.28226817e+00\n   2.72243887e-01\
+    \  4.18668318e+00  7.70996380e+00 -4.46009493e+00\n   1.25937796e+01  7.33875847e+00\
+    \  0.00000000e+00  0.00000000e+00\n   0.00000000e+00  0.00000000e+00  0.00000000e+00\
+    \  0.00000000e+00\n   0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n\
+    \   0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n   0.00000000e+00]\n\
+    \ [ 6.23779488e+00 -1.29817486e+01 -1.95103180e+00  1.43342030e+00\n  -8.95753670e+00\
+    \ -2.59421492e+00  1.90406930e+00 -1.34659262e+01\n   8.50534558e-01 -3.75862330e-01\
+    \ -1.05650072e+01 -2.68629050e+00\n  -3.06804633e+00 -7.98570251e+00 -1.24646711e+00\
+    \  5.40656185e+00\n  -1.27771015e+01 -4.49331713e+00  1.77173018e+00 -1.01165791e+01\n\
+    \  -4.04176903e+00  2.42378783e+00 -1.48288670e+01 -2.60645151e-01\n  -4.65797335e-01\
+    \ -1.08297653e+01 -3.62822032e+00 -2.98963284e+00\n  -8.55002308e+00 -1.91427493e+00\
+    \  0.00000000e+00  0.00000000e+00\n   0.00000000e+00  0.00000000e+00  0.00000000e+00\
+    \  0.00000000e+00\n   0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n\
+    \   0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n   0.00000000e+00]]"
+_last_original_obs:
+  desc: null
+  value: None
+_logger:
+  desc: null
+  value: <stable_baselines3.common.logger.Logger object at 0x7f42d1d8d940>
+_n_updates:
+  desc: null
+  value: 0
+_num_timesteps_at_start:
+  desc: null
+  value: 0
+_total_timesteps:
+  desc: null
+  value: 10000000
+_vec_normalize_env:
+  desc: null
+  value: None
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.13.10
+    framework: torch
+    is_jupyter_run: true
+    is_kaggle_kernel: false
+    python_version: 3.8.12
+    start_time: 1677688167.625907
+    t:
+      1:
+      - 1
+      - 55
+      2:
+      - 1
+      - 55
+      3:
+      - 13
+      - 15
+      - 16
+      - 22
+      - 23
+      - 35
+      4: 3.8.12
+      5: 0.13.10
+      8:
+      - 1
+      - 5
+action_noise:
+  desc: null
+  value: None
+action_space:
+  desc: null
+  value: "Box([-1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1.\
+    \ -1.\n -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1.], [1.\
+    \ 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.\n 1. 1.\
+    \ 1. 1. 1. 1. 1. 1. 1. 1.], (34,), float32)"
+actor:
+  desc: null
+  value: "Actor(\n  (features_extractor): FlattenExtractor(\n    (flatten): Flatten(start_dim=1,\
+    \ end_dim=-1)\n  )\n  (latent_pi): Sequential(\n    (0): Linear(in_features=45,\
+    \ out_features=128, bias=True)\n    (1): ReLU()\n    (2): Linear(in_features=128,\
+    \ out_features=256, bias=True)\n    (3): ReLU()\n    (4): Linear(in_features=256,\
+    \ out_features=256, bias=True)\n    (5): ReLU()\n    (6): Linear(in_features=256,\
+    \ out_features=128, bias=True)\n    (7): ReLU()\n  )\n  (mu): Linear(in_features=128,\
+    \ out_features=34, bias=True)\n  (log_std): Linear(in_features=128, out_features=34,\
+    \ bias=True)\n)"
+algo:
+  desc: null
+  value: SAC
+batch_norm_stats:
+  desc: null
+  value: '[]'
+batch_norm_stats_target:
+  desc: null
+  value: '[]'
+batch_size:
+  desc: null
+  value: 256
+buffer_size:
+  desc: null
+  value: 1000000
+critic:
+  desc: null
+  value: "ContinuousCritic(\n  (features_extractor): FlattenExtractor(\n    (flatten):\
+    \ Flatten(start_dim=1, end_dim=-1)\n  )\n  (qf0): Sequential(\n    (0): Linear(in_features=79,\
+    \ out_features=128, bias=True)\n    (1): ReLU()\n    (2): Linear(in_features=128,\
+    \ out_features=256, bias=True)\n    (3): ReLU()\n    (4): Linear(in_features=256,\
+    \ out_features=256, bias=True)\n    (5): ReLU()\n    (6): Linear(in_features=256,\
+    \ out_features=128, bias=True)\n    (7): ReLU()\n    (8): Linear(in_features=128,\
+    \ out_features=1, bias=True)\n  )\n  (qf1): Sequential(\n    (0): Linear(in_features=79,\
+    \ out_features=128, bias=True)\n    (1): ReLU()\n    (2): Linear(in_features=128,\
+    \ out_features=256, bias=True)\n    (3): ReLU()\n    (4): Linear(in_features=256,\
+    \ out_features=256, bias=True)\n    (5): ReLU()\n    (6): Linear(in_features=256,\
+    \ out_features=128, bias=True)\n    (7): ReLU()\n    (8): Linear(in_features=128,\
+    \ out_features=1, bias=True)\n  )\n)"
+critic_target:
+  desc: null
+  value: "ContinuousCritic(\n  (features_extractor): FlattenExtractor(\n    (flatten):\
+    \ Flatten(start_dim=1, end_dim=-1)\n  )\n  (qf0): Sequential(\n    (0): Linear(in_features=79,\
+    \ out_features=128, bias=True)\n    (1): ReLU()\n    (2): Linear(in_features=128,\
+    \ out_features=256, bias=True)\n    (3): ReLU()\n    (4): Linear(in_features=256,\
+    \ out_features=256, bias=True)\n    (5): ReLU()\n    (6): Linear(in_features=256,\
+    \ out_features=128, bias=True)\n    (7): ReLU()\n    (8): Linear(in_features=128,\
+    \ out_features=1, bias=True)\n  )\n  (qf1): Sequential(\n    (0): Linear(in_features=79,\
+    \ out_features=128, bias=True)\n    (1): ReLU()\n    (2): Linear(in_features=128,\
+    \ out_features=256, bias=True)\n    (3): ReLU()\n    (4): Linear(in_features=256,\
+    \ out_features=256, bias=True)\n    (5): ReLU()\n    (6): Linear(in_features=256,\
+    \ out_features=128, bias=True)\n    (7): ReLU()\n    (8): Linear(in_features=128,\
+    \ out_features=1, bias=True)\n  )\n)"
+device:
+  desc: null
+  value: cpu
+ent_coef:
+  desc: null
+  value: auto
+ent_coef_optimizer:
+  desc: null
+  value: "Adam (\nParameter Group 0\n    amsgrad: False\n    betas: (0.9, 0.999)\n\
+    \    capturable: False\n    differentiable: False\n    eps: 1e-08\n    foreach:\
+    \ None\n    fused: False\n    lr: 0.0003\n    maximize: False\n    weight_decay:\
+    \ 0\n)"
+env:
+  desc: null
+  value: <stable_baselines3.common.vec_env.dummy_vec_env.DummyVecEnv object at 0x7f42d3c0fdc0>
+env_id:
+  desc: null
+  value: darm/DarmHand-v0
+ep_info_buffer:
+  desc: null
+  value: deque([], maxlen=100)
+ep_success_buffer:
+  desc: null
+  value: deque([], maxlen=100)
+eval_env:
+  desc: null
+  value: None
+eval_freq:
+  desc: null
+  value: 2000
+gamma:
+  desc: null
+  value: 0.99
+gradient_steps:
+  desc: null
+  value: 6
+learning_rate:
+  desc: null
+  value: 0.0003
+learning_starts:
+  desc: null
+  value: 40000
+log_ent_coef:
+  desc: null
+  value: tensor([0.], requires_grad=True)
+log_interval:
+  desc: null
+  value: 20
+lr_schedule:
+  desc: null
+  value: <function constant_fn.<locals>.func at 0x7f42d44e1700>
+max_no_improvement_evals:
+  desc: null
+  value: 10
+mean_reward_thresh:
+  desc: null
+  value: 1300
+n_envs:
+  desc: null
+  value: 6
+no_improvement_min_evals:
+  desc: null
+  value: 20
+num_cpu:
+  desc: null
+  value: 6
+num_timesteps:
+  desc: null
+  value: 0
+observation_space:
+  desc: null
+  value: "Box([-inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf\n\
+    \ -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf\n -inf\
+    \ -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf\n -inf -inf\
+    \ -inf], [inf inf inf inf inf inf inf inf inf inf inf inf inf inf inf inf inf\
+    \ inf\n inf inf inf inf inf inf inf inf inf inf inf inf inf inf inf inf inf inf\n\
+    \ inf inf inf inf inf inf inf inf inf], (45,), float32)"
+optimize_memory_usage:
+  desc: null
+  value: 'False'
+pi_net_arch:
+  desc: null
+  value:
+  - 128
+  - 256
+  - 256
+  - 128
+policy:
+  desc: null
+  value: "SACPolicy(\n  (actor): Actor(\n    (features_extractor): FlattenExtractor(\n\
+    \      (flatten): Flatten(start_dim=1, end_dim=-1)\n    )\n    (latent_pi): Sequential(\n\
+    \      (0): Linear(in_features=45, out_features=128, bias=True)\n      (1): ReLU()\n\
+    \      (2): Linear(in_features=128, out_features=256, bias=True)\n      (3): ReLU()\n\
+    \      (4): Linear(in_features=256, out_features=256, bias=True)\n      (5): ReLU()\n\
+    \      (6): Linear(in_features=256, out_features=128, bias=True)\n      (7): ReLU()\n\
+    \    )\n    (mu): Linear(in_features=128, out_features=34, bias=True)\n    (log_std):\
+    \ Linear(in_features=128, out_features=34, bias=True)\n  )\n  (critic): ContinuousCritic(\n\
+    \    (features_extractor): FlattenExtractor(\n      (flatten): Flatten(start_dim=1,\
+    \ end_dim=-1)\n    )\n    (qf0): Sequential(\n      (0): Linear(in_features=79,\
+    \ out_features=128, bias=True)\n      (1): ReLU()\n      (2): Linear(in_features=128,\
+    \ out_features=256, bias=True)\n      (3): ReLU()\n      (4): Linear(in_features=256,\
+    \ out_features=256, bias=True)\n      (5): ReLU()\n      (6): Linear(in_features=256,\
+    \ out_features=128, bias=True)\n      (7): ReLU()\n      (8): Linear(in_features=128,\
+    \ out_features=1, bias=True)\n    )\n    (qf1): Sequential(\n      (0): Linear(in_features=79,\
+    \ out_features=128, bias=True)\n      (1): ReLU()\n      (2): Linear(in_features=128,\
+    \ out_features=256, bias=True)\n      (3): ReLU()\n      (4): Linear(in_features=256,\
+    \ out_features=256, bias=True)\n      (5): ReLU()\n      (6): Linear(in_features=256,\
+    \ out_features=128, bias=True)\n      (7): ReLU()\n      (8): Linear(in_features=128,\
+    \ out_features=1, bias=True)\n    )\n  )\n  (critic_target): ContinuousCritic(\n\
+    \    (features_extractor): FlattenExtractor(\n      (flatten): Flatten(start_dim=1,\
+    \ end_dim=-1)\n    )\n    (qf0): Sequential(\n      (0): Linear(in_features=79,\
+    \ out_features=128, bias=True)\n      (1): ReLU()\n      (2): Linear(in_features=128,\
+    \ out_features=256, bias=True)\n      (3): ReLU()\n      (4): Linear(in_features=256,\
+    \ out_features=256, bias=True)\n      (5): ReLU()\n      (6): Linear(in_features=256,\
+    \ out_features=128, bias=True)\n      (7): ReLU()\n      (8): Linear(in_features=128,\
+    \ out_features=1, bias=True)\n    )\n    (qf1): Sequential(\n      (0): Linear(in_features=79,\
+    \ out_features=128, bias=True)\n      (1): ReLU()\n      (2): Linear(in_features=128,\
+    \ out_features=256, bias=True)\n      (3): ReLU()\n      (4): Linear(in_features=256,\
+    \ out_features=256, bias=True)\n      (5): ReLU()\n      (6): Linear(in_features=256,\
+    \ out_features=128, bias=True)\n      (7): ReLU()\n      (8): Linear(in_features=128,\
+    \ out_features=1, bias=True)\n    )\n  )\n)"
+policy_class:
+  desc: null
+  value: <class 'stable_baselines3.sac.policies.SACPolicy'>
+policy_kwargs:
+  desc: null
+  value: '{''net_arch'': {''pi'': [128, 256, 256, 128], ''qf'': [128, 256, 256, 128]},
+    ''use_sde'': False}'
+qf_net_arch:
+  desc: null
+  value:
+  - 128
+  - 256
+  - 256
+  - 128
+replay_buffer:
+  desc: null
+  value: <stable_baselines3.common.buffers.ReplayBuffer object at 0x7f42d3c27c10>
+replay_buffer_class:
+  desc: null
+  value: <class 'stable_baselines3.common.buffers.ReplayBuffer'>
+replay_buffer_kwargs:
+  desc: null
+  value: '{}'
+rl_lib:
+  desc: null
+  value: SB3
+run_local_dir:
+  desc: null
+  value: /home/daniel/DARM/darm_mujoco/darm_training/results/darm_mf_hand/test1_MF_SB3_SAC
+sde_sample_freq:
+  desc: null
+  value: -1
+seed:
+  desc: null
+  value: 0
+single_finger_env:
+  desc: null
+  value: false
+start_time:
+  desc: null
+  value: 1677688290547290837
+target_entropy:
+  desc: null
+  value: '-34.0'
+target_update_interval:
+  desc: null
+  value: 1
+tau:
+  desc: null
+  value: 0.005
+tensorboard_log:
+  desc: null
+  value: /home/daniel/DARM/darm_mujoco/darm_training/results/darm_mf_hand/test1_MF_SB3_SAC
+total_timesteps:
+  desc: null
+  value: 10000000
+train_freq:
+  desc: null
+  value: 'TrainFreq(frequency=1, unit=<TrainFrequencyUnit.STEP: ''step''>)'
+use_sde:
+  desc: null
+  value: 'False'
+use_sde_at_warmup:
+  desc: null
+  value: 'False'
+verbose:
+  desc: null
+  value: 1
+wandb_model_save_freq:
+  desc: null
+  value: 2000

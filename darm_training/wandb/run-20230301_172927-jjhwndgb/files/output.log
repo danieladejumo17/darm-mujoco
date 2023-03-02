@@ -1,0 +1,337 @@
+Loaded XML file successfully
+Loaded XML file successfully
+Loaded XML file successfully
+Loaded XML file successfully
+Loaded XML file successfully
+Loaded XML file successfully
+Using cpu device
+/home/daniel/miniconda3/lib/python3.8/site-packages/gym/spaces/box.py:73: UserWarning: [33mWARN: Box bound precision lowered by casting to float32
+  logger.warn(
+Loaded XML file successfully
+Logging to /home/daniel/DARM/darm_mujoco/darm_training/results/darm_mf_hand/test1_MF_SB3_SAC/test1_MF_SB3_SAC_1
+/home/daniel/miniconda3/lib/python3.8/site-packages/numpy/core/fromnumeric.py:86: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 2.52     |
+|    ep_rew_mean     | -21.6    |
+| time/              |          |
+|    episodes        | 20       |
+|    fps             | 2        |
+|    time_elapsed    | 36       |
+|    total_timesteps | 84       |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.1      |
+|    ep_rew_mean     | -23.3    |
+| time/              |          |
+|    episodes        | 40       |
+|    fps             | 2        |
+|    time_elapsed    | 66       |
+|    total_timesteps | 138      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.11     |
+|    ep_rew_mean     | -24.6    |
+| time/              |          |
+|    episodes        | 60       |
+|    fps             | 2        |
+|    time_elapsed    | 88       |
+|    total_timesteps | 204      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.11     |
+|    ep_rew_mean     | -24.1    |
+| time/              |          |
+|    episodes        | 80       |
+|    fps             | 2        |
+|    time_elapsed    | 110      |
+|    total_timesteps | 270      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.54     |
+|    ep_rew_mean     | -24.1    |
+| time/              |          |
+|    episodes        | 100      |
+|    fps             | 2        |
+|    time_elapsed    | 142      |
+|    total_timesteps | 384      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.74     |
+|    ep_rew_mean     | -25.3    |
+| time/              |          |
+|    episodes        | 120      |
+|    fps             | 2        |
+|    time_elapsed    | 167      |
+|    total_timesteps | 444      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.64     |
+|    ep_rew_mean     | -25.8    |
+| time/              |          |
+|    episodes        | 140      |
+|    fps             | 2        |
+|    time_elapsed    | 199      |
+|    total_timesteps | 534      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.72     |
+|    ep_rew_mean     | -25.4    |
+| time/              |          |
+|    episodes        | 160      |
+|    fps             | 2        |
+|    time_elapsed    | 235      |
+|    total_timesteps | 618      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.69     |
+|    ep_rew_mean     | -25.9    |
+| time/              |          |
+|    episodes        | 180      |
+|    fps             | 2        |
+|    time_elapsed    | 260      |
+|    total_timesteps | 684      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.93     |
+|    ep_rew_mean     | -25.8    |
+| time/              |          |
+|    episodes        | 200      |
+|    fps             | 2        |
+|    time_elapsed    | 291      |
+|    total_timesteps | 750      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.8      |
+|    ep_rew_mean     | -27      |
+| time/              |          |
+|    episodes        | 220      |
+|    fps             | 2        |
+|    time_elapsed    | 320      |
+|    total_timesteps | 816      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.76     |
+|    ep_rew_mean     | -26.9    |
+| time/              |          |
+|    episodes        | 240      |
+|    fps             | 2        |
+|    time_elapsed    | 340      |
+|    total_timesteps | 876      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.54     |
+|    ep_rew_mean     | -28.4    |
+| time/              |          |
+|    episodes        | 260      |
+|    fps             | 2        |
+|    time_elapsed    | 366      |
+|    total_timesteps | 930      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.58     |
+|    ep_rew_mean     | -28.1    |
+| time/              |          |
+|    episodes        | 280      |
+|    fps             | 2        |
+|    time_elapsed    | 390      |
+|    total_timesteps | 990      |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 2.95     |
+|    ep_rew_mean     | -29      |
+| time/              |          |
+|    episodes        | 300      |
+|    fps             | 2        |
+|    time_elapsed    | 422      |
+|    total_timesteps | 1050     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 2.98     |
+|    ep_rew_mean     | -28      |
+| time/              |          |
+|    episodes        | 320      |
+|    fps             | 2        |
+|    time_elapsed    | 447      |
+|    total_timesteps | 1122     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 2.99     |
+|    ep_rew_mean     | -28.6    |
+| time/              |          |
+|    episodes        | 340      |
+|    fps             | 2        |
+|    time_elapsed    | 475      |
+|    total_timesteps | 1170     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.01     |
+|    ep_rew_mean     | -27.7    |
+| time/              |          |
+|    episodes        | 360      |
+|    fps             | 2        |
+|    time_elapsed    | 509      |
+|    total_timesteps | 1230     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.1      |
+|    ep_rew_mean     | -25.3    |
+| time/              |          |
+|    episodes        | 380      |
+|    fps             | 2        |
+|    time_elapsed    | 539      |
+|    total_timesteps | 1296     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 2.94     |
+|    ep_rew_mean     | -27      |
+| time/              |          |
+|    episodes        | 400      |
+|    fps             | 2        |
+|    time_elapsed    | 568      |
+|    total_timesteps | 1350     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 2.94     |
+|    ep_rew_mean     | -26.7    |
+| time/              |          |
+|    episodes        | 420      |
+|    fps             | 2        |
+|    time_elapsed    | 597      |
+|    total_timesteps | 1404     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 2.93     |
+|    ep_rew_mean     | -26      |
+| time/              |          |
+|    episodes        | 440      |
+|    fps             | 2        |
+|    time_elapsed    | 624      |
+|    total_timesteps | 1464     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 2.99     |
+|    ep_rew_mean     | -25      |
+| time/              |          |
+|    episodes        | 460      |
+|    fps             | 2        |
+|    time_elapsed    | 662      |
+|    total_timesteps | 1548     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.03     |
+|    ep_rew_mean     | -27.1    |
+| time/              |          |
+|    episodes        | 480      |
+|    fps             | 2        |
+|    time_elapsed    | 694      |
+|    total_timesteps | 1602     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.15     |
+|    ep_rew_mean     | -24.8    |
+| time/              |          |
+|    episodes        | 500      |
+|    fps             | 2        |
+|    time_elapsed    | 719      |
+|    total_timesteps | 1662     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.17     |
+|    ep_rew_mean     | -24.8    |
+| time/              |          |
+|    episodes        | 520      |
+|    fps             | 2        |
+|    time_elapsed    | 744      |
+|    total_timesteps | 1716     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.24     |
+|    ep_rew_mean     | -24.2    |
+| time/              |          |
+|    episodes        | 540      |
+|    fps             | 2        |
+|    time_elapsed    | 781      |
+|    total_timesteps | 1806     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.31     |
+|    ep_rew_mean     | -24      |
+| time/              |          |
+|    episodes        | 560      |
+|    fps             | 2        |
+|    time_elapsed    | 808      |
+|    total_timesteps | 1860     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 3.15     |
+|    ep_rew_mean     | -22.8    |
+| time/              |          |
+|    episodes        | 580      |
+|    fps             | 2        |
+|    time_elapsed    | 842      |
+|    total_timesteps | 1896     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 2.9      |
+|    ep_rew_mean     | -24.6    |
+| time/              |          |
+|    episodes        | 600      |
+|    fps             | 2        |
+|    time_elapsed    | 867      |
+|    total_timesteps | 1950     |
+---------------------------------
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 2.92     |
+|    ep_rew_mean     | -24.9    |
+| time/              |          |
+|    episodes        | 620      |
+|    fps             | 2        |
+|    time_elapsed    | 889      |
+|    total_timesteps | 2004     |
+---------------------------------
+Saving last checkpoint
+Last checkpoint saved in: /home/daniel/DARM/darm_mujoco/darm_training/results/darm_mf_hand/test1_MF_SB3_SAC/models/last_model
+Running generate_darm_xml.sh
+Single Finger: false
+No Wrist: false
+/home/daniel/miniconda3/lib/python3.8/site-packages/gym/spaces/box.py:73: UserWarning: [33mWARN: Box bound precision lowered by casting to float32
+  logger.warn(
+Loaded XML file successfully
+/home/daniel/miniconda3/lib/python3.8/site-packages/numpy/core/fromnumeric.py:86: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
+-27.2353184 7.792124143450337
+Loaded XML file successfully
+
+100%|██████████| 1/1 [00:01<00:00,  1.06s/it]

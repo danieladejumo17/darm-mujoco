@@ -1,0 +1,325 @@
+2023-03-01 16:51:07,072 INFO    StreamThr :10366 [internal.py:wandb_internal():87] W&B internal server running at pid: 10366, started at: 2023-03-01 16:51:07.071357
+2023-03-01 16:51:07,103 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status
+2023-03-01 16:51:07,114 INFO    WriterThread:10366 [datastore.py:open_for_write():85] open: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/run-bnqx3e32.wandb
+2023-03-01 16:51:07,116 DEBUG   SenderThread:10366 [sender.py:send():336] send: header
+2023-03-01 16:51:07,156 DEBUG   SenderThread:10366 [sender.py:send():336] send: run
+2023-03-01 16:51:08,393 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: check_version
+2023-03-01 16:51:08,394 INFO    SenderThread:10366 [dir_watcher.py:__init__():216] watching files in: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files
+2023-03-01 16:51:08,395 INFO    SenderThread:10366 [sender.py:_start_run_threads():1067] run started: bnqx3e32 with start time 1677685867.083495
+2023-03-01 16:51:08,396 DEBUG   SenderThread:10366 [sender.py:send_request():363] send_request: summary_record
+2023-03-01 16:51:08,397 INFO    SenderThread:10366 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-03-01 16:51:08,397 DEBUG   SenderThread:10366 [sender.py:send_request():363] send_request: check_version
+2023-03-01 16:51:09,221 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: run_start
+2023-03-01 16:51:09,223 DEBUG   HandlerThread:10366 [system_info.py:__init__():31] System info init
+2023-03-01 16:51:09,224 DEBUG   HandlerThread:10366 [system_info.py:__init__():46] System info init done
+2023-03-01 16:51:09,224 INFO    HandlerThread:10366 [system_monitor.py:start():151] Starting system monitor
+2023-03-01 16:51:09,224 INFO    SystemMonitor:10366 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-03-01 16:51:09,224 INFO    HandlerThread:10366 [system_monitor.py:probe():172] Collecting system info
+2023-03-01 16:51:09,225 INFO    SystemMonitor:10366 [interfaces.py:start():168] Started cpu
+2023-03-01 16:51:09,226 INFO    SystemMonitor:10366 [interfaces.py:start():168] Started disk
+2023-03-01 16:51:09,227 INFO    SystemMonitor:10366 [interfaces.py:start():168] Started memory
+2023-03-01 16:51:09,228 INFO    SystemMonitor:10366 [interfaces.py:start():168] Started network
+2023-03-01 16:51:09,248 DEBUG   HandlerThread:10366 [system_info.py:probe():195] Probing system
+2023-03-01 16:51:09,255 DEBUG   HandlerThread:10366 [system_info.py:_probe_git():180] Probing git
+2023-03-01 16:51:09,280 DEBUG   HandlerThread:10366 [system_info.py:_probe_git():188] Probing git done
+2023-03-01 16:51:09,280 DEBUG   HandlerThread:10366 [system_info.py:probe():241] Probing system done
+2023-03-01 16:51:09,280 DEBUG   HandlerThread:10366 [system_monitor.py:probe():181] {'os': 'Linux-5.4.0-42-generic-x86_64-with-glibc2.17', 'python': '3.8.12', 'heartbeatAt': '2023-03-01T15:51:09.248761', 'startedAt': '2023-03-01T15:51:07.048099', 'docker': None, 'cuda': None, 'args': None, 'state': 'running', 'program': 'DARM/darm_mujoco/darm_training/sb3_sac_darm_mf_hand.ipynb', 'root': '/home/daniel/DARM/darm_mujoco', 'git': {'remote': 'git@github.com:danieladejumo17/darm-mujoco.git', 'commit': 'a8c2fce31fe4b543f63c1a20d04599569fa4d2a9'}, 'email': 'adejumodaniel17@gmail.com', 'host': 'Daniel', 'username': 'daniel', 'executable': '/home/daniel/miniconda3/bin/python3.8', 'cpu_count': 2, 'cpu_count_logical': 4, 'cpu_freq': {'current': 2309.311, 'min': 400.0, 'max': 2800.0}, 'cpu_freq_per_core': [{'current': 2332.522, 'min': 400.0, 'max': 2800.0}, {'current': 2301.826, 'min': 400.0, 'max': 2800.0}, {'current': 2302.536, 'min': 400.0, 'max': 2800.0}, {'current': 2300.36, 'min': 400.0, 'max': 2800.0}], 'disk': {'total': 29.658042907714844, 'used': 27.65825653076172}, 'memory': {'total': 7.455356597900391}}
+2023-03-01 16:51:09,280 INFO    HandlerThread:10366 [system_monitor.py:probe():182] Finished collecting system info
+2023-03-01 16:51:09,280 INFO    HandlerThread:10366 [system_monitor.py:probe():185] Publishing system info
+2023-03-01 16:51:09,280 DEBUG   HandlerThread:10366 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-03-01 16:51:09,281 DEBUG   HandlerThread:10366 [system_info.py:_save_pip():67] Saving pip packages done
+2023-03-01 16:51:09,281 DEBUG   HandlerThread:10366 [system_info.py:_save_conda():74] Saving list of conda packages installed into the current environment
+2023-03-01 16:51:09,397 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/requirements.txt
+2023-03-01 16:51:09,398 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/conda-environment.yaml
+2023-03-01 16:51:09,399 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/wandb-summary.json
+2023-03-01 16:51:18,400 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/conda-environment.yaml
+2023-03-01 16:51:18,595 DEBUG   HandlerThread:10366 [system_info.py:_save_conda():86] Saving conda packages done
+2023-03-01 16:51:18,595 DEBUG   HandlerThread:10366 [system_info.py:_save_code():89] Saving code
+2023-03-01 16:51:18,596 WARNING HandlerThread:10366 [system_info.py:_save_code():91] unable to save code -- program entry not found
+2023-03-01 16:51:18,596 DEBUG   HandlerThread:10366 [system_info.py:_save_patches():127] Saving git patches
+2023-03-01 16:51:18,895 DEBUG   HandlerThread:10366 [system_info.py:_save_patches():169] Saving git patches done
+2023-03-01 16:51:18,897 INFO    HandlerThread:10366 [system_monitor.py:probe():187] Finished publishing system info
+2023-03-01 16:51:18,923 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:51:18,933 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:51:18,939 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:51:18,942 DEBUG   SenderThread:10366 [sender.py:send():336] send: files
+2023-03-01 16:51:18,942 INFO    SenderThread:10366 [sender.py:_save_file():1321] saving file wandb-metadata.json with policy now
+2023-03-01 16:51:18,943 INFO    SenderThread:10366 [sender.py:_save_file():1321] saving file diff.patch with policy now
+2023-03-01 16:51:18,977 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-01 16:51:18,978 DEBUG   SenderThread:10366 [sender.py:send_request():363] send_request: stop_status
+2023-03-01 16:51:18,996 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: pause
+2023-03-01 16:51:18,996 INFO    HandlerThread:10366 [handler.py:handle_request_pause():717] stopping system metrics thread or process
+2023-03-01 16:51:18,996 INFO    HandlerThread:10366 [system_monitor.py:finish():161] Stopping system monitor
+2023-03-01 16:51:18,997 DEBUG   SystemMonitor:10366 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2023-03-01 16:51:18,997 DEBUG   SystemMonitor:10366 [system_monitor.py:_start():137] Finished system metrics aggregation loop
+2023-03-01 16:51:18,997 DEBUG   SystemMonitor:10366 [system_monitor.py:_start():141] Publishing last batch of metrics
+2023-03-01 16:51:18,998 INFO    HandlerThread:10366 [interfaces.py:finish():175] Joined cpu
+2023-03-01 16:51:18,998 INFO    HandlerThread:10366 [interfaces.py:finish():175] Joined disk
+2023-03-01 16:51:18,999 INFO    HandlerThread:10366 [interfaces.py:finish():175] Joined memory
+2023-03-01 16:51:18,999 INFO    HandlerThread:10366 [interfaces.py:finish():175] Joined network
+2023-03-01 16:51:19,402 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/diff.patch
+2023-03-01 16:51:19,402 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/wandb-metadata.json
+2023-03-01 16:51:19,956 DEBUG   SenderThread:10366 [sender.py:send():336] send: telemetry
+2023-03-01 16:51:20,587 INFO    wandb-upload_0:10366 [upload_job.py:push():138] Uploaded file /tmp/tmp65iqqvn2wandb/ofpccyza-wandb-metadata.json
+2023-03-01 16:51:21,581 INFO    wandb-upload_1:10366 [upload_job.py:push():138] Uploaded file /tmp/tmp65iqqvn2wandb/6y83m07e-diff.patch
+2023-03-01 16:51:22,959 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:51:27,960 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:51:32,961 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:51:33,975 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:51:37,970 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:51:38,400 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: resume
+2023-03-01 16:51:38,400 INFO    HandlerThread:10366 [handler.py:handle_request_resume():708] starting system metrics thread or process
+2023-03-01 16:51:38,400 INFO    HandlerThread:10366 [system_monitor.py:start():151] Starting system monitor
+2023-03-01 16:51:38,405 INFO    SystemMonitor:10366 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-03-01 16:51:38,406 INFO    SystemMonitor:10366 [interfaces.py:start():168] Started cpu
+2023-03-01 16:51:38,408 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: pause
+2023-03-01 16:51:38,409 INFO    HandlerThread:10366 [handler.py:handle_request_pause():717] stopping system metrics thread or process
+2023-03-01 16:51:38,409 INFO    HandlerThread:10366 [system_monitor.py:finish():161] Stopping system monitor
+2023-03-01 16:51:38,412 INFO    HandlerThread:10366 [interfaces.py:finish():175] Joined cpu
+2023-03-01 16:51:38,413 WARNING HandlerThread:10366 [interfaces.py:finish():177] Failed to join disk: cannot join thread before it is started
+2023-03-01 16:51:38,977 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:51:39,416 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/config.yaml
+2023-03-01 16:51:43,724 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:51:43,978 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:51:44,487 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: resume
+2023-03-01 16:51:44,487 INFO    HandlerThread:10366 [handler.py:handle_request_resume():708] starting system metrics thread or process
+2023-03-01 16:51:44,488 INFO    HandlerThread:10366 [system_monitor.py:start():151] Starting system monitor
+2023-03-01 16:51:44,494 INFO    SystemMonitor:10366 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-03-01 16:51:44,506 INFO    SystemMonitor:10366 [interfaces.py:start():168] Started cpu
+2023-03-01 16:51:44,515 INFO    SystemMonitor:10366 [interfaces.py:start():168] Started disk
+2023-03-01 16:51:44,522 INFO    SystemMonitor:10366 [interfaces.py:start():168] Started memory
+2023-03-01 16:51:44,531 INFO    SystemMonitor:10366 [interfaces.py:start():168] Started network
+2023-03-01 16:51:48,421 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/output.log
+2023-03-01 16:51:48,958 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:51:48,978 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:51:50,423 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/output.log
+2023-03-01 16:51:52,423 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/output.log
+2023-03-01 16:51:53,980 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:51:54,154 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:51:54,424 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/output.log
+2023-03-01 16:51:56,426 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/output.log
+2023-03-01 16:51:58,427 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/output.log
+2023-03-01 16:51:58,981 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:51:59,678 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:51:59,939 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: pause
+2023-03-01 16:51:59,940 INFO    HandlerThread:10366 [handler.py:handle_request_pause():717] stopping system metrics thread or process
+2023-03-01 16:51:59,940 INFO    HandlerThread:10366 [system_monitor.py:finish():161] Stopping system monitor
+2023-03-01 16:51:59,941 INFO    HandlerThread:10366 [interfaces.py:finish():175] Joined cpu
+2023-03-01 16:51:59,941 INFO    HandlerThread:10366 [interfaces.py:finish():175] Joined disk
+2023-03-01 16:51:59,943 INFO    HandlerThread:10366 [interfaces.py:finish():175] Joined memory
+2023-03-01 16:51:59,944 INFO    HandlerThread:10366 [interfaces.py:finish():175] Joined network
+2023-03-01 16:51:59,944 DEBUG   SystemMonitor:10366 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2023-03-01 16:51:59,944 DEBUG   SystemMonitor:10366 [system_monitor.py:_start():137] Finished system metrics aggregation loop
+2023-03-01 16:51:59,945 DEBUG   SystemMonitor:10366 [system_monitor.py:_start():141] Publishing last batch of metrics
+2023-03-01 16:51:59,946 DEBUG   SenderThread:10366 [sender.py:send():336] send: stats
+2023-03-01 16:52:00,428 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/output.log
+2023-03-01 16:52:03,982 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:52:04,948 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:52:08,983 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:52:09,949 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:52:13,985 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:52:14,951 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:52:18,985 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:52:19,952 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:52:23,987 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:52:24,953 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:52:28,989 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:52:29,954 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:52:33,990 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:52:34,956 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:52:38,992 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:52:39,957 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:52:43,994 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:52:44,958 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:52:48,995 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:52:49,960 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:52:53,996 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:52:54,961 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:52:58,998 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:52:59,962 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:53:03,999 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:53:04,963 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:53:09,000 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:53:09,964 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:53:14,002 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:53:14,966 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:53:19,003 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:53:19,967 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:53:24,004 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:53:24,968 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:53:29,006 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:53:29,969 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:53:34,008 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:53:34,970 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:53:39,009 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:53:39,971 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:53:44,010 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:53:44,972 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:53:49,011 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:53:49,973 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:53:54,012 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:53:54,057 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: resume
+2023-03-01 16:53:54,058 INFO    HandlerThread:10366 [handler.py:handle_request_resume():708] starting system metrics thread or process
+2023-03-01 16:53:54,058 INFO    HandlerThread:10366 [system_monitor.py:start():151] Starting system monitor
+2023-03-01 16:53:54,066 INFO    SystemMonitor:10366 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-03-01 16:53:54,069 INFO    SystemMonitor:10366 [interfaces.py:start():168] Started cpu
+2023-03-01 16:53:54,070 INFO    SystemMonitor:10366 [interfaces.py:start():168] Started disk
+2023-03-01 16:53:54,070 INFO    SystemMonitor:10366 [interfaces.py:start():168] Started memory
+2023-03-01 16:53:54,083 INFO    SystemMonitor:10366 [interfaces.py:start():168] Started network
+2023-03-01 16:53:54,975 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:53:57,017 DEBUG   SenderThread:10366 [sender.py:send():336] send: telemetry
+2023-03-01 16:53:57,022 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: pause
+2023-03-01 16:53:57,022 INFO    HandlerThread:10366 [handler.py:handle_request_pause():717] stopping system metrics thread or process
+2023-03-01 16:53:57,022 INFO    HandlerThread:10366 [system_monitor.py:finish():161] Stopping system monitor
+2023-03-01 16:53:57,025 INFO    HandlerThread:10366 [interfaces.py:finish():175] Joined cpu
+2023-03-01 16:53:57,028 DEBUG   SystemMonitor:10366 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2023-03-01 16:53:57,029 DEBUG   SystemMonitor:10366 [system_monitor.py:_start():137] Finished system metrics aggregation loop
+2023-03-01 16:53:57,030 DEBUG   SystemMonitor:10366 [system_monitor.py:_start():141] Publishing last batch of metrics
+2023-03-01 16:53:57,029 INFO    HandlerThread:10366 [interfaces.py:finish():175] Joined disk
+2023-03-01 16:53:57,031 INFO    HandlerThread:10366 [interfaces.py:finish():175] Joined memory
+2023-03-01 16:53:57,031 INFO    HandlerThread:10366 [interfaces.py:finish():175] Joined network
+2023-03-01 16:53:57,031 DEBUG   SenderThread:10366 [sender.py:send():336] send: stats
+2023-03-01 16:53:58,492 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/output.log
+2023-03-01 16:53:59,014 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:54:00,033 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:54:04,015 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:54:05,034 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:54:09,017 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:54:10,040 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: status_report
+2023-03-01 16:54:14,017 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:54:19,019 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:54:24,020 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:54:29,021 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:54:34,023 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:54:39,024 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:54:43,843 INFO    SenderThread:10366 [retry.py:__call__():172] Retry attempt failed:
+Traceback (most recent call last):
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/urllib3/connection.py", line 414, in connect
+    self.sock = ssl_wrap_socket(
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/urllib3/util/ssl_.py", line 449, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/urllib3/util/ssl_.py", line 493, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/home/daniel/miniconda3/lib/python3.8/ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/home/daniel/miniconda3/lib/python3.8/ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "/home/daniel/miniconda3/lib/python3.8/ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+socket.timeout: _ssl.c:1114: The handshake operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/requests/adapters.py", line 440, in send
+    resp = conn.urlopen(
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/urllib3/util/retry.py", line 550, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 389, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=conn.timeout)
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 340, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Read timed out. (read timeout=10)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/wandb/sdk/lib/retry.py", line 131, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/wandb/sdk/internal/internal_api.py", line 242, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/transport/requests.py", line 38, in execute
+    request = requests.post(self.url, **post_args)
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/requests/api.py", line 117, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/requests/sessions.py", line 529, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/requests/sessions.py", line 645, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/daniel/miniconda3/lib/python3.8/site-packages/requests/adapters.py", line 532, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='api.wandb.ai', port=443): Read timed out. (read timeout=10)
+2023-03-01 16:54:44,025 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:54:49,026 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:54:54,027 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:54:59,028 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:55:04,031 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:55:09,032 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:55:14,033 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:55:19,034 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:55:24,036 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:55:25,209 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: resume
+2023-03-01 16:55:25,209 INFO    HandlerThread:10366 [handler.py:handle_request_resume():708] starting system metrics thread or process
+2023-03-01 16:55:25,209 INFO    HandlerThread:10366 [system_monitor.py:start():151] Starting system monitor
+2023-03-01 16:55:25,218 INFO    SystemMonitor:10366 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-03-01 16:55:25,219 INFO    SystemMonitor:10366 [interfaces.py:start():168] Started cpu
+2023-03-01 16:55:25,222 INFO    SystemMonitor:10366 [interfaces.py:start():168] Started disk
+2023-03-01 16:55:25,226 INFO    SystemMonitor:10366 [interfaces.py:start():168] Started memory
+2023-03-01 16:55:25,229 INFO    SystemMonitor:10366 [interfaces.py:start():168] Started network
+2023-03-01 16:55:29,040 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:55:34,041 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:55:38,386 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: pause
+2023-03-01 16:55:38,387 INFO    HandlerThread:10366 [handler.py:handle_request_pause():717] stopping system metrics thread or process
+2023-03-01 16:55:38,387 INFO    HandlerThread:10366 [system_monitor.py:finish():161] Stopping system monitor
+2023-03-01 16:55:38,387 DEBUG   SystemMonitor:10366 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2023-03-01 16:55:38,389 DEBUG   SystemMonitor:10366 [system_monitor.py:_start():137] Finished system metrics aggregation loop
+2023-03-01 16:55:38,389 DEBUG   SystemMonitor:10366 [system_monitor.py:_start():141] Publishing last batch of metrics
+2023-03-01 16:55:38,389 INFO    HandlerThread:10366 [interfaces.py:finish():175] Joined cpu
+2023-03-01 16:55:38,390 INFO    HandlerThread:10366 [interfaces.py:finish():175] Joined disk
+2023-03-01 16:55:38,390 INFO    HandlerThread:10366 [interfaces.py:finish():175] Joined memory
+2023-03-01 16:55:38,390 INFO    HandlerThread:10366 [interfaces.py:finish():175] Joined network
+2023-03-01 16:55:39,042 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:55:44,043 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:55:49,279 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: poll_exit
+2023-03-01 16:55:54,282 DEBUG   HandlerThread:10366 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-01 16:55:56,363 WARNING StreamThr :10366 [internal.py:is_dead():415] Internal process exiting, parent pid 9898 disappeared
+2023-03-01 16:55:56,363 ERROR   StreamThr :10366 [internal.py:wandb_internal():153] Internal process shutdown.
+2023-03-01 16:55:57,282 INFO    WriterThread:10366 [datastore.py:close():299] close: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/run-bnqx3e32.wandb
+2023-03-01 16:55:57,283 INFO    HandlerThread:10366 [handler.py:finish():841] shutting down handler
+2023-03-01 17:02:10,306 WARNING FileStreamThread:10366 [file_stream.py:request_with_retry():667] requests_with_retry encountered retryable exception: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')). func: <bound method Session.post of <requests.sessions.Session object at 0x7f93cca5c130>>, args: ('https://api.wandb.ai/files/danieladejumo/DARM/bnqx3e32/file_stream',), kwargs: {'json': {'complete': False, 'failed': False, 'dropped': 0, 'uploaded': []}}
+2023-03-01 17:02:23,106 WARNING FileStreamThread:10366 [file_stream.py:request_with_retry():667] requests_with_retry encountered retryable exception: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /files/danieladejumo/DARM/bnqx3e32/file_stream (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1131)'))). func: <bound method Session.post of <requests.sessions.Session object at 0x7f93cca5c130>>, args: ('https://api.wandb.ai/files/danieladejumo/DARM/bnqx3e32/file_stream',), kwargs: {'json': {'complete': False, 'failed': False, 'dropped': 0, 'uploaded': []}}
+2023-03-01 17:02:37,746 WARNING FileStreamThread:10366 [file_stream.py:request_with_retry():667] requests_with_retry encountered retryable exception: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /files/danieladejumo/DARM/bnqx3e32/file_stream (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1131)'))). func: <bound method Session.post of <requests.sessions.Session object at 0x7f93cca5c130>>, args: ('https://api.wandb.ai/files/danieladejumo/DARM/bnqx3e32/file_stream',), kwargs: {'json': {'complete': False, 'failed': False, 'dropped': 0, 'uploaded': []}}
+2023-03-01 17:02:57,160 WARNING FileStreamThread:10366 [file_stream.py:request_with_retry():667] requests_with_retry encountered retryable exception: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /files/danieladejumo/DARM/bnqx3e32/file_stream (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1131)'))). func: <bound method Session.post of <requests.sessions.Session object at 0x7f93cca5c130>>, args: ('https://api.wandb.ai/files/danieladejumo/DARM/bnqx3e32/file_stream',), kwargs: {'json': {'complete': False, 'failed': False, 'dropped': 0, 'uploaded': []}}
+2023-03-01 17:03:23,727 WARNING FileStreamThread:10366 [file_stream.py:request_with_retry():667] requests_with_retry encountered retryable exception: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /files/danieladejumo/DARM/bnqx3e32/file_stream (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1131)'))). func: <bound method Session.post of <requests.sessions.Session object at 0x7f93cca5c130>>, args: ('https://api.wandb.ai/files/danieladejumo/DARM/bnqx3e32/file_stream',), kwargs: {'json': {'complete': False, 'failed': False, 'dropped': 0, 'uploaded': []}}
+2023-03-01 17:04:12,880 WARNING FileStreamThread:10366 [file_stream.py:request_with_retry():667] requests_with_retry encountered retryable exception: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /files/danieladejumo/DARM/bnqx3e32/file_stream (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1131)'))). func: <bound method Session.post of <requests.sessions.Session object at 0x7f93cca5c130>>, args: ('https://api.wandb.ai/files/danieladejumo/DARM/bnqx3e32/file_stream',), kwargs: {'json': {'complete': False, 'failed': False, 'dropped': 0, 'uploaded': []}}
+2023-03-01 17:05:27,633 WARNING FileStreamThread:10366 [file_stream.py:request_with_retry():667] requests_with_retry encountered retryable exception: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /files/danieladejumo/DARM/bnqx3e32/file_stream (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1131)'))). func: <bound method Session.post of <requests.sessions.Session object at 0x7f93cca5c130>>, args: ('https://api.wandb.ai/files/danieladejumo/DARM/bnqx3e32/file_stream',), kwargs: {'json': {'complete': False, 'failed': False, 'dropped': 0, 'uploaded': []}}
+2023-03-01 17:07:58,983 WARNING FileStreamThread:10366 [file_stream.py:request_with_retry():667] requests_with_retry encountered retryable exception: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /files/danieladejumo/DARM/bnqx3e32/file_stream (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1131)'))). func: <bound method Session.post of <requests.sessions.Session object at 0x7f93cca5c130>>, args: ('https://api.wandb.ai/files/danieladejumo/DARM/bnqx3e32/file_stream',), kwargs: {'json': {'complete': False, 'failed': False, 'dropped': 0, 'uploaded': []}}
+2023-03-01 17:12:56,178 WARNING FileStreamThread:10366 [file_stream.py:request_with_retry():667] requests_with_retry encountered retryable exception: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /files/danieladejumo/DARM/bnqx3e32/file_stream (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1131)'))). func: <bound method Session.post of <requests.sessions.Session object at 0x7f93cca5c130>>, args: ('https://api.wandb.ai/files/danieladejumo/DARM/bnqx3e32/file_stream',), kwargs: {'json': {'complete': False, 'failed': False, 'dropped': 0, 'uploaded': []}}
+2023-03-01 17:18:33,052 WARNING FileStreamThread:10366 [file_stream.py:request_with_retry():667] requests_with_retry encountered retryable exception: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /files/danieladejumo/DARM/bnqx3e32/file_stream (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1131)'))). func: <bound method Session.post of <requests.sessions.Session object at 0x7f93cca5c130>>, args: ('https://api.wandb.ai/files/danieladejumo/DARM/bnqx3e32/file_stream',), kwargs: {'json': {'complete': False, 'failed': False, 'dropped': 0, 'uploaded': []}}
+2023-03-01 17:23:41,412 WARNING FileStreamThread:10366 [file_stream.py:request_with_retry():667] requests_with_retry encountered retryable exception: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /files/danieladejumo/DARM/bnqx3e32/file_stream (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f93cc162220>: Failed to establish a new connection: [Errno -2] Name or service not known')). func: <bound method Session.post of <requests.sessions.Session object at 0x7f93cca5c130>>, args: ('https://api.wandb.ai/files/danieladejumo/DARM/bnqx3e32/file_stream',), kwargs: {'json': {'complete': False, 'failed': False, 'dropped': 0, 'uploaded': []}}
+2023-03-01 17:28:58,069 INFO    SenderThread:10366 [sender.py:finish():1493] shutting down sender
+2023-03-01 17:28:58,942 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/config.yaml
+2023-03-01 17:29:00,944 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/output.log
+2023-03-01 17:29:01,974 INFO    SenderThread:10366 [dir_watcher.py:finish():362] shutting down directory watcher
+2023-03-01 17:29:02,944 INFO    Thread-13 :10366 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/output.log
+2023-03-01 17:29:02,945 INFO    SenderThread:10366 [dir_watcher.py:finish():392] scan: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files
+2023-03-01 17:29:02,945 INFO    SenderThread:10366 [dir_watcher.py:finish():406] scan save: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/config.yaml config.yaml
+2023-03-01 17:29:02,946 INFO    SenderThread:10366 [dir_watcher.py:finish():406] scan save: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/diff.patch diff.patch
+2023-03-01 17:29:02,954 INFO    SenderThread:10366 [dir_watcher.py:finish():406] scan save: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/conda-environment.yaml conda-environment.yaml
+2023-03-01 17:29:02,955 INFO    SenderThread:10366 [dir_watcher.py:finish():406] scan save: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/wandb-metadata.json wandb-metadata.json
+2023-03-01 17:29:02,956 INFO    SenderThread:10366 [dir_watcher.py:finish():406] scan save: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/output.log output.log
+2023-03-01 17:29:02,956 INFO    SenderThread:10366 [dir_watcher.py:finish():406] scan save: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/requirements.txt requirements.txt
+2023-03-01 17:29:02,962 INFO    SenderThread:10366 [dir_watcher.py:finish():406] scan save: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/wandb-summary.json wandb-summary.json
+2023-03-01 17:29:02,975 INFO    SenderThread:10366 [file_pusher.py:finish():162] shutting down file pusher
+2023-03-01 17:29:02,976 INFO    SenderThread:10366 [file_pusher.py:join():167] waiting for file pusher
+2023-03-01 17:29:47,256 INFO    wandb-upload_2:10366 [upload_job.py:push():138] Uploaded file /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/output.log
+2023-03-01 17:29:47,260 INFO    wandb-upload_3:10366 [upload_job.py:push():138] Uploaded file /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/requirements.txt
+2023-03-01 17:29:47,968 INFO    wandb-upload_4:10366 [upload_job.py:push():138] Uploaded file /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/wandb-summary.json
+2023-03-01 17:30:40,231 INFO    wandb-upload_1:10366 [upload_job.py:push():138] Uploaded file /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/conda-environment.yaml
+2023-03-01 17:30:42,552 INFO    wandb-upload_0:10366 [upload_job.py:push():138] Uploaded file /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230301_165107-bnqx3e32/files/config.yaml

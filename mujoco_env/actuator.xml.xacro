@@ -24,14 +24,21 @@
     'flexor_pollicis_brevis', 'flexor_pollicis_longus',
     'extensor_pollicis_brevis', 'extensor_pollicis_longus',
     'opponens_pollicis'
-    ]}" />
-
-    <xacro:property name="digiti_minimi_specific_tendons" value="${['opponens_digiti_minimi']}" />
+    ]}" /> 
 
     <xacro:property name="digitorum_tendons" value="${[
         'dorsal_interossei', 'palmar_interossei',
-        'extensor_communis', 'flexor_profundus',
-        'flexor_superficialis']}" />
+        'flexor_profundus', 'flexor_superficialis']}" />
+
+    <xacro:property name="digitorum_extensor" value="${['extensor_communis']}" />
+
+    <xacro:property name="digiti_minimi_specific_tendons" value="${['opponens_digiti_minimi']}" />
+
+    <xacro:property name="carpal_tendons_max_tension" value="10" /> 
+    <xacro:property name="pollicis_tendons_max_tension" value="5" /> 
+    <xacro:property name="digitorum_tendons_max_tension" value="5" /> 
+    <xacro:property name="digitorum_extensor_max_tension" value="10" /> 
+    <xacro:property name="digiti_minimi_specific_tendons_max_tension" value="5" /> 
 
 
     <xacro:macro name="hand_actuators" params="hand_name">
@@ -62,25 +69,35 @@
 
 
         <!-- Create a List of Muscles -->
-        <!-- Carpal Tendon Actuators -->
         <xacro:property name="s_finger" value="$(arg single_finger)" />
         <xacro:property name="n_wrist" value="$(arg no_wrist)" />
+        
+        <!-- Carpal Tendon Actuators -->
         <xacro:unless value="${s_finger or n_wrist}">
-            <xacro:make_actuators tendons="${list(carpal_tendons)}" ctrlrange="0 10"/>
+            <xacro:make_actuators tendons="${list(carpal_tendons)}" ctrlrange="0 ${carpal_tendons_max_tension}"/>
+        </xacro:unless>
+
+        <!-- Digit I (Pollicis) Tendon Actuators -->
+        <xacro:unless value="$(arg single_finger)">
+            <xacro:make_actuators tendons="${list(pollicis_tendons)}" ctrlrange="0 ${pollicis_tendons_max_tension}"/>
         </xacro:unless>
 
         <!-- Digit II -->
-        <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="ii" ctrlrange="0 5"/>
+        <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="ii" ctrlrange="0 ${digitorum_tendons_max_tension}"/>
+        <xacro:make_actuators tendons="${list(digitorum_extensor)}" index="ii" ctrlrange="0 ${digitorum_extensor_max_tension}"/>
 
-        <!-- Pollicis, Digit III-V, Digiti Minimi Specific Tendon Actuators -->
+        <!-- Digit III-V, Digiti Minimi Specific Tendon Actuators -->
         <xacro:unless value="$(arg single_finger)">
-            <xacro:make_actuators tendons="${list(pollicis_tendons)}" ctrlrange="0 5"/>
+            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iii" ctrlrange="0 ${digitorum_tendons_max_tension}"/>
+            <xacro:make_actuators tendons="${list(digitorum_extensor)}" index="iii" ctrlrange="0 ${digitorum_extensor_max_tension}"/>
 
-            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iii" ctrlrange="0 5"/>
-            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iv" ctrlrange="0 5"/>
-            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="v" ctrlrange="0 5"/>
+            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iv" ctrlrange="0 ${digitorum_tendons_max_tension}"/>
+            <xacro:make_actuators tendons="${list(digitorum_extensor)}" index="iv" ctrlrange="0 ${digitorum_extensor_max_tension}"/>
+            
+            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="v" ctrlrange="0 ${digitorum_tendons_max_tension}"/>
+            <xacro:make_actuators tendons="${list(digitorum_extensor)}" index="v" ctrlrange="0 ${digitorum_extensor_max_tension}"/>
 
-            <xacro:make_actuators tendons="${list(digiti_minimi_specific_tendons)}" ctrlrange="0 5"/>
+            <xacro:make_actuators tendons="${list(digiti_minimi_specific_tendons)}" ctrlrange="0 ${digiti_minimi_specific_tendons_max_tension}"/>
         </xacro:unless>
     </xacro:macro>
 

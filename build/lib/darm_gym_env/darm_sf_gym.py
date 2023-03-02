@@ -9,7 +9,7 @@ from mujoco.glfw import glfw
 from pathlib import Path
 
 
-TARGETS_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_sf_joint_space_targets.npy"
+# TARGETS_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_sf_joint_space_targets.npy"
 DARM_XML_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/mujoco_env/darm.xml"
 
 class DARMSFEnv(gym.Env):
@@ -18,8 +18,8 @@ class DARMSFEnv(gym.Env):
     def __init__(self, render_mode=None, reaction_time=0.08, hand_name="hand1",
                     target_joint_state_delta = [4, 8, 8, 8],
                     min_th = 0.004,
-                    min_target_th = 0.008,
-                    max_target_th = 0.04,
+                    min_target_th = 2*0.004,
+                    max_target_th = 10*0.004,
                     min_joint_vals = [-20, -45, -10, -10],
                     max_joint_vals = [20, 90, 90, 90]) -> None:
         super().__init__()
@@ -45,13 +45,13 @@ class DARMSFEnv(gym.Env):
             bonus = 4.0,
             penalty = 50,
             act_reg = 0.1,
-            sparse = 1,
-            solved = 1,
-            done = 1
+            # sparse = 1,
+            # solved = 1, # review - weight should not be assigned to this?
+            # done = 1 # review - weight should not be assigned to this?
         )
 
         # Load the Model
-        self._load_model("../mujoco_env/darm.xml")
+        self._load_model()
         if not (self.model and self.data):
             raise "Error loading model"
         self._get_fingertip_indices()
@@ -64,10 +64,10 @@ class DARMSFEnv(gym.Env):
         self.ref_pos = np.array(self.data.xpos[ref_body_idx])
 
         # Load targets
-        with open(TARGETS_FILE, 'rb') as f:
-            # np.array([np.random.random((15)) for _ in range(5)])
-            self.targets = np.load(f)
-        self.targets_len = len(self.targets)
+        # with open(TARGETS_FILE, 'rb') as f:
+        #     # np.array([np.random.random((15)) for _ in range(5)])
+        #     self.targets = np.load(f)
+        # self.targets_len = len(self.targets)
 
         # Define Observation Space
         self.observation_space = gym.spaces.Box(low=-np.inf, high=np.inf, 
@@ -86,7 +86,7 @@ class DARMSFEnv(gym.Env):
         self.window = None
         self.window_size = 1200, 900
 
-    def _load_model(self, xml_path):
+    def _load_model(self):
         xml_path = DARM_XML_FILE
         self.model = mj.MjModel.from_xml_path(xml_path)
 
@@ -111,9 +111,12 @@ class DARMSFEnv(gym.Env):
     def _get_obs(self, prev_obs, new_obs, action_time=None):
         if not action_time:
             # if no action time velocity is zero. i.e. after reset
-            vel_obs = np.zeros((3,))
+            vel_obs = np.zeros((3*len(self.fingertip_indices),))
         elif action_time: 
-            vel_obs = (prev_obs[:3] - new_obs[:3])/action_time
+            prev_fingertip_pos = prev_obs[:3*len(self.fingertip_indices)]
+            new_fingertip_pos = new_obs[:3*len(self.fingertip_indices)]
+            # BUG: FIXED: (prev - new) to (new - prev)
+            vel_obs = (new_fingertip_pos - prev_fingertip_pos)/action_time
 
         return np.concatenate((np.array([(np.array(self.data.site_xpos[i]) - self.ref_pos) for i in self.fingertip_indices]).flatten(),
                              self.target_obs,
@@ -125,7 +128,7 @@ class DARMSFEnv(gym.Env):
     def _norm_to_target(self, obs):
         """
         Returns the norm of each fingertip to the target position
-        obs: an observation from the observation space [...fingertip_pos, ...target_pos]
+        obs: an observation from the observation space [...fingertip_pos, ...target_pos, ...fingertip_vel]
         """
         obs = obs.reshape((-1, 3))
         n_fingertips = len(self.fingertip_indices)

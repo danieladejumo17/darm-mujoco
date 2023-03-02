@@ -1,29 +1,34 @@
 import gym
 from darm_gym_env import DARMEnv
 import time
-import random
+from pprint import pprint
 
-env = gym.make("darm/DarmHand-v0", render_mode="human", hand_name="hand1")
+env = gym.make("darm/DarmHand-v0", render_mode="human", hand_name="hand1",
+               single_finger_env=False)
 
 done = False
 obs = env.reset()
 
 start = time.time()
+episode_return = 0
+
 while not done:
     ac = env.action_space.sample()
-    if random.random() > 0.5: 
-        ac[0:4] = [0.0, 0.0, 10.0, 10.0]
     obs, rew, done, info = env.step(ac)
+    episode_return += rew
+
     env.render()
 
     if done:
-        env.reset()
+        obs = env.reset()
         done = False
 
         print(f"Duration: {time.time() - start}")
+        pprint(info)
+        print(f"Episode Return: {episode_return} \n\n")
+        episode_return = 0
+
         start = time.time()
-        print(info)
     # TODO: Address links going beyond their limits
-    # TODO: Add trucation signal from closing window
 
 env.close()
