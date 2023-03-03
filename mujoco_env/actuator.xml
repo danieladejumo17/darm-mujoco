@@ -5,36 +5,11 @@
 <!-- =================================================================================== -->
 <actuator>
   <!-- A total of 34 muscles -->
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_adductor_pollicis_oblique_actuator" tendon="hand1_adductor_pollicis_oblique"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_adductor_pollicis_transverse_actuator" tendon="hand1_adductor_pollicis_transverse"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_abductor_pollicis_brevis_actuator" tendon="hand1_abductor_pollicis_brevis"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_abductor_pollicis_longus_actuator" tendon="hand1_abductor_pollicis_longus"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_flexor_pollicis_brevis_actuator" tendon="hand1_flexor_pollicis_brevis"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_flexor_pollicis_longus_actuator" tendon="hand1_flexor_pollicis_longus"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_extensor_pollicis_brevis_actuator" tendon="hand1_extensor_pollicis_brevis"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_extensor_pollicis_longus_actuator" tendon="hand1_extensor_pollicis_longus"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_opponens_pollicis_actuator" tendon="hand1_opponens_pollicis"/>
   <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_dorsal_interossei_ii_actuator" tendon="hand1_dorsal_interossei_ii"/>
   <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_palmar_interossei_ii_actuator" tendon="hand1_palmar_interossei_ii"/>
   <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_flexor_profundus_ii_actuator" tendon="hand1_flexor_profundus_ii"/>
   <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_flexor_superficialis_ii_actuator" tendon="hand1_flexor_superficialis_ii"/>
   <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 10" gainprm="-1" gaintype="fixed" name="hand1_extensor_communis_ii_actuator" tendon="hand1_extensor_communis_ii"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_dorsal_interossei_iii_actuator" tendon="hand1_dorsal_interossei_iii"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_palmar_interossei_iii_actuator" tendon="hand1_palmar_interossei_iii"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_flexor_profundus_iii_actuator" tendon="hand1_flexor_profundus_iii"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_flexor_superficialis_iii_actuator" tendon="hand1_flexor_superficialis_iii"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 10" gainprm="-1" gaintype="fixed" name="hand1_extensor_communis_iii_actuator" tendon="hand1_extensor_communis_iii"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_dorsal_interossei_iv_actuator" tendon="hand1_dorsal_interossei_iv"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_palmar_interossei_iv_actuator" tendon="hand1_palmar_interossei_iv"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_flexor_profundus_iv_actuator" tendon="hand1_flexor_profundus_iv"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_flexor_superficialis_iv_actuator" tendon="hand1_flexor_superficialis_iv"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 10" gainprm="-1" gaintype="fixed" name="hand1_extensor_communis_iv_actuator" tendon="hand1_extensor_communis_iv"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_dorsal_interossei_v_actuator" tendon="hand1_dorsal_interossei_v"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_palmar_interossei_v_actuator" tendon="hand1_palmar_interossei_v"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_flexor_profundus_v_actuator" tendon="hand1_flexor_profundus_v"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_flexor_superficialis_v_actuator" tendon="hand1_flexor_superficialis_v"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 10" gainprm="-1" gaintype="fixed" name="hand1_extensor_communis_v_actuator" tendon="hand1_extensor_communis_v"/>
-  <general biasprm="0" biastype="none" ctrllimited="true" ctrlrange="0 5" gainprm="-1" gaintype="fixed" name="hand1_opponens_digiti_minimi_actuator" tendon="hand1_opponens_digiti_minimi"/>
   <!-- <xacro:hand_actuators hand_name="hand2" />
     <xacro:hand_actuators hand_name="hand3" /> -->
 </actuator>
