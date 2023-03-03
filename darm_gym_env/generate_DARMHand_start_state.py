@@ -13,11 +13,11 @@ from tqdm import tqdm
 # ================================= TODO: CHECKLIST =================================
 
 # Choose single_finger or multi-fingers
-START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/DARMHand_SF_start_state.npy"
-# START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/DARMHand_MFNW_start_state.npy"
+# START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/DARMHand_SF_start_state.npy"
+START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/DARMHand_MFNW_start_state.npy"
 
 env = gym.make("darm/DarmHand-v0", render_mode=None, hand_name="hand1",
-               single_finger_env=True,
+               single_finger_env=False,
                ignore_load_start_states=True)
 
 targets = []
