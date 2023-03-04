@@ -315,6 +315,8 @@ class DARMEnv(gym.Env):
         if self.render_mode == "human":
             # Update target visualization mocaps pos
             self.data.mocap_pos = self.target_obs.reshape(len(self.fingertip_indices),3) + self.ref_pos
+            # Go Forward
+            mj.mj_forward(self.model, self.data)
             self._render_frame()
 
         self.ep_start_time = self.data.time
