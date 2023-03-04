@@ -74,7 +74,7 @@ class DARMEnv(gym.Env):
         self.rwd_keys_wt = dict(
             reach = 1.0,
             bonus = 4.0,
-            penalty = 50,
+            penalty = 1,  # done = all(...)
             act_reg = 0.1,
             # sparse = 1,
             # solved = 1, # review - weight should not be assigned to this?
@@ -352,7 +352,7 @@ class DARMEnv(gym.Env):
         # Get Reward
         rwd_dict = self._get_reward(action, new_obs)
         reward = rwd_dict["dense"].mean()
-        done = any(rwd_dict["done"])  # all(rwd_dict["done"])
+        done = all(rwd_dict["done"])
         
         return new_obs, reward, done, {**self._get_info(), "action": action, "reward": {**rwd_dict}}
 
