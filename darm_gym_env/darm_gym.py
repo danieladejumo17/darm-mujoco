@@ -225,6 +225,7 @@ class DARMEnv(gym.Env):
         # act_mag = np.linalg.norm(action.reshape(-1, 5)) # reshape action to (-1,5), ensure nu is ordered from mujoco
         # TODO: Consider scaling down this act_mag to be equiv. to a single finger with nu=5
         act_mag = np.linalg.norm(action)/np.sqrt(self.model.nu/1) # action magnitude is not measured per finger but as a whole
+        act_mag = np.array([act_mag]*len(self.fingertip_indices))
         # by dividing by sqrt(nu/5), the norm is similar to when computing with nu==5. Check it out.
         # by dividing by sqrt(nu) act_mag will have a max value in the order of the max_value of action now => 1
         
