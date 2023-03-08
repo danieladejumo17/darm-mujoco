@@ -4,7 +4,7 @@ import time
 from pprint import pprint
 
 env = gym.make("darm/DarmHand-v0", render_mode="human", hand_name="hand1",
-               single_finger_env=False)
+               single_finger_env=True)
 
 done = False
 obs = env.reset()

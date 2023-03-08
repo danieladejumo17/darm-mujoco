@@ -228,6 +228,7 @@ class DARMEnv(gym.Env):
         # by dividing by sqrt(nu/5), the norm is similar to when computing with nu==5. Check it out.
         # by dividing by sqrt(nu) act_mag will have a max value in the order of the max_value of action now => 1
         
+        act_mag = np.array([act_mag]*len(self.fingertip_indices))
         rwd_dict = collections.OrderedDict((
             # Optional Keys
             ('reach',   -1.*reach_dist),
