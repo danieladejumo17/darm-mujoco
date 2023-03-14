@@ -84,7 +84,7 @@ class DARMEnv(gym.Env):
             reach = 1.0,
             bonus = 4.0,
             penalty = 50,
-            act_reg = 0.1,
+            act_reg = 0.01,
             # sparse = 1,
             # solved = 1, # review - weight should not be assigned to this?
             # done = 1 # review - weight should not be assigned to this?
