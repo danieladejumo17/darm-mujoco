@@ -9,102 +9,72 @@ from mujoco.glfw import glfw
 from pathlib import Path
 
 
+# TARGETS_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_sf_joint_space_targets.npy"
 DARM_XML_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/mujoco_env/darm.xml"
-SF_START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/DARMHand_SF_start_state.npy"
-MF_START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/DARMHand_MFNW_start_state.npy"
 
-class DARMEnv(gym.Env):
-    metadata = {"render_modes": ["human"], "render_fps": 60}
+class DARMSFEnv(gym.Env):
+    metadata = {"render_modes": ["human"], "render_fps": 1}
 
-    def __init__(self, render_mode=None, action_time=0.08, hand_name="hand1",
-                min_th = 0.004,
-                min_target_th = 2*0.004,
-                max_target_th = 5*0.004, # 20 mm
-                target_joint_state_delta = [],
-                min_joint_vals = [],
-                max_joint_vals = [],
-                max_tendon_tension = [],
-                single_finger_env = False,
-                ignore_load_start_states = False
-                ) -> None:
+    def __init__(self, render_mode=None, reaction_time=0.08, hand_name="hand1",
+                    target_joint_state_delta = [4, 8, 8, 8],
+                    min_th = 0.004,
+                    min_target_th = 2*0.004,
+                    max_target_th = 10*0.004,
+                    min_joint_vals = [-20, -45, -10, -10],
+                    max_joint_vals = [20, 90, 90, 90]) -> None:
         super().__init__()
-        assert render_mode is None or render_mode in self.metadata["render_modes"]
-        
 
-        # ========================== Env Parameters ==========================
+        # Env Parameters
+        assert render_mode is None or render_mode in self.metadata["render_modes"]
         self.render_mode = render_mode
         self.hand_name = hand_name
-        self.single_finger_env = single_finger_env
-        self.action_time = action_time
+        self.reaction_time = reaction_time
         self.ep_start_time = 0  # episode start time
-
-
-        # ========================== Load the Model ==========================
-        self._load_model()
-        if not (self.model and self.data):
-            raise "Error loading model"
-        self._get_fingertip_indices()
         
-
-        # ========================== Setup Rendering ==========================
-        self.renderer = mj.Renderer(self.model)
-        # enable joint visualization option:
-        self.scene_option = mj.MjvOption()
-        self.scene_option.flags[mj.mjtVisFlag.mjVIS_JOINT] = True
-        self.last_frame = None
-        self.last_frame_time = 0
-
-
-        # ========================== Load targets ==========================
-        if not ignore_load_start_states:
-            self._load_start_states()
-
-
-        # ========================== Mujoco Model Simulation Parameters ==========================
-        self.min_joint_vals = min_joint_vals or self._get_joint_limits("min")   # degrees
-        self.max_joint_vals = max_joint_vals or self._get_joint_limits("max")   # degress
         # abs increament of joint state from starting state to target state
-        self.target_joint_state_delta = target_joint_state_delta or self._compute_target_joint_state_delta()   # degrees
-        self.max_tendon_tension = max_tendon_tension or self._get_actuator_ctrlrange("max")
-
-        self.min_joint_vals = self.min_joint_vals*(np.pi/180)
-        self.max_joint_vals = self.max_joint_vals*(np.pi/180)
-        self.target_joint_state_delta = self.target_joint_state_delta*(np.pi/180)
-
+        self.target_joint_state_delta = np.array(target_joint_state_delta)*(np.pi/180)  
         self.min_th = min_th    # norm threshold in metres at which env is solved
         self.min_target_th = min_target_th  # min norm to target state
         self.max_target_th = max_target_th  # max norm to target state
+        # TODO: The following data should be read from mujoco
+        self.min_joint_vals = np.array(min_joint_vals)*(np.pi/180)
+        self.max_joint_vals = np.array(max_joint_vals)*(np.pi/180)
 
-        # Initialize target observation
-        self.target_obs = np.zeros(3*len(self.fingertip_indices))
-
-
-        # ========================== Reward Components Weights ==========================
         self.rwd_keys_wt = dict(
             reach = 1.0,
             bonus = 4.0,
             penalty = 50,
-            act_reg = 0.01,
+            act_reg = 0.1,
             # sparse = 1,
             # solved = 1, # review - weight should not be assigned to this?
             # done = 1 # review - weight should not be assigned to this?
         )
 
+        # Load the Model
+        self._load_model()
+        if not (self.model and self.data):
+            raise "Error loading model"
+        self._get_fingertip_indices()
 
-        # ========================== Get Ref Position ==========================
-        # Reference Position is at the centre of the wrist
+        # Get Ref Position
         # The ref pos will remain fixed since it was taken before simulation started
         mj.mj_forward(self.model, self.data)
-        ref_body_idx = mj.mj_name2id(self.model, int(mj.mjtObj.mjOBJ_BODY), f"{self.hand_name}_rc_centre_block")
+        finger_idx = "ii"
+        ref_body_idx = mj.mj_name2id(self.model, int(mj.mjtObj.mjOBJ_BODY), f"{self.hand_name}_mcp_centre_block_{finger_idx}")
         self.ref_pos = np.array(self.data.xpos[ref_body_idx])
 
+        # Load targets
+        # with open(TARGETS_FILE, 'rb') as f:
+        #     # np.array([np.random.random((15)) for _ in range(5)])
+        #     self.targets = np.load(f)
+        # self.targets_len = len(self.targets)
 
-        # ========================== Define Observation and Action Space ==========================
+        # Define Observation Space
         self.observation_space = gym.spaces.Box(low=-np.inf, high=np.inf, 
                                                 shape=(3*3*len(self.fingertip_indices),), 
                                                 dtype=np.float32)
         
-
+        # Define Action Space
         # NOTE: Watch out for Box upper limit if Carpal Actuators are involved
         # FIXME: Fix action range in reward and step functions. Current ==> [0,2] after denorm
         # Define a mujoco action range array used for scaling
@@ -112,8 +82,7 @@ class DARMEnv(gym.Env):
                                             high=np.array([1.0]*self.model.nu), 
                                             shape=(self.model.nu,), dtype=np.float32)
 
-
-        # ========================== For Human Rendering ==========================
+        # For Human Rendering
         self.window = None
         self.window_size = 1200, 900
 
@@ -128,45 +97,6 @@ class DARMEnv(gym.Env):
             return
         
         self.data = mj.MjData(self.model)
-        renderer = mj.Renderer(self.model)
-
-    def _load_start_states(self):
-        if self.single_finger_env:
-            filename = SF_START_STATE_FILE
-        else:
-            filename = MF_START_STATE_FILE
-
-        with open(filename, 'rb') as f:
-            self.start_states = np.load(f, allow_pickle=True)
-            self.start_states_len = len(self.start_states)
-
-    def _get_joint_limits(self, type = None):
-        joint_limits = []
-        for i in range(self.model.njnt):
-            joint_limits.append(self.model.jnt_range[i]*(180/np.pi))
-        
-        joint_limits = np.asarray(joint_limits)
-        
-        if type == "min":
-            return joint_limits[:, 0]
-        if type == "max":
-            return joint_limits[:, 1]
-        
-        return joint_limits[:, 0], joint_limits[:, 1]
-
-    def _compute_target_joint_state_delta(self):
-        # return (self.max_joint_vals - self.min_joint_vals)//10  # for every range of 10 deg, have a delta of 1 deg
-        joint_state_delta =  ((self.max_joint_vals - self.min_joint_vals)//40) * 2  # for every range of 40 deg, have a delta of 2 deg
-        return np.clip(joint_state_delta, a_min=2, a_max=10)    # a minimum delta of 2 degrees, max of 10 degrees
-
-    def _get_actuator_ctrlrange(self, type = None):
-        if type == "min":
-            return np.array([self.model.actuator_ctrlrange[i][0] for i in range(self.model.nu)])
-        if type == "max":
-            return np.array([self.model.actuator_ctrlrange[i][1] for i in range(self.model.nu)])
-    
-        ctrl_range = np.array([self.model.actuator_ctrlrange[i] for i in range(self.model.nu)])
-        return ctrl_range[:, 0], ctrl_range[:, 1] # (min, max)
 
     def _init_controller(self):
         pass
@@ -175,12 +105,7 @@ class DARMEnv(gym.Env):
         pass
 
     def _get_fingertip_indices(self):
-        # NOTE: Remember to set the mocap index properly in reset()
-        if self.single_finger_env:
-            indices = ["ii"]
-        else:
-            indices = ["i", "ii", "iii", "iv", "v"]
-
+        indices = ["ii"]
         self.fingertip_indices = [mj.mj_name2id(self.model, int(mj.mjtObj.mjOBJ_SITE), f"{self.hand_name}_fingertip_{i}") for i in indices]
     
     def _get_obs(self, prev_obs, new_obs, action_time=None):
@@ -190,6 +115,7 @@ class DARMEnv(gym.Env):
         elif action_time: 
             prev_fingertip_pos = prev_obs[:3*len(self.fingertip_indices)]
             new_fingertip_pos = new_obs[:3*len(self.fingertip_indices)]
+            # BUG: FIXED: (prev - new) to (new - prev)
             vel_obs = (new_fingertip_pos - prev_fingertip_pos)/action_time
 
         return np.concatenate((np.array([(np.array(self.data.site_xpos[i]) - self.ref_pos) for i in self.fingertip_indices]).flatten(),
@@ -212,32 +138,25 @@ class DARMEnv(gym.Env):
 
         return np.linalg.norm(fingertip_poses-target_poses, ord=2, axis=-1)
 
-    def _get_reward(self, action, new_state):
+    def _get_reward(self, state, action, new_state, time_delta):
         """
-        Reward function to compute reward given action, and new state.
-        R = R(a, S')
+        Reward function to compute reward given state, action, and new state.
+        R = R(S, a, S')
 
-        Agent is punished for being far from target
-        Agent is punished for going farther than a threshold from the target
-        Agent is punished for high action magnitude
-        Agent is rewarded for being close to the target
-        Agent is rewarded for coming close to the target beyond a threshold 
+        If norm to target reduces: -1 else (-1 + x) where x is a neg. number 
+                proportional to number of fingers with increased norms
+        // Punish high velocity according to the eqution: -0.3 + 0.3*np.exp(-1*vel): DEPR
+        Punish high torque according to the equation: -0.5 + 0.5*np.exp(-1*action)
+        Reward reaching target with a tolerance of 4mm: 250
         """
 
         reach_dist = self._norm_to_target(new_state)    # NOTE: Single finger
         near_th = self.min_th
         far_th = 2*self.max_target_th
-
-        # Scale action down to [0, 1] from [0, max_tendon_tension]
-        action = action / self.max_tendon_tension
-        
+        # Use 0.5 to scale down reward to [0 1] from [0 2]
+        # TODO: Let action range of model be limited to 1. Scale action input in mujoco model
         # NOTE: Some of the fingers in five fingered hand have more than five actuators
-        # act_mag = np.linalg.norm(action.reshape(-1, 5)) # reshape action to (-1,5), ensure nu is ordered from mujoco
-        # TODO: Consider scaling down this act_mag to be equiv. to a single finger with nu=5
-        act_mag = np.linalg.norm(action)/np.sqrt(self.model.nu/1) # action magnitude is not measured per finger but as a whole
-        act_mag = np.array([act_mag]*len(self.fingertip_indices))
-        # by dividing by sqrt(nu/5), the norm is similar to when computing with nu==5. Check it out.
-        # by dividing by sqrt(nu) act_mag will have a max value in the order of the max_value of action now => 1
+        act_mag = np.linalg.norm((1/5)*action.reshape(-1, 5)) # reshape action to (-1,5), ensure nu is ordered from mujoco
         
         rwd_dict = collections.OrderedDict((
             # Optional Keys
@@ -251,106 +170,98 @@ class DARMEnv(gym.Env):
             ('done',    reach_dist > far_th),
         ))
 
-            # Weights:
-            # reach = 1.0,
-            # bonus = 4.0,
-            # penalty = 50,
-            # act_reg = 0.1,
         rwd_dict['dense'] = np.sum([wt*rwd_dict[key] for key, wt in self.rwd_keys_wt.items()], axis=0)
         return rwd_dict
+
+
+        # # Change in Norm to Target
+        # prev_norm = self._norm_to_target(state)
+        # new_norm = self._norm_to_target(new_state)
+        # # norm_reward = -1 + sum(new_norm > prev_norm)*(-1/len(self.fingertip_indices))
+        # norm_reward = 1 if new_norm < prev_norm else -1
+
+        # # agent takes advantage of +1 by turning all arounf
+        # # implement far_th and near_th
+        # # essentially use the myosuite reward function
+
+        # # norm_reward = -40*self._norm_to_target(state)   # max: -3.2
+
+        # # Velocity Correction
+        # # previous_pos = state[:3*len(self.fingertip_indices)].reshape((-1,3))
+        # # new_pos = new_state[:3*len(self.fingertip_indices)].reshape((-1,3))
+        # # vel = np.linalg.norm(new_pos-previous_pos, ord=2, axis=-1) / time_delta
+        # # vel_reward = (-0.3 + 0.3*np.exp(-1*vel)).mean() # scale vel term in exp beween [-1,-5]
+        
+        # # Effort Correction
+        # # action_reward = (-0.5 + 0.5*np.exp(-1*action)).mean()
+
+        # ctrl_reward = -0.1*np.sum((0.5*action)**2)  # max: -0.4
+
+        # # Reach Target Reward
+        # reach_reward = 100 if self._get_done(new_state) else 0
+
+        # reward_info = {"norm_reward": norm_reward, "ctrl_reward": ctrl_reward, "reach_reward": reach_reward}
+        # return (norm_reward + ctrl_reward + reach_reward), reward_info
 
     def _get_done(self, new_state):
         return all(self._norm_to_target(new_state) < self.min_th)
 
-    def _check_collision(self):
-        """Returns True if there is collision, otherwise False"""
-        return len(self.data.contact.geom1) > 0
+    # def reset(self, seed=None, options=None):
+        # super().reset()
+    def reset(self, **kwargs):
+        # Go to a random valid pose
+        # Sample from Joint Space
+        joint_state = np.random.uniform(low=self.min_joint_vals, high=self.max_joint_vals)
 
-    def generate_start_state(self):
-        while True:
-            # ========================== Sample valid start_state from Joint Space ==========================
-            joint_state = np.random.uniform(low=self.min_joint_vals, high=self.max_joint_vals)
-            # normal_sampling = np.random.normal(loc=0.5, scale=0.5/3, size=self.min_joint_vals.shape)
-            # normal_sampling = np.clip(normal_sampling, 0, 1)
-            # joint_state = self.min_joint_vals + normal_sampling*(self.max_joint_vals - self.min_joint_vals)
-            self.forward(joint_state)
-
-            if self._check_collision(): # returns True if there is collision
-                # ensure there is no collision at the start state
-                continue
-            
+        # FIXME: Create utility to check for collision in multifingered case
         
-            # ========================== Create a valid target ==========================
-            joint_state_delta = self.target_joint_state_delta*np.random.choice(a=[-1,1], size=(self.model.njnt,), replace=True)
+        # Create a new goal
+        self.target_obs = np.random.random(3)
+        while True:
+            joint_state_delta = self.target_joint_state_delta*np.random.choice(a=[-1,1], size=(4,), replace=True)
             target_joint_state = np.clip(a=joint_state + joint_state_delta, 
                                         a_min=self.min_joint_vals, 
                                         a_max=self.max_joint_vals)
             self.target_obs = self.forward(target_joint_state)[:3*len(self.fingertip_indices)]
-            if self._check_collision(): # returns True if there is collision
-                # ensure there is no collision at the target state
-                continue
+            # self.target_obs = self.targets[np.random.randint(0, self.targets_len)]
             
-            # Return to start state
-            observation = self.forward(joint_state)
+            # MOCAPS for visualization
+            if self.render_mode == "human":
+                self.data.mocap_pos = self.target_obs.reshape(len(self.fingertip_indices),3) + self.ref_pos
 
-            # Verify distance of start state to target state is within limits
+            # Go forward to Joint State
+            observation = self.forward(joint_state) #self._get_obs()
+
+            # Verify distance is within limits
             norm = self._norm_to_target(observation)
-            if not (all(norm >= self.min_target_th) and all(norm <= self.max_target_th)):
-                continue
-            
-            # If all checks are positive, break random search loop
-            return observation, joint_state, self.target_obs      
+            if norm >= self.min_target_th and norm <= self.max_target_th:
+                break
 
-    def sample_saved_start_states(self):
-        # Sample a start state from saved start states
-        # start_state = [joint_state, target_obs]
-        start_state = self.start_states[np.random.randint(self.start_states_len)]
-
-        # Set Target Obs
-        self.target_obs = start_state[1]
-
-        # Go forward to start state
-        observation = self.forward(start_state[0])
-
-        # Return Observation
-        return observation
-
-    # def reset(self, seed=None, options=None):
-        # super().reset()
-    def reset(self, **kwargs):
-        # ========================== Get a random valid pose and target ==========================
-        # observation, _, _ = self.generate_start_state()
-        observation = self.sample_saved_start_states()
-
-        # ========================== Render Frame ==========================
+        # Render Frame
         if self.render_mode == "human":
-            # Update target visualization mocaps pos
-            self.data.mocap_pos = self.target_obs.reshape(len(self.fingertip_indices),3) + self.ref_pos
-            # Go Forward
-            mj.mj_forward(self.model, self.data)
             self._render_frame()
 
         self.ep_start_time = self.data.time
-        return observation
+        return observation #, self._get_info()
 
     def step(self, action):
         prev_obs = self._get_obs(prev_obs=None, new_obs=None, action_time=None)
 
+        # FIXME: READ Action range from self.<>
         # action from model is in the range [-1,1]
         # action + 1 === [0, 2]
         # action * x === [0, 2x]
-        action = (action + 1)*(self.max_tendon_tension/2)
-        action = np.clip(action, 0, self.max_tendon_tension)
+        action = (action + 1)*2.5  # [0, 5]
+        action = np.clip(action, 0, 5)
         self.data.ctrl[0 : self.model.nu] = action
         time_prev = self.data.time   # simulation time in seconds
 
-        # Perform action  
-        while (self.data.time - time_prev < self.action_time):
+        # Perform action    
+        while (self.data.time - time_prev < self.reaction_time):
             mj.mj_step(self.model, self.data)
         time_after = self.data.time # time after performing action
 
-
-        # Get new observation (fingertips_pos)
+        # Get new observation
         new_obs = self._get_obs(prev_obs=None, new_obs=None, action_time=None)
         # include velocity in new obs
         new_obs = self._get_obs(prev_obs=prev_obs,
@@ -361,11 +272,15 @@ class DARMEnv(gym.Env):
             self._render_frame()
 
         # Get Reward
-        rwd_dict = self._get_reward(action, new_obs)
+        rwd_dict = self._get_reward(prev_obs, action, new_obs, time_after-time_prev)
         reward = rwd_dict["dense"].mean()
-        done = any(rwd_dict["done"])  # all(rwd_dict["done"])
+        done = any(rwd_dict["done"])    # all(rwd_dict["solved"]) or any(rwd_dict["done"])
+
+        # if self.render_mode == "human":
+        #     self._render_frame()
         
-        return new_obs, reward, done, {**self._get_info(), "action": action, "reward": {**rwd_dict}}
+        return new_obs, reward, done, {**self._get_info(), "action": action, "reward": {**rwd_dict}}   # False, self._get_info()
+        # return new_obs, reward, self._get_done(new_obs), {**self._get_info(), "reward": {**reward_info}}   # False, self._get_info()
 
     def forward(self, joint_conf):
         self.data.qpos = joint_conf
@@ -374,13 +289,7 @@ class DARMEnv(gym.Env):
 
     def render(self, mode, **kwargs):
         if self.render_mode == "human":
-            return self._render_frame()
-        else:
-            T = 1/DARMEnv.metadata["render_fps"]    # period
-            if (not self.last_frame) or ((self.data.time - self.last_frame_time) >= T):
-                self.renderer.update_scene(self.data, scene_option=self.scene_option)
-                self.last_frame = self.renderer.render()
-            return self.last_frame.copy()
+            self._render_frame()
 
     def _render_frame(self):
         if self.render_mode == "human" and not self.window:

@@ -47,12 +47,12 @@ class DARMEnv(gym.Env):
         
 
         # ========================== Setup Rendering ==========================
+        self.renderer = mj.Renderer(self.model)
         # enable joint visualization option:
-        # self.renderer = mj.Renderer(self.model)
-        # self.scene_option = mj.MjvOption()
-        # self.scene_option.flags[mj.mjtVisFlag.mjVIS_JOINT] = True
-        # self.last_frame = None
-        # self.last_frame_time = 0
+        self.scene_option = mj.MjvOption()
+        self.scene_option.flags[mj.mjtVisFlag.mjVIS_JOINT] = True
+        self.last_frame = None
+        self.last_frame_time = 0
 
 
         # ========================== Load targets ==========================
@@ -84,7 +84,7 @@ class DARMEnv(gym.Env):
             reach = 1.0,
             bonus = 4.0,
             penalty = 50,
-            act_reg = 0.1,
+            act_reg = 0.01,
             # sparse = 1,
             # solved = 1, # review - weight should not be assigned to this?
             # done = 1 # review - weight should not be assigned to this?
@@ -128,6 +128,7 @@ class DARMEnv(gym.Env):
             return
         
         self.data = mj.MjData(self.model)
+        renderer = mj.Renderer(self.model)
 
     def _load_start_states(self):
         if self.single_finger_env:
@@ -374,12 +375,12 @@ class DARMEnv(gym.Env):
     def render(self, mode, **kwargs):
         if self.render_mode == "human":
             return self._render_frame()
-        # else:
-        #     T = 1/DARMEnv.metadata["render_fps"]    # period
-        #     if (not self.last_frame) or ((self.data.time - self.last_frame_time) >= T):
-        #         self.renderer.update_scene(self.data, scene_option=self.scene_option)
-        #         self.last_frame = self.renderer.render()
-        #     return self.last_frame.copy()
+        else:
+            T = 1/DARMEnv.metadata["render_fps"]    # period
+            if (not self.last_frame) or ((self.data.time - self.last_frame_time) >= T):
+                self.renderer.update_scene(self.data, scene_option=self.scene_option)
+                self.last_frame = self.renderer.render()
+            return self.last_frame.copy()
 
     def _render_frame(self):
         if self.render_mode == "human" and not self.window:
