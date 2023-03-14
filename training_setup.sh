@@ -1,6 +1,6 @@
 sudo apt update
 sudo apt install build-essential -y
-pip install ray[rllib]==2.2.0 torch
+pip install ray[rllib]==2.2.0
 pip install wandb
 pip install tensorflow_probability
 python setup.py install

@@ -14,7 +14,7 @@ SF_START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/DARMHand_SF
 MF_START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/DARMHand_MFNW_start_state.npy"
 
 class DARMEnv(gym.Env):
-    metadata = {"render_modes": ["human"], "render_fps": 1}
+    metadata = {"render_modes": ["human"], "render_fps": 60}
 
     def __init__(self, render_mode=None, action_time=0.08, hand_name="hand1",
                 min_th = 0.004,
@@ -44,6 +44,15 @@ class DARMEnv(gym.Env):
         if not (self.model and self.data):
             raise "Error loading model"
         self._get_fingertip_indices()
+        
+
+        # ========================== Setup Rendering ==========================
+        # enable joint visualization option:
+        # self.renderer = mj.Renderer(self.model)
+        # self.scene_option = mj.MjvOption()
+        # self.scene_option.flags[mj.mjtVisFlag.mjVIS_JOINT] = True
+        # self.last_frame = None
+        # self.last_frame_time = 0
 
 
         # ========================== Load targets ==========================
@@ -225,10 +234,10 @@ class DARMEnv(gym.Env):
         # act_mag = np.linalg.norm(action.reshape(-1, 5)) # reshape action to (-1,5), ensure nu is ordered from mujoco
         # TODO: Consider scaling down this act_mag to be equiv. to a single finger with nu=5
         act_mag = np.linalg.norm(action)/np.sqrt(self.model.nu/1) # action magnitude is not measured per finger but as a whole
+        act_mag = np.array([act_mag]*len(self.fingertip_indices))
         # by dividing by sqrt(nu/5), the norm is similar to when computing with nu==5. Check it out.
         # by dividing by sqrt(nu) act_mag will have a max value in the order of the max_value of action now => 1
         
-        act_mag = np.array([act_mag]*len(self.fingertip_indices))
         rwd_dict = collections.OrderedDict((
             # Optional Keys
             ('reach',   -1.*reach_dist),
@@ -364,7 +373,13 @@ class DARMEnv(gym.Env):
 
     def render(self, mode, **kwargs):
         if self.render_mode == "human":
-            self._render_frame()
+            return self._render_frame()
+        # else:
+        #     T = 1/DARMEnv.metadata["render_fps"]    # period
+        #     if (not self.last_frame) or ((self.data.time - self.last_frame_time) >= T):
+        #         self.renderer.update_scene(self.data, scene_option=self.scene_option)
+        #         self.last_frame = self.renderer.render()
+        #     return self.last_frame.copy()
 
     def _render_frame(self):
         if self.render_mode == "human" and not self.window:

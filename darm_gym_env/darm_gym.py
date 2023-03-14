@@ -44,6 +44,15 @@ class DARMEnv(gym.Env):
         if not (self.model and self.data):
             raise "Error loading model"
         self._get_fingertip_indices()
+        
+
+        # ========================== Setup Rendering ==========================
+        # enable joint visualization option:
+        # self.renderer = mj.Renderer(self.model)
+        # self.scene_option = mj.MjvOption()
+        # self.scene_option.flags[mj.mjtVisFlag.mjVIS_JOINT] = True
+        # self.last_frame = None
+        # self.last_frame_time = 0
 
 
         # ========================== Load targets ==========================
@@ -364,7 +373,13 @@ class DARMEnv(gym.Env):
 
     def render(self, mode, **kwargs):
         if self.render_mode == "human":
-            self._render_frame()
+            return self._render_frame()
+        # else:
+        #     T = 1/DARMEnv.metadata["render_fps"]    # period
+        #     if (not self.last_frame) or ((self.data.time - self.last_frame_time) >= T):
+        #         self.renderer.update_scene(self.data, scene_option=self.scene_option)
+        #         self.last_frame = self.renderer.render()
+        #     return self.last_frame.copy()
 
     def _render_frame(self):
         if self.render_mode == "human" and not self.window:
