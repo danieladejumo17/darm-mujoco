@@ -51,7 +51,7 @@ class DARMEnv(gym.Env):
         # enable joint visualization option:
         self.scene_option = mj.MjvOption()
         self.scene_option.flags[mj.mjtVisFlag.mjVIS_JOINT] = True
-        self.last_frame = None
+        self.last_frame = self.renderer.render()
         self.last_frame_time = 0
 
 
@@ -377,7 +377,7 @@ class DARMEnv(gym.Env):
             return self._render_frame()
         else:
             T = 1/DARMEnv.metadata["render_fps"]    # period
-            if (not self.last_frame) or ((self.data.time - self.last_frame_time) >= T):
+            if (self.data.time - self.last_frame_time) >= T:
                 self.renderer.update_scene(self.data, scene_option=self.scene_option)
                 self.last_frame = self.renderer.render()
             return self.last_frame.copy()
