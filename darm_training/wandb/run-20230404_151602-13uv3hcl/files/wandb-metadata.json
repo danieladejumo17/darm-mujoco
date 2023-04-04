@@ -1,0 +1,56 @@
+{
+    "os": "Linux-5.4.0-42-generic-x86_64-with-glibc2.17",
+    "python": "3.8.12",
+    "heartbeatAt": "2023-04-04T14:16:05.461469",
+    "startedAt": "2023-04-04T14:16:02.852714",
+    "docker": null,
+    "cuda": null,
+    "args": null,
+    "state": "running",
+    "program": "darm_training/sb3_sac_dii.ipynb",
+    "root": "/home/daniel/DARM/darm_mujoco",
+    "git": {
+        "remote": "git@github.com:danieladejumo17/darm-mujoco.git",
+        "commit": "9418a1a89d425a54504404f3ff35365b5adc5a7c"
+    },
+    "email": "adejumodaniel17@gmail.com",
+    "host": "Daniel",
+    "username": "daniel",
+    "executable": "/home/daniel/miniconda3/bin/python3.8",
+    "cpu_count": 2,
+    "cpu_count_logical": 4,
+    "cpu_freq": {
+        "current": 2100.004,
+        "min": 400.0,
+        "max": 2800.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2100.008,
+            "min": 400.0,
+            "max": 2800.0
+        },
+        {
+            "current": 2099.998,
+            "min": 400.0,
+            "max": 2800.0
+        },
+        {
+            "current": 2100.009,
+            "min": 400.0,
+            "max": 2800.0
+        },
+        {
+            "current": 2100.001,
+            "min": 400.0,
+            "max": 2800.0
+        }
+    ],
+    "disk": {
+        "total": 29.658042907714844,
+        "used": 27.856056213378906
+    },
+    "memory": {
+        "total": 7.455364227294922
+    }
+}

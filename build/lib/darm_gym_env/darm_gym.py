@@ -2,7 +2,7 @@ import os
 import numpy as np
 import collections
 
-from darm_render import DARMRender
+import darm_gym_env.darm_render
 import gym
 import mujoco as mj
 
@@ -51,7 +51,7 @@ class DARMEnv(gym.Env):
 
         # ========================== Setup Rendering ==========================
         if self.render_mode == "human":
-            self.darm_render = DARMRender(self.model, self.data, (1200,900))
+            self.darm_render = darm_gym_env.darm_render.DARMRender(self.model, self.data, (1200,900))
             self.darm_render.init_window_render()
 
 
@@ -285,8 +285,7 @@ class DARMEnv(gym.Env):
 
     def digits_in_contact(self):
         """Returns True if there is any collision between the digits of the hand"""
-        indices = [self.index_str_mapping[i] for i in self.all_digits]
-        contacts = np.concatenate([self.get_finger_contacts(index) for index in indices])
+        contacts = np.concatenate([self.get_finger_contacts(index) for index in self.digits_indices])
         return sum(contacts) > 0
 
     def _get_obs(self, action_time=None):
@@ -426,7 +425,8 @@ class DARMEnv(gym.Env):
             fingertip_obs = np.zeros_like(self.target_obs)
             for idx_str in self.digits:
                 fingertip_obs[self.index_str_mapping[idx_str]] = self.get_fingertip_pose(idx_str)
-            norm = self.position_norm(fingertip_obs[:, :3], self.target_obs[:, :3])
+            norm_all = self.position_norm(fingertip_obs[:, :3], self.target_obs[:, :3])
+            norm = norm_all[self.digits_indices]
             if not (all(norm >= self.min_target_th) and all(norm <= self.max_target_th)):
                 continue
             

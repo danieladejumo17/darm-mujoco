@@ -1,0 +1,562 @@
+2023-04-04 15:16:02,904 INFO    StreamThr :28346 [internal.py:wandb_internal():87] W&B internal server running at pid: 28346, started at: 2023-04-04 15:16:02.901919
+2023-04-04 15:16:02,917 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status
+2023-04-04 15:16:02,921 INFO    WriterThread:28346 [datastore.py:open_for_write():85] open: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/run-13uv3hcl.wandb
+2023-04-04 15:16:02,922 DEBUG   SenderThread:28346 [sender.py:send():336] send: header
+2023-04-04 15:16:03,007 DEBUG   SenderThread:28346 [sender.py:send():336] send: run
+2023-04-04 15:16:04,308 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: check_version
+2023-04-04 15:16:04,315 INFO    SenderThread:28346 [dir_watcher.py:__init__():216] watching files in: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files
+2023-04-04 15:16:04,316 INFO    SenderThread:28346 [sender.py:_start_run_threads():1067] run started: 13uv3hcl with start time 1680617762.88922
+2023-04-04 15:16:04,317 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:16:04,317 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:16:04,318 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: check_version
+2023-04-04 15:16:05,316 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:16:05,431 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: run_start
+2023-04-04 15:16:05,434 DEBUG   HandlerThread:28346 [system_info.py:__init__():31] System info init
+2023-04-04 15:16:05,435 DEBUG   HandlerThread:28346 [system_info.py:__init__():46] System info init done
+2023-04-04 15:16:05,436 INFO    HandlerThread:28346 [system_monitor.py:start():151] Starting system monitor
+2023-04-04 15:16:05,437 INFO    SystemMonitor:28346 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-04-04 15:16:05,438 INFO    HandlerThread:28346 [system_monitor.py:probe():172] Collecting system info
+2023-04-04 15:16:05,440 INFO    SystemMonitor:28346 [interfaces.py:start():168] Started cpu
+2023-04-04 15:16:05,441 INFO    SystemMonitor:28346 [interfaces.py:start():168] Started disk
+2023-04-04 15:16:05,446 INFO    SystemMonitor:28346 [interfaces.py:start():168] Started memory
+2023-04-04 15:16:05,450 INFO    SystemMonitor:28346 [interfaces.py:start():168] Started network
+2023-04-04 15:16:05,461 DEBUG   HandlerThread:28346 [system_info.py:probe():195] Probing system
+2023-04-04 15:16:05,473 DEBUG   HandlerThread:28346 [system_info.py:_probe_git():180] Probing git
+2023-04-04 15:16:05,514 DEBUG   HandlerThread:28346 [system_info.py:_probe_git():188] Probing git done
+2023-04-04 15:16:05,514 DEBUG   HandlerThread:28346 [system_info.py:probe():241] Probing system done
+2023-04-04 15:16:05,515 DEBUG   HandlerThread:28346 [system_monitor.py:probe():181] {'os': 'Linux-5.4.0-42-generic-x86_64-with-glibc2.17', 'python': '3.8.12', 'heartbeatAt': '2023-04-04T14:16:05.461469', 'startedAt': '2023-04-04T14:16:02.852714', 'docker': None, 'cuda': None, 'args': None, 'state': 'running', 'program': 'darm_training/sb3_sac_dii.ipynb', 'root': '/home/daniel/DARM/darm_mujoco', 'git': {'remote': 'git@github.com:danieladejumo17/darm-mujoco.git', 'commit': '9418a1a89d425a54504404f3ff35365b5adc5a7c'}, 'email': 'adejumodaniel17@gmail.com', 'host': 'Daniel', 'username': 'daniel', 'executable': '/home/daniel/miniconda3/bin/python3.8', 'cpu_count': 2, 'cpu_count_logical': 4, 'cpu_freq': {'current': 2100.004, 'min': 400.0, 'max': 2800.0}, 'cpu_freq_per_core': [{'current': 2100.008, 'min': 400.0, 'max': 2800.0}, {'current': 2099.998, 'min': 400.0, 'max': 2800.0}, {'current': 2100.009, 'min': 400.0, 'max': 2800.0}, {'current': 2100.001, 'min': 400.0, 'max': 2800.0}], 'disk': {'total': 29.658042907714844, 'used': 27.856056213378906}, 'memory': {'total': 7.455364227294922}}
+2023-04-04 15:16:05,515 INFO    HandlerThread:28346 [system_monitor.py:probe():182] Finished collecting system info
+2023-04-04 15:16:05,515 INFO    HandlerThread:28346 [system_monitor.py:probe():185] Publishing system info
+2023-04-04 15:16:05,515 DEBUG   HandlerThread:28346 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-04-04 15:16:05,516 DEBUG   HandlerThread:28346 [system_info.py:_save_pip():67] Saving pip packages done
+2023-04-04 15:16:05,516 DEBUG   HandlerThread:28346 [system_info.py:_save_conda():74] Saving list of conda packages installed into the current environment
+2023-04-04 15:16:06,315 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/conda-environment.yaml
+2023-04-04 15:16:06,316 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/requirements.txt
+2023-04-04 15:16:12,318 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/conda-environment.yaml
+2023-04-04 15:16:12,578 DEBUG   HandlerThread:28346 [system_info.py:_save_conda():86] Saving conda packages done
+2023-04-04 15:16:12,578 DEBUG   HandlerThread:28346 [system_info.py:_save_code():89] Saving code
+2023-04-04 15:16:12,579 WARNING HandlerThread:28346 [system_info.py:_save_code():91] unable to save code -- program entry not found
+2023-04-04 15:16:12,579 DEBUG   HandlerThread:28346 [system_info.py:_save_patches():127] Saving git patches
+2023-04-04 15:16:13,322 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/upstream_diff_9030449925d27ea397c9bc47f73ef8a0afca6814.patch
+2023-04-04 15:16:13,325 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/diff.patch
+2023-04-04 15:16:14,764 DEBUG   HandlerThread:28346 [system_info.py:_save_patches():169] Saving git patches done
+2023-04-04 15:16:14,769 INFO    HandlerThread:28346 [system_monitor.py:probe():187] Finished publishing system info
+2023-04-04 15:16:14,805 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:16:14,805 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:16:14,807 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:16:14,808 DEBUG   SenderThread:28346 [sender.py:send():336] send: files
+2023-04-04 15:16:14,809 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-metadata.json with policy now
+2023-04-04 15:16:14,809 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file diff.patch with policy now
+2023-04-04 15:16:14,810 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file upstream_diff_9030449925d27ea397c9bc47f73ef8a0afca6814.patch with policy now
+2023-04-04 15:16:14,901 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: stop_status
+2023-04-04 15:16:14,903 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: stop_status
+2023-04-04 15:16:14,919 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: pause
+2023-04-04 15:16:14,920 INFO    HandlerThread:28346 [handler.py:handle_request_pause():717] stopping system metrics thread or process
+2023-04-04 15:16:14,921 INFO    HandlerThread:28346 [system_monitor.py:finish():161] Stopping system monitor
+2023-04-04 15:16:14,931 DEBUG   SystemMonitor:28346 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2023-04-04 15:16:14,931 DEBUG   SystemMonitor:28346 [system_monitor.py:_start():137] Finished system metrics aggregation loop
+2023-04-04 15:16:14,932 DEBUG   SystemMonitor:28346 [system_monitor.py:_start():141] Publishing last batch of metrics
+2023-04-04 15:16:14,937 INFO    HandlerThread:28346 [interfaces.py:finish():175] Joined cpu
+2023-04-04 15:16:14,937 INFO    HandlerThread:28346 [interfaces.py:finish():175] Joined disk
+2023-04-04 15:16:14,938 INFO    HandlerThread:28346 [interfaces.py:finish():175] Joined memory
+2023-04-04 15:16:14,938 INFO    HandlerThread:28346 [interfaces.py:finish():175] Joined network
+2023-04-04 15:16:14,951 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: resume
+2023-04-04 15:16:14,951 INFO    HandlerThread:28346 [handler.py:handle_request_resume():708] starting system metrics thread or process
+2023-04-04 15:16:14,951 INFO    HandlerThread:28346 [system_monitor.py:start():151] Starting system monitor
+2023-04-04 15:16:14,956 INFO    SystemMonitor:28346 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-04-04 15:16:14,963 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: pause
+2023-04-04 15:16:14,964 INFO    HandlerThread:28346 [handler.py:handle_request_pause():717] stopping system metrics thread or process
+2023-04-04 15:16:14,964 INFO    HandlerThread:28346 [system_monitor.py:finish():161] Stopping system monitor
+2023-04-04 15:16:14,964 WARNING HandlerThread:28346 [interfaces.py:finish():177] Failed to join cpu: cannot join thread before it is started
+2023-04-04 15:16:15,322 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/upstream_diff_9030449925d27ea397c9bc47f73ef8a0afca6814.patch
+2023-04-04 15:16:15,323 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-metadata.json
+2023-04-04 15:16:15,438 DEBUG   SenderThread:28346 [sender.py:send():336] send: telemetry
+2023-04-04 15:16:15,439 DEBUG   SenderThread:28346 [sender.py:send():336] send: stats
+2023-04-04 15:16:16,473 INFO    wandb-upload_0:28346 [upload_job.py:push():138] Uploaded file /tmp/tmpyj5wj4s2wandb/6p2t7pp8-wandb-metadata.json
+2023-04-04 15:16:16,770 INFO    wandb-upload_1:28346 [upload_job.py:push():138] Uploaded file /tmp/tmpyj5wj4s2wandb/tqfwe5jj-diff.patch
+2023-04-04 15:16:17,790 INFO    wandb-upload_2:28346 [upload_job.py:push():138] Uploaded file /tmp/tmpyj5wj4s2wandb/tsnmnwpy-upstream_diff_9030449925d27ea397c9bc47f73ef8a0afca6814.patch
+2023-04-04 15:16:18,441 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:16:23,442 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:16:24,150 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: resume
+2023-04-04 15:16:24,151 INFO    HandlerThread:28346 [handler.py:handle_request_resume():708] starting system metrics thread or process
+2023-04-04 15:16:24,151 INFO    HandlerThread:28346 [system_monitor.py:start():151] Starting system monitor
+2023-04-04 15:16:24,152 INFO    SystemMonitor:28346 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-04-04 15:16:24,154 INFO    SystemMonitor:28346 [interfaces.py:start():168] Started cpu
+2023-04-04 15:16:24,155 INFO    SystemMonitor:28346 [interfaces.py:start():168] Started disk
+2023-04-04 15:16:24,156 INFO    SystemMonitor:28346 [interfaces.py:start():168] Started memory
+2023-04-04 15:16:24,158 INFO    SystemMonitor:28346 [interfaces.py:start():168] Started network
+2023-04-04 15:16:26,327 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:16:28,328 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:16:28,747 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:16:29,900 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:16:30,329 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:16:31,657 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: pause
+2023-04-04 15:16:31,658 INFO    HandlerThread:28346 [handler.py:handle_request_pause():717] stopping system metrics thread or process
+2023-04-04 15:16:31,658 INFO    HandlerThread:28346 [system_monitor.py:finish():161] Stopping system monitor
+2023-04-04 15:16:31,658 DEBUG   SystemMonitor:28346 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2023-04-04 15:16:31,660 DEBUG   SystemMonitor:28346 [system_monitor.py:_start():137] Finished system metrics aggregation loop
+2023-04-04 15:16:31,660 DEBUG   SystemMonitor:28346 [system_monitor.py:_start():141] Publishing last batch of metrics
+2023-04-04 15:16:31,661 INFO    HandlerThread:28346 [interfaces.py:finish():175] Joined cpu
+2023-04-04 15:16:31,661 INFO    HandlerThread:28346 [interfaces.py:finish():175] Joined disk
+2023-04-04 15:16:31,662 INFO    HandlerThread:28346 [interfaces.py:finish():175] Joined memory
+2023-04-04 15:16:31,662 INFO    HandlerThread:28346 [interfaces.py:finish():175] Joined network
+2023-04-04 15:16:31,663 DEBUG   SenderThread:28346 [sender.py:send():336] send: stats
+2023-04-04 15:16:32,330 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:16:34,332 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:16:34,670 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:16:34,901 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:16:35,951 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: resume
+2023-04-04 15:16:35,951 INFO    HandlerThread:28346 [handler.py:handle_request_resume():708] starting system metrics thread or process
+2023-04-04 15:16:35,951 INFO    HandlerThread:28346 [system_monitor.py:start():151] Starting system monitor
+2023-04-04 15:16:35,956 INFO    SystemMonitor:28346 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-04-04 15:16:35,959 INFO    SystemMonitor:28346 [interfaces.py:start():168] Started cpu
+2023-04-04 15:16:35,959 INFO    SystemMonitor:28346 [interfaces.py:start():168] Started disk
+2023-04-04 15:16:35,959 INFO    SystemMonitor:28346 [interfaces.py:start():168] Started memory
+2023-04-04 15:16:35,962 INFO    SystemMonitor:28346 [interfaces.py:start():168] Started network
+2023-04-04 15:16:36,333 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/config.yaml
+2023-04-04 15:16:37,238 DEBUG   SenderThread:28346 [sender.py:send():336] send: telemetry
+2023-04-04 15:16:37,241 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: pause
+2023-04-04 15:16:37,241 INFO    HandlerThread:28346 [handler.py:handle_request_pause():717] stopping system metrics thread or process
+2023-04-04 15:16:37,241 INFO    HandlerThread:28346 [system_monitor.py:finish():161] Stopping system monitor
+2023-04-04 15:16:37,242 DEBUG   SystemMonitor:28346 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2023-04-04 15:16:37,244 INFO    HandlerThread:28346 [interfaces.py:finish():175] Joined cpu
+2023-04-04 15:16:37,244 INFO    HandlerThread:28346 [interfaces.py:finish():175] Joined disk
+2023-04-04 15:16:37,244 INFO    HandlerThread:28346 [interfaces.py:finish():175] Joined memory
+2023-04-04 15:16:37,245 INFO    HandlerThread:28346 [interfaces.py:finish():175] Joined network
+2023-04-04 15:16:37,245 DEBUG   SystemMonitor:28346 [system_monitor.py:_start():137] Finished system metrics aggregation loop
+2023-04-04 15:16:37,245 DEBUG   SystemMonitor:28346 [system_monitor.py:_start():141] Publishing last batch of metrics
+2023-04-04 15:16:37,246 DEBUG   SenderThread:28346 [sender.py:send():336] send: stats
+2023-04-04 15:16:38,334 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:16:39,569 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: resume
+2023-04-04 15:16:39,569 INFO    HandlerThread:28346 [handler.py:handle_request_resume():708] starting system metrics thread or process
+2023-04-04 15:16:39,569 INFO    HandlerThread:28346 [system_monitor.py:start():151] Starting system monitor
+2023-04-04 15:16:39,570 INFO    SystemMonitor:28346 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-04-04 15:16:39,571 INFO    SystemMonitor:28346 [interfaces.py:start():168] Started cpu
+2023-04-04 15:16:39,573 INFO    SystemMonitor:28346 [interfaces.py:start():168] Started disk
+2023-04-04 15:16:39,577 INFO    HandlerThread:28346 [handler.py:handle_tbrecord():748] handling tbrecord: tbrecord {
+  log_dir: "/home/daniel/DARM/darm_mujoco/darm_training/results/dii/SB3_SAC_dii_torque/SB3_SAC_dii_torque_1"
+  save: true
+}
+control {
+  relay_id: "e35655622ea443c5ba519acbeff3a0a3"
+}
+_info {
+  stream_id: "13uv3hcl"
+}
+
+2023-04-04 15:16:39,577 DEBUG   HandlerThread:28346 [config_util.py:dict_from_config_file():100] no default config file found in config-defaults.yaml
+2023-04-04 15:16:39,579 INFO    SystemMonitor:28346 [interfaces.py:start():168] Started memory
+2023-04-04 15:16:39,581 INFO    SystemMonitor:28346 [interfaces.py:start():168] Started network
+2023-04-04 15:16:39,716 DEBUG   SenderThread:28346 [sender.py:send():336] send: tbrecord
+2023-04-04 15:16:39,718 DEBUG   SenderThread:28346 [sender.py:send():336] send: config
+2023-04-04 15:16:39,721 DEBUG   SenderThread:28346 [sender.py:send():336] send: files
+2023-04-04 15:16:39,721 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file events.out.tfevents.1680617799.Daniel.28113.0 with policy live
+2023-04-04 15:16:39,903 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:16:40,335 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:16:40,931 INFO    wandb-upload_0:28346 [upload_job.py:push():138] Uploaded file /tmp/tmpyj5wj4s2wandb/a4ex0pz1-events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:16:41,015 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:16:41,335 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:16:42,336 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:16:43,336 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:16:44,336 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:16:44,337 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:16:44,904 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:16:46,337 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:16:46,339 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:16:46,339 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:16:47,339 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:16:48,339 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:16:49,340 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:16:49,672 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:16:49,673 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:16:49,674 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:16:49,675 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:16:49,675 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:16:49,675 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:16:49,676 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:16:49,676 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:16:49,682 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:16:49,683 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:16:49,684 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:16:49,685 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:16:49,685 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:16:49,686 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:16:49,686 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:16:49,686 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:16:49,687 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:16:49,688 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:16:49,688 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:16:49,689 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:16:49,690 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:16:49,763 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:16:49,764 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:16:49,764 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:16:49,765 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:16:49,766 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:16:49,767 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:16:49,906 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:16:50,340 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:16:50,341 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:16:50,341 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:16:51,582 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:16:51,773 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:16:51,774 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:16:51,774 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:16:52,341 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:16:52,341 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:16:52,341 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:16:52,779 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:16:52,780 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:16:52,780 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:16:53,341 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:16:53,342 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:16:53,782 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:16:53,783 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:16:53,783 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:16:54,342 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:16:54,342 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:16:54,342 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:16:54,908 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:16:56,343 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:16:56,343 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:16:56,633 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:16:56,794 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:16:56,795 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:16:56,796 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:16:56,796 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:16:56,796 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:16:56,797 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:16:57,343 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:16:57,344 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:16:57,799 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:16:57,800 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:16:57,801 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:16:58,344 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:16:58,344 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:16:58,345 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:16:59,344 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:16:59,807 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:16:59,808 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:16:59,808 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:16:59,910 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:17:00,345 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:00,346 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:00,347 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:00,812 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:00,812 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:00,813 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:01,346 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:01,814 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:17:02,346 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:02,346 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:02,817 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:02,818 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:02,819 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:03,346 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:03,347 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:03,824 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:03,825 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:03,825 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:04,347 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:04,347 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:04,348 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:04,831 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:04,832 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:04,833 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:04,834 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:04,834 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:04,836 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:04,913 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:17:05,348 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:05,349 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:05,416 DEBUG   SenderThread:28346 [sender.py:send():336] send: telemetry
+2023-04-04 15:17:05,424 DEBUG   SenderThread:28346 [sender.py:send():336] send: files
+2023-04-04 15:17:05,425 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file model.zip with policy live
+2023-04-04 15:17:06,348 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:06,349 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:06,349 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_created():275] file/dir created: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/model.zip
+2023-04-04 15:17:06,839 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:06,845 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:17:08,239 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:08,240 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:08,349 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/config.yaml
+2023-04-04 15:17:08,350 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:08,350 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:08,350 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:08,852 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:08,852 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:08,854 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:09,350 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:09,858 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:09,859 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:09,859 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:09,915 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:17:10,350 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:10,351 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:10,351 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:10,866 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:10,867 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:10,867 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:11,038 INFO    wandb-upload_2:28346 [upload_job.py:push():138] Uploaded file /tmp/tmpyj5wj4s2wandb/36pi08xk-model.zip
+2023-04-04 15:17:11,351 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:11,352 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:12,352 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:12,872 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:12,873 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:12,874 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:13,352 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:13,353 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:13,875 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:17:14,353 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:14,880 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:14,881 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:14,882 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:14,916 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:17:15,353 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:15,353 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:15,886 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:15,886 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:15,888 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:16,354 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:16,354 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:16,354 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:17,895 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:17,895 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:17,896 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:18,354 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:18,355 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:18,355 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:18,899 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:18,899 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:18,899 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:17:18,901 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:19,356 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:19,357 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:19,905 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:19,906 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:19,907 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:19,917 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:17:20,356 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:20,356 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:20,357 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:21,911 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:21,912 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:21,913 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:22,356 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:22,357 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:22,357 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:22,917 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:22,917 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:22,917 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:23,357 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:23,357 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:23,920 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:17:24,357 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:24,919 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:17:24,925 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:24,925 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:24,926 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:25,358 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:25,358 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:26,358 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:27,359 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:27,934 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:27,935 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:27,935 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:28,360 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:28,360 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:28,938 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:28,938 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:28,939 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:28,941 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:17:29,360 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:29,361 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:29,921 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:17:29,944 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:29,944 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:29,946 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:30,361 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:30,361 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:30,361 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:30,952 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:30,952 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:30,953 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:31,361 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:31,362 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:31,965 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:31,965 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:31,967 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:31,967 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:31,968 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:31,968 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:32,361 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:32,362 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:32,362 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:32,749 DEBUG   SenderThread:28346 [sender.py:send():336] send: files
+2023-04-04 15:17:32,749 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file model.zip with policy live
+2023-04-04 15:17:32,971 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:32,972 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:32,972 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:33,363 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/model.zip
+2023-04-04 15:17:33,363 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:33,364 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:33,973 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:17:34,363 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:34,922 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:17:35,364 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:35,977 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:35,978 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:35,978 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:36,365 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:36,840 INFO    wandb-upload_0:28346 [upload_job.py:push():138] Uploaded file /tmp/tmpyj5wj4s2wandb/4z3mb7t3-model.zip
+2023-04-04 15:17:37,985 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:37,986 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:37,987 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:38,366 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:38,366 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:38,366 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:38,990 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:38,991 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:38,992 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:17:38,993 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:39,366 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:39,367 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:39,582 DEBUG   SystemMonitor:28346 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2023-04-04 15:17:39,583 DEBUG   SenderThread:28346 [sender.py:send():336] send: stats
+2023-04-04 15:17:39,923 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:17:40,368 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:41,368 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:42,000 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:42,001 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:42,002 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:42,002 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:42,002 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:42,003 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:42,368 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:42,369 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:42,369 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:42,577 INFO    wandb-upload_2:28346 [upload_job.py:push():138] Uploaded file /tmp/tmpyj5wj4s2wandb/hi4egxk5-events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:43,005 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:43,005 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:43,006 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:43,369 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:43,369 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:44,011 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:44,012 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:44,013 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:44,013 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:44,014 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:44,012 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:17:44,016 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:44,369 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:44,370 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:44,370 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:44,924 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:17:45,021 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:45,023 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:45,024 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:45,369 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:45,370 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:46,026 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:46,027 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:46,028 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:46,370 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:46,370 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:46,371 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:47,033 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:47,033 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:47,035 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:47,370 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:47,371 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:48,041 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:48,041 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:48,042 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:48,042 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:48,042 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:48,043 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:48,371 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:48,371 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:48,371 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:49,044 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:17:49,926 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:17:50,051 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:50,053 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:50,054 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:50,372 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:50,372 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:50,372 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:51,059 DEBUG   SenderThread:28346 [sender.py:send():336] send: history
+2023-04-04 15:17:51,059 DEBUG   SenderThread:28346 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:17:51,059 INFO    SenderThread:28346 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:17:51,372 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/events.out.tfevents.1680617799.Daniel.28113.0
+2023-04-04 15:17:51,372 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/wandb-summary.json
+2023-04-04 15:17:52,289 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: pause
+2023-04-04 15:17:52,289 INFO    HandlerThread:28346 [handler.py:handle_request_pause():717] stopping system metrics thread or process
+2023-04-04 15:17:52,289 INFO    HandlerThread:28346 [system_monitor.py:finish():161] Stopping system monitor
+2023-04-04 15:17:52,290 DEBUG   SystemMonitor:28346 [system_monitor.py:_start():137] Finished system metrics aggregation loop
+2023-04-04 15:17:52,291 DEBUG   SystemMonitor:28346 [system_monitor.py:_start():141] Publishing last batch of metrics
+2023-04-04 15:17:52,296 INFO    HandlerThread:28346 [interfaces.py:finish():175] Joined cpu
+2023-04-04 15:17:52,297 INFO    HandlerThread:28346 [interfaces.py:finish():175] Joined disk
+2023-04-04 15:17:52,297 INFO    HandlerThread:28346 [interfaces.py:finish():175] Joined memory
+2023-04-04 15:17:52,297 INFO    HandlerThread:28346 [interfaces.py:finish():175] Joined network
+2023-04-04 15:17:52,297 DEBUG   SenderThread:28346 [sender.py:send():336] send: stats
+2023-04-04 15:17:52,373 INFO    Thread-13 :28346 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/daniel/DARM/darm_mujoco/darm_training/wandb/run-20230404_151602-13uv3hcl/files/output.log
+2023-04-04 15:17:54,299 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:17:54,932 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:17:59,302 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:17:59,934 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:18:04,302 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:18:04,935 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:18:09,303 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:18:09,937 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:18:14,304 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:18:14,937 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:18:19,305 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:18:19,938 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:18:24,306 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:18:24,940 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:18:29,307 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:18:29,940 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:18:34,308 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:18:34,942 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:18:39,309 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:18:39,942 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:18:44,310 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:18:44,943 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:18:49,311 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:18:49,945 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:18:54,312 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:18:54,946 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:18:59,313 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:18:59,906 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:19:04,314 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:19:04,948 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:19:09,316 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:19:09,950 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:19:14,316 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:19:14,951 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:19:19,318 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:19:19,952 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:19:23,448 DEBUG   Thread-17 :28346 [tb_watcher.py:_process_events():276] Encountered tensorboard directory watcher error: Directory /home/daniel/DARM/darm_mujoco/darm_training/results/dii/SB3_SAC_dii_torque/SB3_SAC_dii_torque_1 has been permanently deleted
+2023-04-04 15:19:24,319 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:19:24,953 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:19:29,320 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:19:29,454 DEBUG   Thread-17 :28346 [tb_watcher.py:_process_events():276] Encountered tensorboard directory watcher error: Directory /home/daniel/DARM/darm_mujoco/darm_training/results/dii/SB3_SAC_dii_torque/SB3_SAC_dii_torque_1 has been permanently deleted
+2023-04-04 15:19:29,954 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:19:34,321 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:19:34,956 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:19:35,458 DEBUG   Thread-17 :28346 [tb_watcher.py:_process_events():276] Encountered tensorboard directory watcher error: Directory /home/daniel/DARM/darm_mujoco/darm_training/results/dii/SB3_SAC_dii_torque/SB3_SAC_dii_torque_1 has been permanently deleted
+2023-04-04 15:19:39,322 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:19:39,956 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:19:41,463 DEBUG   Thread-17 :28346 [tb_watcher.py:_process_events():276] Encountered tensorboard directory watcher error: Directory /home/daniel/DARM/darm_mujoco/darm_training/results/dii/SB3_SAC_dii_torque/SB3_SAC_dii_torque_1 has been permanently deleted
+2023-04-04 15:19:44,324 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:19:44,958 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:19:47,466 DEBUG   Thread-17 :28346 [tb_watcher.py:_process_events():276] Encountered tensorboard directory watcher error: Directory /home/daniel/DARM/darm_mujoco/darm_training/results/dii/SB3_SAC_dii_torque/SB3_SAC_dii_torque_1 has been permanently deleted
+2023-04-04 15:19:49,325 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:19:49,959 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:19:53,470 DEBUG   Thread-17 :28346 [tb_watcher.py:_process_events():276] Encountered tensorboard directory watcher error: Directory /home/daniel/DARM/darm_mujoco/darm_training/results/dii/SB3_SAC_dii_torque/SB3_SAC_dii_torque_1 has been permanently deleted
+2023-04-04 15:19:54,326 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:19:54,960 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:19:59,327 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:19:59,474 DEBUG   Thread-17 :28346 [tb_watcher.py:_process_events():276] Encountered tensorboard directory watcher error: Directory /home/daniel/DARM/darm_mujoco/darm_training/results/dii/SB3_SAC_dii_torque/SB3_SAC_dii_torque_1 has been permanently deleted
+2023-04-04 15:19:59,961 DEBUG   HandlerThread:28346 [handler.py:handle_request():144] handle_request: keepalive

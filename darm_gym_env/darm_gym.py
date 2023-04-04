@@ -2,7 +2,7 @@ import os
 import numpy as np
 import collections
 
-from darm_render import DARMRender
+import darm_gym_env.darm_render
 import gym
 import mujoco as mj
 
@@ -51,7 +51,7 @@ class DARMEnv(gym.Env):
 
         # ========================== Setup Rendering ==========================
         if self.render_mode == "human":
-            self.darm_render = DARMRender(self.model, self.data, (1200,900))
+            self.darm_render = darm_gym_env.darm_render.DARMRender(self.model, self.data, (1200,900))
             self.darm_render.init_window_render()
 
 

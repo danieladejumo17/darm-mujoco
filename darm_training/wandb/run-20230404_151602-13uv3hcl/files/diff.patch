@@ -1,0 +1,186 @@
+diff --git a/build/lib/darm_gym_env/darm_gym.py b/build/lib/darm_gym_env/darm_gym.py
+index d0f89ea..d034ea8 100644
+--- a/build/lib/darm_gym_env/darm_gym.py
++++ b/build/lib/darm_gym_env/darm_gym.py
+@@ -2,7 +2,7 @@ import os
+ import numpy as np
+ import collections
+ 
+-from darm_render import DARMRender
++import darm_gym_env.darm_render
+ import gym
+ import mujoco as mj
+ 
+@@ -51,7 +51,7 @@ class DARMEnv(gym.Env):
+ 
+         # ========================== Setup Rendering ==========================
+         if self.render_mode == "human":
+-            self.darm_render = DARMRender(self.model, self.data, (1200,900))
++            self.darm_render = darm_gym_env.darm_render.DARMRender(self.model, self.data, (1200,900))
+             self.darm_render.init_window_render()
+ 
+ 
+@@ -285,8 +285,7 @@ class DARMEnv(gym.Env):
+ 
+     def digits_in_contact(self):
+         """Returns True if there is any collision between the digits of the hand"""
+-        indices = [self.index_str_mapping[i] for i in self.all_digits]
+-        contacts = np.concatenate([self.get_finger_contacts(index) for index in indices])
++        contacts = np.concatenate([self.get_finger_contacts(index) for index in self.digits_indices])
+         return sum(contacts) > 0
+ 
+     def _get_obs(self, action_time=None):
+@@ -426,7 +425,8 @@ class DARMEnv(gym.Env):
+             fingertip_obs = np.zeros_like(self.target_obs)
+             for idx_str in self.digits:
+                 fingertip_obs[self.index_str_mapping[idx_str]] = self.get_fingertip_pose(idx_str)
+-            norm = self.position_norm(fingertip_obs[:, :3], self.target_obs[:, :3])
++            norm_all = self.position_norm(fingertip_obs[:, :3], self.target_obs[:, :3])
++            norm = norm_all[self.digits_indices]
+             if not (all(norm >= self.min_target_th) and all(norm <= self.max_target_th)):
+                 continue
+             
+diff --git a/darm_gym_env/__pycache__/darm_gym.cpython-38.pyc b/darm_gym_env/__pycache__/darm_gym.cpython-38.pyc
+index 39fa32d..1b68e91 100644
+Binary files a/darm_gym_env/__pycache__/darm_gym.cpython-38.pyc and b/darm_gym_env/__pycache__/darm_gym.cpython-38.pyc differ
+diff --git a/darm_gym_env/darm_gym.py b/darm_gym_env/darm_gym.py
+index 0579777..d034ea8 100644
+--- a/darm_gym_env/darm_gym.py
++++ b/darm_gym_env/darm_gym.py
+@@ -2,7 +2,7 @@ import os
+ import numpy as np
+ import collections
+ 
+-from darm_render import DARMRender
++import darm_gym_env.darm_render
+ import gym
+ import mujoco as mj
+ 
+@@ -51,7 +51,7 @@ class DARMEnv(gym.Env):
+ 
+         # ========================== Setup Rendering ==========================
+         if self.render_mode == "human":
+-            self.darm_render = DARMRender(self.model, self.data, (1200,900))
++            self.darm_render = darm_gym_env.darm_render.DARMRender(self.model, self.data, (1200,900))
+             self.darm_render.init_window_render()
+ 
+ 
+diff --git a/darm_gym_env/generate_DARMHand_start_state.py b/darm_gym_env/generate_DARMHand_start_state.py
+index d47e8c6..cdac96e 100644
+--- a/darm_gym_env/generate_DARMHand_start_state.py
++++ b/darm_gym_env/generate_DARMHand_start_state.py
+@@ -25,7 +25,7 @@ env = DARMEnv(render_mode=None, hand_name="hand1",
+ #                ignore_load_start_states=True)
+ 
+ targets = []
+-N_OBERVATIONS = int(1e3)
++N_OBERVATIONS = int(1e5)
+ 
+ try:
+     for _ in tqdm(range(N_OBERVATIONS)):
+diff --git a/darm_gym_env/start_states/DARMHand_SF_start_state.npy b/darm_gym_env/start_states/DARMHand_SF_start_state.npy
+index 0f2d56a..4cfd353 100644
+Binary files a/darm_gym_env/start_states/DARMHand_SF_start_state.npy and b/darm_gym_env/start_states/DARMHand_SF_start_state.npy differ
+diff --git a/darm_gym_env/testing.ipynb b/darm_gym_env/testing.ipynb
+index 8c3243a..3f147fa 100644
+--- a/darm_gym_env/testing.ipynb
++++ b/darm_gym_env/testing.ipynb
+@@ -2,7 +2,7 @@
+  "cells": [
+   {
+    "cell_type": "code",
+-   "execution_count": 2,
++   "execution_count": 4,
+    "id": "84e18792",
+    "metadata": {},
+    "outputs": [
+@@ -13,14 +13,6 @@
+       "Loaded XML file successfully\n"
+      ]
+     },
+-    {
+-     "name": "stderr",
+-     "output_type": "stream",
+-     "text": [
+-      "/home/daniel/miniconda3/lib/python3.8/site-packages/gym/spaces/box.py:73: UserWarning: \u001b[33mWARN: Box bound precision lowered by casting to float32\u001b[0m\n",
+-      "  logger.warn(\n"
+-     ]
+-    },
+     {
+      "ename": "KeyboardInterrupt",
+      "evalue": "",
+@@ -31,7 +23,9 @@
+       "\u001b[1;32m/home/daniel/DARM/darm_mujoco/darm_gym_env/testing.ipynb Cell 1\u001b[0m in \u001b[0;36m<cell line: 10>\u001b[0;34m()\u001b[0m\n\u001b[1;32m     <a href='vscode-notebook-cell:/home/daniel/DARM/darm_mujoco/darm_gym_env/testing.ipynb#W0sZmlsZQ%3D%3D?line=10'>11</a>\u001b[0m start_time \u001b[39m=\u001b[39m time\u001b[39m.\u001b[39mtime()\n\u001b[1;32m     <a href='vscode-notebook-cell:/home/daniel/DARM/darm_mujoco/darm_gym_env/testing.ipynb#W0sZmlsZQ%3D%3D?line=11'>12</a>\u001b[0m \u001b[39mwhile\u001b[39;00m time\u001b[39m.\u001b[39mtime() \u001b[39m-\u001b[39m start_time \u001b[39m<\u001b[39m \u001b[39m4\u001b[39m:\n\u001b[0;32m---> <a href='vscode-notebook-cell:/home/daniel/DARM/darm_mujoco/darm_gym_env/testing.ipynb#W0sZmlsZQ%3D%3D?line=12'>13</a>\u001b[0m     env\u001b[39m.\u001b[39;49mrender()\n",
+       "File \u001b[0;32m~/miniconda3/lib/python3.8/site-packages/darm_gym_env-0.0.1-py3.8.egg/darm_gym_env/darm_gym.py:509\u001b[0m, in \u001b[0;36mDARMEnv.render\u001b[0;34m(self, mode, **kwargs)\u001b[0m\n\u001b[1;32m    507\u001b[0m \u001b[39mdef\u001b[39;00m \u001b[39mrender\u001b[39m(\u001b[39mself\u001b[39m, mode\u001b[39m=\u001b[39m\u001b[39m\"\u001b[39m\u001b[39mhuman\u001b[39m\u001b[39m\"\u001b[39m, \u001b[39m*\u001b[39m\u001b[39m*\u001b[39mkwargs):\n\u001b[1;32m    508\u001b[0m     \u001b[39mif\u001b[39;00m mode\u001b[39m==\u001b[39m\u001b[39m\"\u001b[39m\u001b[39mhuman\u001b[39m\u001b[39m\"\u001b[39m \u001b[39mand\u001b[39;00m \u001b[39mself\u001b[39m\u001b[39m.\u001b[39mrender_mode \u001b[39m==\u001b[39m \u001b[39m\"\u001b[39m\u001b[39mhuman\u001b[39m\u001b[39m\"\u001b[39m:\n\u001b[0;32m--> 509\u001b[0m         \u001b[39mreturn\u001b[39;00m \u001b[39mself\u001b[39;49m\u001b[39m.\u001b[39;49m_render_frame()\n",
+       "File \u001b[0;32m~/miniconda3/lib/python3.8/site-packages/darm_gym_env-0.0.1-py3.8.egg/darm_gym_env/darm_gym.py:518\u001b[0m, in \u001b[0;36mDARMEnv._render_frame\u001b[0;34m(self)\u001b[0m\n\u001b[1;32m    517\u001b[0m \u001b[39mdef\u001b[39;00m \u001b[39m_render_frame\u001b[39m(\u001b[39mself\u001b[39m):\n\u001b[0;32m--> 518\u001b[0m     \u001b[39mself\u001b[39;49m\u001b[39m.\u001b[39;49mdarm_render\u001b[39m.\u001b[39;49mwindow_render()\n",
+-      "File \u001b[0;32m~/DARM/darm_mujoco/darm_gym_env/darm_render.py:116\u001b[0m, in \u001b[0;36mDARMRender.window_render\u001b[0;34m(self, model, data)\u001b[0m\n\u001b[1;32m    114\u001b[0m \u001b[39m# Update scene and render\u001b[39;00m\n\u001b[1;32m    115\u001b[0m mj\u001b[39m.\u001b[39mmjv_updateScene(model, data, \u001b[39mself\u001b[39m\u001b[39m.\u001b[39mopt, \u001b[39mNone\u001b[39;00m, \u001b[39mself\u001b[39m\u001b[39m.\u001b[39mcam, mj\u001b[39m.\u001b[39mmjtCatBit\u001b[39m.\u001b[39mmjCAT_ALL\u001b[39m.\u001b[39mvalue, \u001b[39mself\u001b[39m\u001b[39m.\u001b[39mscene)\n\u001b[0;32m--> 116\u001b[0m mj\u001b[39m.\u001b[39;49mmjr_render(viewport, \u001b[39mself\u001b[39;49m\u001b[39m.\u001b[39;49mscene, \u001b[39mself\u001b[39;49m\u001b[39m.\u001b[39;49mcontext)\n\u001b[1;32m    118\u001b[0m \u001b[39m# swap OpenGL buffers (blocking call due to v-sync)\u001b[39;00m\n\u001b[1;32m    119\u001b[0m glfw\u001b[39m.\u001b[39mswap_buffers(\u001b[39mself\u001b[39m\u001b[39m.\u001b[39mwindow)\n",
++      "File \u001b[0;32m~/DARM/darm_mujoco/darm_gym_env/darm_render.py:111\u001b[0m, in \u001b[0;36mDARMRender.window_render\u001b[0;34m(self, model, data)\u001b[0m\n\u001b[1;32m    108\u001b[0m \u001b[39mif\u001b[39;00m \u001b[39mnot\u001b[39;00m data: data \u001b[39m=\u001b[39m \u001b[39mself\u001b[39m\u001b[39m.\u001b[39mdata\n\u001b[1;32m    110\u001b[0m \u001b[39m# Get Framebuffer Viewport\u001b[39;00m\n\u001b[0;32m--> 111\u001b[0m vp_width, vp_height \u001b[39m=\u001b[39m glfw\u001b[39m.\u001b[39;49mget_framebuffer_size(\u001b[39mself\u001b[39;49m\u001b[39m.\u001b[39;49mwindow)\n\u001b[1;32m    112\u001b[0m viewport \u001b[39m=\u001b[39m mj\u001b[39m.\u001b[39mMjrRect(\u001b[39m0\u001b[39m, \u001b[39m0\u001b[39m, vp_width, vp_height)\n\u001b[1;32m    114\u001b[0m \u001b[39m# Update scene and render\u001b[39;00m\n",
++      "File \u001b[0;32m~/miniconda3/lib/python3.8/site-packages/glfw/__init__.py:1395\u001b[0m, in \u001b[0;36mget_framebuffer_size\u001b[0;34m(window)\u001b[0m\n\u001b[1;32m   1393\u001b[0m height_value \u001b[39m=\u001b[39m ctypes\u001b[39m.\u001b[39mc_int(\u001b[39m0\u001b[39m)\n\u001b[1;32m   1394\u001b[0m height \u001b[39m=\u001b[39m ctypes\u001b[39m.\u001b[39mpointer(height_value)\n\u001b[0;32m-> 1395\u001b[0m _glfw\u001b[39m.\u001b[39;49mglfwGetFramebufferSize(window, width, height)\n\u001b[1;32m   1396\u001b[0m \u001b[39mreturn\u001b[39;00m width_value\u001b[39m.\u001b[39mvalue, height_value\u001b[39m.\u001b[39mvalue\n",
++      "File \u001b[0;32m~/miniconda3/lib/python3.8/site-packages/glfw/__init__.py:682\u001b[0m, in \u001b[0;36m_prepare_errcheck.<locals>.errcheck\u001b[0;34m(result, *args)\u001b[0m\n\u001b[1;32m    674\u001b[0m \u001b[39mdef\u001b[39;00m \u001b[39m_prepare_errcheck\u001b[39m():\n\u001b[1;32m    675\u001b[0m     \u001b[39m\"\"\"\u001b[39;00m\n\u001b[1;32m    676\u001b[0m \u001b[39m    This function sets the errcheck attribute of all ctypes wrapped functions\u001b[39;00m\n\u001b[1;32m    677\u001b[0m \u001b[39m    to evaluate the _exc_info_from_callback global variable and re-raise any\u001b[39;00m\n\u001b[0;32m   (...)\u001b[0m\n\u001b[1;32m    680\u001b[0m \u001b[39m    using the _callback_exception_decorator.\u001b[39;00m\n\u001b[1;32m    681\u001b[0m \u001b[39m    \"\"\"\u001b[39;00m\n\u001b[0;32m--> 682\u001b[0m     \u001b[39mdef\u001b[39;00m \u001b[39merrcheck\u001b[39m(result, \u001b[39m*\u001b[39margs):\n\u001b[1;32m    683\u001b[0m         \u001b[39mglobal\u001b[39;00m _exc_info_from_callback\n\u001b[1;32m    684\u001b[0m         \u001b[39mif\u001b[39;00m _exc_info_from_callback \u001b[39mis\u001b[39;00m \u001b[39mnot\u001b[39;00m \u001b[39mNone\u001b[39;00m:\n",
+       "\u001b[0;31mKeyboardInterrupt\u001b[0m: "
+      ]
+     }
+diff --git a/darm_training/sb3_sac_darm_sf_hand-nb3.ipynb b/darm_training/sb3_sac_darm_sf_hand-nb3.ipynb
+index 649aa15..c635da7 100644
+--- a/darm_training/sb3_sac_darm_sf_hand-nb3.ipynb
++++ b/darm_training/sb3_sac_darm_sf_hand-nb3.ipynb
+@@ -4899,7 +4899,7 @@
+  ],
+  "metadata": {
+   "kernelspec": {
+-   "display_name": "Python 3 (ipykernel)",
++   "display_name": "Python 3",
+    "language": "python",
+    "name": "python3"
+   },
+@@ -4913,7 +4913,7 @@
+    "name": "python",
+    "nbconvert_exporter": "python",
+    "pygments_lexer": "ipython3",
+-   "version": "3.10.8"
++   "version": "3.8.12"
+   },
+   "vscode": {
+    "interpreter": {
+diff --git a/darm_training/wandb/debug-internal.log b/darm_training/wandb/debug-internal.log
+index 30b89d1..eb03485 120000
+--- a/darm_training/wandb/debug-internal.log
++++ b/darm_training/wandb/debug-internal.log
+@@ -1 +1 @@
+-run-20230302_150402-6occ3zcz/logs/debug-internal.log
+\ No newline at end of file
++run-20230404_151602-13uv3hcl/logs/debug-internal.log
+\ No newline at end of file
+diff --git a/darm_training/wandb/debug.log b/darm_training/wandb/debug.log
+index 6c373ee..4491a71 120000
+--- a/darm_training/wandb/debug.log
++++ b/darm_training/wandb/debug.log
+@@ -1 +1 @@
+-run-20230302_150402-6occ3zcz/logs/debug.log
+\ No newline at end of file
++run-20230404_151602-13uv3hcl/logs/debug.log
+\ No newline at end of file
+diff --git a/darm_training/wandb/latest-run b/darm_training/wandb/latest-run
+index f06bc9e..d6b4c62 120000
+--- a/darm_training/wandb/latest-run
++++ b/darm_training/wandb/latest-run
+@@ -1 +1 @@
+-run-20230302_150402-6occ3zcz
+\ No newline at end of file
++run-20230404_151602-13uv3hcl
+\ No newline at end of file
+diff --git a/dist/darm_gym_env-0.0.1-py3.8.egg b/dist/darm_gym_env-0.0.1-py3.8.egg
+index 888ef7a..e55d447 100644
+Binary files a/dist/darm_gym_env-0.0.1-py3.8.egg and b/dist/darm_gym_env-0.0.1-py3.8.egg differ
+diff --git a/training_setup.sh b/training_setup.sh
+index d5c2419..f3fe37e 100644
+--- a/training_setup.sh
++++ b/training_setup.sh
+@@ -1,6 +1,7 @@
+ sudo apt update
+ sudo apt install build-essential -y
+ pip install ray[rllib]==2.2.0
++pip install stable-baselines3[extra]
+ pip install wandb
+ pip install tensorflow_probability
+ python setup.py install

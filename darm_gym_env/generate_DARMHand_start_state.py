@@ -25,7 +25,7 @@ env = DARMEnv(render_mode=None, hand_name="hand1",
 #                ignore_load_start_states=True)
 
 targets = []
-N_OBERVATIONS = int(1e3)
+N_OBERVATIONS = int(1e5)
 
 try:
     for _ in tqdm(range(N_OBERVATIONS)):
