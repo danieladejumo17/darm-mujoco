@@ -243,6 +243,8 @@
     <xacro:macro name="fingertip_target" params="hand_name name rgba:=${fingertip_target_mocap_rgba}">
         <body name="${hand_name}_${name}" pos="0 0.25 0" mocap="true" >
             <geom type="sphere" size="${fingertip_target_mocap_size}" rgba="${rgba}" />
+            <geom type="cylinder" size="${fingertip_target_mocap_size/2} ${3*fingertip_target_mocap_size}" 
+                    pos="0 0 ${1.5*fingertip_target_mocap_size}" rgba="${rgba}" />
         </body>
     </xacro:macro>
     

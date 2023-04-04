@@ -7,6 +7,7 @@
   <!-- Phalanges -->
   <body mocap="true" name="hand1_fingertip_ii_target" pos="0 0.25 0">
     <geom rgba="0 1 0 1" size="0.004" type="sphere"/>
+    <geom pos="0 0 0.006" rgba="0 1 0 1" size="0.002 0.012" type="cylinder"/>
   </body>
   <body childclass="darm_meshes" euler="0 0 0" name="hand1_forearm" pos="0 0 0.12">
     <geom mesh="forearm_mesh" type="mesh"/>

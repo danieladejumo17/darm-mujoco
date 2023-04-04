@@ -1,5 +1,6 @@
 import gym
-from darm_gym_env import DARMEnv
+from darm_gym import DARMEnv
+# from darm_gym_env import DARMEnv
 import time
 import random
 import numpy as np
@@ -7,21 +8,24 @@ import os
 from tqdm import tqdm
 
 # ================================= TODO: CHECKLIST =================================
-# Change file path  /////Remove last 1000 obs from MFNW
+# Change file path
 # Change single_finger_env
 # Change Mujoco XML
 # ================================= TODO: CHECKLIST =================================
 
 # Choose single_finger or multi-fingers
-START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/DARMHand_SF_start_state.npy"
-# START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/DARMHand_MFNW_start_state.npy"
+START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_SF_start_state.npy"
+# START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_MFNW_start_state.npy"
 
-env = gym.make("darm/DarmHand-v0", render_mode=None, hand_name="hand1",
-               single_finger_env=True,
-               ignore_load_start_states=True)
+env = DARMEnv(render_mode=None, hand_name="hand1",
+              digits=["ii"], ignore_load_start_states=True)
+
+# env = gym.make("darm/DarmHand-v0", render_mode=None, hand_name="hand1",
+#                single_finger_env=False,
+#                ignore_load_start_states=True)
 
 targets = []
-N_OBERVATIONS = int(1e5)
+N_OBERVATIONS = int(1e3)
 
 try:
     for _ in tqdm(range(N_OBERVATIONS)):

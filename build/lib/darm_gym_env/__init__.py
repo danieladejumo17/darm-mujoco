@@ -1,4 +1,5 @@
 from darm_gym_env.darm_gym import DARMEnv
+from darm_gym_env.darm_render import DARMRender
 from darm_gym_env.darm_sf_gym import DARMSFEnv
 
 from gym.envs.registration import register
