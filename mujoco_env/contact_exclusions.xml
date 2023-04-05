@@ -10,12 +10,13 @@
   <exclude body1="hand1_carpals_metacarpals" body2="hand1_rc_centre_block"/>
   <exclude body1="hand1_rc_centre_block" body2="hand1_forearm"/>
   <exclude body1="hand1_carpals_metacarpals" body2="hand1_forearm"/>
-  <!-- PHALANGES II -->
-  <exclude body1="hand1_mcp_centre_block_ii" body2="hand1_carpals_metacarpals"/>
-  <exclude body1="hand1_proximal_phalanx_ii" body2="hand1_mcp_centre_block_ii"/>
-  <exclude body1="hand1_proximal_phalanx_ii" body2="hand1_carpals_metacarpals"/>
-  <exclude body1="hand1_middle_phalanx_ii" body2="hand1_proximal_phalanx_ii"/>
-  <exclude body1="hand1_distal_phalanx_ii" body2="hand1_middle_phalanx_ii"/>
-  <!-- <xacro:hand_contacts hand_name="hand2" />
-    <xacro:hand_contacts hand_name="hand3" /> -->
+  <exclude body1="hand1_proximal_cm_i_centre_block" body2="hand1_carpals_metacarpals"/>
+  <exclude body1="hand1_distal_cm_i_centre_block" body2="hand1_proximal_cm_i_centre_block"/>
+  <exclude body1="hand1_distal_cm_i_centre_block" body2="hand1_carpals_metacarpals"/>
+  <exclude body1="hand1_metacarpal_i" body2="hand1_distal_cm_i_centre_block"/>
+  <exclude body1="hand1_metacarpal_i" body2="hand1_proximal_cm_i_centre_block"/>
+  <exclude body1="hand1_metacarpal_i" body2="hand1_carpals_metacarpals"/>
+  <exclude body1="hand1_proximal_phalanx_i" body2="hand1_metacarpal_i"/>
+  <exclude body1="hand1_distal_phalanx_i" body2="hand1_proximal_phalanx_i"/>
+  <!-- <xacro:hand_contacts hand_name="hand2" /> -->
 </contact>

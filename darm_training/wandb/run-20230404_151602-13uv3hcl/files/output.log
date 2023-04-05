@@ -579,3 +579,4 @@ Episode length: 3.80 +/- 1.94
 |    total_timesteps | 32274    |
 ---------------------------------
 Saving last checkpoint
+Last checkpoint saved in: /home/daniel/DARM/darm_mujoco/darm_training/results/dii/SB3_SAC_dii_torque/models/last_model

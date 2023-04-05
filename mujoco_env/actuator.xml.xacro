@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actuator xmlns:xacro="http://wiki.ros.org/xacro">
 
-    <xacro:arg name="single_finger" default="false" />
     <xacro:arg name="no_wrist" default="false" />
+    <xacro:arg name="digit_i" default="true" />
+    <xacro:arg name="digit_ii" default="true" />
+    <xacro:arg name="digit_iii" default="true" />
+    <xacro:arg name="digit_iv" default="true" />
+    <xacro:arg name="digit_v" default="true" />
 
     <!-- A total of 34 muscles -->
 
@@ -69,39 +73,44 @@
 
 
         <!-- Create a List of Muscles -->
-        <xacro:property name="s_finger" value="$(arg single_finger)" />
         <xacro:property name="n_wrist" value="$(arg no_wrist)" />
         
         <!-- Carpal Tendon Actuators -->
-        <xacro:unless value="${s_finger or n_wrist}">
+        <xacro:unless value="${n_wrist}">
             <xacro:make_actuators tendons="${list(carpal_tendons)}" ctrlrange="0 ${carpal_tendons_max_tension}"/>
         </xacro:unless>
 
         <!-- Digit I (Pollicis) Tendon Actuators -->
-        <xacro:unless value="$(arg single_finger)">
+        <xacro:if value="$(arg digit_i)">
             <xacro:make_actuators tendons="${list(pollicis_tendons)}" ctrlrange="0 ${pollicis_tendons_max_tension}"/>
-        </xacro:unless>
+        </xacro:if>
 
         <!-- Digit II -->
-        <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="ii" ctrlrange="0 ${digitorum_tendons_max_tension}"/>
-        <xacro:make_actuators tendons="${list(digitorum_extensor)}" index="ii" ctrlrange="0 ${digitorum_extensor_max_tension}"/>
+        <xacro:if value="$(arg digit_ii)">
+            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="ii" ctrlrange="0 ${digitorum_tendons_max_tension}"/>
+            <xacro:make_actuators tendons="${list(digitorum_extensor)}" index="ii" ctrlrange="0 ${digitorum_extensor_max_tension}"/>
+        </xacro:if>
 
-        <!-- Digit III-V, Digiti Minimi Specific Tendon Actuators -->
-        <xacro:unless value="$(arg single_finger)">
+        <!-- Digit III -->
+        <xacro:if value="$(arg digit_iii)">
             <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iii" ctrlrange="0 ${digitorum_tendons_max_tension}"/>
             <xacro:make_actuators tendons="${list(digitorum_extensor)}" index="iii" ctrlrange="0 ${digitorum_extensor_max_tension}"/>
+        </xacro:if>
 
+        <!-- Digit IV -->
+        <xacro:if value="$(arg digit_iv)">
             <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iv" ctrlrange="0 ${digitorum_tendons_max_tension}"/>
             <xacro:make_actuators tendons="${list(digitorum_extensor)}" index="iv" ctrlrange="0 ${digitorum_extensor_max_tension}"/>
-            
+        </xacro:if>
+
+        <!-- Digit V -->
+        <xacro:if value="$(arg digit_v)">
             <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="v" ctrlrange="0 ${digitorum_tendons_max_tension}"/>
             <xacro:make_actuators tendons="${list(digitorum_extensor)}" index="v" ctrlrange="0 ${digitorum_extensor_max_tension}"/>
-
             <xacro:make_actuators tendons="${list(digiti_minimi_specific_tendons)}" ctrlrange="0 ${digiti_minimi_specific_tendons_max_tension}"/>
-        </xacro:unless>
+        </xacro:if>
     </xacro:macro>
 
     <xacro:hand_actuators hand_name="hand1" />
-    <!-- <xacro:hand_actuators hand_name="hand2" />
-    <xacro:hand_actuators hand_name="hand3" /> -->
+    <!-- <xacro:hand_actuators hand_name="hand2" /> -->
 </actuator>

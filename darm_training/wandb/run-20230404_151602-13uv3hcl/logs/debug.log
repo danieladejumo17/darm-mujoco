@@ -44,3 +44,15 @@ config: {'env_id': 'darm/DarmHand-v0', 'algo': 'SAC', 'rl_lib': 'SB3', 'seed': 0
 2023-04-04 15:17:32,748 INFO    MainThread:28113 [sb3.py:save_model():149] Saving model checkpoint to /home/daniel/DARM/darm_mujoco/darm_training/results/dii/SB3_SAC_dii_torque/models/model.zip
 2023-04-04 15:17:52,288 INFO    MainThread:28113 [jupyter.py:_save_ipynb():390] looking for notebook: darm_training/sb3_sac_dii.ipynb
 2023-04-04 15:17:52,288 INFO    MainThread:28113 [wandb_init.py:_pause_backend():403] pausing backend
+2023-04-04 16:02:16,028 INFO    MainThread:28113 [wandb_init.py:_resume_backend():408] resuming backend
+2023-04-04 16:02:16,030 INFO    MainThread:28113 [wandb_run.py:_finish():1854] finishing run danieladejumo/DARM/13uv3hcl
+2023-04-04 16:02:16,182 INFO    MainThread:28113 [jupyter.py:save_history():478] saving 8 cells to _session_history.ipynb
+2023-04-04 16:02:16,183 INFO    MainThread:28113 [wandb_run.py:_config_callback():1250] config_cb ('_wandb', 'session_history') code/_session_history.ipynb None
+2023-04-04 16:02:16,200 INFO    MainThread:28113 [jupyter.py:_save_ipynb():390] looking for notebook: darm_training/sb3_sac_dii.ipynb
+2023-04-04 16:02:16,200 INFO    MainThread:28113 [wandb_init.py:_jupyter_teardown():420] cleaning up jupyter logic
+2023-04-04 16:02:16,201 INFO    MainThread:28113 [wandb_run.py:_atexit_cleanup():2083] got exitcode: 0
+2023-04-04 16:02:16,201 INFO    MainThread:28113 [wandb_run.py:_restore():2066] restore
+2023-04-04 16:02:16,201 INFO    MainThread:28113 [wandb_run.py:_restore():2072] restore done
+2023-04-04 16:02:29,284 WARNING MsgRouterThr:28113 [router.py:message_loop():77] message_loop has been closed
+2023-04-04 16:02:37,215 INFO    MainThread:28113 [wandb_run.py:_restore():2066] restore
+2023-04-04 16:02:37,215 INFO    MainThread:28113 [wandb_run.py:_restore():2072] restore done

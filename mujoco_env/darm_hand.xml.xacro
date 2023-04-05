@@ -3,8 +3,12 @@
     <xacro:include filename="phalanges.xml.xacro" />
 
     <!-- Single Finger -->
-    <xacro:arg name="single_finger" default="false" />
     <xacro:arg name="no_wrist" default="false" />
+    <xacro:arg name="digit_i" default="true" />
+    <xacro:arg name="digit_ii" default="true" />
+    <xacro:arg name="digit_iii" default="true" />
+    <xacro:arg name="digit_iv" default="true" />
+    <xacro:arg name="digit_v" default="true" />
 
     <!-- Wrist -->
     <xacro:property name="rc_joint_tf" value="${[0, 0, 0.032]}" />
@@ -251,17 +255,31 @@
     <!-- DARM Hand -->
     <xacro:macro name="darm_hand" params="hand_name pos">
         <!-- NOTE: Only the required mocap bodies should be exposed -->
-        <xacro:unless value="$(arg single_finger)">
+        <!-- DIGIT I Taget MOCAP -->
+        <xacro:if value="$(arg digit_i)">
             <xacro:fingertip_target hand_name="${hand_name}" name="fingertip_i_target" rgba="1 0 0 1" />
-        </xacro:unless> 
+        </xacro:if>
 
-        <xacro:fingertip_target hand_name="${hand_name}" name="fingertip_ii_target" rgba="0 1 0 1" />
-        
-        <xacro:unless value="$(arg single_finger)">
+        <!-- DIGIT II Taget MOCAP -->
+        <xacro:if value="$(arg digit_ii)">
+            <xacro:fingertip_target hand_name="${hand_name}" name="fingertip_ii_target" rgba="0 1 0 1" />
+        </xacro:if>
+
+        <!-- DIGIT III Taget MOCAP -->
+        <xacro:if value="$(arg digit_iii)">
             <xacro:fingertip_target hand_name="${hand_name}" name="fingertip_iii_target" rgba="0 0 1 1" />
+        </xacro:if>
+
+        <!-- DIGIT IV Taget MOCAP -->
+        <xacro:if value="$(arg digit_iv)">
             <xacro:fingertip_target hand_name="${hand_name}" name="fingertip_iv_target" rgba="1 1 1 1" />
+        </xacro:if>
+
+        <!-- DIGIT V Taget MOCAP -->
+        <xacro:if value="$(arg digit_v)">
             <xacro:fingertip_target hand_name="${hand_name}" name="fingertip_v_target" rgba="0.7 0.3 0 1" />
-        </xacro:unless> 
+        </xacro:if>
+
         
         <body name="${hand_name}_forearm" pos="${pos}" euler="0 0 0" childclass="darm_meshes">
             <geom type="mesh" mesh="forearm_mesh" />
@@ -389,42 +407,8 @@
                     <site name="${hand_name}_opponens_digiti_minimi_carpals_tunnel" pos="${opponens_digiti_minimi_carpals_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}" />
                     
                     
-                    <xacro:phalanges hand_name="${hand_name}" index="ii" mcp_translation="${mcp_ii_translation}" mcp_rotation="${mcp_ii_rotation}" 
-                                    pp_length="${pp_ii_length}" mp_length="${mp_ii_length}" dp_length="${dp_ii_length}"
-                                    mcp_radius="${mcp_ii_radius}" 
-                                    pip_radius="${pip_ii_radius}" dip_radius="${dip_ii_radius}"
-                                    dorsal_interossei_insertion_tf="${dorsal_interossei_ii_insertion_tf}"
-                                    palmar_interossei_insertion_tf="${palmar_interossei_ii_insertion_tf}"
-                                    pp_extensor_communis_insertion_tf="${pp_ii_extensor_communis_insertion_tf}"
-                                    flexor_superficialis_insertion_tf="${flexor_superficialis_ii_insertion_tf}"
-                                    mp_extensor_hood_insertion_tf="${mp_ii_extensor_hood_insertion_tf}"
-                                    flexor_profundus_insertion_tf="${flexor_profundus_ii_insertion_tf}"
-                                    dp_extensor_hood_insertion_tf="${dp_ii_extensor_hood_insertion_tf}" />
-                    <xacro:unless value="$(arg single_finger)">
-                        <xacro:phalanges hand_name="${hand_name}" index="iii" mcp_translation="${mcp_iii_translation}" mcp_rotation="${mcp_iii_rotation}" 
-                                        pp_length="${pp_iii_length}" mp_length="${mp_iii_length}" dp_length="${dp_iii_length}"
-                                        mcp_radius="${mcp_iii_radius}" 
-                                        pip_radius="${pip_iii_radius}" dip_radius="${dip_iii_radius}"
-                                        dorsal_interossei_insertion_tf="${dorsal_interossei_iii_insertion_tf}"
-                                        palmar_interossei_insertion_tf="${palmar_interossei_iii_insertion_tf}"
-                                        pp_extensor_communis_insertion_tf="${pp_iii_extensor_communis_insertion_tf}"
-                                        flexor_superficialis_insertion_tf="${flexor_superficialis_iii_insertion_tf}"
-                                        mp_extensor_hood_insertion_tf="${mp_iii_extensor_hood_insertion_tf}"
-                                        flexor_profundus_insertion_tf="${flexor_profundus_iii_insertion_tf}"
-                                        dp_extensor_hood_insertion_tf="${dp_iii_extensor_hood_insertion_tf}" />
-
-                        <xacro:phalanges hand_name="${hand_name}" index="iv" mcp_translation="${mcp_iv_translation}" mcp_rotation="${mcp_iv_rotation}" 
-                                        pp_length="${pp_iv_length}" mp_length="${mp_iv_length}" dp_length="${dp_iv_length}"
-                                        mcp_radius="${mcp_iv_radius}" 
-                                        pip_radius="${pip_iv_radius}" dip_radius="${dip_iv_radius}"
-                                        dorsal_interossei_insertion_tf="${dorsal_interossei_iv_insertion_tf}"
-                                        palmar_interossei_insertion_tf="${palmar_interossei_iv_insertion_tf}"
-                                        pp_extensor_communis_insertion_tf="${pp_iv_extensor_communis_insertion_tf}"
-                                        flexor_superficialis_insertion_tf="${flexor_superficialis_iv_insertion_tf}"
-                                        mp_extensor_hood_insertion_tf="${mp_iv_extensor_hood_insertion_tf}"
-                                        flexor_profundus_insertion_tf="${flexor_profundus_iv_insertion_tf}"
-                                        dp_extensor_hood_insertion_tf="${dp_iv_extensor_hood_insertion_tf}" />
-                        
+                    <!-- Digits I -->
+                    <xacro:if value="$(arg digit_i)">
                         <xacro:phalanx_i hand_name="${hand_name}" index="i" cm_translation="${cm_i_translation}" cm_rotation="${cm_i_rotation}" 
                                         centre_block_offset="${cm_i_centre_block_offset}" metacarpal_length="${metacarpal_i_length}" 
                                         pp_length="${pp_i_length}" dp_length="${dp_i_length}" proximal_cm_radius="${proximal_cm_i_radius}" 
@@ -442,7 +426,55 @@
                                         metacarpal_i_extensor_tunnel_tf="${metacarpal_i_extensor_tunnel_tf}" 
                                         pp_i_flexor_tunnel_tf="${pp_i_flexor_tunnel_tf}"
                                         pp_i_extensor_tunnel_tf="${pp_i_extensor_tunnel_tf}" />
+                    </xacro:if>
 
+                    <!-- Digits II -->
+                    <xacro:if value="$(arg digit_ii)">
+                        <xacro:phalanges hand_name="${hand_name}" index="ii" mcp_translation="${mcp_ii_translation}" mcp_rotation="${mcp_ii_rotation}" 
+                                    pp_length="${pp_ii_length}" mp_length="${mp_ii_length}" dp_length="${dp_ii_length}"
+                                    mcp_radius="${mcp_ii_radius}" 
+                                    pip_radius="${pip_ii_radius}" dip_radius="${dip_ii_radius}"
+                                    dorsal_interossei_insertion_tf="${dorsal_interossei_ii_insertion_tf}"
+                                    palmar_interossei_insertion_tf="${palmar_interossei_ii_insertion_tf}"
+                                    pp_extensor_communis_insertion_tf="${pp_ii_extensor_communis_insertion_tf}"
+                                    flexor_superficialis_insertion_tf="${flexor_superficialis_ii_insertion_tf}"
+                                    mp_extensor_hood_insertion_tf="${mp_ii_extensor_hood_insertion_tf}"
+                                    flexor_profundus_insertion_tf="${flexor_profundus_ii_insertion_tf}"
+                                    dp_extensor_hood_insertion_tf="${dp_ii_extensor_hood_insertion_tf}" />
+                    </xacro:if>
+
+                    <!-- Digits III -->
+                    <xacro:if value="$(arg digit_iii)">
+                        <xacro:phalanges hand_name="${hand_name}" index="iii" mcp_translation="${mcp_iii_translation}" mcp_rotation="${mcp_iii_rotation}" 
+                                        pp_length="${pp_iii_length}" mp_length="${mp_iii_length}" dp_length="${dp_iii_length}"
+                                        mcp_radius="${mcp_iii_radius}" 
+                                        pip_radius="${pip_iii_radius}" dip_radius="${dip_iii_radius}"
+                                        dorsal_interossei_insertion_tf="${dorsal_interossei_iii_insertion_tf}"
+                                        palmar_interossei_insertion_tf="${palmar_interossei_iii_insertion_tf}"
+                                        pp_extensor_communis_insertion_tf="${pp_iii_extensor_communis_insertion_tf}"
+                                        flexor_superficialis_insertion_tf="${flexor_superficialis_iii_insertion_tf}"
+                                        mp_extensor_hood_insertion_tf="${mp_iii_extensor_hood_insertion_tf}"
+                                        flexor_profundus_insertion_tf="${flexor_profundus_iii_insertion_tf}"
+                                        dp_extensor_hood_insertion_tf="${dp_iii_extensor_hood_insertion_tf}" />
+                    </xacro:if>
+
+                    <!-- Digits IV -->
+                    <xacro:if value="$(arg digit_iv)">
+                        <xacro:phalanges hand_name="${hand_name}" index="iv" mcp_translation="${mcp_iv_translation}" mcp_rotation="${mcp_iv_rotation}" 
+                                        pp_length="${pp_iv_length}" mp_length="${mp_iv_length}" dp_length="${dp_iv_length}"
+                                        mcp_radius="${mcp_iv_radius}" 
+                                        pip_radius="${pip_iv_radius}" dip_radius="${dip_iv_radius}"
+                                        dorsal_interossei_insertion_tf="${dorsal_interossei_iv_insertion_tf}"
+                                        palmar_interossei_insertion_tf="${palmar_interossei_iv_insertion_tf}"
+                                        pp_extensor_communis_insertion_tf="${pp_iv_extensor_communis_insertion_tf}"
+                                        flexor_superficialis_insertion_tf="${flexor_superficialis_iv_insertion_tf}"
+                                        mp_extensor_hood_insertion_tf="${mp_iv_extensor_hood_insertion_tf}"
+                                        flexor_profundus_insertion_tf="${flexor_profundus_iv_insertion_tf}"
+                                        dp_extensor_hood_insertion_tf="${dp_iv_extensor_hood_insertion_tf}" />
+                    </xacro:if>
+
+                    <!-- Digits V -->
+                    <xacro:if value="$(arg digit_v)">
                         <xacro:phalanx_v hand_name="${hand_name}" index="v" cm_translation="${cm_v_translation}" cm_rotation="${cm_v_rotation}" 
                                         centre_block_offset="${cm_v_centre_block_offset}" metacarpal_length="${metacarpal_v_length}" 
                                         mcp_translation="${mcp_v_translation}" mcp_rotation="${mcp_v_rotation}" pp_length="${pp_v_length}" 
@@ -461,13 +493,13 @@
                                         opponens_digiti_minimi_insertion_i_tf="${opponens_digiti_minimi_insertion_i_tf}" 
                                         opponens_digiti_minimi_insertion_ii_tf="${opponens_digiti_minimi_insertion_ii_tf}" 
                                         opponens_digiti_minimi_distal_cm_v_tunnel_tf="${opponens_digiti_minimi_distal_cm_v_tunnel_tf}" />
-                    </xacro:unless>
+                    </xacro:if>
+
                 </body>
             </body>
         </body>
     </xacro:macro>
 
     <xacro:darm_hand hand_name="hand1" pos="0 0 0.12" />
-    <!-- <xacro:darm_hand hand_name="hand2" pos="0.5 0 0.12" />
-    <xacro:darm_hand hand_name="hand3" pos="-0.5 0 0.12" /> -->
+    <!-- <xacro:darm_hand hand_name="hand2" pos="0.5 0 0.12" /> -->
 </worldbody>

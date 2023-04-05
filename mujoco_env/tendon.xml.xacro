@@ -2,8 +2,12 @@
 <tendon xmlns:xacro="http://wiki.ros.org/xacro">
     <!-- TODO: Muscles with three fibres -->
 
-    <xacro:arg name="single_finger" default="false" />
     <xacro:arg name="no_wrist" default="false" />
+    <xacro:arg name="digit_i" default="true" />
+    <xacro:arg name="digit_ii" default="true" />
+    <xacro:arg name="digit_iii" default="true" />
+    <xacro:arg name="digit_iv" default="true" />
+    <xacro:arg name="digit_v" default="true" />
 
 
     <xacro:macro name="hand_tendons" params="hand_name">
@@ -123,21 +127,37 @@
                 <site site="${hand_name}_flexor_superficialis_${index}_insertion" />
             </spatial>
         </xacro:macro>
-        
 
+        <!-- Carpals, RC Joint -->
+        <xacro:property name="n_wrist" value="$(arg no_wrist)" />
+        <xacro:unless value="${n_wrist}">
+            <spatial name="${hand_name}_flexor_carpi_radialis" width="0.0004">
+                <site site="${hand_name}_flexor_carpi_radialis_origin" />
+                <geom geom="${hand_name}_rc_joint_wrap" sidesite="${hand_name}_rc_joint_wrap_palmar_sidesite" />
+                <site site="${hand_name}_flexor_carpi_radialis_insertion" />
+            </spatial>
 
-        <xacro:phalanges_tendons index="ii" hand_name="${hand_name}" />
-        <!-- Digits III to V -->
-        <xacro:unless value="$(arg single_finger)">
-            <xacro:phalanges_tendons index="iii" hand_name="${hand_name}" />
-            <xacro:phalanges_tendons index="iv" hand_name="${hand_name}" />
-            <xacro:phalanges_tendons index="v" hand_name="${hand_name}" />
+            <spatial name="${hand_name}_flexor_carpi_ulnaris" width="0.0004">
+                <site site="${hand_name}_flexor_carpi_ulnaris_origin" />
+                <geom geom="${hand_name}_rc_joint_wrap" sidesite="${hand_name}_rc_joint_wrap_palmar_sidesite" />
+                <site site="${hand_name}_flexor_carpi_ulnaris_insertion" />
+            </spatial>
+
+            <spatial name="${hand_name}_extensor_carpi_radialis" width="0.0004">
+                <site site="${hand_name}_extensor_carpi_radialis_origin" />
+                <geom geom="${hand_name}_rc_joint_wrap" sidesite="${hand_name}_rc_joint_wrap_dorsal_sidesite" />
+                <site site="${hand_name}_extensor_carpi_radialis_insertion" />
+            </spatial>
+
+            <spatial name="${hand_name}_extensor_carpi_ulnaris" width="0.0004">
+                <site site="${hand_name}_extensor_carpi_ulnaris_origin" />
+                <geom geom="${hand_name}_rc_joint_wrap" sidesite="${hand_name}_rc_joint_wrap_dorsal_sidesite" />
+                <site site="${hand_name}_extensor_carpi_ulnaris_insertion" />
+            </spatial>
         </xacro:unless>
-
-
-        <!-- Pollicis and Digiti Minimi -->
-        <xacro:unless value="$(arg single_finger)">
-            <!-- Pollicis Muscles -->
+        
+        <!-- Digits I - Pollicis Muscles -->
+        <xacro:if value="$(arg digit_i)">
             <spatial name="${hand_name}_abductor_pollicis_brevis" width="0.0004">
                 <site site="${hand_name}_abductor_pollicis_brevis_origin" />
                 <geom geom="${hand_name}_rc_joint_wrap" sidesite="${hand_name}_rc_joint_wrap_palmar_sidesite" />
@@ -221,10 +241,27 @@
                 <geom geom="${hand_name}_distal_cm_i_wrap" sidesite="${hand_name}_distal_cm_i_wrap_dorsal_sidesite" />
                 <site site="${hand_name}_abductor_pollicis_longus_insertion" />
             </spatial>
+        </xacro:if>
 
+        <!-- Digits II -->
+        <xacro:if value="$(arg digit_ii)">
+            <xacro:phalanges_tendons index="ii" hand_name="${hand_name}" />
+        </xacro:if>
 
+        <!-- Digits III -->
+        <xacro:if value="$(arg digit_iii)">
+            <xacro:phalanges_tendons index="iii" hand_name="${hand_name}" />
+        </xacro:if>
 
-            <!-- Digiti Minimi -->
+        <!-- Digits IV -->
+        <xacro:if value="$(arg digit_iv)">
+            <xacro:phalanges_tendons index="iv" hand_name="${hand_name}" />
+        </xacro:if>
+
+        <!-- Digits V - Digiti Minimi-->
+        <xacro:if value="$(arg digit_v)">
+            <xacro:phalanges_tendons index="v" hand_name="${hand_name}" />
+
             <spatial name="${hand_name}_opponens_digiti_minimi" width="0.0004">
                 <site site="${hand_name}_opponens_digiti_minimi_origin" />
                 <geom geom="${hand_name}_rc_joint_wrap" sidesite="${hand_name}_rc_joint_wrap_palmar_sidesite" />
@@ -235,41 +272,9 @@
                 <site site="${hand_name}_opponens_digiti_minimi_insertion_i" />
                 <site site="${hand_name}_opponens_digiti_minimi_insertion_ii" />
             </spatial>
-        </xacro:unless>
-
-
-
-        <!-- Carpals, RC Joint -->
-        <xacro:property name="s_finger" value="$(arg single_finger)" />
-        <xacro:property name="n_wrist" value="$(arg no_wrist)" />
-        <xacro:unless value="${s_finger or n_wrist}">
-            <spatial name="${hand_name}_flexor_carpi_radialis" width="0.0004">
-                <site site="${hand_name}_flexor_carpi_radialis_origin" />
-                <geom geom="${hand_name}_rc_joint_wrap" sidesite="${hand_name}_rc_joint_wrap_palmar_sidesite" />
-                <site site="${hand_name}_flexor_carpi_radialis_insertion" />
-            </spatial>
-
-            <spatial name="${hand_name}_flexor_carpi_ulnaris" width="0.0004">
-                <site site="${hand_name}_flexor_carpi_ulnaris_origin" />
-                <geom geom="${hand_name}_rc_joint_wrap" sidesite="${hand_name}_rc_joint_wrap_palmar_sidesite" />
-                <site site="${hand_name}_flexor_carpi_ulnaris_insertion" />
-            </spatial>
-
-            <spatial name="${hand_name}_extensor_carpi_radialis" width="0.0004">
-                <site site="${hand_name}_extensor_carpi_radialis_origin" />
-                <geom geom="${hand_name}_rc_joint_wrap" sidesite="${hand_name}_rc_joint_wrap_dorsal_sidesite" />
-                <site site="${hand_name}_extensor_carpi_radialis_insertion" />
-            </spatial>
-
-            <spatial name="${hand_name}_extensor_carpi_ulnaris" width="0.0004">
-                <site site="${hand_name}_extensor_carpi_ulnaris_origin" />
-                <geom geom="${hand_name}_rc_joint_wrap" sidesite="${hand_name}_rc_joint_wrap_dorsal_sidesite" />
-                <site site="${hand_name}_extensor_carpi_ulnaris_insertion" />
-            </spatial>
-        </xacro:unless>
+        </xacro:if>
     </xacro:macro>
 
     <xacro:hand_tendons hand_name="hand1" />
-    <!-- <xacro:hand_tendons hand_name="hand2" />
-    <xacro:hand_tendons hand_name="hand3" /> -->
+    <!-- <xacro:hand_tendons hand_name="hand2" /> -->
 </tendon>

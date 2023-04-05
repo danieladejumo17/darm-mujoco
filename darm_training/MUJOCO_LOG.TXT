@@ -46,3 +46,9 @@ WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Ti
 Mon Mar 13 13:43:15 2023
 WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 159.7960.
 
+Wed Apr  5 00:21:58 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 164.0900.
+
+Wed Apr  5 04:12:21 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 290.1340.
+
