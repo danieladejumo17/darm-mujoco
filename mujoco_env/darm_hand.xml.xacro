@@ -337,7 +337,7 @@
             <!-- TODO: Measure this accurately from f360 -->
             <body name="${hand_name}_rc_centre_block" pos="${rc_joint_tf[0]} ${rc_joint_tf[1]} ${rc_joint_tf[2]}" euler="0 0 0">
                 <xacro:unless value="$(arg no_wrist)">
-                    <joint type="hinge" axis="0 1 0" pos="0 0 -0.032" limited="true" range="-20 10" />
+                    <joint  name="rc_adab_joint" type="hinge" axis="0 1 0" pos="0 0 -0.032" limited="true" range="-20 10" />
                 </xacro:unless>
                 <geom type="mesh" mesh="rc_centre_block_mesh" />
                 <geom class="wrap_geom" name="${hand_name}_rc_joint_wrap" type="cylinder"  
@@ -345,7 +345,7 @@
 
                 <body name="${hand_name}_carpals_metacarpals" pos="0 0 0" euler="0 0 0">
                     <xacro:unless value="$(arg no_wrist)">
-                        <joint type="hinge" axis="1 0 0" limited="true" range="-80 80" />
+                        <joint name="rc_flex_joint" type="hinge" axis="1 0 0" limited="true" range="-80 80" />
                     </xacro:unless>
                     <geom type="mesh" mesh="carpals_metacarpals_mesh" />
                     <geom class="wrap_geom" pos="${mcp_ii_translation}" name="${hand_name}_mcp_ii_wrap" type="cylinder" size="${mcp_ii_radius} ${mcp_ii_radius}" euler="0 90 0" rgba="${wrap_rgba}" />

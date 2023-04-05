@@ -12,14 +12,14 @@
         fingertip_site_size=0.004 fingertip_site_rgba='1 0 0 0.5'">
 
         <body name="${hand_name}_mcp_centre_block_${index}" pos="${mcp_translation}" euler="${mcp_rotation}">
-            <joint type="hinge" axis="0 1 0" limited="true" range="-20 20" />
+            <joint name="mcp_adab_joint_${index}" type="hinge" axis="0 1 0" limited="true" range="-20 20" />
             <geom type="mesh" mesh="mcp_centre_block_${index}_mesh" />
 
             <site name="${hand_name}_mcp_${index}_wrap_dorsal_sidesite" pos="0 ${mcp_radius+sidesite_size} 0" size="${sidesite_size}" rgba="${sidesite_rgba}" />
             <site name="${hand_name}_mcp_${index}_wrap_palmar_sidesite" pos="0 -${mcp_radius+sidesite_size} 0" size="${sidesite_size}" rgba="${sidesite_rgba}" />
 
             <body name="${hand_name}_proximal_phalanx_${index}" pos="0 0 0" euler="0 0 0">
-                <joint type="hinge" axis="1 0 0" limited="true" range="-45 90" />
+                <joint name="mcp_flex_joint_${index}" type="hinge" axis="1 0 0" limited="true" range="-45 90" />
                 <geom type="mesh" mesh="proximal_phalanx_${index}_mesh" rgba="${pp_rgba}" />
                 
                 <site name="${hand_name}_dorsal_interossei_${index}_insertion" pos="${dorsal_interossei_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
@@ -35,7 +35,7 @@
 
 
                 <body name="${hand_name}_middle_phalanx_${index}" pos="0 0 ${pp_length}" euler="0 0 0">
-                    <joint type="hinge" axis="1 0 0" limited="true" range="-10 90"/>
+                    <joint name="pip_joint_${index}" type="hinge" axis="1 0 0" limited="true" range="-10 90"/>
                     <geom type="mesh" mesh="middle_phalanx_${index}_mesh" rgba="${mp_rgba}" />
                     <geom class="wrap_geom" name="${hand_name}_pip_${index}_wrap"  type="cylinder" size="${pip_radius} ${pip_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
 
@@ -49,7 +49,7 @@
                     <site name="${hand_name}_dip_${index}_wrap_palmar_sidesite" pos="0 -${dip_radius+sidesite_size} ${mp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
     
                     <body name="${hand_name}_distal_phalanx_${index}" pos="0 0 ${mp_length}" euler="0 0 0">
-                        <joint type="hinge" axis="1 0 0" limited="true" range="-10 90"/>
+                        <joint name="dip_joint_${index}" type="hinge" axis="1 0 0" limited="true" range="-10 90"/>
                         <geom type="mesh" mesh="distal_phalanx_${index}_mesh" rgba="${dp_rgba}" />
                         <geom class="wrap_geom" name="${hand_name}_dip_${index}_wrap" type="cylinder" size="${dip_radius} ${dip_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
 
@@ -73,7 +73,7 @@
         tunnelsite_size:=0.0015 tunnelsite_rgba:='0.5 0.5 0.5 1' sidesite_rgba:='1 1 1 0.2' 
         sidesite_size:=0.001 site_size:=0.002 site_rgba:='0.1 0.1 0.1 1'">
         <body name="${hand_name}_proximal_cm_v_centre_block" pos="${cm_translation}" euler="${cm_rotation}">
-            <joint type="hinge" axis="1 0 0" limited="true" range="-10 10" />
+            <joint name="cm_flex_joint_${index}" type="hinge" axis="1 0 0" limited="true" range="-10 10" />
             <geom type="mesh" mesh="proximal_cm_v_centre_block_mesh" />
             <geom class="wrap_geom" name="${hand_name}_proximal_cm_v_wrap" type="cylinder" size="${proximal_cm_radius} 0.009" euler="0 90 0" rgba="${wrap_rgba}" />
             
@@ -81,7 +81,7 @@
             <site name="${hand_name}_proximal_cm_v_wrap_palmar_sidesite" pos="0 -${proximal_cm_radius+sidesite_size} 0" size="${sidesite_size}" rgba="${sidesite_rgba}" />
 
             <body name="${hand_name}_distal_cm_v_centre_block" pos="${centre_block_offset}" euler="0 0 0">
-                <joint type="hinge" axis="0 0 1" limited="true" range="-10 10" />
+                <joint name="cm_axial_joint_${index}" type="hinge" axis="0 0 1" limited="true" range="-10 10" />
                 <geom type="mesh" mesh="distal_cm_v_centre_block_mesh" />
                 <geom class="wrap_geom" name="${hand_name}_distal_cm_v_wrap" type="cylinder" size="${distal_cm_radius} 0.008" euler="90 0 0" rgba="${wrap_rgba}" />
                 
@@ -91,7 +91,7 @@
                 <site name="${hand_name}_opponens_digiti_minimi_distal_cm_v_tunnel" pos="${opponens_digiti_minimi_distal_cm_v_tunnel_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>
 
                 <body name="${hand_name}_metacarpal_v" pos="0 0 ${metacarpal_length}" euler="0 0 0">
-                    <joint type="hinge" axis="0 1 0" pos="0 0 -${metacarpal_length}"  limited="true" range="-5 5" />
+                    <joint name="cm_adab_joint_${index}" type="hinge" axis="0 1 0" pos="0 0 -${metacarpal_length}"  limited="true" range="-5 5" />
                     <geom type="mesh" mesh="metacarpal_v_mesh" />
                     <geom class="wrap_geom" pos="${mcp_translation}" name="${hand_name}_mcp_${index}_wrap" type="cylinder" size="${mcp_radius} ${mcp_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
 
@@ -132,7 +132,7 @@
         tunnelsite_size:=0.0015 tunnelsite_rgba:='0.5 0.5 0.5 1' sidesite_rgba:='1 1 1 0.2' 
         fingertip_site_size=0.004 fingertip_site_rgba='1 0 0 0.5' ">
         <body name="${hand_name}_proximal_cm_i_centre_block" pos="${cm_translation[0]} ${cm_translation[1]} ${cm_translation[2]}" euler="${cm_rotation}">
-            <joint type="hinge" axis="1 0 0" limited="true" range="-50 -10" />
+            <joint name="cm_flex_joint_${index}" type="hinge" axis="1 0 0" limited="true" range="-50 -10" />
             <geom type="mesh" mesh="proximal_cm_i_centre_block_mesh" />
             <geom class="wrap_geom" name="${hand_name}_proximal_cm_i_wrap" type="cylinder" size="${proximal_cm_radius} 0.010" euler="0 90 0" rgba="${wrap_rgba}" />
 
@@ -141,13 +141,13 @@
 
             
             <body name="${hand_name}_distal_cm_i_centre_block" pos="${centre_block_offset[0]} ${centre_block_offset[1]} ${centre_block_offset[2]}" euler="0 0 0">
-                <joint type="hinge" axis="0 0 1" limited="true" range="-15 15" />
+                <joint name="cm_axial_joint_${index}" type="hinge" axis="0 0 1" limited="true" range="-15 15" />
                 <geom type="mesh" mesh="distal_cm_i_centre_block_mesh" />
                 <geom class="wrap_geom" name="${hand_name}_distal_cm_i_wrap" type="cylinder" size="${distal_cm_radius} 0.009" euler="90 0 0" rgba="${wrap_rgba}" />
 
   
                 <body name="${hand_name}_metacarpal_i" pos="0 0 0" euler="0 0 0">
-                    <joint type="hinge" axis="0 1 0" pos="0 0 0" limited="true" range="-20 20" />
+                    <joint name="cm_adab_joint_${index}" type="hinge" axis="0 1 0" pos="0 0 0" limited="true" range="-20 20" />
                     <geom type="mesh" mesh="metacarpal_i_mesh" />
                     <geom class="wrap_geom" name="${hand_name}_mcp_i_wrap" type="cylinder" pos="0 0 ${metacarpal_length}" size="${mcp_radius} 0.008" euler="0 90 0" rgba="${wrap_rgba}" />
 
@@ -164,7 +164,7 @@
 
                 
                         <body name="${hand_name}_proximal_phalanx_${index}" pos="0 0 ${metacarpal_length}" euler="0 0 0">
-                            <joint type="hinge" axis="1 0 0" limited="true" range="-10 90" />
+                            <joint name="mcp_joint_${index}" type="hinge" axis="1 0 0" limited="true" range="-10 90" />
                             <geom type="mesh" mesh="proximal_phalanx_${index}_mesh" rgba="${pp_rgba}" />
                             <geom class="wrap_geom" name="${hand_name}_ip_i_wrap" type="cylinder" pos="0 0 ${pp_length}" size="${ip_radius} 0.008" euler="0 90 0" rgba="${wrap_rgba}" />
 
@@ -181,7 +181,7 @@
                             <site name="${hand_name}_ip_${index}_wrap_palmar_sidesite" pos="0 -${ip_radius+sidesite_size} ${pp_length}" size="${sidesite_size}" rgba="${sidesite_rgba}" />
 
                             <body name="${hand_name}_distal_phalanx_${index}" pos="0 0 ${pp_length}" euler="0 0 0">
-                                <joint type="hinge" axis="1 0 0"  limited="true" range="-60 90" />
+                                <joint name="ip_joint_${index}" type="hinge" axis="1 0 0"  limited="true" range="-60 90" />
                                 <geom type="mesh" mesh="distal_phalanx_${index}_mesh" rgba="${dp_rgba}" />
 
                                 <site name="${hand_name}_flexor_pollicis_longus_insertion" pos="${flexor_pollicis_longus_insertion_tf}" size="${site_size}" rgba="${site_rgba}"/>
