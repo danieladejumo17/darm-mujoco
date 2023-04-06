@@ -348,9 +348,9 @@
                         <joint name="rc_flex_joint" type="hinge" axis="1 0 0" limited="true" range="-80 80" />
                     </xacro:unless>
                     <geom type="mesh" mesh="carpals_metacarpals_mesh" />
-                    <geom class="wrap_geom" pos="${mcp_ii_translation}" name="${hand_name}_mcp_ii_wrap" type="cylinder" size="${mcp_ii_radius} ${mcp_ii_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
-                    <geom class="wrap_geom" pos="${mcp_iii_translation}" name="${hand_name}_mcp_iii_wrap" type="cylinder" size="${mcp_iii_radius} ${mcp_iii_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
-                    <geom class="wrap_geom" pos="${mcp_iv_translation}" name="${hand_name}_mcp_iv_wrap" type="cylinder" size="${mcp_iv_radius} ${mcp_iv_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
+                    <geom class="wrap_geom" pos="${mcp_ii_translation}" name="${hand_name}_mcp_ii_wrap" type="cylinder" size="${mcp_ii_radius} ${0.7*mcp_ii_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
+                    <geom class="wrap_geom" pos="${mcp_iii_translation}" name="${hand_name}_mcp_iii_wrap" type="cylinder" size="${mcp_iii_radius} ${0.7*mcp_iii_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
+                    <geom class="wrap_geom" pos="${mcp_iv_translation}" name="${hand_name}_mcp_iv_wrap" type="cylinder" size="${mcp_iv_radius} ${0.7*mcp_iv_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
 
 
                     <site name="${hand_name}_flexor_carpi_radialis_insertion" pos="${flexor_carpi_radialis_insertion_tf}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>

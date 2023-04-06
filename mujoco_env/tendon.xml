@@ -5,26 +5,6 @@
 <!-- =================================================================================== -->
 <tendon>
   <!-- TODO: Muscles with three fibres -->
-  <spatial name="hand1_flexor_carpi_radialis" width="0.0004">
-    <site site="hand1_flexor_carpi_radialis_origin"/>
-    <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_palmar_sidesite"/>
-    <site site="hand1_flexor_carpi_radialis_insertion"/>
-  </spatial>
-  <spatial name="hand1_flexor_carpi_ulnaris" width="0.0004">
-    <site site="hand1_flexor_carpi_ulnaris_origin"/>
-    <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_palmar_sidesite"/>
-    <site site="hand1_flexor_carpi_ulnaris_insertion"/>
-  </spatial>
-  <spatial name="hand1_extensor_carpi_radialis" width="0.0004">
-    <site site="hand1_extensor_carpi_radialis_origin"/>
-    <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_dorsal_sidesite"/>
-    <site site="hand1_extensor_carpi_radialis_insertion"/>
-  </spatial>
-  <spatial name="hand1_extensor_carpi_ulnaris" width="0.0004">
-    <site site="hand1_extensor_carpi_ulnaris_origin"/>
-    <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_dorsal_sidesite"/>
-    <site site="hand1_extensor_carpi_ulnaris_insertion"/>
-  </spatial>
   <spatial name="hand1_abductor_pollicis_brevis" width="0.0004">
     <site site="hand1_abductor_pollicis_brevis_origin"/>
     <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_palmar_sidesite"/>

@@ -27,7 +27,8 @@ class DARMEnv(gym.Env):
                 max_tendon_tension = [],
                 start_state_file = "DARMHand_MFNW_start_state.npy",
                 ignore_load_start_states = False,
-                digits = ["i", "ii", "iii", "iv", "v"]
+                digits = ["i", "ii", "iii", "iv", "v"],
+                freeze_wrist_joint = True
                 ) -> None:
         super().__init__()
         assert render_mode is None or render_mode in self.metadata["render_modes"]
@@ -106,6 +107,7 @@ class DARMEnv(gym.Env):
         self.all_digits = ["i", "ii", "iii", "iv", "v"]
         self.digits = digits
         self.digits_indices = np.array([self.index_str_mapping[idx_str] for idx_str in self.digits])
+        self.freeze_wrist_joint = freeze_wrist_joint
 
 
         # ========================== Define Observation and Action Space ==========================
@@ -168,6 +170,62 @@ class DARMEnv(gym.Env):
         ctrl_range = np.array([self.model.actuator_ctrlrange[i] for i in range(self.model.nu)])
         return ctrl_range[:, 0], ctrl_range[:, 1] # (min, max)
 
+    def freeze_joints(self, digit_index, wrist=None):
+        """digit_index is [0,5)"""
+        try:
+            eps = 1e-4
+            if digit_index:
+                idx_str = self.index_int_mapping[digit_index]
+
+                phalanges_joints  = [f"mcp_adab_joint_{idx_str}",
+                                    f"mcp_adab_joint_{idx_str}",
+                                    f"pip_joint_{idx_str}",
+                                    f"dip_joint_{idx_str}"]
+                cm_joints = [f"cm_flex_joint_{idx_str}",
+                            f"cm_axial_joint_{idx_str}",
+                            f"cm_adab_joint_{idx_str}"]
+                
+                if digit_index != 0:
+                    for joint_name in phalanges_joints:
+                        joint_qpos = self.data.joint(joint_name).qpos[0]
+                        # Restrict joint range to current qpos
+                        self.model.joint(joint_name).range = [joint_qpos-eps, joint_qpos+eps]
+                        # self.model.joint(joint_name).margin = 0.0
+                        # self.model.joint(joint_name).stiffness = 1000
+
+                    if digit_index == 4:
+                        for joint_name in cm_joints:
+                            joint_qpos = self.data.joint(joint_name).qpos[0]
+                            # Restrict joint range to current qpos
+                            self.model.joint(joint_name).range = [joint_qpos-eps, joint_qpos+eps]
+                            # self.model.joint(joint_name).margin = 0.0
+                            # self.model.joint(joint_name).stiffness = 1000
+
+                if digit_index == 0:
+                    pollicis_joints = [f"mcp_joint_{idx_str}",
+                                f"mcp_joint_{idx_str}"]
+                    joint_names = cm_joints + pollicis_joints
+
+                    for joint_name in joint_names:
+                        joint_qpos = self.data.joint(joint_name).qpos[0]
+                        # Restrict joint range to current qpos
+                        self.model.joint(joint_name).range = [joint_qpos-eps, joint_qpos+eps]
+                        # self.model.joint(joint_name).margin = 0.0
+                        # self.model.joint(joint_name).stiffness = 1000
+
+            if wrist:
+                joint_names = [f"rc_adab_joint", f"rc_flex_joint"]
+
+                for joint_name in joint_names:
+                        joint_qpos = self.data.joint(joint_name).qpos[0]
+                        # Restrict joint range to current qpos
+                        self.model.joint(joint_name).range = [joint_qpos-eps, joint_qpos+eps]
+                        # self.model.joint(joint_name).margin = 0.0
+                        # self.model.joint(joint_name).stiffness = 1000
+        except KeyError as e:
+            # safely pass if joint is not present in model
+            pass
+        
     def _init_controller(self):
         pass
 
@@ -451,6 +509,14 @@ class DARMEnv(gym.Env):
         # ========================== Get a random valid pose and target ==========================
         # observation, _, _ = self.generate_start_state()
         observation = self.sample_saved_start_states()
+
+        # freeze joints
+        for idx_str in self.all_digits:
+            if not idx_str in self.digits:
+                self.freeze_joints(digit_index=self.index_str_mapping[idx_str])
+        if self.freeze_wrist_joint:
+            self.freeze_joints(digit_index=None, wrist=True)
+
         
         for idx_str in self.digits:
             self.prev_fingertip_pose[self.index_str_mapping[idx_str]] = self.get_fingertip_pose(idx_str)
@@ -458,9 +524,13 @@ class DARMEnv(gym.Env):
         # ========================== Render Frame ==========================
         if self.render_mode == "human":
             # Update target visualization mocaps pos and quat
-            target_pos = self.target_obs[self.digits_indices, :3]
-            self.data.mocap_pos = self.remove_distance_obs_transform(target_pos)
-            self.data.mocap_quat = self.target_obs[self.digits_indices, 3:]
+            if self.data.mocap_pos.shape[0] == 5:
+                self.data.mocap_pos = self.remove_distance_obs_transform(self.target_obs[:, :3])
+                self.data.mocap_quat = self.target_obs[:, 3:]
+            else:
+                target_pos = self.target_obs[self.digits_indices, :3]
+                self.data.mocap_pos = self.remove_distance_obs_transform(target_pos)
+                self.data.mocap_quat = self.target_obs[self.digits_indices, 3:]
             # Go Forward
             mj.mj_forward(self.model, self.data)
             self._render_frame()

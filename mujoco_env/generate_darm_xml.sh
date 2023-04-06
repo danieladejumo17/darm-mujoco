@@ -18,4 +18,4 @@ echo Digit V: $digit_v
 rosrun xacro xacro darm_hand.xml.xacro -o darm_hand.xml no_wrist:=$no_wrist digit_i:=$digit_i digit_ii:=$digit_ii digit_iii:=$digit_iii digit_iv:=$digit_iv digit_v:=$digit_v
 rosrun xacro xacro contact_exclusions.xml.xacro -o contact_exclusions.xml digit_i:=$digit_i digit_ii:=$digit_ii digit_iii:=$digit_iii digit_iv:=$digit_iv digit_v:=$digit_v
 rosrun xacro xacro tendon.xml.xacro -o tendon.xml no_wrist:=$no_wrist digit_i:=$digit_i digit_ii:=$digit_ii digit_iii:=$digit_iii digit_iv:=$digit_iv digit_v:=$digit_v
-rosrun xacro xacro actuator.xml.xacro -o actuator.xml no_wrist:=$no_wrist digit_i:=$digit_i digit_ii:=$digit_ii digit_iii:=$digit_iii digit_iv:=$digit_iv digit_v:=$digit_v
+# rosrun xacro xacro actuator.xml.xacro -o actuator.xml no_wrist:=$no_wrist digit_i:=$digit_i digit_ii:=$digit_ii digit_iii:=$digit_iii digit_iv:=$digit_iv digit_v:=$digit_v

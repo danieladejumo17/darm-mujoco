@@ -6,7 +6,8 @@ from pprint import pprint
 
 # env = gym.make("darm/DarmHand-v0", render_mode="human", hand_name="hand1")
 env = DARMEnv(render_mode="human", hand_name="hand1", 
-              digits=["ii"], start_state_file="DARMHand_SF_start_state.npy")
+              digits=["ii"], 
+              start_state_file="DARMHand_MFNW_start_state.npy")
 env = gym.wrappers.TimeLimit(env, max_episode_steps=200)
 
 done = False

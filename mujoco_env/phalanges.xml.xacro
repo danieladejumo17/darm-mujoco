@@ -93,7 +93,7 @@
                 <body name="${hand_name}_metacarpal_v" pos="0 0 ${metacarpal_length}" euler="0 0 0">
                     <joint name="cm_adab_joint_${index}" type="hinge" axis="0 1 0" pos="0 0 -${metacarpal_length}"  limited="true" range="-5 5" />
                     <geom type="mesh" mesh="metacarpal_v_mesh" />
-                    <geom class="wrap_geom" pos="${mcp_translation}" name="${hand_name}_mcp_${index}_wrap" type="cylinder" size="${mcp_radius} ${mcp_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
+                    <geom class="wrap_geom" pos="${mcp_translation}" name="${hand_name}_mcp_${index}_wrap" type="cylinder" size="${mcp_radius} ${0.7*mcp_radius}" euler="0 90 0" rgba="${wrap_rgba}" />
 
 
                     <site name="${hand_name}_flexor_v_metacarpals_tunnel" pos="0 -0.009 -${metacarpal_length}" size="${tunnel_site_size}" rgba="${tunnel_site_rgba}"/>

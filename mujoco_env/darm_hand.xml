@@ -64,15 +64,13 @@
     <site name="hand1_opponens_digiti_minimi_origin" pos="-0.012 -0.013 -0.075" rgba="1 0.5 0.5 1" size="0.0015"/>
     <!-- TODO: Measure this accurately from f360 -->
     <body euler="0 0 0" name="hand1_rc_centre_block" pos="0 0 0.032">
-      <joint axis="0 1 0" limited="true" name="rc_adab_joint" pos="0 0 -0.032" range="-20 10" type="hinge"/>
       <geom mesh="rc_centre_block_mesh" type="mesh"/>
       <geom class="wrap_geom" euler="0 90 0" name="hand1_rc_joint_wrap" rgba="0 0 1 0.2" size="0.012 0.0235" type="cylinder"/>
       <body euler="0 0 0" name="hand1_carpals_metacarpals" pos="0 0 0">
-        <joint axis="1 0 0" limited="true" name="rc_flex_joint" range="-80 80" type="hinge"/>
         <geom mesh="carpals_metacarpals_mesh" type="mesh"/>
-        <geom class="wrap_geom" euler="0 90 0" name="hand1_mcp_ii_wrap" pos="0.0293 0.0087 0.0908" rgba="0 0 1 0.2" size="0.011 0.011" type="cylinder"/>
-        <geom class="wrap_geom" euler="0 90 0" name="hand1_mcp_iii_wrap" pos="0.0082 0.0087 0.0933" rgba="0 0 1 0.2" size="0.011 0.011" type="cylinder"/>
-        <geom class="wrap_geom" euler="0 90 0" name="hand1_mcp_iv_wrap" pos="-0.0103 0.0021 0.0889" rgba="0 0 1 0.2" size="0.0095 0.0095" type="cylinder"/>
+        <geom class="wrap_geom" euler="0 90 0" name="hand1_mcp_ii_wrap" pos="0.0293 0.0087 0.0908" rgba="0 0 1 0.2" size="0.011 0.0077" type="cylinder"/>
+        <geom class="wrap_geom" euler="0 90 0" name="hand1_mcp_iii_wrap" pos="0.0082 0.0087 0.0933" rgba="0 0 1 0.2" size="0.011 0.0077" type="cylinder"/>
+        <geom class="wrap_geom" euler="0 90 0" name="hand1_mcp_iv_wrap" pos="-0.0103 0.0021 0.0889" rgba="0 0 1 0.2" size="0.0095 0.00665" type="cylinder"/>
         <site name="hand1_flexor_carpi_radialis_insertion" pos="0.02 -0.015 0.016" rgba="0.5 0.5 0.5 1" size="0.0015"/>
         <site name="hand1_flexor_carpi_ulnaris_insertion" pos="-0.0185 -0.012 0.016" rgba="0.5 0.5 0.5 1" size="0.0015"/>
         <site name="hand1_extensor_carpi_radialis_insertion" pos="0.021 0.01 0.016" rgba="0.5 0.5 0.5 1" size="0.0015"/>
@@ -275,7 +273,7 @@
             <body euler="0 0 0" name="hand1_metacarpal_v" pos="0 0 0.0349">
               <joint axis="0 1 0" limited="true" name="cm_adab_joint_v" pos="0 0 -0.0349" range="-5 5" type="hinge"/>
               <geom mesh="metacarpal_v_mesh" type="mesh"/>
-              <geom class="wrap_geom" euler="0 90 0" name="hand1_mcp_v_wrap" pos="0 0 0" rgba="0 0 1 0.2" size="0.0095 0.0095" type="cylinder"/>
+              <geom class="wrap_geom" euler="0 90 0" name="hand1_mcp_v_wrap" pos="0 0 0" rgba="0 0 1 0.2" size="0.0095 0.00665" type="cylinder"/>
               <site name="hand1_flexor_v_metacarpals_tunnel" pos="0 -0.009 -0.0349" rgba="0.5 0.5 0.5 1" size="0.0015"/>
               <site name="hand1_extensor_communis_v_metacarpals_tunnel" pos="0 0.009 -0.0349" rgba="0.5 0.5 0.5 1" size="0.0015"/>
               <site name="hand1_dorsal_interossei_v_metacarpals_tunnel" pos="0.006 -0.006 -0.013" rgba="0.5 0.5 0.5 1" size="0.0015"/>
