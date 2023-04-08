@@ -120,9 +120,7 @@ class DARMEnv(gym.Env):
         # Define a mujoco action range array used for scaling
         self.nact = int(self.model.nu/2)
         print(f"Number of tendon position actuators: {self.nact}")
-        self.action_space = gym.spaces.Box(low=np.array([-1.0]*self.nact), 
-                                            high=np.array([1.0]*self.nact), 
-                                            shape=(self.nact,), dtype=np.float32)
+        self.action_space = gym.spaces.MultiBinary(n=self.nact)
 
     def _load_model(self):
         xml_path = DARM_XML_FILE
@@ -526,7 +524,7 @@ class DARMEnv(gym.Env):
 
 
         # process action, update model and ctrl data
-        action = action > 0
+        action = action > 0  # FIXME: Remove once MultiBinary works
         [contract_tendon_one_step(i) if action[i] else relax_tendon(i) for i in range(self.nact)]
 
         # Perform action  
