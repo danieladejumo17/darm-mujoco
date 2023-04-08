@@ -4,3 +4,5 @@ darm_gym_env/__pycache__/*
 dist/*
 darm_gym_env.egg-info/*
 build/*
+.ipynb_checkpoints/*
+.vscode/*
