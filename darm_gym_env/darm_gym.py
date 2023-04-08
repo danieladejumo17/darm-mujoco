@@ -24,11 +24,11 @@ class DARMEnv(gym.Env):
                 target_joint_state_delta = [],
                 min_joint_vals = [],
                 max_joint_vals = [],
-                max_tendon_tension = [],
                 start_state_file = "DARMHand_MFNW_start_state.npy",
                 ignore_load_start_states = False,
                 digits = ["i", "ii", "iii", "iv", "v"],
-                freeze_wrist_joint = True
+                freeze_wrist_joint = True,
+                servo_step = 0.00628*5
                 ) -> None:
         super().__init__()
         assert render_mode is None or render_mode in self.metadata["render_modes"]
@@ -66,7 +66,6 @@ class DARMEnv(gym.Env):
         self.max_joint_vals = max_joint_vals or self._get_joint_limits("max")   # degress
         # abs increament of joint state from starting state to target state
         self.target_joint_state_delta = target_joint_state_delta or self._compute_target_joint_state_delta()   # degrees
-        self.max_tendon_tension = max_tendon_tension or self._get_actuator_ctrlrange("max")
 
         self.min_joint_vals = self.min_joint_vals*(np.pi/180)
         self.max_joint_vals = self.max_joint_vals*(np.pi/180)
@@ -79,7 +78,6 @@ class DARMEnv(gym.Env):
 
         # Initialize target observation
         self.target_obs = np.zeros((5,7))
-        self.prev_fingertip_pose = np.zeros((5,7))
 
 
         # ========================== Reward Components Weights ==========================
@@ -88,7 +86,7 @@ class DARMEnv(gym.Env):
             contact = 1.0,
             bonus = 4.0,
             penalty = 50,
-            act_reg = 0.01,
+            # act_reg = 0.01,
             # sparse = 1,
             # solved = 1, # review - weight should not be assigned to this?
             # done = 1 # review - weight should not be assigned to this?
@@ -108,6 +106,7 @@ class DARMEnv(gym.Env):
         self.digits = digits
         self.digits_indices = np.array([self.index_str_mapping[idx_str] for idx_str in self.digits])
         self.freeze_wrist_joint = freeze_wrist_joint
+        self.servo_step = servo_step
 
 
         # ========================== Define Observation and Action Space ==========================
@@ -119,9 +118,11 @@ class DARMEnv(gym.Env):
         # NOTE: Watch out for Box upper limit if Carpal Actuators are involved
         # FIXME: Fix action range in reward and step functions. Current ==> [0,2] after denorm
         # Define a mujoco action range array used for scaling
-        self.action_space = gym.spaces.Box(low=np.array([-1.0]*self.model.nu), 
-                                            high=np.array([1.0]*self.model.nu), 
-                                            shape=(self.model.nu,), dtype=np.float32)
+        self.nact = int(self.model.nu/2)
+        print(f"Number of tendon position actuators: {self.nact}")
+        self.action_space = gym.spaces.Box(low=np.array([-1.0]*self.nact), 
+                                            high=np.array([1.0]*self.nact), 
+                                            shape=(self.nact,), dtype=np.float32)
 
     def _load_model(self):
         xml_path = DARM_XML_FILE
@@ -160,15 +161,6 @@ class DARMEnv(gym.Env):
         # return (self.max_joint_vals - self.min_joint_vals)//10  # for every range of 10 deg, have a delta of 1 deg
         joint_state_delta =  ((self.max_joint_vals - self.min_joint_vals)//40) * 2  # for every range of 40 deg, have a delta of 2 deg
         return np.clip(joint_state_delta, a_min=2, a_max=10)    # a minimum delta of 2 degrees, max of 10 degrees
-
-    def _get_actuator_ctrlrange(self, type = None):
-        if type == "min":
-            return np.array([self.model.actuator_ctrlrange[i][0] for i in range(self.model.nu)])
-        if type == "max":
-            return np.array([self.model.actuator_ctrlrange[i][1] for i in range(self.model.nu)])
-    
-        ctrl_range = np.array([self.model.actuator_ctrlrange[i] for i in range(self.model.nu)])
-        return ctrl_range[:, 0], ctrl_range[:, 1] # (min, max)
 
     def freeze_joints(self, digit_index, wrist=None):
         """digit_index is [0,5)"""
@@ -346,22 +338,12 @@ class DARMEnv(gym.Env):
         contacts = np.concatenate([self.get_finger_contacts(index) for index in self.digits_indices])
         return sum(contacts) > 0
 
-    def _get_obs(self, action_time=None):
+    def _get_obs(self):
         def get_target_pose(index):
             return self.target_obs[index]
 
         def get_kinematic_chain_obs(index):
             return self.get_finger_frames_pos(self.index_int_mapping[index])
-
-        def get_vel_obs(index):
-            if not action_time:
-                # if no action time, velocity is zero. i.e. after reset
-                return np.zeros(3)
-            
-            prev_fingertip_pos = self.prev_fingertip_pose[index][:3]
-            new_fingertip_pos = self.get_fingertip_pose(self.index_int_mapping[index])[:3]
-            vel_obs = (new_fingertip_pos - prev_fingertip_pos)/action_time
-            return vel_obs
 
         def get_contact_obs(index):
             return self.get_finger_contacts(index)
@@ -369,7 +351,6 @@ class DARMEnv(gym.Env):
         def get_finger_obs(index):
             return np.concatenate((get_target_pose(index),
                             get_kinematic_chain_obs(index),
-                            get_vel_obs(index),
                             get_contact_obs(index)))
             
         obs = np.concatenate([get_finger_obs(index) for index in self.digits_indices])
@@ -386,10 +367,10 @@ class DARMEnv(gym.Env):
         """Returns the angular distance between two quaternion orientation"""
         return 2*np.arccos(np.abs(np.dot(quat1, np.transpose(quat2)).diagonal()))
 
-    def _get_reward(self, action, new_state):
+    def _get_reward(self):
         """
         Reward function to compute reward given action, and new state.
-        R = R(a, S')
+        # R = R(a, S')
 
         Agent is punished for being far from target
         Agent is punished for going farther than a threshold from the target
@@ -407,24 +388,14 @@ class DARMEnv(gym.Env):
             fingertip_obs[self.index_str_mapping[idx_str]] = self.get_fingertip_pose(idx_str)
         reach_dist_all = self.position_norm(fingertip_obs[:, :3], self.target_obs[:, :3])
         angle_dist_all = self.orientation_norm(fingertip_obs[:, 3:7], self.target_obs[:, 3:7])
+        
         # Compute reward only for active digits
         reach_dist = reach_dist_all[self.digits_indices]
         angle_dist = angle_dist_all[self.digits_indices]
         contact = np.array([sum(self.get_finger_contacts(i)) for i in self.digits_indices])
-
-        # Scale action down to [0, 1] from [0, max_tendon_tension]
-        action = action / self.max_tendon_tension
-        
-        # NOTE: Some of the fingers in five fingered hand have more than five actuators
-        # act_mag = np.linalg.norm(action.reshape(-1, 5)) # reshape action to (-1,5), ensure nu is ordered from mujoco
-        # TODO: Consider scaling down this act_mag to be equiv. to a single finger with nu=5
-        act_mag = np.linalg.norm(action)/np.sqrt(self.model.nu/1) # action magnitude is not measured per finger but as a whole
-        act_mag = np.array([act_mag]*len(self.digits))
-        # by dividing by sqrt(nu/5), the norm is similar to when computing with nu==5. Check it out.
-        # by dividing by sqrt(nu) act_mag will have a max value in the order of the max_value of action now => 1
         
         # reach dist scaled from cm to m
-        reach_rwd = -1*0.01*reach_dist - 0.05*angle_dist
+        reach_rwd = -1*(reach_dist/self.distance_scale) - 0.01*angle_dist
         bonus_rwd = (1.*(np.logical_and((reach_dist<2*near_th), (angle_dist<2*angle_near_th))) + 
                  1.*(np.logical_and((reach_dist<near_th), (angle_dist<angle_near_th))))
         rwd_dict = collections.OrderedDict((
@@ -432,7 +403,6 @@ class DARMEnv(gym.Env):
             ('reach',   reach_rwd),
             ('bonus',   bonus_rwd),
             ('contact', -1*contact),
-            ('act_reg', -1.*act_mag),
             ('penalty', -1.*(reach_dist>far_th)),
             # Must keys
             ('sparse',  -1.*reach_dist),
@@ -445,7 +415,6 @@ class DARMEnv(gym.Env):
             # contact = 1.0
             # bonus = 4.0,
             # penalty = 50,
-            # act_reg = 0.1,
         rwd_dict['dense'] = np.sum([wt*rwd_dict[key] for key, wt in self.rwd_keys_wt.items()], axis=0)
         return rwd_dict
 
@@ -510,16 +479,13 @@ class DARMEnv(gym.Env):
         # observation, _, _ = self.generate_start_state()
         observation = self.sample_saved_start_states()
 
-        # freeze joints
+        # ========================== Freeze unused joints ==========================
         for idx_str in self.all_digits:
             if not idx_str in self.digits:
                 self.freeze_joints(digit_index=self.index_str_mapping[idx_str])
         if self.freeze_wrist_joint:
             self.freeze_joints(digit_index=None, wrist=True)
 
-        
-        for idx_str in self.digits:
-            self.prev_fingertip_pose[self.index_str_mapping[idx_str]] = self.get_fingertip_pose(idx_str)
 
         # ========================== Render Frame ==========================
         if self.render_mode == "human":
@@ -538,32 +504,48 @@ class DARMEnv(gym.Env):
         self.ep_start_time = self.data.time
         return observation
 
-    def step(self, action):
-        for idx_str in self.digits:
-            self.prev_fingertip_pose[self.index_str_mapping[idx_str]] = self.get_fingertip_pose(idx_str)
+    def set_position_servo(self, actuator_no, kp):
+        self.model.actuator_gainprm[actuator_no, 0] = kp
+        self.model.actuator_biasprm[actuator_no, 1] = -kp
 
-        # action from model is in the range [-1,1]
-        # action + 1 === [0, 2]
-        # action * x === [0, 2x]
-        action = (action + 1)*(self.max_tendon_tension/2)
-        action = np.clip(action, 0, self.max_tendon_tension)
-        self.data.ctrl[0 : self.model.nu] = action
-        time_prev = self.data.time   # simulation time in seconds
+    def set_velocity_servo(self, actuator_no, kv):
+        self.model.actuator_gainprm[actuator_no, 0] = kv
+        self.model.actuator_biasprm[actuator_no, 2] = -kv
+
+    def step(self, action):
+        def contract_tendon_one_step(index):
+            self.set_position_servo(index, 10_000)
+            self.set_velocity_servo(index + self.nact, 10)
+            # Update the servo position
+            position = self.data.actuator(index).length[0] - self.servo_step/self.distance_scale
+            self.data.ctrl[index] = position
+
+        def relax_tendon(index):
+            self.set_position_servo(index, 0)
+            self.set_velocity_servo(index + self.nact, 0)
+
+
+        # process action, update model and ctrl data
+        action = action > 0
+        [contract_tendon_one_step(i) if action[i] else relax_tendon(i) for i in range(self.nact)]
 
         # Perform action  
-        while (self.data.time - time_prev < self.action_time):
+        movement_done = False
+        i = 0
+        while not movement_done:
+            movement_done = all(np.abs(self.data.actuator_length[:self.nact]*action - self.data.ctrl[:self.nact]) < 0.1*(self.servo_step/self.distance_scale))
             mj.mj_step(self.model, self.data)
-        time_after = self.data.time # time after performing action
-
+            i += 1
+            if i == 200: break
 
         # Get observation
-        obs = self._get_obs(action_time=time_after-time_prev)
+        obs = self._get_obs()
 
         if self.render_mode == "human":
             self._render_frame()
 
         # Get Reward
-        rwd_dict = self._get_reward(action, obs)
+        rwd_dict = self._get_reward()
         reward = rwd_dict["dense"].mean()
         done = any(rwd_dict["done"])  # all(rwd_dict["done"])
         
@@ -572,7 +554,7 @@ class DARMEnv(gym.Env):
     def forward(self, joint_conf):
         self.data.qpos = joint_conf
         mj.mj_forward(self.model, self.data)
-        return self._get_obs(action_time=None)
+        return self._get_obs()
 
     def render(self, mode="human", **kwargs):
         if mode=="human" and self.render_mode == "human":

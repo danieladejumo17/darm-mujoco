@@ -45,7 +45,7 @@
     <xacro:property name="digiti_minimi_specific_tendons_max_tension" value="5" /> 
 
 
-    <xacro:macro name="hand_actuators" params="hand_name">
+    <xacro:macro name="hand_pos_actuators" params="hand_name">
         <!-- MACRO TO UNROLL LOOP -->
         <xacro:macro name="make_actuators" params="tendons:=^ ctrlrange:='0 5' index:='0'">
             <xacro:if value="${tendons}">
@@ -53,16 +53,16 @@
                 <xacro:property name="tendon_name" value="${tendons.pop(0)}"/>
 
                 <xacro:unless value="${index != '0'}">
-                    <general name="${hand_name}_${tendon_name}_actuator" tendon="${hand_name}_${tendon_name}"
-                        gaintype="fixed" biastype="none" gainprm="-1" biasprm="0" ctrllimited="true" ctrlrange="${ctrlrange}"/>
+                    <position name="${hand_name}_${tendon_name}_pos_actuator" tendon="${hand_name}_${tendon_name}"
+                         kp="0" forcelimited="true" forcerange="-7 7" />
                     
                     <!-- recursively call make_actuators -->
                     <xacro:make_actuators ctrlrange="${ctrlrange}" />
                 </xacro:unless>
 
                 <xacro:if value="${index != '0'}">
-                    <general name="${hand_name}_${tendon_name}_${index}_actuator" tendon="${hand_name}_${tendon_name}_${index}"
-                        gaintype="fixed" biastype="none" gainprm="-1" biasprm="0" ctrllimited="true" ctrlrange="${ctrlrange}"/>
+                    <position name="${hand_name}_${tendon_name}_${index}_pos_actuator" tendon="${hand_name}_${tendon_name}_${index}"
+                         kp="0" forcelimited="true" forcerange="-7 7" />
                     
                     <!-- recursively call make_actuators -->
                     <xacro:make_actuators ctrlrange="${ctrlrange}" index="${index}" />
@@ -111,6 +111,75 @@
         </xacro:if>
     </xacro:macro>
 
-    <xacro:hand_actuators hand_name="hand1" />
+
+
+    <xacro:macro name="hand_vel_actuators" params="hand_name">
+        <!-- MACRO TO UNROLL LOOP -->
+        <xacro:macro name="make_actuators" params="tendons:=^ ctrlrange:='0 5' index:='0'">
+            <xacro:if value="${tendons}">
+                <!-- pop first item from list -->
+                <xacro:property name="tendon_name" value="${tendons.pop(0)}"/>
+
+                <xacro:unless value="${index != '0'}">
+                    <velocity name="${hand_name}_${tendon_name}_vel_actuator" tendon="${hand_name}_${tendon_name}"
+                         kv="0" forcelimited="true" forcerange="-7 7" />
+                    
+                    <!-- recursively call make_actuators -->
+                    <xacro:make_actuators ctrlrange="${ctrlrange}" />
+                </xacro:unless>
+
+                <xacro:if value="${index != '0'}">
+                    <velocity name="${hand_name}_${tendon_name}_${index}_vel_actuator" tendon="${hand_name}_${tendon_name}_${index}"
+                         kv="0" forcelimited="true" forcerange="-7 7" />
+                    
+                    <!-- recursively call make_actuators -->
+                    <xacro:make_actuators ctrlrange="${ctrlrange}" index="${index}" />
+                </xacro:if>
+
+            </xacro:if>
+        </xacro:macro>
+
+
+        <!-- Create a List of Muscles -->
+        <xacro:property name="n_wrist" value="$(arg no_wrist)" />
+        
+        <!-- Carpal Tendon Actuators -->
+        <xacro:unless value="${n_wrist}">
+            <xacro:make_actuators tendons="${list(carpal_tendons)}" ctrlrange="0 ${carpal_tendons_max_tension}"/>
+        </xacro:unless>
+
+        <!-- Digit I (Pollicis) Tendon Actuators -->
+        <xacro:if value="$(arg digit_i)">
+            <xacro:make_actuators tendons="${list(pollicis_tendons)}" ctrlrange="0 ${pollicis_tendons_max_tension}"/>
+        </xacro:if>
+
+        <!-- Digit II -->
+        <xacro:if value="$(arg digit_ii)">
+            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="ii" ctrlrange="0 ${digitorum_tendons_max_tension}"/>
+            <xacro:make_actuators tendons="${list(digitorum_extensor)}" index="ii" ctrlrange="0 ${digitorum_extensor_max_tension}"/>
+        </xacro:if>
+
+        <!-- Digit III -->
+        <xacro:if value="$(arg digit_iii)">
+            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iii" ctrlrange="0 ${digitorum_tendons_max_tension}"/>
+            <xacro:make_actuators tendons="${list(digitorum_extensor)}" index="iii" ctrlrange="0 ${digitorum_extensor_max_tension}"/>
+        </xacro:if>
+
+        <!-- Digit IV -->
+        <xacro:if value="$(arg digit_iv)">
+            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="iv" ctrlrange="0 ${digitorum_tendons_max_tension}"/>
+            <xacro:make_actuators tendons="${list(digitorum_extensor)}" index="iv" ctrlrange="0 ${digitorum_extensor_max_tension}"/>
+        </xacro:if>
+
+        <!-- Digit V -->
+        <xacro:if value="$(arg digit_v)">
+            <xacro:make_actuators tendons="${list(digitorum_tendons)}" index="v" ctrlrange="0 ${digitorum_tendons_max_tension}"/>
+            <xacro:make_actuators tendons="${list(digitorum_extensor)}" index="v" ctrlrange="0 ${digitorum_extensor_max_tension}"/>
+            <xacro:make_actuators tendons="${list(digiti_minimi_specific_tendons)}" ctrlrange="0 ${digiti_minimi_specific_tendons_max_tension}"/>
+        </xacro:if>
+    </xacro:macro>
+
+    <xacro:hand_pos_actuators hand_name="hand1" />
+    <xacro:hand_vel_actuators hand_name="hand1" />
     <!-- <xacro:hand_actuators hand_name="hand2" /> -->
 </actuator>
