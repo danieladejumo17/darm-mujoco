@@ -9,6 +9,7 @@ darm_gym_env/generate_DARMHand_start_state.py
 darm_gym_env/obs_DARMSFHand-v0_test.py
 darm_gym_env/obs_DARMSFHand_targets_gen.py
 darm_gym_env/obs_multi_darm_gym.py
+darm_gym_env/pendulum.py
 darm_gym_env.egg-info/PKG-INFO
 darm_gym_env.egg-info/SOURCES.txt
 darm_gym_env.egg-info/dependency_links.txt
