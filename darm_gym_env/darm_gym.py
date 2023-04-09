@@ -121,6 +121,7 @@ class DARMEnv(gym.Env):
         self.nact = int(self.model.nu/2)
         print(f"Number of tendon position actuators: {self.nact}")
         self.action_space = gym.spaces.MultiBinary(n=self.nact)
+        # self.action_space = gym.spaces.MultiDiscrete([2]*self.nact)
 
     def _load_model(self):
         xml_path = DARM_XML_FILE
