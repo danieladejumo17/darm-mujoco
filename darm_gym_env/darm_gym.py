@@ -28,7 +28,8 @@ class DARMEnv(gym.Env):
                 ignore_load_start_states = False,
                 digits = ["i", "ii", "iii", "iv", "v"],
                 freeze_wrist_joint = True,
-                servo_step = 0.00628*5
+                servo_step = 0.00628*5,
+                rwd_type = "shaped_reward"
                 ) -> None:
         super().__init__()
         assert render_mode is None or render_mode in self.metadata["render_modes"]
@@ -107,6 +108,7 @@ class DARMEnv(gym.Env):
         self.digits_indices = np.array([self.index_str_mapping[idx_str] for idx_str in self.digits])
         self.freeze_wrist_joint = freeze_wrist_joint
         self.servo_step = servo_step
+        self.rwd_type = rwd_type
 
 
         # ========================== Define Observation and Action Space ==========================
@@ -369,7 +371,7 @@ class DARMEnv(gym.Env):
         """Returns the angular distance between two quaternion orientation"""
         return 2*np.arccos(np.abs(np.dot(quat1, np.transpose(quat2)).diagonal()))
 
-    def _get_reward(self):
+    def _get_reward(self, prev_fingertip_pose=None):
         """
         Reward function to compute reward given action, and new state.
         # R = R(a, S')
@@ -381,44 +383,111 @@ class DARMEnv(gym.Env):
         Agent is rewarded for coming close to the target beyond a threshold 
         """
 
-        near_th = self.min_th
-        angle_near_th = self.angle_min_th
-        far_th = 2*self.max_target_th
+        def shaped_reward():
+            if prev_fingertip_pose is None:
+                raise "prev_fingertip_pose not supplied to shaped reward function"
+            
+            near_th = self.min_th
+            angle_near_th = self.angle_min_th
+            far_th = 2*self.max_target_th
 
-        fingertip_obs = np.zeros_like(self.target_obs)
-        for idx_str in self.digits:
-            fingertip_obs[self.index_str_mapping[idx_str]] = self.get_fingertip_pose(idx_str)
-        reach_dist_all = self.position_norm(fingertip_obs[:, :3], self.target_obs[:, :3])
-        angle_dist_all = self.orientation_norm(fingertip_obs[:, 3:7], self.target_obs[:, 3:7])
-        
-        # Compute reward only for active digits
-        reach_dist = reach_dist_all[self.digits_indices]
-        angle_dist = angle_dist_all[self.digits_indices]
-        contact = np.array([sum(self.get_finger_contacts(i)) for i in self.digits_indices])
-        
-        # reach dist scaled from cm to m
-        reach_rwd = -1*(reach_dist/self.distance_scale) - 0.01*angle_dist
-        bonus_rwd = (1.*(np.logical_and((reach_dist<2*near_th), (angle_dist<2*angle_near_th))) + 
-                 1.*(np.logical_and((reach_dist<near_th), (angle_dist<angle_near_th))))
-        rwd_dict = collections.OrderedDict((
-            # Optional Keys
-            ('reach',   reach_rwd),
-            ('bonus',   bonus_rwd),
-            ('contact', -1*contact),
-            ('penalty', -1.*(reach_dist>far_th)),
-            # Must keys
-            ('sparse',  -1.*reach_dist),
-            ('solved',  reach_dist<near_th),
-            ('done',    reach_dist > far_th),
-        ))
+            fingertip_obs = np.zeros_like(self.target_obs)
+            for idx_str in self.digits:
+                fingertip_obs[self.index_str_mapping[idx_str]] = self.get_fingertip_pose(idx_str)
 
-            # Weights:
-            # reach = 1.0,
-            # contact = 1.0
-            # bonus = 4.0,
-            # penalty = 50,
-        rwd_dict['dense'] = np.sum([wt*rwd_dict[key] for key, wt in self.rwd_keys_wt.items()], axis=0)
-        return rwd_dict
+            # Distances 
+            # Compute reward only for active digits
+            reach_dist = self.position_norm(fingertip_obs[:, :3], self.target_obs[:, :3])[self.digits_indices]
+            prev_reach_dist = self.position_norm(prev_fingertip_pose[:, :3], self.target_obs[:, :3])[self.digits_indices]
+            
+            # Angles
+            angle_dist = self.orientation_norm(fingertip_obs[:, 3:7], self.target_obs[:, 3:7])[self.digits_indices]
+            prev_angle_dist = self.orientation_norm(prev_fingertip_pose[:, 3:7], self.target_obs[:, 3:7])[self.digits_indices]
+            
+            # Contact
+            # changed from sum to any
+            contact = np.array([any(self.get_finger_contacts(i)) for i in self.digits_indices])
+            
+
+
+            # reward = -sum(distances) + sum(previous_distances)
+            reach_dist_rwd = -sum(reach_dist) + sum(prev_reach_dist)
+            angle_dist_rwd = -sum(angle_dist) + sum(prev_angle_dist)
+            reach_rwd = reach_dist_rwd + angle_dist_rwd
+
+            bonus_rwd = sum(
+                1.*(np.logical_and((reach_dist<2*near_th), (angle_dist<2*angle_near_th))) + 
+                1.*(np.logical_and((reach_dist<near_th), (angle_dist<angle_near_th)))
+                )
+
+            contact_rwd = -1*sum(contact)
+
+            penalty_rwd = -1*sum(reach_dist>far_th)
+
+
+            rwd_dict = collections.OrderedDict((
+                # Optional Keys
+                ('reach',   reach_rwd),
+                ('bonus',   bonus_rwd),
+                ('contact', contact_rwd),
+                ('penalty', penalty_rwd),
+                # Must keys
+                ('solved',  [all(reach_dist<near_th)]),
+                ('done',    [any(reach_dist > far_th)]),
+            ))
+
+                # Weights:
+                # reach = 1.0,
+                # contact = 1.0
+                # bonus = 4.0,
+                # penalty = 50,
+            rwd_dict['dense'] = np.sum([wt*rwd_dict[key] for key, wt in self.rwd_keys_wt.items()], axis=0)
+            return rwd_dict
+
+        def myo_reward():
+            near_th = self.min_th
+            angle_near_th = self.angle_min_th
+            far_th = 2*self.max_target_th
+
+            fingertip_obs = np.zeros_like(self.target_obs)
+            for idx_str in self.digits:
+                fingertip_obs[self.index_str_mapping[idx_str]] = self.get_fingertip_pose(idx_str)
+            reach_dist_all = self.position_norm(fingertip_obs[:, :3], self.target_obs[:, :3])
+            angle_dist_all = self.orientation_norm(fingertip_obs[:, 3:7], self.target_obs[:, 3:7])
+            
+            # Compute reward only for active digits
+            reach_dist = reach_dist_all[self.digits_indices]
+            angle_dist = angle_dist_all[self.digits_indices]
+            contact = np.array([sum(self.get_finger_contacts(i)) for i in self.digits_indices])
+            
+            # reach dist scaled from cm to m
+            reach_rwd = -1*(reach_dist/self.distance_scale) - 0.01*angle_dist
+            bonus_rwd = (1.*(np.logical_and((reach_dist<2*near_th), (angle_dist<2*angle_near_th))) + 
+                    1.*(np.logical_and((reach_dist<near_th), (angle_dist<angle_near_th))))
+            rwd_dict = collections.OrderedDict((
+                # Optional Keys
+                ('reach',   reach_rwd),
+                ('bonus',   bonus_rwd),
+                ('contact', -1*contact),
+                ('penalty', -1.*(reach_dist>far_th)),
+                # Must keys
+                ('sparse',  -1.*reach_dist),
+                ('solved',  reach_dist<near_th),
+                ('done',    reach_dist > far_th),
+            ))
+
+                # Weights:
+                # reach = 1.0,
+                # contact = 1.0
+                # bonus = 4.0,
+                # penalty = 50,
+            rwd_dict['dense'] = np.sum([wt*rwd_dict[key] for key, wt in self.rwd_keys_wt.items()], axis=0)
+            return rwd_dict
+        
+        if self.rwd_type == "myo":
+            return myo_reward()
+        elif self.rwd_type == "shaped_reward":
+            return shaped_reward()
 
     def generate_start_state(self):
         while True:
@@ -526,6 +595,11 @@ class DARMEnv(gym.Env):
             self.set_position_servo(index, 0)
             self.set_velocity_servo(index + self.nact, 0)
 
+        prev_fingertip_pose = None
+        if self.rwd_type == "shaped_reward":
+            prev_fingertip_pose = np.zeros_like(self.target_obs)
+            for idx_str in self.digits:
+                prev_fingertip_pose[self.index_str_mapping[idx_str]] = self.get_fingertip_pose(idx_str)
 
         # process action, update model and ctrl data
         action = action > 0  # FIXME: Remove once MultiBinary works
@@ -547,7 +621,7 @@ class DARMEnv(gym.Env):
             self._render_frame()
 
         # Get Reward
-        rwd_dict = self._get_reward()
+        rwd_dict = self._get_reward(prev_fingertip_pose=prev_fingertip_pose)
         reward = rwd_dict["dense"].mean()
         done = any(rwd_dict["done"])  # all(rwd_dict["done"])
         
