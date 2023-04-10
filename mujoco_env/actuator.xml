@@ -10,10 +10,30 @@
   <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_profundus_ii_pos_actuator" tendon="hand1_flexor_profundus_ii"/>
   <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_superficialis_ii_pos_actuator" tendon="hand1_flexor_superficialis_ii"/>
   <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_extensor_communis_ii_pos_actuator" tendon="hand1_extensor_communis_ii"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_dorsal_interossei_iii_pos_actuator" tendon="hand1_dorsal_interossei_iii"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_palmar_interossei_iii_pos_actuator" tendon="hand1_palmar_interossei_iii"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_profundus_iii_pos_actuator" tendon="hand1_flexor_profundus_iii"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_superficialis_iii_pos_actuator" tendon="hand1_flexor_superficialis_iii"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_extensor_communis_iii_pos_actuator" tendon="hand1_extensor_communis_iii"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_dorsal_interossei_iv_pos_actuator" tendon="hand1_dorsal_interossei_iv"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_palmar_interossei_iv_pos_actuator" tendon="hand1_palmar_interossei_iv"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_profundus_iv_pos_actuator" tendon="hand1_flexor_profundus_iv"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_superficialis_iv_pos_actuator" tendon="hand1_flexor_superficialis_iv"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_extensor_communis_iv_pos_actuator" tendon="hand1_extensor_communis_iv"/>
   <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_dorsal_interossei_ii_vel_actuator" tendon="hand1_dorsal_interossei_ii"/>
   <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_palmar_interossei_ii_vel_actuator" tendon="hand1_palmar_interossei_ii"/>
   <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_profundus_ii_vel_actuator" tendon="hand1_flexor_profundus_ii"/>
   <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_superficialis_ii_vel_actuator" tendon="hand1_flexor_superficialis_ii"/>
   <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_extensor_communis_ii_vel_actuator" tendon="hand1_extensor_communis_ii"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_dorsal_interossei_iii_vel_actuator" tendon="hand1_dorsal_interossei_iii"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_palmar_interossei_iii_vel_actuator" tendon="hand1_palmar_interossei_iii"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_profundus_iii_vel_actuator" tendon="hand1_flexor_profundus_iii"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_superficialis_iii_vel_actuator" tendon="hand1_flexor_superficialis_iii"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_extensor_communis_iii_vel_actuator" tendon="hand1_extensor_communis_iii"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_dorsal_interossei_iv_vel_actuator" tendon="hand1_dorsal_interossei_iv"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_palmar_interossei_iv_vel_actuator" tendon="hand1_palmar_interossei_iv"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_profundus_iv_vel_actuator" tendon="hand1_flexor_profundus_iv"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_superficialis_iv_vel_actuator" tendon="hand1_flexor_superficialis_iv"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_extensor_communis_iv_vel_actuator" tendon="hand1_extensor_communis_iv"/>
   <!-- <xacro:hand_actuators hand_name="hand2" /> -->
 </actuator>

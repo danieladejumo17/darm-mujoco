@@ -28,8 +28,8 @@ class DARMEnv(gym.Env):
                 ignore_load_start_states = False,
                 digits = ["i", "ii", "iii", "iv", "v"],
                 freeze_wrist_joint = True,
-                servo_step = 0.00628*5,
-                rwd_type = "shaped_reward"
+                servo_step = 0.00628*2,
+                rwd_type = "myo"
                 ) -> None:
         super().__init__()
         assert render_mode is None or render_mode in self.metadata["render_modes"]
@@ -108,7 +108,9 @@ class DARMEnv(gym.Env):
         self.digits_indices = np.array([self.index_str_mapping[idx_str] for idx_str in self.digits])
         self.freeze_wrist_joint = freeze_wrist_joint
         self.servo_step = servo_step
+        print(f"Using step size `{self.servo_step}` units")
         self.rwd_type = rwd_type
+        print(f"Using `{self.rwd_type}` reward type")
 
 
         # ========================== Define Observation and Action Space ==========================
@@ -127,6 +129,7 @@ class DARMEnv(gym.Env):
                                             shape=(self.nact,), dtype=np.float32)
         # self.action_space = gym.spaces.MultiBinary(n=self.nact)
         # self.action_space = gym.spaces.MultiDiscrete([2]*self.nact)
+        print(f"Using `{self.action_space}` action space")
 
     def _load_model(self):
         xml_path = DARM_XML_FILE
@@ -586,7 +589,7 @@ class DARMEnv(gym.Env):
     def step(self, action):
         def contract_tendon_one_step(index):
             self.set_position_servo(index, 10_000)
-            self.set_velocity_servo(index + self.nact, 10)
+            self.set_velocity_servo(index + self.nact, 100)
             # Update the servo position
             position = self.data.actuator(index).length[0] - self.servo_step/self.distance_scale
             self.data.ctrl[index] = position
