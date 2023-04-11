@@ -363,8 +363,9 @@ class DARMEnv(gym.Env):
 
         def get_finger_obs(index):
             return np.concatenate((get_target_pose(index),
-                            get_kinematic_chain_obs(index),
-                            get_contact_obs(index)))
+                            get_kinematic_chain_obs(index) #,
+                            # get_contact_obs(index)
+                            ))
             
         obs = np.concatenate([get_finger_obs(index) for index in self.digits_indices])
         return obs

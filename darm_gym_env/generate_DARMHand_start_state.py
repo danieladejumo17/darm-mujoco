@@ -22,7 +22,7 @@ START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/D
 
 env = DARMEnv(render_mode=None, hand_name="hand1",
               digits=["ii"],
-              freeze_wrist_joint = True,
+              freeze_wrist_joint = False,
               ignore_load_start_states=True)
 
 # env = gym.make("darm/DarmHand-v0", render_mode=None, hand_name="hand1",
