@@ -588,8 +588,12 @@ class DARMEnv(gym.Env):
 
     def step(self, action):
         def contract_tendon_one_step(index):
-            self.set_position_servo(index, 10_000)
-            self.set_velocity_servo(index + self.nact, 100)
+            if "_carpi_" in self.model.actuator(index).name:
+                self.set_position_servo(index, 10_000*10)
+                self.set_velocity_servo(index + self.nact, 100*10)
+            else:
+                self.set_position_servo(index, 10_000)
+                self.set_velocity_servo(index + self.nact, 100)
             # Update the servo position
             position = self.data.actuator(index).length[0] - self.servo_step/self.distance_scale
             self.data.ctrl[index] = position

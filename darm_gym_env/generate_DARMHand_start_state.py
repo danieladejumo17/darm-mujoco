@@ -16,10 +16,12 @@ from tqdm import tqdm
 # Choose single_finger or multi-fingers
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_SF_start_state.npy"
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_MFNW_start_state.npy"
-START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_dii_iii_iv_start_state.npy"
+# START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_dii_iii_iv_start_state.npy"
+START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_dii_iii_iv_wrist_start_state.npy"
 
 env = DARMEnv(render_mode=None, hand_name="hand1",
               digits=["ii", "iii", "iv"],
+              freeze_wrist_joint = False,
               ignore_load_start_states=True)
 
 # env = gym.make("darm/DarmHand-v0", render_mode=None, hand_name="hand1",

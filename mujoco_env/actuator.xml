@@ -5,6 +5,10 @@
 <!-- =================================================================================== -->
 <actuator>
   <!-- A total of 34 muscles -->
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_carpi_radialis_pos_actuator" tendon="hand1_flexor_carpi_radialis"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_carpi_ulnaris_pos_actuator" tendon="hand1_flexor_carpi_ulnaris"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_extensor_carpi_radialis_pos_actuator" tendon="hand1_extensor_carpi_radialis"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_extensor_carpi_ulnaris_pos_actuator" tendon="hand1_extensor_carpi_ulnaris"/>
   <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_dorsal_interossei_ii_pos_actuator" tendon="hand1_dorsal_interossei_ii"/>
   <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_palmar_interossei_ii_pos_actuator" tendon="hand1_palmar_interossei_ii"/>
   <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_profundus_ii_pos_actuator" tendon="hand1_flexor_profundus_ii"/>
@@ -20,6 +24,10 @@
   <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_profundus_iv_pos_actuator" tendon="hand1_flexor_profundus_iv"/>
   <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_superficialis_iv_pos_actuator" tendon="hand1_flexor_superficialis_iv"/>
   <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_extensor_communis_iv_pos_actuator" tendon="hand1_extensor_communis_iv"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_carpi_radialis_vel_actuator" tendon="hand1_flexor_carpi_radialis"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_carpi_ulnaris_vel_actuator" tendon="hand1_flexor_carpi_ulnaris"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_extensor_carpi_radialis_vel_actuator" tendon="hand1_extensor_carpi_radialis"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_extensor_carpi_ulnaris_vel_actuator" tendon="hand1_extensor_carpi_ulnaris"/>
   <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_dorsal_interossei_ii_vel_actuator" tendon="hand1_dorsal_interossei_ii"/>
   <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_palmar_interossei_ii_vel_actuator" tendon="hand1_palmar_interossei_ii"/>
   <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_profundus_ii_vel_actuator" tendon="hand1_flexor_profundus_ii"/>
