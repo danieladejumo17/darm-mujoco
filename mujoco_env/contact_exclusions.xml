@@ -15,15 +15,5 @@
   <exclude body1="hand1_proximal_phalanx_ii" body2="hand1_carpals_metacarpals"/>
   <exclude body1="hand1_middle_phalanx_ii" body2="hand1_proximal_phalanx_ii"/>
   <exclude body1="hand1_distal_phalanx_ii" body2="hand1_middle_phalanx_ii"/>
-  <exclude body1="hand1_mcp_centre_block_iii" body2="hand1_carpals_metacarpals"/>
-  <exclude body1="hand1_proximal_phalanx_iii" body2="hand1_mcp_centre_block_iii"/>
-  <exclude body1="hand1_proximal_phalanx_iii" body2="hand1_carpals_metacarpals"/>
-  <exclude body1="hand1_middle_phalanx_iii" body2="hand1_proximal_phalanx_iii"/>
-  <exclude body1="hand1_distal_phalanx_iii" body2="hand1_middle_phalanx_iii"/>
-  <exclude body1="hand1_mcp_centre_block_iv" body2="hand1_carpals_metacarpals"/>
-  <exclude body1="hand1_proximal_phalanx_iv" body2="hand1_mcp_centre_block_iv"/>
-  <exclude body1="hand1_proximal_phalanx_iv" body2="hand1_carpals_metacarpals"/>
-  <exclude body1="hand1_middle_phalanx_iv" body2="hand1_proximal_phalanx_iv"/>
-  <exclude body1="hand1_distal_phalanx_iv" body2="hand1_middle_phalanx_iv"/>
   <!-- <xacro:hand_contacts hand_name="hand2" /> -->
 </contact>

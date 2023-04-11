@@ -122,7 +122,13 @@ class DARMEnv(gym.Env):
         # NOTE: Watch out for Box upper limit if Carpal Actuators are involved
         # FIXME: Fix action range in reward and step functions. Current ==> [0,2] after denorm
         # Define a mujoco action range array used for scaling
-        self.nact = int(self.model.nu/2)
+
+        # TODO: ////////////////////////////////////////// Wrist Variation
+        self.nact = int(self.model.nu/2) - 4
+
+        # TODO: ////////////////////////////////////////// Wrist Variation
+        self.carpi_act_lengths = np.array([self.data.actuator(i).length for i in range(4)])
+
         print(f"Number of tendon position actuators: {self.nact}")
         self.action_space = gym.spaces.Box(low=np.array([-1.0]*self.nact), 
                                             high=np.array([1.0]*self.nact), 
@@ -575,6 +581,9 @@ class DARMEnv(gym.Env):
             mj.mj_forward(self.model, self.data)
             self._render_frame()
 
+        # TODO: ////////////////////////////////////////// Wrist Variation
+        self.carpi_act_lengths = np.array([self.data.actuator(i).length for i in range(4)])
+
         self.ep_start_time = self.data.time
         return observation
 
@@ -587,6 +596,14 @@ class DARMEnv(gym.Env):
         self.model.actuator_biasprm[actuator_no, 2] = -kv
 
     def step(self, action):
+        # TODO: ////////////////////////////////////////// Wrist Variation
+        def stiffen_tendon(index):
+            self.set_position_servo(index, 10_000*20)
+            self.set_velocity_servo(index + self.nact, 100*20)
+            # Update the servo position
+            position = self.carpi_act_lengths[index]
+            self.data.ctrl[index] = position
+
         def contract_tendon_one_step(index):
             if "_carpi_" in self.model.actuator(index).name:
                 self.set_position_servo(index, 10_000*10)
@@ -610,7 +627,12 @@ class DARMEnv(gym.Env):
 
         # process action, update model and ctrl data
         action = action > 0  # FIXME: Remove once MultiBinary works
-        [contract_tendon_one_step(i) if action[i] else relax_tendon(i) for i in range(self.nact)]
+        
+        # TODO: ////////////////////////////////////////// Wrist Variation
+        [stiffen_tendon(i) for i in range(4)]
+        
+        # TODO: ////////////////////////////////////////// Wrist Variation
+        [contract_tendon_one_step(i+4) if action[i] else relax_tendon(i+4) for i in range(self.nact)]
 
         # Perform action  
         movement_done = False
