@@ -18,11 +18,17 @@ from tqdm import tqdm
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_MFNW_start_state.npy"
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_dii_iii_iv_start_state.npy"
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_dii_iii_iv_wrist_start_state.npy"
-START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_dii_wrist_start_state.npy"
+# START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_dii_wrist_start_state.npy"
+# START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_diii_wrist_start_state.npy"
+# START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_div_wrist_start_state.npy"
+# START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_dii_start_state.npy"
+# START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_diii_start_state.npy"
+# START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_div_start_state.npy"
+# START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_di_start_state.npy"
+START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_dv_start_state.npy"
 
 env = DARMEnv(render_mode=None, hand_name="hand1",
-              digits=["ii"],
-              freeze_wrist_joint = False,
+              digits=["v"],
               ignore_load_start_states=True)
 
 # env = gym.make("darm/DarmHand-v0", render_mode=None, hand_name="hand1",
@@ -30,12 +36,21 @@ env = DARMEnv(render_mode=None, hand_name="hand1",
 #                ignore_load_start_states=True)
 
 targets = []
-N_OBERVATIONS = int(1e5)
+N_OBERVATIONS = int(3e5)
 
 try:
     for _ in tqdm(range(N_OBERVATIONS)):
         _, joint_state, target_obs = env.generate_start_state()
         targets.append(np.array([joint_state, target_obs], dtype=object))
+
+        # POLLICIS
+        # _joint_state = np.zeros(6)
+        # _, joint_state, target_obs = env.generate_start_state()
+        # _joint_state[1:] = joint_state
+
+        # target = np.array([_joint_state, target_obs], dtype=object)
+        # target[0] = np.delete(target[0], 0, 0)
+        # targets.append(target)
 except Exception as e:
     print(e)
 finally:

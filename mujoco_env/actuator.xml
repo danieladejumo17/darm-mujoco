@@ -5,23 +5,23 @@
 <!-- =================================================================================== -->
 <actuator>
   <!-- A total of 34 muscles -->
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_carpi_radialis_pos_actuator" tendon="hand1_flexor_carpi_radialis"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_carpi_ulnaris_pos_actuator" tendon="hand1_flexor_carpi_ulnaris"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_extensor_carpi_radialis_pos_actuator" tendon="hand1_extensor_carpi_radialis"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_extensor_carpi_ulnaris_pos_actuator" tendon="hand1_extensor_carpi_ulnaris"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_dorsal_interossei_ii_pos_actuator" tendon="hand1_dorsal_interossei_ii"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_palmar_interossei_ii_pos_actuator" tendon="hand1_palmar_interossei_ii"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_profundus_ii_pos_actuator" tendon="hand1_flexor_profundus_ii"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_superficialis_ii_pos_actuator" tendon="hand1_flexor_superficialis_ii"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_extensor_communis_ii_pos_actuator" tendon="hand1_extensor_communis_ii"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_carpi_radialis_vel_actuator" tendon="hand1_flexor_carpi_radialis"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_carpi_ulnaris_vel_actuator" tendon="hand1_flexor_carpi_ulnaris"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_extensor_carpi_radialis_vel_actuator" tendon="hand1_extensor_carpi_radialis"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_extensor_carpi_ulnaris_vel_actuator" tendon="hand1_extensor_carpi_ulnaris"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_dorsal_interossei_ii_vel_actuator" tendon="hand1_dorsal_interossei_ii"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_palmar_interossei_ii_vel_actuator" tendon="hand1_palmar_interossei_ii"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_profundus_ii_vel_actuator" tendon="hand1_flexor_profundus_ii"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_superficialis_ii_vel_actuator" tendon="hand1_flexor_superficialis_ii"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_extensor_communis_ii_vel_actuator" tendon="hand1_extensor_communis_ii"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_adductor_pollicis_oblique_pos_actuator" tendon="hand1_adductor_pollicis_oblique"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_adductor_pollicis_transverse_pos_actuator" tendon="hand1_adductor_pollicis_transverse"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_abductor_pollicis_brevis_pos_actuator" tendon="hand1_abductor_pollicis_brevis"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_abductor_pollicis_longus_pos_actuator" tendon="hand1_abductor_pollicis_longus"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_pollicis_brevis_pos_actuator" tendon="hand1_flexor_pollicis_brevis"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_pollicis_longus_pos_actuator" tendon="hand1_flexor_pollicis_longus"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_extensor_pollicis_brevis_pos_actuator" tendon="hand1_extensor_pollicis_brevis"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_extensor_pollicis_longus_pos_actuator" tendon="hand1_extensor_pollicis_longus"/>
+  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_opponens_pollicis_pos_actuator" tendon="hand1_opponens_pollicis"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_adductor_pollicis_oblique_vel_actuator" tendon="hand1_adductor_pollicis_oblique"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_adductor_pollicis_transverse_vel_actuator" tendon="hand1_adductor_pollicis_transverse"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_abductor_pollicis_brevis_vel_actuator" tendon="hand1_abductor_pollicis_brevis"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_abductor_pollicis_longus_vel_actuator" tendon="hand1_abductor_pollicis_longus"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_pollicis_brevis_vel_actuator" tendon="hand1_flexor_pollicis_brevis"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_pollicis_longus_vel_actuator" tendon="hand1_flexor_pollicis_longus"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_extensor_pollicis_brevis_vel_actuator" tendon="hand1_extensor_pollicis_brevis"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_extensor_pollicis_longus_vel_actuator" tendon="hand1_extensor_pollicis_longus"/>
+  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_opponens_pollicis_vel_actuator" tendon="hand1_opponens_pollicis"/>
   <!-- <xacro:hand_actuators hand_name="hand2" /> -->
 </actuator>

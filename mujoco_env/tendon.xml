@@ -5,126 +5,80 @@
 <!-- =================================================================================== -->
 <tendon>
   <!-- TODO: Muscles with three fibres -->
-  <spatial name="hand1_flexor_carpi_radialis" width="0.0004">
-    <site site="hand1_flexor_carpi_radialis_origin"/>
+  <spatial name="hand1_abductor_pollicis_brevis" width="0.0004">
+    <site site="hand1_abductor_pollicis_brevis_origin"/>
     <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_palmar_sidesite"/>
-    <site site="hand1_flexor_carpi_radialis_insertion"/>
+    <site site="hand1_abductor_pollicis_brevis_carpals_tunnel"/>
+    <geom geom="hand1_distal_cm_i_wrap" sidesite="hand1_distal_cm_i_wrap_dorsal_sidesite"/>
+    <site site="hand1_abductor_pollicis_brevis_insertion"/>
   </spatial>
-  <spatial name="hand1_flexor_carpi_ulnaris" width="0.0004">
-    <site site="hand1_flexor_carpi_ulnaris_origin"/>
+  <spatial name="hand1_adductor_pollicis_oblique" width="0.0004">
+    <site site="hand1_adductor_pollicis_origin"/>
     <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_palmar_sidesite"/>
-    <site site="hand1_flexor_carpi_ulnaris_insertion"/>
+    <site site="hand1_adductor_pollicis_capitate_tunnel"/>
+    <geom geom="hand1_distal_cm_i_wrap" sidesite="hand1_proximal_cm_i_wrap_palmar_sidesite"/>
+    <site site="hand1_adductor_pollicis_insertion"/>
   </spatial>
-  <spatial name="hand1_extensor_carpi_radialis" width="0.0004">
-    <site site="hand1_extensor_carpi_radialis_origin"/>
+  <spatial name="hand1_adductor_pollicis_transverse" width="0.0004">
+    <site site="hand1_adductor_pollicis_origin"/>
+    <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_palmar_sidesite"/>
+    <site site="hand1_adductor_pollicis_capitate_tunnel"/>
+    <site site="hand1_adductor_pollicis_metacarpals_iii_tunnel_i"/>
+    <site site="hand1_adductor_pollicis_metacarpals_iii_tunnel_ii"/>
+    <site site="hand1_adductor_pollicis_insertion"/>
+  </spatial>
+  <spatial name="hand1_flexor_pollicis_brevis" width="0.0004">
+    <site site="hand1_flexor_pollicis_brevis_origin"/>
+    <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_palmar_sidesite"/>
+    <site site="hand1_flexor_pollicis_brevis_carpals_tunnel"/>
+    <geom geom="hand1_distal_cm_i_wrap" sidesite="hand1_distal_cm_i_wrap_dorsal_sidesite"/>
+    <site site="hand1_flexor_pollicis_brevis_insertion"/>
+  </spatial>
+  <spatial name="hand1_opponens_pollicis" width="0.0004">
+    <site site="hand1_opponens_pollicis_origin"/>
+    <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_palmar_sidesite"/>
+    <site site="hand1_opponens_pollicis_carpals_tunnel"/>
+    <geom geom="hand1_distal_cm_i_wrap" sidesite="hand1_distal_cm_i_wrap_dorsal_sidesite"/>
+    <site site="hand1_opponens_pollicis_insertion_i"/>
+    <site site="hand1_opponens_pollicis_insertion_ii"/>
+  </spatial>
+  <spatial name="hand1_flexor_pollicis_longus" width="0.0004">
+    <site site="hand1_flexor_pollicis_longus_origin"/>
+    <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_palmar_sidesite"/>
+    <site site="hand1_flexor_pollicis_brevis_carpals_tunnel"/>
+    <geom geom="hand1_proximal_cm_i_wrap" sidesite="hand1_proximal_cm_i_wrap_palmar_sidesite"/>
+    <site site="hand1_metacarpal_i_flexor_tunnel"/>
+    <geom geom="hand1_mcp_i_wrap" sidesite="hand1_mcp_i_wrap_palmar_sidesite"/>
+    <site site="hand1_pp_i_flexor_tunnel"/>
+    <geom geom="hand1_ip_i_wrap" sidesite="hand1_ip_i_wrap_palmar_sidesite"/>
+    <site site="hand1_flexor_pollicis_longus_insertion"/>
+  </spatial>
+  <spatial name="hand1_extensor_pollicis_brevis" width="0.0004">
+    <site site="hand1_extensor_pollicis_brevis_origin"/>
     <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_dorsal_sidesite"/>
-    <site site="hand1_extensor_carpi_radialis_insertion"/>
+    <site site="hand1_extensor_pollicis_carpals_tunnel"/>
+    <geom geom="hand1_proximal_cm_i_wrap" sidesite="hand1_proximal_cm_i_wrap_dorsal_sidesite"/>
+    <site site="hand1_metacarpal_i_extensor_tunnel"/>
+    <geom geom="hand1_mcp_i_wrap" sidesite="hand1_mcp_i_wrap_dorsal_sidesite"/>
+    <site site="hand1_extensor_pollicis_brevis_insertion"/>
   </spatial>
-  <spatial name="hand1_extensor_carpi_ulnaris" width="0.0004">
-    <site site="hand1_extensor_carpi_ulnaris_origin"/>
+  <spatial name="hand1_extensor_pollicis_longus" width="0.0004">
+    <site site="hand1_extensor_pollicis_longus_origin"/>
     <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_dorsal_sidesite"/>
-    <site site="hand1_extensor_carpi_ulnaris_insertion"/>
+    <site site="hand1_extensor_pollicis_carpals_tunnel"/>
+    <geom geom="hand1_proximal_cm_i_wrap" sidesite="hand1_proximal_cm_i_wrap_dorsal_sidesite"/>
+    <site site="hand1_metacarpal_i_extensor_tunnel"/>
+    <geom geom="hand1_mcp_i_wrap" sidesite="hand1_mcp_i_wrap_dorsal_sidesite"/>
+    <site site="hand1_pp_i_extensor_tunnel"/>
+    <geom geom="hand1_ip_i_wrap" sidesite="hand1_ip_i_wrap_dorsal_sidesite"/>
+    <site site="hand1_extensor_pollicis_longus_insertion"/>
   </spatial>
-  <spatial name="hand1_dorsal_interossei_ii" width="0.0004">
-    <site site="hand1_dorsal_interossei_ii_origin"/>
-    <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_palmar_sidesite"/>
-    <site site="hand1_flexor_ii_carpals_tunnel"/>
-    <site site="hand1_flexor_ii_metacarpals_tunnel"/>
-    <site site="hand1_dorsal_interossei_ii_metacarpals_tunnel"/>
-    <pulley divisor="3"/>
-    <site site="hand1_dorsal_interossei_ii_metacarpals_tunnel"/>
-    <geom geom="hand1_mcp_ii_wrap" sidesite="hand1_mcp_ii_wrap_palmar_sidesite"/>
-    <site site="hand1_dorsal_interossei_ii_insertion"/>
-    <pulley divisor="3"/>
-    <site site="hand1_dorsal_interossei_ii_metacarpals_tunnel"/>
-    <geom geom="hand1_mcp_ii_wrap" sidesite="hand1_mcp_ii_wrap_palmar_sidesite"/>
-    <site site="hand1_dorsal_interossei_ii_insertion"/>
-    <site site="hand1_pp_ii_dorsal_interossei_tunnel"/>
-    <geom geom="hand1_pip_ii_wrap" sidesite="hand1_pip_ii_wrap_dorsal_sidesite"/>
-    <site site="hand1_mp_ii_extensor_hood_insertion"/>
-    <pulley divisor="3"/>
-    <site site="hand1_dorsal_interossei_ii_metacarpals_tunnel"/>
-    <geom geom="hand1_mcp_ii_wrap" sidesite="hand1_mcp_ii_wrap_palmar_sidesite"/>
-    <site site="hand1_dorsal_interossei_ii_insertion"/>
-    <site site="hand1_pp_ii_dorsal_interossei_tunnel"/>
-    <geom geom="hand1_pip_ii_wrap" sidesite="hand1_pip_ii_wrap_dorsal_sidesite"/>
-    <site site="hand1_mp_ii_extensor_hood_insertion"/>
-    <geom geom="hand1_dip_ii_wrap" sidesite="hand1_dip_ii_wrap_dorsal_sidesite"/>
-    <site site="hand1_dp_ii_extensor_hood_insertion"/>
-  </spatial>
-  <spatial name="hand1_palmar_interossei_ii" width="0.0004">
-    <site site="hand1_palmar_interossei_ii_origin"/>
-    <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_palmar_sidesite"/>
-    <site site="hand1_flexor_ii_carpals_tunnel"/>
-    <site site="hand1_flexor_ii_metacarpals_tunnel"/>
-    <site site="hand1_palmar_interossei_ii_metacarpals_tunnel"/>
-    <pulley divisor="3"/>
-    <site site="hand1_palmar_interossei_ii_metacarpals_tunnel"/>
-    <geom geom="hand1_mcp_ii_wrap" sidesite="hand1_mcp_ii_wrap_palmar_sidesite"/>
-    <site site="hand1_palmar_interossei_ii_insertion"/>
-    <pulley divisor="3"/>
-    <site site="hand1_palmar_interossei_ii_metacarpals_tunnel"/>
-    <geom geom="hand1_mcp_ii_wrap" sidesite="hand1_mcp_ii_wrap_palmar_sidesite"/>
-    <site site="hand1_palmar_interossei_ii_insertion"/>
-    <site site="hand1_pp_ii_palmar_interossei_tunnel"/>
-    <geom geom="hand1_pip_ii_wrap" sidesite="hand1_pip_ii_wrap_dorsal_sidesite"/>
-    <site site="hand1_mp_ii_extensor_hood_insertion"/>
-    <pulley divisor="3"/>
-    <site site="hand1_palmar_interossei_ii_metacarpals_tunnel"/>
-    <geom geom="hand1_mcp_ii_wrap" sidesite="hand1_mcp_ii_wrap_palmar_sidesite"/>
-    <site site="hand1_palmar_interossei_ii_insertion"/>
-    <site site="hand1_pp_ii_palmar_interossei_tunnel"/>
-    <geom geom="hand1_pip_ii_wrap" sidesite="hand1_pip_ii_wrap_dorsal_sidesite"/>
-    <site site="hand1_mp_ii_extensor_hood_insertion"/>
-    <geom geom="hand1_dip_ii_wrap" sidesite="hand1_dip_ii_wrap_dorsal_sidesite"/>
-    <site site="hand1_dp_ii_extensor_hood_insertion"/>
-  </spatial>
-  <spatial name="hand1_extensor_communis_ii" width="0.0004">
-    <site site="hand1_extensor_communis_ii_origin"/>
+  <spatial name="hand1_abductor_pollicis_longus" width="0.0004">
+    <site site="hand1_abductor_pollicis_longus_origin"/>
     <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_dorsal_sidesite"/>
-    <site site="hand1_extensor_communis_ii_carpals_tunnel"/>
-    <site site="hand1_extensor_communis_ii_metacarpals_tunnel"/>
-    <pulley divisor="3"/>
-    <site site="hand1_extensor_communis_ii_metacarpals_tunnel"/>
-    <geom geom="hand1_mcp_ii_wrap" sidesite="hand1_mcp_ii_wrap_dorsal_sidesite"/>
-    <site site="hand1_pp_ii_extensor_communis_insertion"/>
-    <pulley divisor="3"/>
-    <site site="hand1_extensor_communis_ii_metacarpals_tunnel"/>
-    <geom geom="hand1_mcp_ii_wrap" sidesite="hand1_mcp_ii_wrap_dorsal_sidesite"/>
-    <site site="hand1_pp_ii_extensor_communis_insertion"/>
-    <geom geom="hand1_pip_ii_wrap" sidesite="hand1_pip_ii_wrap_dorsal_sidesite"/>
-    <site site="hand1_mp_ii_extensor_hood_insertion"/>
-    <pulley divisor="3"/>
-    <site site="hand1_extensor_communis_ii_metacarpals_tunnel"/>
-    <geom geom="hand1_mcp_ii_wrap" sidesite="hand1_mcp_ii_wrap_dorsal_sidesite"/>
-    <site site="hand1_pp_ii_extensor_communis_insertion"/>
-    <geom geom="hand1_pip_ii_wrap" sidesite="hand1_pip_ii_wrap_dorsal_sidesite"/>
-    <site site="hand1_mp_ii_extensor_hood_insertion"/>
-    <geom geom="hand1_dip_ii_wrap" sidesite="hand1_dip_ii_wrap_dorsal_sidesite"/>
-    <site site="hand1_dp_ii_extensor_hood_insertion"/>
-  </spatial>
-  <spatial name="hand1_flexor_profundus_ii" width="0.0004">
-    <site site="hand1_flexor_profundus_ii_origin"/>
-    <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_palmar_sidesite"/>
-    <site site="hand1_flexor_ii_carpals_tunnel"/>
-    <site site="hand1_flexor_ii_metacarpals_tunnel"/>
-    <geom geom="hand1_mcp_ii_wrap" sidesite="hand1_mcp_ii_wrap_palmar_sidesite"/>
-    <site site="hand1_pp_ii_flexor_tunnel"/>
-    <geom geom="hand1_pip_ii_wrap" sidesite="hand1_pip_ii_wrap_palmar_sidesite"/>
-    <!-- <site site="${hand_name}_flexor_superficialis_${index}_insertion" /> -->
-    <site site="hand1_mp_ii_flexor_tunnel"/>
-    <geom geom="hand1_dip_ii_wrap" sidesite="hand1_dip_ii_wrap_palmar_sidesite"/>
-    <site site="hand1_flexor_profundus_ii_insertion"/>
-  </spatial>
-  <spatial name="hand1_flexor_superficialis_ii" width="0.0004">
-    <site site="hand1_flexor_superficialis_ii_origin"/>
-    <geom geom="hand1_rc_joint_wrap" sidesite="hand1_rc_joint_wrap_palmar_sidesite"/>
-    <site site="hand1_flexor_ii_carpals_tunnel"/>
-    <site site="hand1_flexor_ii_metacarpals_tunnel"/>
-    <geom geom="hand1_mcp_ii_wrap" sidesite="hand1_mcp_ii_wrap_palmar_sidesite"/>
-    <site site="hand1_pp_ii_flexor_tunnel"/>
-    <geom geom="hand1_pip_ii_wrap" sidesite="hand1_pip_ii_wrap_palmar_sidesite"/>
-    <site site="hand1_flexor_superficialis_ii_insertion"/>
+    <site site="hand1_extensor_pollicis_carpals_tunnel"/>
+    <geom geom="hand1_distal_cm_i_wrap" sidesite="hand1_distal_cm_i_wrap_dorsal_sidesite"/>
+    <site site="hand1_abductor_pollicis_longus_insertion"/>
   </spatial>
   <!-- <xacro:hand_tendons hand_name="hand2" /> -->
 </tendon>
