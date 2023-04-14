@@ -627,11 +627,11 @@ class DARMEnv(gym.Env):
         # action = action > 0  # FIXME: Remove once MultiBinary works
         
         for i in range(self.nact):
-            if action[i] <= 0:
+            if action[i] < -0.5:
                 relax_tendon(i)
-            elif action[i] > 0 and action[i] <= 0.5:
+            elif action[i] >= -0.5 and action[i] < 0.5:
                 stiffen_tendon(i)
-            elif action[i] > 0.5:
+            elif action[i] >= 0.5:
                 contract_tendon_one_step(i)
             
         # [contract_tendon_one_step(i) if action[i] else relax_tendon(i) for i in range(self.nact)]

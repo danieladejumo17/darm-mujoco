@@ -18,7 +18,7 @@ start = time.time()
 episode_return = 0
 
 while not done:
-    ac = np.array([0, 0, 1, 0, 0]) # env.action_space.sample()
+    ac = env.action_space.sample() # np.array([0, 0, 1, 0, 0]) #
     # print("-----------------")
     # old_len = env.data.actuator(2).length[0]
     # print(f"Old Length: {old_len}")

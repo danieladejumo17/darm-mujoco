@@ -22,13 +22,13 @@ from tqdm import tqdm
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_diii_wrist_start_state.npy"
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_div_wrist_start_state.npy"
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_dii_start_state.npy"
-# START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_diii_start_state.npy"
+START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_diii_start_state.npy"
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_div_start_state.npy"
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_di_start_state.npy"
-START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_dv_start_state.npy"
+# START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_dv_start_state.npy"
 
 env = DARMEnv(render_mode=None, hand_name="hand1",
-              digits=["v"],
+              digits=["iii"],
               ignore_load_start_states=True)
 
 # env = gym.make("darm/DarmHand-v0", render_mode=None, hand_name="hand1",
@@ -36,7 +36,7 @@ env = DARMEnv(render_mode=None, hand_name="hand1",
 #                ignore_load_start_states=True)
 
 targets = []
-N_OBERVATIONS = int(3e5)
+N_OBERVATIONS = int(3e4)
 
 try:
     for _ in tqdm(range(N_OBERVATIONS)):
