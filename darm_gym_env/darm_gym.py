@@ -591,14 +591,27 @@ class DARMEnv(gym.Env):
     def step(self, action):
         def contract_tendon_one_step(index):
             if "_carpi_" in self.model.actuator(index).name:
-                self.set_position_servo(index, 10_000*10)
-                self.set_velocity_servo(index + self.nact, 100*10)
+                self.set_position_servo(index, 1000*10)
+                self.set_velocity_servo(index + self.nact, 10*10)
             else:
-                self.set_position_servo(index, 10_000)
-                self.set_velocity_servo(index + self.nact, 100)
+                self.set_position_servo(index, 1000)
+                self.set_velocity_servo(index + self.nact, 10)
             # Update the servo position
             position = self.data.actuator(index).length[0] - self.servo_step/self.distance_scale
             self.data.ctrl[index] = position
+
+        def stiffen_tendon(index):
+            if "_carpi_" in self.model.actuator(index).name:
+                self.set_position_servo(index, 1000*10)
+                self.set_velocity_servo(index + self.nact, 10*10)
+            else:
+                self.set_position_servo(index, 1000)
+                self.set_velocity_servo(index + self.nact, 10)
+            
+            # Fix the servo position.
+            # Only update the ctrl if it's previously zero to avoid error accumulation
+            if self.data.ctrl[index] == 0:
+                self.data.ctrl[index] = self.data.actuator(index).length[0]
 
         def relax_tendon(index):
             self.set_position_servo(index, 0)
@@ -611,16 +624,25 @@ class DARMEnv(gym.Env):
                 prev_fingertip_pose[self.index_str_mapping[idx_str]] = self.get_fingertip_pose(idx_str)
 
         # process action, update model and ctrl data
-        action = action > 0  # FIXME: Remove once MultiBinary works
+        # action = action > 0  # FIXME: Remove once MultiBinary works
         
-        [contract_tendon_one_step(i) if action[i] else relax_tendon(i) for i in range(self.nact)]
+        for i in range(self.nact):
+            if action[i] <= 0:
+                relax_tendon(i)
+            elif action[i] > 0 and action[i] <= 0.5:
+                stiffen_tendon(i)
+            elif action[i] > 0.5:
+                contract_tendon_one_step(i)
+            
+        # [contract_tendon_one_step(i) if action[i] else relax_tendon(i) for i in range(self.nact)]
 
         # Perform action  
-        movement_done = False
+        # movement_done = False
+        movement_done = all(np.abs(self.data.actuator_length[:self.nact]*(action > 0) - self.data.ctrl[:self.nact]) < 0.1*(self.servo_step/self.distance_scale))
         i = 0
         while not movement_done:
-            movement_done = all(np.abs(self.data.actuator_length[:self.nact]*action - self.data.ctrl[:self.nact]) < 0.1*(self.servo_step/self.distance_scale))
             mj.mj_step(self.model, self.data)
+            movement_done = all(np.abs(self.data.actuator_length[:self.nact]*(action > 0) - self.data.ctrl[:self.nact]) < 0.1*(self.servo_step/self.distance_scale))
             i += 1
             if i == 200: break
 

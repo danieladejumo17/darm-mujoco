@@ -5,9 +5,9 @@
 <!-- =================================================================================== -->
 <worldbody>
   <!-- Phalanges -->
-  <body mocap="true" name="hand1_fingertip_i_target" pos="0 0.25 0">
-    <geom conaffinity="0" contype="0" rgba="1 0 0 1" size="0.004" type="sphere"/>
-    <geom conaffinity="0" contype="0" pos="0 0 0.006" rgba="1 0 0 1" size="0.002 0.012" type="cylinder"/>
+  <body mocap="true" name="hand1_fingertip_iii_target" pos="0 0.25 0">
+    <geom conaffinity="0" contype="0" rgba="0 0 1 1" size="0.004" type="sphere"/>
+    <geom conaffinity="0" contype="0" pos="0 0 0.006" rgba="0 0 1 1" size="0.002 0.012" type="cylinder"/>
   </body>
   <body childclass="darm_meshes" euler="0 0 0" name="hand1_forearm" pos="0 0 0.12">
     <geom mesh="forearm_mesh" type="mesh"/>
@@ -89,46 +89,38 @@
         <site name="hand1_proximal_cm_i_wrap_dorsal_sidesite" pos="0.0335607 -0.0073321 0.0254833" rgba="1 1 1 0.2" size="0.001"/>
         <site name="hand1_proximal_cm_i_wrap_palmar_sidesite" pos="0.0111607 -0.0073321 0.0254833" rgba="1 1 1 0.2" size="0.001"/>
         <site name="hand1_opponens_digiti_minimi_carpals_tunnel" pos="-0.007 -0.010 0.016" rgba="0.5 0.5 0.5 1" size="0.0015"/>
-        <body euler="24 -15 -75" name="hand1_proximal_cm_i_centre_block" pos="0.0223607 -0.0073321 0.0254833">
-          <joint axis="1 0 0" limited="true" name="cm_flex_joint_i" range="-50 -10" type="hinge"/>
-          <geom mesh="proximal_cm_i_centre_block_mesh" type="mesh"/>
-          <geom class="wrap_geom" euler="0 90 0" name="hand1_proximal_cm_i_wrap" rgba="0 0 1 0.2" size="0.0085 0.010" type="cylinder"/>
-          <site name="hand1_distal_cm_i_wrap_dorsal_sidesite" pos="0.0085 0 0.013" rgba="1 1 1 0.2" size="0.001"/>
-          <site name="hand1_distal_cm_i_wrap_palmar_sidesite" pos="-0.0085 0 0.013" rgba="1 1 1 0.2" size="0.001"/>
-          <body euler="0 0 0" name="hand1_distal_cm_i_centre_block" pos="0 0 0.013">
-            <joint axis="0 0 1" limited="true" name="cm_axial_joint_i" range="-15 15" type="hinge"/>
-            <geom mesh="distal_cm_i_centre_block_mesh" type="mesh"/>
-            <geom class="wrap_geom" euler="90 0 0" name="hand1_distal_cm_i_wrap" rgba="0 0 1 0.2" size="0.0075 0.009" type="cylinder"/>
-            <body euler="0 0 0" name="hand1_metacarpal_i" pos="0 0 0">
-              <joint axis="0 1 0" limited="true" name="cm_adab_joint_i" pos="0 0 0" range="-20 20" type="hinge"/>
-              <geom mesh="metacarpal_i_mesh" type="mesh"/>
-              <geom class="wrap_geom" euler="0 90 0" name="hand1_mcp_i_wrap" pos="0 0 0.0395" rgba="0 0 1 0.2" size="0.0075 0.008" type="cylinder"/>
-              <site name="hand1_opponens_pollicis_insertion_i" pos="0.0055 0.0048 0.009875" rgba="0.5 0.5 0.5 1" size="0.0015"/>
-              <site name="hand1_opponens_pollicis_insertion_ii" pos="0.00543 0.005595 0.03379" rgba="0.5 0.5 0.5 1" size="0.0015"/>
-              <site name="hand1_abductor_pollicis_longus_insertion" pos="0.0055 0.0 0.008" rgba="0.5 0.5 0.5 1" size="0.0015"/>
-              <site name="hand1_mcp_i_wrap_dorsal_sidesite" pos="0 0.0085 0.0395" rgba="1 1 1 0.2" size="0.001"/>
-              <site name="hand1_mcp_i_wrap_palmar_sidesite" pos="0 -0.0085 0.0395" rgba="1 1 1 0.2" size="0.001"/>
-              <site name="hand1_metacarpal_i_flexor_tunnel" pos="0.0 -0.0065 0.01975" rgba="0.5 0.5 0.5 1" size="0.0015"/>
-              <site name="hand1_metacarpal_i_extensor_tunnel" pos="0.0 0.0065 0.01975" rgba="0.5 0.5 0.5 1" size="0.0015"/>
-              <body euler="0 0 0" name="hand1_proximal_phalanx_i" pos="0 0 0.0395">
-                <joint axis="1 0 0" limited="true" name="mcp_joint_i" range="-10 90" type="hinge"/>
-                <geom mesh="proximal_phalanx_i_mesh" rgba="1 0 0 1" type="mesh"/>
-                <geom class="wrap_geom" euler="0 90 0" name="hand1_ip_i_wrap" pos="0 0 0.0335" rgba="0 0 1 0.2" size="0.0065 0.008" type="cylinder"/>
-                <site name="hand1_pp_i_flexor_tunnel" pos="0.0 -0.005 0.01675" rgba="1 0 0 1" size="0.0015"/>
-                <site name="hand1_pp_i_extensor_tunnel" pos="0.0 0.005 0.01675" rgba="1 0 0 1" size="0.0015"/>
-                <site name="hand1_abductor_pollicis_brevis_insertion" pos="0.008 0.0 0.0" rgba="0.5 0.5 0.5 1" size="0.0015"/>
-                <site name="hand1_adductor_pollicis_insertion" pos="-0.008 0.0 0.0" rgba="0.5 0.5 0.5 1" size="0.0015"/>
-                <site name="hand1_flexor_pollicis_brevis_insertion" pos="0.005 -0.005598 0.008406" rgba="0.5 0.5 0.5 1" size="0.0015"/>
-                <site name="hand1_extensor_pollicis_brevis_insertion" pos="0.0 0.006 0.008" rgba="0.1 0.1 0.1 1" size="0.002"/>
-                <site name="hand1_ip_i_wrap_dorsal_sidesite" pos="0 0.0075 0.0335" rgba="1 1 1 0.2" size="0.001"/>
-                <site name="hand1_ip_i_wrap_palmar_sidesite" pos="0 -0.0075 0.0335" rgba="1 1 1 0.2" size="0.001"/>
-                <body euler="0 0 0" name="hand1_distal_phalanx_i" pos="0 0 0.0335">
-                  <joint axis="1 0 0" limited="true" name="ip_joint_i" range="-60 90" type="hinge"/>
-                  <geom mesh="distal_phalanx_i_mesh" rgba="0 0 1 1" type="mesh"/>
-                  <site name="hand1_flexor_pollicis_longus_insertion" pos="0.0 -0.005 0.007" rgba="0.1 0.1 0.1 1" size="0.002"/>
-                  <site name="hand1_extensor_pollicis_longus_insertion" pos="0.0 0.005 0.007" rgba="0.1 0.1 0.1 1" size="0.002"/>
-                  <site name="hand1_fingertip_i" pos="0 0 0.027" rgba="1 0 0 0.5" size="0.004"/>
-                </body>
+        <body euler="0 0 0" name="hand1_mcp_centre_block_iii" pos="0.0082 0.0087 0.0933">
+          <joint axis="0 1 0" limited="true" name="mcp_adab_joint_iii" range="-20 20" type="hinge"/>
+          <geom mesh="mcp_centre_block_iii_mesh" type="mesh"/>
+          <site name="hand1_mcp_iii_wrap_dorsal_sidesite" pos="0 0.012 0" rgba="1 1 1 0.2" size="0.001"/>
+          <site name="hand1_mcp_iii_wrap_palmar_sidesite" pos="0 -0.012 0" rgba="1 1 1 0.2" size="0.001"/>
+          <body euler="0 0 0" name="hand1_proximal_phalanx_iii" pos="0 0 0">
+            <joint axis="1 0 0" limited="true" name="mcp_flex_joint_iii" range="-45 90" type="hinge"/>
+            <geom mesh="proximal_phalanx_iii_mesh" rgba="1 0 0 1" type="mesh"/>
+            <site name="hand1_dorsal_interossei_iii_insertion" pos="0.007 -0.007 0.012" rgba="0.1 0.1 0.1 1" size="0.002"/>
+            <site name="hand1_palmar_interossei_iii_insertion" pos="-0.007 -0.007 0.012" rgba="0.1 0.1 0.1 1" size="0.002"/>
+            <site name="hand1_pp_iii_extensor_communis_insertion" pos="0 0.009 0.012" rgba="0.1 0.1 0.1 1" size="0.002"/>
+            <site name="hand1_pp_iii_dorsal_interossei_tunnel" pos="0.007 0.0063 0.045" rgba="1 0 0 1" size="0.0015"/>
+            <site name="hand1_pp_iii_palmar_interossei_tunnel" pos="-0.007 0.0063 0.045" rgba="1 0 0 1" size="0.0015"/>
+            <site name="hand1_pp_iii_flexor_tunnel" pos="0 -0.00595 0.026" rgba="1 0 0 1" size="0.0015"/>
+            <site name="hand1_pip_iii_wrap_dorsal_sidesite" pos="0 0.008 0.052" rgba="1 1 1 0.2" size="0.001"/>
+            <site name="hand1_pip_iii_wrap_palmar_sidesite" pos="0 -0.008 0.052" rgba="1 1 1 0.2" size="0.001"/>
+            <body euler="0 0 0" name="hand1_middle_phalanx_iii" pos="0 0 0.052">
+              <joint axis="1 0 0" limited="true" name="pip_joint_iii" range="-10 90" type="hinge"/>
+              <geom mesh="middle_phalanx_iii_mesh" rgba="0 1 0 1" type="mesh"/>
+              <geom class="wrap_geom" euler="0 90 0" name="hand1_pip_iii_wrap" rgba="0 0 1 0.2" size="0.007 0.007" type="cylinder"/>
+              <site name="hand1_flexor_superficialis_iii_insertion" pos="0 -0.005 0.007" rgba="0.1 0.1 0.1 1" size="0.002"/>
+              <site name="hand1_mp_iii_extensor_hood_insertion" pos="0 0.005 0.007" rgba="0.1 0.1 0.1 1" size="0.002"/>
+              <site name="hand1_mp_iii_flexor_tunnel" pos="0 -0.0045 0.0191428571429" rgba="0 1 0 1" size="0.0015"/>
+              <site name="hand1_dip_iii_wrap_dorsal_sidesite" pos="0 0.007 0.0335" rgba="1 1 1 0.2" size="0.001"/>
+              <site name="hand1_dip_iii_wrap_palmar_sidesite" pos="0 -0.007 0.0335" rgba="1 1 1 0.2" size="0.001"/>
+              <body euler="0 0 0" name="hand1_distal_phalanx_iii" pos="0 0 0.0335">
+                <joint axis="1 0 0" limited="true" name="dip_joint_iii" range="-10 90" type="hinge"/>
+                <geom mesh="distal_phalanx_iii_mesh" rgba="0 0 1 1" type="mesh"/>
+                <geom class="wrap_geom" euler="0 90 0" name="hand1_dip_iii_wrap" rgba="0 0 1 0.2" size="0.006 0.006" type="cylinder"/>
+                <site name="hand1_flexor_profundus_iii_insertion" pos="0 -0.005 0.007" rgba="0.1 0.1 0.1 1" size="0.002"/>
+                <site name="hand1_dp_iii_extensor_hood_insertion" pos="0 0.005 0.007" rgba="0.1 0.1 0.1 1" size="0.002"/>
+                <site name="hand1_fingertip_iii" pos="0 0 0.0204" rgba="1 0 0 0.5" size="0.004"/>
               </body>
             </body>
           </body>
