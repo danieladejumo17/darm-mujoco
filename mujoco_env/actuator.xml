@@ -14,27 +14,6 @@
   <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_extensor_pollicis_brevis_pos_actuator" tendon="hand1_extensor_pollicis_brevis"/>
   <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_extensor_pollicis_longus_pos_actuator" tendon="hand1_extensor_pollicis_longus"/>
   <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_opponens_pollicis_pos_actuator" tendon="hand1_opponens_pollicis"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_dorsal_interossei_ii_pos_actuator" tendon="hand1_dorsal_interossei_ii"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_palmar_interossei_ii_pos_actuator" tendon="hand1_palmar_interossei_ii"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_profundus_ii_pos_actuator" tendon="hand1_flexor_profundus_ii"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_superficialis_ii_pos_actuator" tendon="hand1_flexor_superficialis_ii"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_extensor_communis_ii_pos_actuator" tendon="hand1_extensor_communis_ii"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_dorsal_interossei_iii_pos_actuator" tendon="hand1_dorsal_interossei_iii"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_palmar_interossei_iii_pos_actuator" tendon="hand1_palmar_interossei_iii"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_profundus_iii_pos_actuator" tendon="hand1_flexor_profundus_iii"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_superficialis_iii_pos_actuator" tendon="hand1_flexor_superficialis_iii"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_extensor_communis_iii_pos_actuator" tendon="hand1_extensor_communis_iii"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_dorsal_interossei_iv_pos_actuator" tendon="hand1_dorsal_interossei_iv"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_palmar_interossei_iv_pos_actuator" tendon="hand1_palmar_interossei_iv"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_profundus_iv_pos_actuator" tendon="hand1_flexor_profundus_iv"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_superficialis_iv_pos_actuator" tendon="hand1_flexor_superficialis_iv"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_extensor_communis_iv_pos_actuator" tendon="hand1_extensor_communis_iv"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_dorsal_interossei_v_pos_actuator" tendon="hand1_dorsal_interossei_v"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_palmar_interossei_v_pos_actuator" tendon="hand1_palmar_interossei_v"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_profundus_v_pos_actuator" tendon="hand1_flexor_profundus_v"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_flexor_superficialis_v_pos_actuator" tendon="hand1_flexor_superficialis_v"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_extensor_communis_v_pos_actuator" tendon="hand1_extensor_communis_v"/>
-  <position forcelimited="true" forcerange="-7 7" kp="0" name="hand1_opponens_digiti_minimi_pos_actuator" tendon="hand1_opponens_digiti_minimi"/>
   <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_adductor_pollicis_oblique_vel_actuator" tendon="hand1_adductor_pollicis_oblique"/>
   <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_adductor_pollicis_transverse_vel_actuator" tendon="hand1_adductor_pollicis_transverse"/>
   <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_abductor_pollicis_brevis_vel_actuator" tendon="hand1_abductor_pollicis_brevis"/>
@@ -44,26 +23,5 @@
   <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_extensor_pollicis_brevis_vel_actuator" tendon="hand1_extensor_pollicis_brevis"/>
   <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_extensor_pollicis_longus_vel_actuator" tendon="hand1_extensor_pollicis_longus"/>
   <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_opponens_pollicis_vel_actuator" tendon="hand1_opponens_pollicis"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_dorsal_interossei_ii_vel_actuator" tendon="hand1_dorsal_interossei_ii"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_palmar_interossei_ii_vel_actuator" tendon="hand1_palmar_interossei_ii"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_profundus_ii_vel_actuator" tendon="hand1_flexor_profundus_ii"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_superficialis_ii_vel_actuator" tendon="hand1_flexor_superficialis_ii"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_extensor_communis_ii_vel_actuator" tendon="hand1_extensor_communis_ii"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_dorsal_interossei_iii_vel_actuator" tendon="hand1_dorsal_interossei_iii"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_palmar_interossei_iii_vel_actuator" tendon="hand1_palmar_interossei_iii"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_profundus_iii_vel_actuator" tendon="hand1_flexor_profundus_iii"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_superficialis_iii_vel_actuator" tendon="hand1_flexor_superficialis_iii"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_extensor_communis_iii_vel_actuator" tendon="hand1_extensor_communis_iii"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_dorsal_interossei_iv_vel_actuator" tendon="hand1_dorsal_interossei_iv"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_palmar_interossei_iv_vel_actuator" tendon="hand1_palmar_interossei_iv"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_profundus_iv_vel_actuator" tendon="hand1_flexor_profundus_iv"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_superficialis_iv_vel_actuator" tendon="hand1_flexor_superficialis_iv"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_extensor_communis_iv_vel_actuator" tendon="hand1_extensor_communis_iv"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_dorsal_interossei_v_vel_actuator" tendon="hand1_dorsal_interossei_v"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_palmar_interossei_v_vel_actuator" tendon="hand1_palmar_interossei_v"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_profundus_v_vel_actuator" tendon="hand1_flexor_profundus_v"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_flexor_superficialis_v_vel_actuator" tendon="hand1_flexor_superficialis_v"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_extensor_communis_v_vel_actuator" tendon="hand1_extensor_communis_v"/>
-  <velocity forcelimited="true" forcerange="-7 7" kv="0" name="hand1_opponens_digiti_minimi_vel_actuator" tendon="hand1_opponens_digiti_minimi"/>
   <!-- <xacro:hand_actuators hand_name="hand2" /> -->
 </actuator>
