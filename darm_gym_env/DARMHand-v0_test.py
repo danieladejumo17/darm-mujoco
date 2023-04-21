@@ -7,8 +7,8 @@ import numpy as np
 
 # env = gym.make("darm/DarmHand-v0", render_mode="human", hand_name="hand1")
 env = DARMEnv(render_mode="human", hand_name="hand1", 
-              digits=["iii"],
-              start_state_file="DARMHand_diii_start_state.npy")
+            #   digits=["ii"],
+              start_state_file="DARMHand_MFNW_start_state.npy")
 env = gym.wrappers.TimeLimit(env, max_episode_steps=200)
 
 done = False

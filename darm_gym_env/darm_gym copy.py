@@ -364,25 +364,6 @@ class DARMEnv(gym.Env):
             
         obs = np.concatenate([get_finger_obs(index) for index in self.digits_indices])
         return obs
-    
-    def get_obs(self, index):
-        def get_target_pose(index):
-            return self.target_obs[index]
-
-        def get_kinematic_chain_obs(index):
-            return self.get_finger_frames_pos(self.index_int_mapping[index])
-
-        def get_contact_obs(index):
-            return self.get_finger_contacts(index)
-
-        def get_finger_obs(index):
-            return np.concatenate((get_target_pose(index),
-                            get_kinematic_chain_obs(index) #,
-                            # get_contact_obs(index)
-                            ))
-            
-        obs = np.concatenate([get_finger_obs(idx) for idx in [index]])
-        return obs
 
     def _get_info(self):
         return {"sim_time": self.data.time - self.ep_start_time}
@@ -610,25 +591,27 @@ class DARMEnv(gym.Env):
     def step(self, action):
         def contract_tendon_one_step(index):
             if "_carpi_" in self.model.actuator(index).name:
-                self.set_position_servo(index, 10_000*10)
-                self.set_velocity_servo(index + self.nact, 100*10)
+                self.set_position_servo(index, 1000*10)
+                self.set_velocity_servo(index + self.nact, 10*10)
             else:
-                self.set_position_servo(index, 10_000)
-                self.set_velocity_servo(index + self.nact, 100)
+                self.set_position_servo(index, 1000)
+                self.set_velocity_servo(index + self.nact, 10)
             # Update the servo position
             position = self.data.actuator(index).length[0] - self.servo_step/self.distance_scale
             self.data.ctrl[index] = position
 
         def stiffen_tendon(index):
             if "_carpi_" in self.model.actuator(index).name:
-                self.set_position_servo(index, 10_000*10)
-                self.set_velocity_servo(index + self.nact, 100*10)
+                self.set_position_servo(index, 1000*10)
+                self.set_velocity_servo(index + self.nact, 10*10)
             else:
-                self.set_position_servo(index, 10_000)
-                self.set_velocity_servo(index + self.nact, 100)
-            # Update the servo position
-            position = self.data.ctrl[index] or self.data.actuator(index).length[0]
-            self.data.ctrl[index] = position
+                self.set_position_servo(index, 1000)
+                self.set_velocity_servo(index + self.nact, 10)
+            
+            # Fix the servo position.
+            # Only update the ctrl if it's previously zero to avoid error accumulation
+            if self.data.ctrl[index] == 0:
+                self.data.ctrl[index] = self.data.actuator(index).length[0]
 
         def relax_tendon(index):
             self.set_position_servo(index, 0)
@@ -642,24 +625,25 @@ class DARMEnv(gym.Env):
 
         # process action, update model and ctrl data
         # action = action > 0  # FIXME: Remove once MultiBinary works
+        
+        for i in range(self.nact):
+            if action[i] < -0.5:
+                relax_tendon(i)
+            elif action[i] >= -0.5 and action[i] < 0.5:
+                stiffen_tendon(i)
+            elif action[i] >= 0.5:
+                contract_tendon_one_step(i)
+            
         # [contract_tendon_one_step(i) if action[i] else relax_tendon(i) for i in range(self.nact)]
 
-        for index, tendon_act in enumerate(action):
-            if tendon_act <= -(1/3):
-                relax_tendon(index)
-            elif tendon_act > -(1/3) and tendon_act <= (1/3):
-                stiffen_tendon(index)
-            else:
-                contract_tendon_one_step(index)
-
         # Perform action  
-        dist_eps = 0.1*(self.servo_step/self.distance_scale)  # distance epsilon
-        controlled = action > -(1/3)
-        movement_done = False
+        # movement_done = False
+        # BUG: action > 0  || wrong partitioning
+        movement_done = all(np.abs(self.data.actuator_length[:self.nact]*(action > 0) - self.data.ctrl[:self.nact]) < 0.1*(self.servo_step/self.distance_scale))
         i = 0
         while not movement_done:
             mj.mj_step(self.model, self.data)
-            movement_done = all(np.abs(self.data.actuator_length[:self.nact]*controlled - self.data.ctrl[:self.nact]) <= dist_eps)
+            movement_done = all(np.abs(self.data.actuator_length[:self.nact]*(action > 0) - self.data.ctrl[:self.nact]) < 0.1*(self.servo_step/self.distance_scale))
             i += 1
             if i == 200: break
 
