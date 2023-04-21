@@ -569,7 +569,13 @@ class DARMEnv(gym.Env):
         # Return Observation
         return observation
 
+    def reset_mujoco_model(self):
+        mj.mj_resetData(self.model, self.data)
+        mj.mj_forward(self.model, self.data)
+
     def reset(self, **kwargs):
+        self.reset_mujoco_model()
+
         # ========================== Get a random valid pose and target ==========================
         # observation, _, _ = self.generate_start_state()
         observation = self.sample_saved_start_states()
@@ -633,6 +639,8 @@ class DARMEnv(gym.Env):
         def relax_tendon(index):
             self.set_position_servo(index, 0)
             self.set_velocity_servo(index + self.nact, 0)
+            self.data.ctrl[index] = 0
+
 
         prev_fingertip_pose = None
         if self.rwd_type == "shaped_reward":

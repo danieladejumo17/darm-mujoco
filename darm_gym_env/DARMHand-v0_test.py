@@ -7,8 +7,8 @@ import numpy as np
 
 # env = gym.make("darm/DarmHand-v0", render_mode="human", hand_name="hand1")
 env = DARMEnv(render_mode="human", hand_name="hand1", 
-            #   digits=["ii"],
-              start_state_file="DARMHand_MFNW_start_state.npy")
+              digits=["i"],
+              start_state_file="DARMHand_di_start_state.npy")
 env = gym.wrappers.TimeLimit(env, max_episode_steps=200)
 
 done = False
@@ -18,7 +18,7 @@ start = time.time()
 episode_return = 0
 
 while not done:
-    ac = env.action_space.sample() # np.array([0, 0, 1, 0, 0]) #
+    ac = np.zeros_like(env.action_space.sample()) # np.array([0, 0, 1, 0, 0]) #
     # print("-----------------")
     # old_len = env.data.actuator(2).length[0]
     # print(f"Old Length: {old_len}")
