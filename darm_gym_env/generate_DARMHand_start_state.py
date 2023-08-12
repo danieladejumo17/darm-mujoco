@@ -15,20 +15,21 @@ from tqdm import tqdm
 
 # Choose single_finger or multi-fingers
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_SF_start_state.npy"
-# START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_MFNW_start_state.npy"
+START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_MFNW_start_state.npy"
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_dii_iii_iv_start_state.npy"
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_dii_iii_iv_wrist_start_state.npy"
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_dii_wrist_start_state.npy"
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_diii_wrist_start_state.npy"
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_div_wrist_start_state.npy"
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_dii_start_state.npy"
-START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_diii_start_state.npy"
+# START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_diii_start_state.npy"
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_div_start_state.npy"
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_di_start_state.npy"
 # START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_dv_start_state.npy"
+# START_STATE_FILE = f"{os.getenv('DARM_MUJOCO_PATH')}/darm_gym_env/start_states/DARMHand_wrist_start_state.npy"
 
 env = DARMEnv(render_mode=None, hand_name="hand1",
-              digits=["iii"],
+              digits=["i", "ii", "iii", "iv", "v"],
               ignore_load_start_states=True)
 
 # env = gym.make("darm/DarmHand-v0", render_mode=None, hand_name="hand1",

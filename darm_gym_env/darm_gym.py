@@ -381,7 +381,8 @@ class DARMEnv(gym.Env):
                             # get_contact_obs(index)
                             ))
             
-        obs = np.concatenate([get_finger_obs(idx) for idx in [index]])
+        # obs = np.concatenate([get_finger_obs(idx) for idx in [index]])
+        obs = get_finger_obs(index)
         return obs
 
     def _get_info(self):
@@ -513,6 +514,41 @@ class DARMEnv(gym.Env):
         elif self.rwd_type == "shaped_reward":
             return shaped_reward()
 
+    def generate_target(self, n_trials=200):
+        for i in range(n_trials):
+            # ========================== Sample valid start_state from Joint Space ==========================
+            joint_state = self.data.qpos
+
+        
+            # ========================== Create a valid target ==========================
+            joint_state_delta = self.target_joint_state_delta*np.random.choice(a=[-1,1], size=(self.model.njnt,), replace=True)
+            target_joint_state = np.clip(a=joint_state + joint_state_delta, 
+                                        a_min=self.min_joint_vals, 
+                                        a_max=self.max_joint_vals)
+            self.forward(target_joint_state)
+            if self.digits_in_contact(): # returns True if there is collision
+                # ensure there is no collision at the target state
+                continue
+            
+            for idx_str in self.digits:
+                self.target_obs[self.index_str_mapping[idx_str]] = self.get_fingertip_pose(idx_str)
+            
+            # Return to start state
+            observation = self.forward(joint_state)
+
+            # Verify distance of start state to target state is within limits
+            fingertip_obs = np.zeros_like(self.target_obs)
+            for idx_str in self.digits:
+                fingertip_obs[self.index_str_mapping[idx_str]] = self.get_fingertip_pose(idx_str)
+            norm_all = self.position_norm(fingertip_obs[:, :3], self.target_obs[:, :3])
+            norm = norm_all[self.digits_indices]
+            if not (all(norm >= self.min_target_th) and all(norm <= self.max_target_th)):
+                continue
+            
+            # If all checks are positive, break random search loop
+            return observation, joint_state, self.target_obs.copy()
+        return False      
+
     def generate_start_state(self):
         while True:
             # ========================== Sample valid start_state from Joint Space ==========================
@@ -569,9 +605,10 @@ class DARMEnv(gym.Env):
         # Return Observation
         return observation
 
-    def reset_mujoco_model(self):
+    def reset_mujoco_model(self, mj_forward=True):
         mj.mj_resetData(self.model, self.data)
-        mj.mj_forward(self.model, self.data)
+        if mj_forward:
+            mj.mj_forward(self.model, self.data)
 
     def reset(self, **kwargs):
         self.reset_mujoco_model()
@@ -613,7 +650,69 @@ class DARMEnv(gym.Env):
         self.model.actuator_gainprm[actuator_no, 0] = kv
         self.model.actuator_biasprm[actuator_no, 2] = -kv
 
+    def act(self, action, max_mj_step=200):
+        def contract_tendon_one_step(index):
+            if "_carpi_" in self.model.actuator(index).name:
+                self.set_position_servo(index, 10_000*10)
+                self.set_velocity_servo(index + self.nact, 100*10)
+            else:
+                self.set_position_servo(index, 10_000)
+                self.set_velocity_servo(index + self.nact, 100)
+            # Update the servo position
+            position = self.data.actuator(index).length[0] - self.servo_step/self.distance_scale
+            self.data.ctrl[index] = position
+
+        def stiffen_tendon(index):
+            if "_carpi_" in self.model.actuator(index).name:
+                self.set_position_servo(index, 10_000*10)
+                self.set_velocity_servo(index + self.nact, 100*10)
+            else:
+                self.set_position_servo(index, 10_000)
+                self.set_velocity_servo(index + self.nact, 100)
+            # Update the servo position
+            position = self.data.ctrl[index] or self.data.actuator(index).length[0]
+            self.data.ctrl[index] = position
+
+        def relax_tendon(index):
+            self.set_position_servo(index, 0)
+            self.set_velocity_servo(index + self.nact, 0)
+            self.data.ctrl[index] = 0
+
+
+        prev_fingertip_pose = None
+        if self.rwd_type == "shaped_reward":
+            prev_fingertip_pose = np.zeros_like(self.target_obs)
+            for idx_str in self.digits:
+                prev_fingertip_pose[self.index_str_mapping[idx_str]] = self.get_fingertip_pose(idx_str)
+
+        # process action, update model and ctrl data
+        # action = action > 0  # FIXME: Remove once MultiBinary works
+        # [contract_tendon_one_step(i) if action[i] else relax_tendon(i) for i in range(self.nact)]
+
+        for index, tendon_act in enumerate(action):
+            if tendon_act <= -(1/3):
+                relax_tendon(index)
+            elif tendon_act > -(1/3) and tendon_act <= (1/3):
+                stiffen_tendon(index)
+            else:
+                contract_tendon_one_step(index)
+
+        # Perform action  
+        dist_eps = 0.1*(self.servo_step/self.distance_scale)  # distance epsilon
+        controlled = action > -(1/3)
+        movement_done = False
+        i = 0
+        while not movement_done:
+            mj.mj_step(self.model, self.data)
+            movement_done = all(np.abs(self.data.actuator_length[:self.nact]*controlled - self.data.ctrl[:self.nact]) <= dist_eps)
+            i += 1
+            if i == max_mj_step: break
+
+        err = np.abs(self.data.actuator_length[:self.nact]*controlled - self.data.ctrl[:self.nact])
+        return err
+
     def step(self, action):
+        # TODO: Replace with self.act(action)
         def contract_tendon_one_step(index):
             if "_carpi_" in self.model.actuator(index).name:
                 self.set_position_servo(index, 10_000*10)
@@ -684,10 +783,12 @@ class DARMEnv(gym.Env):
         
         return obs, reward, done, {**self._get_info(), "action": action, "reward": {**rwd_dict}}
 
-    def forward(self, joint_conf):
+    def forward(self, joint_conf, mj_forward=True):
         self.data.qpos = joint_conf
-        mj.mj_forward(self.model, self.data)
-        return self._get_obs()
+        if mj_forward:
+            mj.mj_forward(self.model, self.data)
+            return self._get_obs()
+        return None
 
     def render(self, mode="human", **kwargs):
         if mode=="human" and self.render_mode == "human":
@@ -706,6 +807,25 @@ class DARMEnv(gym.Env):
         if self.render_mode == "human":
             self.darm_render.close_window()
 
+    def joint_state(self):
+        """Returns the current joint state/configuration of the robot - size(njnt,)"""
+        return self.data.qpos
+
+    def set_fingertips_mocap_pose(self, target_pose):
+        if self.render_mode == "human":
+            # Update target visualization mocaps pos and quat
+            if self.data.mocap_pos.shape[0] == 5:
+                self.data.mocap_pos = self.remove_distance_obs_transform(target_pose[:, :3])
+                self.data.mocap_quat = target_pose[:, 3:]
+            else:
+                target_pos = target_pose[self.digits_indices, :3]
+                self.data.mocap_pos = self.remove_distance_obs_transform(target_pos)
+                self.data.mocap_quat = target_pose[self.digits_indices, 3:]
+            # Go Forward - Because of call from different threads - calling forward causes memory issues
+            # mj.mj_forward(self.model, self.data)
+            # self._render_frame()  # Dont render here to avoid flickering - render will usually be called
+            # by user
+            # FIXME: Write your rendering functionality to ensure rendering at a fixed frame rate
 
 if __name__ == "__main__":
     env = DARMEnv(render_mode="human")

@@ -282,6 +282,12 @@
             <xacro:fingertip_target hand_name="${hand_name}" name="fingertip_v_target" rgba="0.7 0.3 0 1" />
         </xacro:if>
 
+        <!-- WRIST MOCAP -->
+        <!-- <body name="wrist_viz" mocap="true" pos="0 0 0.152" >
+            <geom type="cylinder" size="0.0075 0.1" rgba="1 0 0 1"
+                contype="0" conaffinity="0" />
+        </body> -->
+
         
         <body name="${hand_name}_forearm" pos="${pos}" euler="0 0 0" childclass="darm_meshes">
             <geom type="mesh" mesh="forearm_mesh" />

@@ -6,3 +6,5 @@ darm_gym_env.egg-info/*
 build/*
 .ipynb_checkpoints/*
 .vscode/*
+darm_training/results/*
+darm_gym_env/start_states/*
